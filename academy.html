@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academy | Sporting Pearls Football Academy</title>
+<meta name="description" content="Sporting Pearls Football Academy — a community football development institution building structured pathways for boys, girls and young people through coaching, education, character and opportunity. Est. 2020, Mtwapa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,600&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14284b;--navy-2:#0c1a33;--navy-3:#102141;
+  --sand:#f3efe7;--pearl:#fbfaf7;
+  --amber:#f59d1e;--amber-2:#d97f06;
+  --blue:#2e6f9e;--blue-2:#1f567e;--lagoon:#2f8f83;
+  --ink:#14284b;--body:#4a5568;
+  --muted:#6b7280;--muted-d:rgba(251,250,247,.66);
+  --hair:rgba(20,40,75,.14);--hair-d:rgba(251,250,247,.16);
+  --fd:'Fraunces',Georgia,serif;--fb:'Work Sans',system-ui,sans-serif;
+  --fm:'Space Mono',ui-monospace,monospace;--fh:'Caveat',cursive;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(1.25rem,5vw,3.75rem);--sp:clamp(4.5rem,9vw,7.5rem);--barh:40px;
+  --pitch:#0a5a3e;--pitch-2:#083a29;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{font-family:var(--fb);background:var(--sand);color:var(--body);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+body.menu-open, body.sp-nav-lock{overflow:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+::selection{background:var(--amber);color:var(--navy)}
+body::after{content:'';position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--pad);position:relative;z-index:3}
+section{scroll-margin-top:90px;position:relative;overflow:hidden}
+h1,h2,h3,h4{font-family:var(--fd);font-weight:700;color:var(--ink);letter-spacing:-.01em;line-height:1.02}
+.it{font-style:italic;font-weight:600;color:var(--amber)}
+.dark .it{color:var(--amber)}
+.dark{color:var(--pearl)}
+.dark h1,.dark h2,.dark h3,.dark h4{color:var(--pearl)}
+.kicker{font-family:var(--fm);font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.65rem;color:var(--blue-2)}
+.kicker::before{content:'';width:9px;height:9px;border-radius:50%;background:var(--amber);flex-shrink:0;animation:kdot 2s ease-in-out infinite}
+@keyframes kdot{50%{box-shadow:0 0 0 5px rgba(245,157,30,.18)}}
+.dark .kicker{color:var(--amber)}
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--amber);width:0;z-index:1300;transform-origin:left;box-shadow:0 0 0 12px rgba(245,157,30,.5)}
+
+/* reveal */
+.js [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js [data-reveal="left"]{transform:translateX(-40px)}
+.js [data-reveal="right"]{transform:translateX(40px)}
+.js [data-reveal="zoom"]{transform:scale(.92)}
+[data-reveal].in{opacity:1;transform:none}
+.wr .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.wr .w>span{display:inline-block;transform:translateY(118%);transition:transform .9s var(--ease)}
+.wr.in .w>span{transform:none}
+
+.sk{width:44px;height:44px;overflow:visible}
+.sk *{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.sk .gh{stroke:var(--navy);opacity:.18;transform:translate(1.6px,1.6px)}
+.sk .ln{stroke:var(--amber-2)}
+.dark .sk .gh{stroke:var(--pearl);opacity:.14}
+.dark .sk .ln{stroke:var(--amber)}
+
+/* ═══════════════════════════════════════════
+   5. NAVIGATION (SPORTING PEARLS PRO)
+═══════════════════════════════════════════ */
+:root {
+  --sp-ink: #0c1a33; --sp-ink-2: #102141; --sp-pearl: #fbfaf7; --sp-amber: #f59d1e;
+  --sp-amber-2: #d97f06; --sp-line: rgba(251,250,247,.12); --sp-muted: rgba(251,250,247,.66);
+  --sp-serif: var(--fd, "Fraunces", Georgia, serif); --sp-mono: var(--fm, "Space Mono", ui-monospace, monospace);
+  --sp-sans: var(--fb, "Work Sans", system-ui, sans-serif); --sp-ease: cubic-bezier(.16, 1, .3, 1);
+}
+.sp-nav-pro { position: fixed; inset: 0 0 auto; z-index: 3000; pointer-events: none; font-family: var(--sp-sans); }
+.sp-nav-pro :is(a, button) { text-decoration: none; color: inherit; }
+.sp-nav-pro :focus-visible { outline: 2px solid var(--sp-amber); outline-offset: 3px; }
+
+.sp-nav-bar {
+  position: relative; z-index: 2600; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.05rem clamp(1.1rem, 4vw, 3rem); color: var(--sp-pearl); border-bottom: 1px solid transparent;
+  transition: .35s var(--sp-ease); transition-property: padding, background, border-color, backdrop-filter; pointer-events: auto;
+}
+.sp-nav-pro.is-scrolled .sp-nav-bar { padding-block: .72rem; background: rgba(12,26,51,.78); backdrop-filter: blur(18px); border-bottom-color: rgba(251,250,247,.08); }
+
+.sp-nav-brand { display: flex; align-items: center; gap: .8rem; min-width: 0; color: var(--sp-pearl); }
+.sp-nav-brand-mark {
+  width: 42px; height: 42px; flex: none; object-fit: contain; object-position: center;
+}
+.sp-nav-brand-text strong { display: block; font-family: var(--sp-serif); font-size: 1rem; font-weight: 600; line-height: 1.05; letter-spacing: .01em; }
+.sp-nav-brand-text small { display: block; margin-top: .18rem; font-family: var(--sp-mono); font-size: .54rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(251,250,247,.64); }
+
+.sp-nav-desktop { display: none; align-items: center; gap: .3rem; margin-inline: auto; }
+.sp-nav-trigger, .sp-nav-link, .sp-nav-mobile-direct-link, .sp-nav-mobile-trigger {
+  font-family: var(--sp-mono); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sp-pearl);
+}
+.sp-nav-trigger, .sp-nav-link {
+  position: relative; display: inline-flex; align-items: center; gap: .45rem; padding: .68rem .95rem;
+  border: 1px solid transparent; border-radius: 999px; font-size: .64rem; color: rgba(251,250,247,.84);
+  transition: .25s ease; transition-property: color, background, border-color, transform;
+}
+.sp-nav-trigger:hover, .sp-nav-link:hover { color: var(--sp-pearl); background: rgba(251,250,247,.07); }
+.sp-nav-trigger.active { color: var(--sp-amber); background: rgba(245,157,30,.09); border-color: rgba(245,157,30,.18); }
+.sp-nav-chevron { width: 12px; height: 12px; transition: transform .3s var(--sp-ease); }
+.sp-nav-trigger.active .sp-nav-chevron { transform: rotate(180deg); }
+
+.sp-nav-actions { display: flex; align-items: center; gap: .8rem; pointer-events: auto; }
+.sp-nav-cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: .55rem; padding: .75rem 1.05rem; border-radius: 999px;
+  background: linear-gradient(180deg, #ffb648, var(--sp-amber)); color: var(--sp-ink); font-size: .6rem;
+  box-shadow: 0 10px 24px rgba(245,157,30,.22); transition: .3s var(--sp-ease); transition-property: transform, box-shadow, background, color, border-color;
+}
+.sp-nav-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(245,157,30,.28); }
+.sp-nav-cta.ghost { background: transparent; color: var(--sp-pearl); border: 1px solid rgba(251,250,247,.28); box-shadow: none; }
+.sp-nav-cta.ghost:hover { background: var(--sp-pearl); color: var(--sp-ink); }
+
+.sp-nav-burger {
+  display: none; position: relative; width: 44px; height: 44px; flex: none; border: 1px solid rgba(251,250,247,.2);
+  border-radius: 50%; color: var(--sp-pearl); background: rgba(251,250,247,.04); transition: .3s ease; transition-property: border-color, background;
+}
+.sp-nav-burger:hover { border-color: rgba(245,157,30,.5); }
+.sp-nav-burger span { position: absolute; left: 13px; right: 13px; height: 1.75px; border-radius: 999px; background: currentColor; transition: transform .4s var(--sp-ease), opacity .25s ease; }
+.sp-nav-burger span:first-child { top: 18px; }
+.sp-nav-burger span:last-child { bottom: 18px; }
+.sp-nav-burger.active span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.sp-nav-burger.active span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+.sp-nav-dropdowns { position: absolute; top: 100%; left: 0; width: 100%; z-index: 2550; display: none; padding-top: .65rem; pointer-events: none; }
+.sp-nav-dropdown {
+  position: absolute; top: .65rem; left: 50%; width: min(1120px, calc(100vw - 2rem)); opacity: 0; visibility: hidden;
+  transform: translateX(-50%) translateY(18px); transition: opacity .3s ease, transform .35s var(--sp-ease), visibility .3s; pointer-events: none;
+}
+.sp-nav-dropdown.active { opacity: 1; visibility: visible; transform: translateX(-50%); pointer-events: auto; }
+.sp-nav-dropdown-shell {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); gap: 1.5rem; padding: 1.6rem;
+  border: 1px solid var(--sp-line); border-radius: 24px; background: radial-gradient(circle at top right, rgba(245,157,30,.1), transparent 28%), rgba(10,21,41,.88);
+  backdrop-filter: blur(24px) saturate(150%); box-shadow: 0 24px 64px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.03);
+}
+.sp-nav-dropdown-main { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; min-width: 0; }
+.sp-nav-col-label { margin: 0 0 .75rem; padding-bottom: .65rem; border-bottom: 1px solid rgba(251,250,247,.09); font-family: var(--sp-mono); font-size: .58rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--sp-amber); }
+.sp-nav-items { display: grid; gap: .45rem; }
+
+.sp-nav-item {
+  display: flex; align-items: center; justify-content: space-between; gap: .9rem; padding: .82rem .8rem;
+  border: 1px solid transparent; border-radius: 16px; color: rgba(251,250,247,.82); transition: .25s ease; transition-property: background, border-color, transform, box-shadow;
+}
+.sp-nav-item:hover, .sp-nav-item.is-active { background: rgba(245,157,30,.09); border-color: rgba(245,157,30,.2); }
+.sp-nav-item.is-active { transform: translateX(3px); box-shadow: 0 8px 20px rgba(0,0,0,.12); }
+.sp-nav-item-text { display: grid; min-width: 0; }
+.sp-nav-item-text strong, .sp-nav-mobile-text strong { display: block; font-family: var(--sp-serif); font-weight: 600; line-height: 1.1; color: var(--sp-pearl); }
+.sp-nav-item-text strong { font-size: .98rem; }
+.sp-nav-item-text small, .sp-nav-mobile-text small { display: block; margin-top: .22rem; font-size: .8rem; line-height: 1.35; color: rgba(251,250,247,.58); }
+.sp-nav-item-go, .sp-nav-mobile-arrow {
+  flex: none; display: grid; place-items: center; border: 1px solid rgba(251,250,247,.18); border-radius: 50%; transition: .25s ease; transition-property: background, border-color, color, transform;
+}
+.sp-nav-item-go { width: 28px; height: 28px; color: rgba(251,250,247,.7); }
+.sp-nav-mobile-arrow { width: 26px; height: 26px; color: var(--sp-amber); }
+.sp-nav-item-go svg, .sp-nav-mobile-arrow svg { width: 12px; height: 12px; transition: transform .25s var(--sp-ease); }
+.sp-nav-item.is-active .sp-nav-item-go { background: var(--sp-amber); border-color: var(--sp-amber); color: var(--sp-ink); }
+.sp-nav-item.is-active .sp-nav-item-go svg { transform: translateX(1px); }
+
+.sp-nav-preview { position: relative; margin: 0; min-height: 420px; overflow: hidden; border: 1px solid var(--sp-line); border-radius: 20px; background: #08101f; }
+.sp-nav-preview-pill {
+  position: absolute; top: 1rem; right: 1rem; z-index: 3; padding: .38rem .6rem; border: 1px solid rgba(251,250,247,.18);
+  border-radius: 999px; background: rgba(12,26,51,.55); backdrop-filter: blur(12px); font-family: var(--sp-mono); font-size: .54rem;
+  font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(251,250,247,.88);
+}
+.sp-nav-preview-media { position: absolute; inset: 0; }
+.sp-nav-preview-img { width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scale(1.04); transition: opacity .26s ease, transform .8s var(--sp-ease); }
+.sp-nav-preview-img.is-switching { opacity: 0; transform: scale(1.09); }
+.sp-nav-preview::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,16,31,.08) 0%, rgba(8,16,31,.02) 35%, rgba(8,16,31,.86) 100%); pointer-events: none; }
+.sp-nav-preview-caption { position: absolute; inset: auto 0 0 0; z-index: 2; display: grid; gap: .35rem; padding: 1.3rem; transition: opacity .3s ease, transform .3s var(--sp-ease); }
+.sp-nav-preview-caption.is-switching { opacity: 0; transform: translateY(10px); }
+.sp-nav-preview-kicker { margin: 0; font-family: var(--sp-mono); font-size: .58rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--sp-amber); }
+.sp-nav-preview-title { margin: 0; font-family: var(--sp-serif); font-size: 1.35rem; font-weight: 700; line-height: 1.1; color: var(--sp-pearl); }
+.sp-nav-preview-copy { margin: 0; max-width: 34ch; font-size: .85rem; line-height: 1.45; color: rgba(251,250,247,.74); }
+
+.sp-nav-mobile { position: fixed; inset: 0; z-index: 2500; opacity: 0; visibility: hidden; pointer-events: none; transition: .35s ease; transition-property: opacity, visibility; }
+.sp-nav-open .sp-nav-mobile { opacity: 1; visibility: visible; pointer-events: auto; }
+.sp-nav-mobile-backdrop {
+  position: absolute; inset: 0; background: radial-gradient(circle at 88% 8%, rgba(245,157,30,.17), transparent 22%),
+  radial-gradient(circle at 8% 88%, rgba(46,111,158,.14), transparent 28%), linear-gradient(180deg, rgba(12,26,51,.99), var(--sp-ink));
+}
+.sp-nav-mobile-scroll { position: relative; z-index: 2; height: 100%; overflow: auto; overscroll-behavior: contain; padding: 100px clamp(1rem, 4vw, 2rem) 2rem; }
+.sp-nav-mobile-body { display: grid; gap: 1rem; max-width: 720px; margin: 0 auto; }
+.sp-nav-mobile-direct { display: grid; gap: .65rem; }
+.sp-nav-mobile-direct-link {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.1rem; border: 1px solid var(--sp-line);
+  border-radius: 16px; background: rgba(251,250,247,.04); font-size: .66rem;
+}
+.sp-nav-mobile-group { overflow: hidden; border: 1px solid var(--sp-line); border-radius: 18px; background: rgba(251,250,247,.03); }
+.sp-nav-mobile-trigger {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.1rem; font-size: .66rem;
+}
+.sp-nav-mobile-trigger svg { width: 13px; height: 13px; transition: transform .3s var(--sp-ease); }
+.sp-nav-mobile-group.open .sp-nav-mobile-trigger svg { transform: rotate(180deg); color: var(--sp-amber); }
+.sp-nav-mobile-panel { display: grid; gap: .65rem; max-height: 0; overflow: hidden; transition: max-height .45s ease, padding .45s ease; }
+.sp-nav-mobile-group.open .sp-nav-mobile-panel { max-height: 1000px; padding: 0 1rem 1rem; }
+.sp-nav-mobile-link {
+  display: flex; align-items: center; gap: .9rem; padding: .75rem; border: 1px solid rgba(251,250,247,.09);
+  border-radius: 14px; background: rgba(251,250,247,.03); transition: .25s ease; transition-property: border-color, background, transform;
+}
+.sp-nav-mobile-link:hover { border-color: rgba(245,157,30,.4); background: rgba(245,157,30,.08); transform: translateY(-1px); }
+.sp-nav-mobile-thumb { width: 58px; height: 58px; flex: none; object-fit: cover; border-radius: 12px; border: 1px solid rgba(251,250,247,.12); background: #08101f; }
+.sp-nav-mobile-text { min-width: 0; }
+.sp-nav-mobile-text strong { font-size: .95rem; line-height: 1.15; }
+.sp-nav-mobile-text small { color: var(--sp-muted); }
+.sp-nav-mobile-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1rem; }
+.sp-nav-mobile-actions .sp-nav-cta { flex: 1; min-width: 180px; }
+
+@media (min-width: 1100px) { .sp-nav-desktop { display: flex; } .sp-nav-dropdowns { display: block; } .sp-nav-mobile { display: none; } }
+@media (max-width: 1099px) { .sp-nav-burger { display: inline-flex; } .sp-nav-cta.desktop-only { display: none; } }
+@media (max-width: 700px) { .sp-nav-brand-text strong { font-size: .95rem; } .sp-nav-brand-mark { width: 38px; height: 38px; } }
+@media (max-width: 1250px) { .sp-nav-dropdown-shell { grid-template-columns: 1fr; } .sp-nav-preview { min-height: 280px; order: -1; } }
+@media (prefers-reduced-motion: reduce) { .sp-nav-pro *, .sp-nav-pro *::before, .sp-nav-pro *::after { animation: none !important; transition-duration: .01ms !important; } }
+@media print { .sp-nav-pro, .sp-nav-mobile, #progress { display: none !important; } }
+
+.btn{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--fm);font-weight:700;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:1rem 1.7rem;border-radius:3px;border:1px solid transparent;transition:.35s var(--ease);cursor:pointer}
+.btn .ar{transition:transform .35s var(--ease)}
+.btn:hover{transform:translateY(-2px) scale(1.02)}
+.btn:hover .ar{transform:translateX(5px)}
+.btn-amber{background:var(--amber);color:var(--navy);box-shadow:0 12px 26px rgba(245,157,30,.28)}
+.btn-amber:hover{background:var(--amber-2)}
+.btn-ghost{border-color:rgba(251,250,247,.5);color:var(--pearl)}
+.btn-ghost:hover{background:var(--pearl);color:var(--navy)}
+.btn-navy{background:var(--navy-2);color:var(--amber);box-shadow:4px 4px 0 rgba(12,26,51,.35)}
+.btn-navy:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 rgba(12,26,51,.35)}
+.btn-outline{border:2px solid var(--navy-2);color:var(--navy-2)}
+.btn-outline:hover{background:var(--navy-2);color:var(--amber)}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100svh;color:var(--pearl);display:grid;grid-template-columns:1.1fr .9fr;overflow:hidden;background:var(--navy);padding-top:110px}
+.hero::before{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 15% 20%,rgba(245,157,30,.14),transparent 50%),radial-gradient(ellipse at 90% 90%,rgba(46,111,158,.22),transparent 55%)}
+.hero-left{position:relative;z-index:3;padding:calc(110px + 3rem) var(--pad) 3rem;display:flex;flex-direction:column;justify-content:center}
+.hero-kick{font-family:var(--fm);font-size:.58rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:.7rem;margin-bottom:1.6rem}
+.hero-kick i{width:8px;height:8px;background:var(--amber);border-radius:50%;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(245,157,30,.6)}50%{box-shadow:0 0 0 9px rgba(245,157,30,0)}}
+.hero h1{color:var(--pearl);font-size:clamp(2.6rem,6.4vw,5.6rem);max-width:13ch;font-weight:600;line-height:1.02;text-shadow:0 4px 18px rgba(0,0,0,.35);margin-bottom:1.4rem}
+.hero h1 .it{font-size:1.02em}
+.hero-sub{max-width:52ch;color:rgba(251,250,247,.88);font-weight:300;font-size:clamp(1rem,1.3vw,1.1rem);margin-bottom:2rem}
+.hero-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.hero-meta span{font-family:var(--fm);font-size:.55rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(251,250,247,.66);border:1px dashed rgba(251,250,247,.35);padding:.38rem .65rem;border-radius:3px}
+.hero-meta b{color:var(--amber)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:2.4rem}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding-top:1.4rem;border-top:1px dashed rgba(251,250,247,.25)}
+.hstat b{font-family:var(--fd);font-weight:700;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1;color:var(--amber);display:block}
+.hstat span{font-family:var(--fm);font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,250,247,.68);margin-top:.3rem;display:block}
+.hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:2rem;overflow:hidden;background:linear-gradient(180deg,#0a5a3e,#083a29)}
+.pitch{position:relative;width:100%;max-width:520px;aspect-ratio:3/4;border:2px solid rgba(251,250,247,.5);border-radius:4px;box-shadow:0 40px 80px rgba(0,0,0,.45),inset 0 0 0 20px rgba(251,250,247,.05)}
+.pitch::before{content:'';position:absolute;left:0;right:0;top:50%;height:2px;background:rgba(251,250,247,.5)}
+.pitch::after{content:'';position:absolute;left:50%;top:50%;width:120px;height:120px;border:2px solid rgba(251,250,247,.5);border-radius:50%;transform:translate(-50%,-50%)}
+.pitch .goal-t{position:absolute;top:0;left:50%;transform:translateX(-50%);width:40%;height:8%;border:2px solid rgba(251,250,247,.5);border-top:none}
+.pitch .goal-b{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:40%;height:8%;border:2px solid rgba(251,250,247,.5);border-bottom:none}
+.pitch .stripes{position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(0,0,0,.08) 0 12.5%,transparent 12.5% 25%);pointer-events:none}
+.player-dot{position:absolute;width:22px;height:22px;border-radius:50%;background:var(--amber);border:2px solid var(--pearl);transform:translate(-50%,-50%);display:grid;place-items:center;font-family:var(--fm);font-size:.55rem;font-weight:700;color:var(--navy-2);box-shadow:0 3px 8px rgba(0,0,0,.45);transition:.5s var(--ease)}
+.player-dot.opp{background:var(--pearl);color:var(--navy-2)}
+.player-dot.keeper{background:var(--blue-2);color:var(--pearl)}
+.p-dot-label{position:absolute;top:100%;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:.45rem;font-weight:700;letter-spacing:.14em;color:var(--pearl);margin-top:.25rem;white-space:nowrap;opacity:.7}
+.pitch .arrow{position:absolute;fill:none;stroke:var(--amber);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:200;stroke-dashoffset:200;transition:stroke-dashoffset 1.5s var(--ease) .3s}
+.pitch.in .arrow{stroke-dashoffset:0}
+.pitch-note{position:absolute;left:-10px;bottom:30px;font-family:var(--fh);font-size:1.3rem;color:var(--amber);transform:rotate(-6deg);background:rgba(12,26,51,.75);padding:.3rem .8rem;border-radius:4px;white-space:nowrap}
+.pitch-side{position:absolute;right:-30px;top:50%;transform:translateY(-50%) rotate(90deg);font-family:var(--fm);font-size:.55rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:rgba(251,250,247,.45);transform-origin:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-left{padding-top:calc(110px + 2rem)}.hero-right{min-height:460px}.pitch{max-width:360px}}
+@media(max-width:600px){.hero-stats{grid-template-columns:1fr 1fr;gap:.8rem}}
+
+/* section head */
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:3rem}
+.sec-head h2{font-size:clamp(2.2rem,5vw,4rem);margin-top:.9rem;max-width:20ch}
+.sec-head p{max-width:46ch;font-size:.98rem}
+.dark .sec-head p{color:var(--muted-d)}
+.sec-eyebrow{font-family:var(--fm);font-size:.62rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--amber-2);display:flex;align-items:center;gap:.7rem;margin-bottom:.5rem}
+.dark .sec-eyebrow{color:var(--amber)}
+.sec-eyebrow::before{content:'';width:28px;height:1.5px;background:currentColor}
+
+/* ============ 01 THE ACADEMY: INTERACTIVE ECOSYSTEM ============ */
+.the-academy{padding:var(--sp) 0;background:var(--sand)}
+.eco-head{text-align:center;max-width:760px;margin:0 auto 3.5rem}
+.eco-head h2{font-size:clamp(2.4rem,5.4vw,4.4rem);margin-top:.6rem}
+.eco-head .lead{font-family:var(--fd);font-style:italic;font-weight:600;font-size:clamp(1.15rem,2.2vw,1.45rem);color:var(--amber-2);margin-top:.8rem}
+
+.eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+@media(max-width:960px){.eco-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.eco-grid{grid-template-columns:1fr}}
+
+.eco-tile{background:var(--pearl);border:1.5px solid var(--hair);border-radius:12px;padding:2rem 1.6rem;display:flex;flex-direction:column;position:relative;transition:.4s var(--ease);cursor:pointer;overflow:hidden}
+.eco-tile::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--ac,var(--amber));transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.eco-tile:hover{transform:translateY(-6px);border-color:var(--ac,var(--amber));box-shadow:0 24px 48px rgba(20,40,75,.12)}
+.eco-tile:hover::before{transform:scaleX(1)}
+
+.eco-tile-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.eco-tile .ic{width:46px;height:46px}
+.eco-tile .idx{font-family:var(--fm);font-size:.65rem;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+.eco-tile h3{font-size:1.3rem;margin-bottom:.5rem;color:var(--ink)}
+.eco-tile p{font-size:.9rem;color:var(--body);line-height:1.55;flex:1}
+.eco-tile .eco-tag{font-family:var(--fm);font-size:.56rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ac,var(--amber-2));margin-top:1.2rem;padding-top:.8rem;border-top:1px dashed var(--hair);display:flex;align-items:center;gap:.4rem}
+.eco-tile .eco-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* ============ PHILOSOPHY ============ */
+.philo{padding:var(--sp) 0;background:var(--navy-2);position:relative;overflow:hidden}
+.philo::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 140px,rgba(251,250,247,.035) 140px 141px);pointer-events:none}
+.philo-head{text-align:center;max-width:720px;margin:0 auto 4rem;position:relative;z-index:2}
+.philo-head h2{font-size:clamp(2.4rem,5.4vw,4.4rem)}
+.philo-head p{color:var(--muted-d);margin-top:1rem}
+.philo-blocks{display:grid;gap:1.2rem}
+@media(min-width:1000px){.philo-blocks{grid-template-columns:repeat(4,1fr)}}
+.p-card{background:var(--pearl);color:var(--ink);border-radius:10px;padding:2rem 1.6rem;transition:.4s var(--ease);position:relative;overflow:hidden}
+.p-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.p-card:hover{transform:translateY(-8px);box-shadow:0 32px 64px rgba(0,0,0,.35)}
+.p-card:hover::before{transform:scaleX(1)}
+.p-num{font-family:var(--fd);font-style:italic;font-weight:900;font-size:3.2rem;line-height:1;color:transparent;-webkit-text-stroke:1.4px var(--amber-2)}
+.p-card h3{font-size:1.35rem;margin:.4rem 0 .5rem}
+.p-card p{font-size:.88rem}
+.p-word{font-family:var(--fm);font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-2);display:block;margin-top:1rem;padding-top:.9rem;border-top:1px dashed var(--hair)}
+.mantra{margin-top:4rem;text-align:center;max-width:900px;margin-inline:auto;position:relative;z-index:2}
+.mantra .m-line{font-family:var(--fd);font-weight:600;font-size:clamp(1.6rem,4vw,3rem);line-height:1.15;color:var(--pearl)}
+.mantra .m-line .it{color:var(--amber)}
+.mantra .m-line+.m-line{margin-top:.4rem}
+.mantra .sign{font-family:var(--fh);font-size:1.6rem;color:var(--amber);transform:rotate(-3deg);display:inline-block;margin-top:1.6rem}
+
+/* ============ PROGRAMMES ============ */
+.programmes{padding:var(--sp) 0;background:var(--sand)}
+.prg-grid{display:grid;gap:1.5rem;grid-template-columns:1fr}
+@media(min-width:640px){.prg-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.prg-grid{grid-template-columns:repeat(3,1fr)}}
+.prg{background:var(--pearl);border:1px solid var(--hair);border-radius:10px;padding:2rem 1.6rem 1.8rem;position:relative;overflow:hidden;transition:.4s var(--ease);display:flex;flex-direction:column}
+.prg:hover{transform:translateY(-8px);border-color:var(--amber);box-shadow:0 28px 54px rgba(20,40,75,.16)}
+.prg::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ac,var(--amber));transform:scaleY(0);transform-origin:top;transition:transform .5s var(--ease)}
+.prg:hover::after{transform:scaleY(1)}
+.prg .n{font-family:var(--fd);font-style:italic;font-weight:900;font-size:1.8rem;line-height:1;color:transparent;-webkit-text-stroke:1.2px var(--ac,var(--amber-2))}
+.prg h3{font-size:1.4rem;margin:.7rem 0 .5rem}
+.prg p{font-size:.92rem;flex:1;margin-bottom:1.2rem}
+.prg-list{list-style:none;display:grid;gap:.35rem;margin-bottom:1.4rem}
+.prg-list li{display:flex;gap:.6rem;font-size:.82rem;color:var(--body)}
+.prg-list li::before{content:'';width:5px;height:5px;background:var(--ac,var(--amber-2));border-radius:50%;margin-top:.6em;flex-shrink:0}
+.prg-link{font-family:var(--fm);font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ac,var(--amber-2));display:inline-flex;align-items:center;gap:.5rem;transition:.3s}
+.prg-link:hover{gap:.9rem;color:var(--amber)}
+.prg .sk{margin-bottom:.6rem}
+
+/* ============ PATHWAY — GROWTH LADDER ============ */
+.pathway{padding:var(--sp) 0;background:var(--pearl);position:relative}
+.path-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:4rem}
+.path-head h2{font-size:clamp(2.4rem,5.4vw,4.4rem);margin-top:.9rem}
+.path-head p{max-width:46ch;font-size:.98rem}
+
+.path-ladder{position:relative;display:flex;flex-direction:column;gap:3.5rem;max-width:1120px;margin:0 auto}
+.path-ladder::before{content:'';position:absolute;left:50%;top:2rem;bottom:2rem;width:2px;background:var(--hair);transform:translateX(-50%);z-index:1}
+
+.l-stage{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;position:relative;z-index:2}
+.l-stage:nth-child(even){direction:rtl}
+.l-stage:nth-child(even) > *{direction:ltr}
+
+.l-node{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:var(--pearl);border:2px solid var(--ac,var(--amber));display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:.7rem;font-weight:700;color:var(--navy-2);box-shadow:0 0 0 6px var(--pearl);z-index:3;transition:.4s var(--ease)}
+.l-stage.in .l-node{background:var(--ac,var(--amber));color:var(--pearl);box-shadow:0 0 0 8px var(--pearl),0 0 20px rgba(245,157,30,.35)}
+
+.l-viz-card{background:linear-gradient(180deg,#0a5a3e,#083a29);border-radius:12px;overflow:hidden;border:1.5px solid rgba(20,40,75,.2);box-shadow:0 20px 40px rgba(12,26,51,.15);position:relative;aspect-ratio:16/11;width:100%;display:flex;align-items:center;justify-content:center}
+.l-viz-card::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(0,0,0,.08) 0 16.66%,transparent 16.66% 33.33%);pointer-events:none;z-index:1}
+.l-viz-card svg{position:absolute;inset:0;width:100%;height:100%;z-index:2;overflow:visible}
+
+.l-body{background:var(--sand);border:1px solid var(--hair);border-radius:12px;padding:2.2rem;border-left:5px solid var(--ac,var(--amber));transition:.4s var(--ease);box-shadow:0 12px 28px rgba(20,40,75,.06)}
+.l-stage:nth-child(even) .l-body{border-left:1px solid var(--hair);border-right:5px solid var(--ac,var(--amber))}
+.l-stage:hover .l-body{transform:translateY(-4px);box-shadow:0 22px 46px rgba(20,40,75,.12);border-color:var(--ac,var(--amber))}
+
+.l-tag{font-family:var(--fm);font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ac,var(--amber-2));display:block;margin-bottom:.5rem}
+.l-age-title{display:flex;align-items:baseline;gap:.9rem;margin-bottom:.8rem}
+.l-age{font-family:var(--fd);font-style:italic;font-weight:900;font-size:clamp(2.2rem,3.6vw,3rem);line-height:1;color:var(--ink)}
+.l-body h3{font-size:1.35rem;line-height:1.2;color:var(--ink)}
+.l-body p{font-size:.95rem;color:var(--body);line-height:1.55;margin-bottom:1.2rem}
+.l-focus{list-style:none;border-top:1px dashed var(--hair);padding-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem}
+.l-focus li{font-family:var(--fm);font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy-2);background:var(--pearl);border:1px solid var(--hair);padding:.35rem .65rem;border-radius:4px}
+
+@media(max-width:960px){
+  .path-ladder::before{left:22px}
+  .l-stage,.l-stage:nth-child(even){display:flex;flex-direction:column;gap:1.5rem;padding-left:3.2rem;direction:ltr}
+  .l-stage:nth-child(even) > *{direction:ltr}
+  .l-node{left:22px;top:2rem;transform:translate(-50%,0)}
+  .l-stage:nth-child(even) .l-body{border-left:5px solid var(--ac,var(--amber));border-right:1px solid var(--hair)}
+  .l-body{padding:1.6rem}
+}
+
+/* pitch markings */
+.viz-outline{fill:none;stroke:rgba(251,250,247,.55);stroke-width:1.5}
+.viz-mid{stroke:rgba(251,250,247,.45);stroke-width:1.5}
+.viz-circle{fill:none;stroke:rgba(251,250,247,.45);stroke-width:1.5}
+.viz-pen{fill:none;stroke:rgba(251,250,247,.45);stroke-width:1.5}
+.v-dot{transition:transform .5s var(--ease)}
+.v-dot.our{fill:var(--amber);stroke:var(--pearl);stroke-width:1.5}
+.v-dot.opp{fill:var(--pearl);stroke:var(--navy-2);stroke-width:1.5}
+.v-dot.keeper{fill:var(--blue-2);stroke:var(--pearl);stroke-width:1.5}
+.v-dot.hi{fill:var(--amber-2);stroke:var(--pearl);stroke-width:2}
+.v-dot-label{font-family:var(--fm);font-size:7px;font-weight:700;fill:var(--navy-2);text-anchor:middle;dominant-baseline:central;letter-spacing:.04em}
+.v-dot.opp .v-dot-label{fill:var(--pearl)}
+.v-dot.keeper .v-dot-label{fill:var(--pearl)}
+.v-line{fill:none;stroke:var(--amber);stroke-width:2;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400}
+.in .v-line{animation:drawLine 1.4s var(--ease) forwards var(--d,0s)}
+.v-line-dash{fill:none;stroke:var(--pearl);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:4 6;opacity:.5}
+.v-line-support{fill:none;stroke:var(--amber);stroke-width:1.2;stroke-dasharray:3 5;opacity:.7}
+@keyframes drawLine{to{stroke-dashoffset:0}}
+.v-ball{fill:var(--amber-2);stroke:var(--pearl);stroke-width:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,.5))}
+.v-cone{fill:url(#coneGrad);opacity:0;transform-origin:var(--ox,50%) var(--oy,50%);transition:opacity .5s ease .3s}
+.in .v-cone{opacity:.65;animation:scanSweep 3.2s ease-in-out .5s infinite}
+@keyframes scanSweep{0%,100%{transform:rotate(-55deg)}50%{transform:rotate(55deg)}}
+.v-pulse{fill:none;stroke:var(--amber);stroke-width:2;opacity:0}
+.in .v-pulse{animation:pulse 2s ease-out infinite var(--d,0s)}
+@keyframes pulse{0%{r:10;opacity:.8}100%{r:45;opacity:0}}
+.viz-caption{position:absolute;left:.8rem;bottom:.6rem;font-family:var(--fm);font-size:.52rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);background:rgba(12,26,51,.75);padding:.25rem .55rem;border-radius:3px;z-index:3}
+.viz-num{position:absolute;top:.6rem;right:.6rem;font-family:var(--fd);font-style:italic;font-weight:900;font-size:1.8rem;line-height:1;color:transparent;-webkit-text-stroke:1.2px rgba(251,250,247,.6);z-index:3}
+
+/* U9 — Free play */
+#vizU9 .d1{animation:u9drift1 6s ease-in-out infinite}
+#vizU9 .d2{animation:u9drift2 7s ease-in-out infinite}
+#vizU9 .d3{animation:u9drift3 5.5s ease-in-out infinite}
+#vizU9 .d4{animation:u9drift4 6.5s ease-in-out infinite}
+#vizU9 .d5{animation:u9drift5 5.8s ease-in-out infinite}
+#vizU9 .ball{animation:u9ball 4.5s ease-in-out infinite}
+@keyframes u9drift1{0%,100%{transform:translate(0,0)}33%{transform:translate(25px,-15px)}66%{transform:translate(-15px,20px)}}
+@keyframes u9drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,-25px)}}
+@keyframes u9drift3{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,15px)}}
+@keyframes u9drift4{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,-10px)}}
+@keyframes u9drift5{0%,100%{transform:translate(0,0)}50%{transform:translate(15px,-25px)}}
+@keyframes u9ball{0%,100%{transform:translate(0,0)}20%{transform:translate(40px,-30px)}40%{transform:translate(-35px,20px)}60%{transform:translate(50px,10px)}80%{transform:translate(-20px,-25px)}}
+
+/* U11 — 1v1 */
+#vizU11 .att{animation:u11att 3.5s var(--ease) infinite}
+#vizU11 .def{animation:u11def 3.5s var(--ease) infinite}
+#vizU11 .ball-11{animation:u11ball 3.5s var(--ease) infinite}
+#vizU11 .fake-arrow{stroke-dasharray:100;stroke-dashoffset:100;opacity:0}
+.in #vizU11 .fake-arrow{animation:u11fake 3.5s var(--ease) infinite}
+@keyframes u11att{0%{transform:translate(0,0)}30%{transform:translate(40px,0)}45%{transform:translate(40px,-8px)}60%{transform:translate(50px,-15px)}100%{transform:translate(90px,-20px)}}
+@keyframes u11def{0%{transform:translate(0,0)}30%{transform:translate(30px,0)}45%{transform:translate(35px,-5px)}60%{transform:translate(20px,5px)}100%{transform:translate(15px,10px)}}
+@keyframes u11ball{0%,30%{transform:translate(0,0)}45%{transform:translate(38px,-10px)}60%{transform:translate(48px,-18px)}100%{transform:translate(95px,-22px)}}
+@keyframes u11fake{0%{opacity:0;stroke-dashoffset:100}35%,50%{opacity:1;stroke-dashoffset:0}100%{opacity:0;stroke-dashoffset:0}}
+
+/* U13 — Scan */
+#vizU13 .cone{transform-origin:150px 110px}
+#vizU13 .scan-dot{fill:var(--pearl);opacity:.35;transition:opacity .3s}
+.in #vizU13 .scan-dot{animation:u13spot 3.2s ease-in-out .5s infinite}
+@keyframes u13spot{0%,20%{fill:var(--pearl);opacity:.35}30%,50%{fill:var(--amber);opacity:1}70%,100%{fill:var(--pearl);opacity:.35}}
+.in #vizU13 .scan-dot.s2{animation-delay:.8s}
+.in #vizU13 .scan-dot.s3{animation-delay:1.4s}
+
+/* U15 — Triangles */
+#vizU15 .pass1{animation:u15pass 3.8s ease-in-out infinite}
+#vizU15 .ball15{animation:u15ball 3.8s ease-in-out infinite}
+#vizU15 .supp{stroke-dasharray:200;stroke-dashoffset:200}
+.in #vizU15 .supp{animation:u15supp 2s ease forwards}
+@keyframes u15pass{0%,20%{stroke-dashoffset:120;opacity:1}40%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes u15ball{0%,18%{transform:translate(0,0);opacity:1}38%{transform:translate(70px,-50px);opacity:1}58%{transform:translate(70px,50px);opacity:1}78%{transform:translate(-40px,60px);opacity:1}100%{transform:translate(0,0);opacity:0}}
+@keyframes u15supp{to{stroke-dashoffset:0}}
+
+/* U17 — Counter */
+#vizU17 .u17d{transform:translate(0,0)}
+.in #vizU17 .u17d.f1{animation:u17counter 4s ease-in-out infinite}
+.in #vizU17 .u17d.f2{animation:u17counter2 4s ease-in-out infinite .2s}
+.in #vizU17 .u17d.f3{animation:u17counter3 4s ease-in-out infinite .3s}
+.in #vizU17 .counter-arrow{animation:u17arrow 4s ease-in-out infinite}
+.in #vizU17 .ball17{animation:u17ball 4s ease-in-out infinite}
+@keyframes u17counter{0%,30%{transform:translate(0,0)}50%,80%{transform:translate(0,-50px)}100%{transform:translate(0,0)}}
+@keyframes u17counter2{0%,30%{transform:translate(0,0)}50%,80%{transform:translate(-30px,-45px)}100%{transform:translate(0,0)}}
+@keyframes u17counter3{0%,30%{transform:translate(0,0)}50%,80%{transform:translate(30px,-45px)}100%{transform:translate(0,0)}}
+@keyframes u17arrow{0%,20%{stroke-dashoffset:100;opacity:0}35%,65%{stroke-dashoffset:0;opacity:1}85%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes u17ball{0%,25%{transform:translate(0,0)}45%{transform:translate(0,-40px)}65%{transform:translate(-20px,-70px)}85%{transform:translate(-30px,-100px)}100%{transform:translate(0,0)}}
+
+/* Senior — Shape */
+#vizSen .captain-ring{fill:none;stroke:var(--amber);stroke-width:2;opacity:0}
+.in #vizSen .captain-ring{animation:capRing 2.2s ease-out infinite}
+@keyframes capRing{0%{r:8;opacity:.9}100%{r:28;opacity:0}}
+.in #vizSen .u-sen.compress{animation:senCompress 5s ease-in-out infinite}
+@keyframes senCompress{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ============ 05 DEVELOPMENT CYCLE (ROOMY & NON-OVERLAPPING) ============ */
+.cycle{padding:var(--sp) 0;background:var(--navy-2)}
+.cycle::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 75% 40%,rgba(245,157,30,.1),transparent 55%);pointer-events:none}
+.cycle-grid{display:grid;gap:4.5rem;align-items:center}
+@media(min-width:1000px){.cycle-grid{grid-template-columns:1fr 1.15fr}}
+.cycle-text h2{font-size:clamp(2.4rem,5.4vw,4.4rem)}
+.cycle-text .lead{font-family:var(--fd);font-style:italic;font-weight:600;font-size:clamp(1.1rem,2.2vw,1.4rem);line-height:1.4;color:var(--pearl);margin:1.2rem 0 1.5rem}
+.cycle-text p{color:var(--muted-d);font-size:.95rem;margin-bottom:1rem}
+.cycle-note{margin-top:1.6rem;border-left:3px solid var(--amber);padding-left:1.2rem;font-family:var(--fd);font-style:italic;font-weight:600;font-size:1.05rem;color:var(--amber);line-height:1.45}
+
+.ring-wrap{position:relative;width:100%;max-width:580px;aspect-ratio:1/1;margin-inline:auto}
+.ring-svg{width:100%;height:100%;overflow:visible}
+.ring-svg .ring-bg{fill:none;stroke:rgba(251,250,247,.16);stroke-width:2.5}
+.ring-svg .ring-prog{fill:none;stroke:var(--amber);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:1700;stroke-dashoffset:1700;transition:stroke-dashoffset 2s var(--ease)}
+.ring-svg.in .ring-prog{stroke-dashoffset:0}
+.ring-svg .node{fill:var(--navy);stroke:var(--amber);stroke-width:2.5;transition:.35s var(--ease);filter:drop-shadow(0 4px 10px rgba(0,0,0,.4))}
+.ring-svg g.ring-step{opacity:0;transform:scale(.6);transform-origin:center;transform-box:fill-box;transition:.7s var(--ease) var(--d,0s)}
+.ring-svg.in g.ring-step{opacity:1;transform:scale(1)}
+.ring-svg g.ring-step:hover .node{fill:var(--amber)}
+.ring-svg g.ring-step:hover text.step-n{fill:var(--navy-2)}
+.ring-svg g.ring-step:hover text.step-l{fill:var(--amber)}
+.ring-svg text.step-n{font-family:var(--fm);font-weight:700;font-size:11px;fill:var(--amber);text-anchor:middle;transition:.3s}
+.ring-svg text.step-l{font-family:var(--fd);font-weight:700;font-size:13.5px;fill:var(--pearl);text-anchor:middle;transition:.3s}
+
+.ring-center{text-align:center;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:210px;height:210px;border-radius:50%;background:rgba(12,26,51,.85);border:1.5px dashed rgba(245,157,30,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.2rem;pointer-events:none;box-shadow:0 0 35px rgba(0,0,0,.5);backdrop-filter:blur(6px)}
+.ring-center b{font-family:var(--fd);font-weight:800;font-size:1.45rem;color:var(--pearl);line-height:1.15;display:block}
+.ring-center span{font-family:var(--fm);font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-top:.6rem;display:block;border-top:1px solid rgba(251,250,247,.15);padding-top:.4rem}
+
+/* ============ SUCCESS ============ */
+.success{padding:var(--sp) 0;background:var(--sand)}
+.succ-grid{display:grid;gap:3rem;align-items:center}
+@media(min-width:960px){.succ-grid{grid-template-columns:1.1fr .9fr}}
+.succ-text h2{font-size:clamp(2.4rem,5.4vw,4.4rem)}
+.succ-text .lead{font-family:var(--fd);font-weight:500;font-size:clamp(1.15rem,2.2vw,1.5rem);line-height:1.45;color:var(--ink);margin:1.2rem 0 1.5rem}
+.succ-text p{font-size:.95rem;margin-bottom:1rem}
+.succ-list{list-style:none;border-top:2px solid var(--ink)}
+.succ-list li{display:flex;gap:1rem;align-items:flex-start;padding:1.05rem 0;border-bottom:1px solid var(--hair);font-size:.95rem;font-weight:500;color:var(--ink);opacity:0;transform:translateX(-14px);transition:.6s var(--ease) var(--d,0s)}
+.succ-list.in li{opacity:1;transform:none}
+.succ-list li::before{content:'→';font-family:var(--fm);color:var(--amber-2);font-weight:700;flex-shrink:0;margin-top:.15rem}
+.succ-visual{position:relative;aspect-ratio:4/5;border-radius:8px;overflow:hidden;box-shadow:0 30px 60px rgba(20,40,75,.25)}
+.succ-visual img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35) saturate(1.05);transition:transform 1.2s var(--ease)}
+.succ-visual:hover img{transform:scale(1.04)}
+.succ-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(12,26,51,.85) 100%)}
+.succ-visual b{position:absolute;left:1.4rem;bottom:1.4rem;color:var(--pearl);font-family:var(--fd);font-style:italic;font-weight:600;font-size:clamp(1.2rem,2.6vw,1.8rem);line-height:1.2;z-index:2;max-width:80%}
+.succ-visual b i{color:var(--amber);font-style:normal}
+.succ-frame{position:absolute;inset:12px;border:1.5px dashed rgba(251,250,247,.45);border-radius:4px;z-index:2;pointer-events:none}
+
+/* ============ VALUES ============ */
+.values{padding:var(--sp) 0;background:var(--pearl)}
+.val-grid{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:640px){.val-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.val-grid{grid-template-columns:repeat(4,1fr)}}
+.v-card{background:var(--sand);border:1px solid var(--hair);border-radius:10px;padding:1.8rem 1.4rem;transition:.4s var(--ease);position:relative;text-align:center}
+.v-card:hover{transform:translateY(-6px);border-color:var(--amber);box-shadow:0 22px 44px rgba(20,40,75,.13)}
+.v-emo{font-size:2.2rem;line-height:1;margin-bottom:.8rem}
+.v-card h3{font-size:1.2rem;margin-bottom:.4rem}
+.v-card p{font-size:.85rem}
+.v-num{position:absolute;top:.8rem;right:.8rem;font-family:var(--fm);font-size:.54rem;font-weight:700;letter-spacing:.16em;color:var(--muted)}
+
+/* ============ BIG CTA ============ */
+.big-cta{padding:var(--sp) 0;background:var(--amber);position:relative;overflow:hidden}
+.big-cta::before{content:'';position:absolute;inset:0;background:repeating-radial-gradient(circle at 70% 30%,transparent 0 70px,rgba(12,26,51,.06) 70px 72px);pointer-events:none}
+.big-cta-in{position:relative;z-index:2;text-align:center;max-width:860px;margin-inline:auto}
+.big-cta h2{font-size:clamp(2.6rem,7vw,5.2rem);line-height:1;color:var(--navy-2);margin:1rem 0 1.4rem}
+.big-cta h2 .it{color:var(--pearl);text-shadow:0 1px 4px rgba(12,26,51,.3)}
+.big-cta .lead{font-size:1.05rem;color:rgba(12,26,51,.85);font-weight:500;margin-bottom:2.5rem;max-width:56ch;margin-inline:auto}
+.big-cta-actions{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center}
+
+/* ═══════════════════════════════════════════
+   6. FOOTER
+═══════════════════════════════════════════ */
+footer { background: var(--navy-3); color: var(--muted-d); padding: 4rem 0 0; position: relative; overflow: hidden; }
+footer::before { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='97' fill='none' stroke='%23fbfaf7' stroke-width='2' opacity='.04'/%3E%3Ccircle cx='100' cy='100' r='67' fill='none' stroke='%23fbfaf7' stroke-width='1.5' opacity='.03'/%3E%3Cpath d='M100 40 L136 50 L150 70 V106 C150 134 129 154 100 166 C71 154 50 134 50 106 V70 L64 50 Z' fill='none' stroke='%23fbfaf7' stroke-width='2' opacity='.03'/%3E%3C/svg%3E") center/contain no-repeat; pointer-events: none; }
+.foot-grid { display: grid; gap: 2.6rem; align-items: center; padding-bottom: 3rem; position: relative; }
+@media(min-width:960px) { .foot-grid { grid-template-columns: 1.2fr 1.5fr auto; gap: 3rem; } }
+.foot-brand { display: flex; gap: 1rem; }
+.foot-brand .crest { width: 56px; flex-shrink: 0; }
+.foot-brand b { font-family: var(--fd); font-weight: 600; font-size: 1.1rem; color: var(--pearl); display: block; line-height: 1.15; }
+.foot-brand p { font-size: .8rem; margin-top: .4rem; font-weight: 300; }
+.foot-loc { font-family: var(--fm); font-size: .58rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--amber); margin-top: .5rem; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 1.7rem; justify-content: center; }
+.foot-links a { font-family: var(--fm); font-size: .64rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(251, 250, 247, .7); transition: .3s; }
+.foot-links a:hover { color: var(--amber); }
+.socials { display: flex; gap: .7rem; }
+.socials a { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(251, 250, 247, .28); display: grid; place-items: center; color: var(--pearl); transition: .3s; }
+.socials a:hover { background: var(--amber); border-color: var(--amber); color: var(--navy); transform: translateY(-3px); }
+.socials svg { width: 15px; height: 15px; }
+.foot-bottom { border-top: 1px solid var(--hair-d); padding: 1.4rem 0; display: flex; flex-wrap: wrap; gap: .6rem; justify-content: space-between; font-family: var(--fm); font-size: .66rem; letter-spacing: .02em; position: relative; }
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-behavior:auto}.wr .w>span{transform:none}}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- SHARED GRADIENT DEFS -->
+<svg style="position:absolute;width:0;height:0" aria-hidden="true">
+  <defs>
+    <radialGradient id="coneGrad" cx="50%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#f59d1e" stop-opacity=".7"/>
+      <stop offset="70%" stop-color="#f59d1e" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#f59d1e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<!-- hand-sketched icon set -->
+<svg style="display:none" aria-hidden="true">
+<symbol id="i-ball" viewBox="0 0 48 48"><g class="gh"><path d="M24 8c9-.5 16.5 7 16 16-.5 9-7 16.5-16 16S7.5 33 8 24 15 8.5 24 8z"/></g><g class="ln"><path d="M24 8c9-.5 16.5 7 16 16-.5 9-7 16.5-16 16S7.5 33 8 24 15 8.5 24 8z"/><path d="M24 18l6.2 4.3-2.2 7.2h-8l-2.2-7.2z"/><path d="M24 8.5v9.5M10 18.5l7.8 3.8M38 18.5l-7.8 3.8M14.5 34l3.5-4.5M33.5 34l-3.5-4.5"/></g></symbol>
+<symbol id="i-butterfly" viewBox="0 0 48 48"><g class="gh"><path d="M24 24c-6.5-8.5-16.5-8-15.5.5 1 6.5 9.5 7 15.5 2.5z"/></g><g class="ln"><path d="M24 24c-6.5-8.5-16.5-8-15.5.5 1 6.5 9.5 7 15.5 2.5z"/><path d="M24 24c6.5-8.5 16.5-8 15.5.5-1 6.5-9.5 7-15.5 2.5z"/><path d="M24 27c-4.5 3-8.5 7.5-5.5 10 2.5 2 5.5-3 5.5-6z"/><path d="M24 27c4.5 3 8.5 7.5 5.5 10-2.5 2-5.5-3-5.5-6z"/><path d="M24 20v17M22 18l-4.5-6M26 18l4.5-6"/></g></symbol>
+<symbol id="i-book" viewBox="0 0 48 48"><g class="gh"><path d="M8 12c6-3.5 10.5-3.5 16 0v24c-5.5-3.5-10-3.5-16 0z"/></g><g class="ln"><path d="M8 12c6-3.5 10.5-3.5 16 0v24c-5.5-3.5-10-3.5-16 0z"/><path d="M40 12c-6-3.5-10.5-3.5-16 0v24c5.5-3.5 10-3.5 16 0z"/><path d="M12 18c3-1 6-1 8 0M12 24c3-1 6-1 8 0M28 18c3-1 6-1 8 0"/><path d="M31 33l7.5-7.5 3 3L34 36z"/></g></symbol>
+<symbol id="i-whistle" viewBox="0 0 48 48"><g class="gh"><path d="M20 22h20v6H28"/></g><g class="ln"><circle cx="19" cy="30" r="8.5"/><path d="M20 22h20v6H28"/><path d="M27 22v-4M33 22v-4"/><circle cx="19" cy="30" r="2"/></g></symbol>
+<symbol id="i-glove" viewBox="0 0 48 48"><g class="gh"><path d="M15 34V14a4 4 0 0 1 8 0v9"/></g><g class="ln"><path d="M15 34V14a4 4 0 0 1 8 0v9a4 4 0 0 1 8 0v11z"/><path d="M13 34h20v5H13z"/><path d="M19 20v5M27 25v4"/></g></symbol>
+<symbol id="i-shield" viewBox="0 0 48 48"><g class="gh"><path d="M24 6l14.5 5v10.5c0 10-6.5 16.5-14.5 21-8-4.5-14.5-11-14.5-21V11z"/></g><g class="ln"><path d="M24 6l14.5 5v10.5c0 10-6.5 16.5-14.5 21-8-4.5-14.5-11-14.5-21V11z"/><path d="M17 24l5 5 9.5-10.5"/></g></symbol>
+<symbol id="i-globe" viewBox="0 0 48 48"><g class="gh"><path d="M24 8c9-.5 16.5 7 16 16-.5 9-7 16.5-16 16S7.5 33 8 24 15 8.5 24 8z"/></g><g class="ln"><path d="M24 8c9-.5 16.5 7 16 16-.5 9-7 16.5-16 16S7.5 33 8 24 15 8.5 24 8z"/><path d="M8.5 24h31M24 8.5c-6.5 6-6.5 25.5 0 31M24 8.5c6.5 6 6.5 25.5 0 31M11 16c8 3 18 3 26 0M11 32c8-3 18-3 26 0"/></g></symbol>
+<symbol id="i-hands" viewBox="0 0 48 48"><g class="gh"><path d="M7 27c4.5-6.5 11-8.5 17-6l8.5 3.5c3 1.5 3 5.5-.5 6.5l-10.5 3c-6.5 2-12.5-1.5-14.5-7z"/></g><g class="ln"><path d="M7 27c4.5-6.5 11-8.5 17-6l8.5 3.5c3 1.5 3 5.5-.5 6.5l-10.5 3c-6.5 2-12.5-1.5-14.5-7z"/><path d="M7 24l-3-3M41 27l3-3M17 22l4-5"/></g></symbol>
+<symbol id="crest" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="97" fill="#f59d1e" stroke="#14284b" stroke-width="3"/>
+  <circle cx="100" cy="100" r="67" fill="#fbfaf7" stroke="#14284b" stroke-width="2"/>
+  <defs><path id="tp" d="M20 100 A80 80 0 0 1 180 100"/><path id="bp" d="M12 100 A88 88 0 0 0 188 100"/></defs>
+  <text fill="#14284b" font-family="Fraunces, Georgia, serif" font-size="19" font-weight="700" letter-spacing="3"><textPath href="#tp" startOffset="50%" text-anchor="middle">SPORTING PEARLS</textPath></text>
+  <text fill="#14284b" font-family="Fraunces, Georgia, serif" font-size="16.5" font-weight="700" letter-spacing="1.5"><textPath href="#bp" startOffset="50%" text-anchor="middle">Football Academy</textPath></text>
+  <text x="16" y="106" font-size="13" fill="#14284b" text-anchor="middle">★</text>
+  <text x="184" y="106" font-size="13" fill="#14284b" text-anchor="middle">★</text>
+  <path d="M100 40 L136 50 L150 70 V106 C150 134 129 154 100 166 C71 154 50 134 50 106 V70 L64 50 Z" fill="#f59d1e" stroke="#14284b" stroke-width="5"/>
+  <path d="M100 46 L132 55 L144 72 V105 C144 130 126 148 100 159 C74 148 56 130 56 105 V72 L68 55 Z" fill="none" stroke="#fbfaf7" stroke-width="2"/>
+  <path d="M58 138 H142 C136 150 120 158 100 164 C80 158 64 150 58 138 Z" fill="#14284b"/>
+  <path d="M68 147 Q100 160 132 147" fill="none" stroke="#fbfaf7" stroke-width="5" stroke-linecap="round" stroke-dasharray="0.5 7.5"/>
+  <circle cx="100" cy="80" r="22" fill="#fbfaf7" stroke="#14284b" stroke-width="3"/>
+  <path d="M100 73 l7.5 5.5 -2.8 8.8 h-9.4 l-2.8 -8.8 z" fill="#14284b"/>
+  <path d="M100 58 v15 M86 66 l6.5 5.5 M114 66 l-6.5 5.5 M89 96 l3.5 -8 M111 96 l-3.5 -8" stroke="#14284b" stroke-width="2" fill="none"/>
+  <text x="67" y="88" font-family="Fraunces, Georgia, serif" font-weight="700" font-size="16" fill="#14284b" text-anchor="middle">20</text>
+  <text x="133" y="88" font-family="Fraunces, Georgia, serif" font-weight="700" font-size="16" fill="#14284b" text-anchor="middle">20</text>
+  <path d="M44 100 L156 100 L150 122 L50 122 Z" fill="#fbfaf7" stroke="#14284b" stroke-width="3"/>
+  <g transform="translate(100 131)">
+    <path d="M0 0 C-9 -8 -19 -6 -18 2 C-17 8 -8 9 0 4 Z" fill="#2e6f9e" stroke="#14284b" stroke-width="1.5"/>
+    <path d="M0 0 C9 -8 19 -6 18 2 C17 8 8 9 0 4 Z" fill="#2e6f9e" stroke="#14284b" stroke-width="1.5"/>
+    <path d="M0 3 C-6 6 -11 11 -7 14 C-3 16 -1 11 0 7 Z" fill="#2e6f9e" stroke="#14284b" stroke-width="1.5"/>
+    <path d="M0 3 C6 6 11 11 7 14 C3 16 1 11 0 7 Z" fill="#2e6f9e" stroke="#14284b" stroke-width="1.5"/>
+    <circle cx="-11" cy="0" r="2" fill="#f59d1e"/><circle cx="11" cy="0" r="2" fill="#f59d1e"/>
+    <path d="M0 -2 v9" stroke="#14284b" stroke-width="2"/>
+    <path d="M-1 -3 l-4 -5 M1 -3 l4 -5" stroke="#14284b" stroke-width="1.5"/>
+  </g>
+</symbol>
+</svg>
+
+<!-- SVG Icon Definitions (Hidden for Navbar) -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="icon-logo" viewBox="0 0 32 32" fill="none" stroke="currentColor">
+    <circle cx="16" cy="16" r="13.5" stroke-width="2"/>
+    <path d="M16 9.2l5.8 4.2-2.2 6.8h-7.2l-2.2-6.8z" fill="currentColor" stroke="none"/>
+    <path d="M16 2.8v6.2M16 20.2v9M4.2 12.2l6 1.8M27.8 12.2l-6 1.8M8.6 25.8l3.8-4.8M23.4 25.8l-3.8-4.8" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<header class="sp-nav-pro" id="spNavPro">
+  <div class="sp-nav-bar" id="spNavBar">
+    <a href="index.html" class="sp-nav-brand" aria-label="Sporting Pearls Football Academy home">
+      <img class="sp-nav-brand-mark" src="logo.png" alt="" width="42" height="42" aria-hidden="true">
+      <span class="sp-nav-brand-text"><strong>Sporting Pearls</strong><small>Football Academy</small></span>
+    </a>
+
+    <nav class="sp-nav-desktop" aria-label="Primary">
+      <a href="about-us.html" class="sp-nav-trigger" data-menu="about" data-label="About" aria-haspopup="true" aria-expanded="false" aria-controls="spNavDropdownAbout">
+        About <svg class="sp-nav-chevron"><use href="#icon-chevron"/></svg>
+      </a>
+      <a href="index.html#programs" class="sp-nav-trigger" data-menu="academy" data-label="Academy" aria-haspopup="true" aria-expanded="false" aria-controls="spNavDropdownAcademy">
+        Academy <svg class="sp-nav-chevron"><use href="#icon-chevron"/></svg>
+      </a>
+      <a href="the-squad.html" class="sp-nav-trigger" data-menu="teams" data-label="Teams" aria-haspopup="true" aria-expanded="false" aria-controls="spNavDropdownTeams">
+        Teams <svg class="sp-nav-chevron"><use href="#icon-chevron"/></svg>
+      </a>
+      <a href="partners.html" class="sp-nav-link">Partners</a>
+      <a href="support-us.html" class="sp-nav-link">Support</a>
+      <a href="contact.html" class="sp-nav-link">Contact</a>
+    </nav>
+
+    <div class="sp-nav-actions">
+      <a href="join-us.html" class="sp-nav-cta desktop-only">Join Us</a>
+      <button class="sp-nav-burger" id="spNavBurger" type="button" aria-expanded="false" aria-controls="spNavMobile">
+        <span></span><span></span>
+        <span class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="sp-nav-dropdowns">
+    <!-- ABOUT -->
+    <section class="sp-nav-dropdown" id="spNavDropdownAbout" data-menu="about" aria-hidden="true">
+      <div class="sp-nav-dropdown-shell">
+        <div class="sp-nav-dropdown-main">
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Who We Are</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item is-active" href="about-us.html" data-img="Pearls/radoms/IMG_7080.jpg" data-kicker="About" data-title="About Us" data-copy="Mission, values and the institution behind Sporting Pearls.">
+                <span class="sp-nav-item-text"><strong>About Us</strong><small>Mission, values and the institution behind Sporting Pearls.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="about-us.html#our-story" data-img="Pearls/kids/IMG_6780.jpg" data-kicker="History" data-title="Our Story" data-copy="From first training sessions in Mtwapa to a structured academy.">
+                <span class="sp-nav-item-text"><strong>Our Story</strong><small>From first training sessions in Mtwapa to a structured academy.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="about-us.html#vision-mission" data-img="Pearls/radoms/IMG_7075.jpg" data-kicker="Direction" data-title="Vision & Mission" data-copy="A clear long-term purpose for young players on and off the pitch.">
+                <span class="sp-nav-item-text"><strong>Vision & Mission</strong><small>A clear long-term purpose for young players on and off the pitch.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="about-us.html#core-values" data-img="Pearls/kids/IMG_6772.jpg" data-kicker="Culture" data-title="Core Values" data-copy="Discipline, respect, education and opportunity in everything we do.">
+                <span class="sp-nav-item-text"><strong>Core Values</strong><small>Discipline, respect, education and opportunity in everything we do.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Governance</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item" href="leadership-governance.html" data-img="Pearls/radoms/IMG_7088.jpg" data-kicker="Leadership" data-title="Leadership & Governance" data-copy="The people, structure and oversight guiding the academy.">
+                <span class="sp-nav-item-text"><strong>Leadership & Governance</strong><small>The people, structure and oversight guiding the academy.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="safeguarding.html" data-img="Pearls/kids/IMG_6760.jpg" data-kicker="Welfare" data-title="Safeguarding" data-copy="Safe, inclusive and child-centred football environments.">
+                <span class="sp-nav-item-text"><strong>Safeguarding</strong><small>Safe, inclusive and child-centred football environments.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="chairman-message.html" data-img="Pearls/radoms/IMG_7078.jpg" data-kicker="Message" data-title="Chairman's Message" data-copy="Why Sporting Pearls is being built to serve generations.">
+                <span class="sp-nav-item-text"><strong>Chairman's Message</strong><small>Why Sporting Pearls is being built to serve generations.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="partners.html" data-img="Pearls/kids/IMG_6858.jpg" data-kicker="Collaboration" data-title="Partner With Us" data-copy="Build the future of youth football with our institution.">
+                <span class="sp-nav-item-text"><strong>Partner With Us</strong><small>Build the future of youth football with our institution.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <figure class="sp-nav-preview">
+          <span class="sp-nav-preview-pill">Preview</span>
+          <div class="sp-nav-preview-media"><img class="sp-nav-preview-img" src="Pearls/radoms/IMG_7080.jpg" alt="Sporting Pearls preview"></div>
+          <figcaption class="sp-nav-preview-caption"><p class="sp-nav-preview-kicker">About</p><h4 class="sp-nav-preview-title">About Us</h4><p class="sp-nav-preview-copy">Mission, values and the institution behind Sporting Pearls.</p></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ACADEMY -->
+    <section class="sp-nav-dropdown" id="spNavDropdownAcademy" data-menu="academy" aria-hidden="true">
+      <div class="sp-nav-dropdown-shell">
+        <div class="sp-nav-dropdown-main">
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Development</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item is-active" href="player-development.html" data-img="Pearls/radoms/IMG_7075.jpg" data-kicker="Pathway" data-title="Player Development" data-copy="Technical, tactical, physical and personal development pathways.">
+                <span class="sp-nav-item-text"><strong>Player Development</strong><small>Technical, tactical, physical and personal development pathways.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="boys-programme.html" data-img="Pearls/kid%2013/IMG_6886.jpg" data-kicker="Boys" data-title="Boys' Programme" data-copy="Structured age-group development from grassroots to senior level.">
+                <span class="sp-nav-item-text"><strong>Boys' Programme</strong><small>Structured age-group development from grassroots to senior level.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="feminin.html" data-img="Pearls/FEMALE/IMG_6700.jpg" data-kicker="Girls" data-title="Sporting Pearls Féminin" data-copy="A dedicated pathway for girls and women in football.">
+                <span class="sp-nav-item-text"><strong>Sporting Pearls Féminin</strong><small>A dedicated pathway for girls and women in football.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="goalkeeper-development.html" data-img="Pearls/u-19/IMG_7014.jpg" data-kicker="Specialist" data-title="Goalkeeper Development" data-copy="Specialist coaching for shot-stoppers and defensive leaders.">
+                <span class="sp-nav-item-text"><strong>Goalkeeper Development</strong><small>Specialist coaching for shot-stoppers and defensive leaders.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Beyond The Pitch</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item" href="coaching-philosophy.html" data-img="Pearls/radoms/IMG_7088.jpg" data-kicker="Method" data-title="Coaching Philosophy" data-copy="How we train, mentor and measure player progress.">
+                <span class="sp-nav-item-text"><strong>Coaching Philosophy</strong><small>How we train, mentor and measure player progress.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="education-life-skills.html" data-img="Pearls/radoms/IMG_7078.jpg" data-kicker="Education" data-title="Education & Life Skills" data-copy="Character, leadership and life-skills development.">
+                <span class="sp-nav-item-text"><strong>Education & Life Skills</strong><small>Character, leadership and life-skills development.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="join-us.html" data-img="Pearls/kids/IMG_6780.jpg" data-kicker="Entry" data-title="Trials & Registration" data-copy="Clear entry points into Sporting Pearls squads and programmes.">
+                <span class="sp-nav-item-text"><strong>Trials & Registration</strong><small>Clear entry points into Sporting Pearls squads and programmes.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="contact.html" data-img="Pearls/radoms/IMG_7080.jpg" data-kicker="Contact" data-title="Academy Enquiries" data-copy="Speak with our team about programmes, trials and pathways.">
+                <span class="sp-nav-item-text"><strong>Academy Enquiries</strong><small>Speak with our team about programmes, trials and pathways.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <figure class="sp-nav-preview">
+          <span class="sp-nav-preview-pill">Preview</span>
+          <div class="sp-nav-preview-media"><img class="sp-nav-preview-img" src="Pearls/radoms/IMG_7075.jpg" alt="Academy preview"></div>
+          <figcaption class="sp-nav-preview-caption"><p class="sp-nav-preview-kicker">Pathway</p><h4 class="sp-nav-preview-title">Player Development</h4><p class="sp-nav-preview-copy">Technical, tactical, physical and personal development pathways.</p></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- TEAMS -->
+    <section class="sp-nav-dropdown" id="spNavDropdownTeams" data-menu="teams" aria-hidden="true">
+      <div class="sp-nav-dropdown-shell">
+        <div class="sp-nav-dropdown-main">
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Squads</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item is-active" href="the-squad.html#roster" data-img="Pearls/kids/IMG_6780.jpg" data-kicker="Youth" data-title="U9 & U13" data-copy="Foundations, coordination and the joy of football.">
+                <span class="sp-nav-item-text"><strong>U9 & U13</strong><small>Foundations, coordination and the joy of football.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="the-squad.html#roster" data-img="Pearls/u-19/18.jpg" data-kicker="Development" data-title="U15 & U17" data-copy="Competitive development, structure and tactical discipline.">
+                <span class="sp-nav-item-text"><strong>U15 & U17</strong><small>Competitive development, structure and tactical discipline.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="the-squad.html#roster" data-img="Pearls/u-19/1.jpg" data-kicker="Senior" data-title="U19 Senior" data-copy="High-performance pathway, exposure and leadership.">
+                <span class="sp-nav-item-text"><strong>U19 Senior</strong><small>High-performance pathway, exposure and leadership.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="the-squad.html#roster" data-img="Pearls/FEMALE/IMG_6704.jpg" data-kicker="Girls" data-title="Féminin Squads" data-copy="Girls' teams across development and competitive levels.">
+                <span class="sp-nav-item-text"><strong>Féminin Squads</strong><small>Girls' teams across development and competitive levels.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Matchday</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item" href="index.html#fixtures" data-img="Pearls/kid%2013/IMG_6891.jpg" data-kicker="Schedule" data-title="Fixtures" data-copy="Upcoming matches, tournaments and kick-off details.">
+                <span class="sp-nav-item-text"><strong>Fixtures</strong><small>Upcoming matches, tournaments and kick-off details.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="index.html#fixtures" data-img="Pearls/u-19/IMG_7014.jpg" data-kicker="Performance" data-title="Results" data-copy="Recent performance across Sporting Pearls squads.">
+                <span class="sp-nav-item-text"><strong>Results</strong><small>Recent performance across Sporting Pearls squads.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="player-development.html" data-img="Pearls/radoms/IMG_7075.jpg" data-kicker="Progression" data-title="Player Pathway" data-copy="How players progress through the Sporting Pearls system.">
+                <span class="sp-nav-item-text"><strong>Player Pathway</strong><small>How players progress through the Sporting Pearls system.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="contact.html" data-img="Pearls/radoms/IMG_7080.jpg" data-kicker="Visit" data-title="Training Centre" data-copy="Our home base and session environment in Kilifi County.">
+                <span class="sp-nav-item-text"><strong>Training Centre</strong><small>Our home base and session environment in Kilifi County.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <figure class="sp-nav-preview">
+          <span class="sp-nav-preview-pill">Preview</span>
+          <div class="sp-nav-preview-media"><img class="sp-nav-preview-img" src="Pearls/kids/IMG_6780.jpg" alt="Teams preview"></div>
+          <figcaption class="sp-nav-preview-caption"><p class="sp-nav-preview-kicker">Youth</p><h4 class="sp-nav-preview-title">U9 & U13</h4><p class="sp-nav-preview-copy">Foundations, coordination and the joy of football.</p></figcaption>
+        </figure>
+      </div>
+    </section>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="sp-nav-mobile" id="spNavMobile" aria-hidden="true">
+    <div class="sp-nav-mobile-backdrop"></div>
+    <div class="sp-nav-mobile-scroll">
+      <div class="sp-nav-mobile-body" id="spNavMobileBody"></div>
+      <div class="sp-nav-mobile-actions">
+        <a href="join-us.html" class="sp-nav-cta">Join Us</a>
+        <a href="partners.html" class="sp-nav-cta ghost">Become a Partner</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 01 HERO -->
+<header class="hero">
+  <div class="hero-left">
+    <span class="hero-kick"><i></i>Academy Overview · Est. 2020</span>
+    <h1 class="wr" data-words>Developing talent. <span class="it">Building character.</span></h1>
+    <p class="hero-sub" data-reveal>Sporting Pearls Football Academy is a community football development institution — not just a collection of teams. We build structured pathways for boys and girls through quality coaching, education, character and opportunity.</p>
+    <div class="hero-meta" data-reveal>
+      <span>Est. <b>2020</b></span>
+      <span>Mtwapa · <b>Kilifi</b></span>
+      <span>Boys & <b>Girls</b></span>
+      <span>U9 → <b>Senior</b></span>
+      <span>🦋 <b>The Butterflies</b></span>
+    </div>
+    <div class="hero-actions" data-reveal>
+      <a href="join-us.html" class="btn btn-amber">Join the Academy <span class="ar">→</span></a>
+      <a href="coaching-philosophy.html" class="btn btn-ghost">Our Coaching Philosophy</a>
+    </div>
+    <div class="hero-stats" data-reveal>
+      <div class="hstat"><b><span data-count="44">0</span>+</b><span>Registered Players</span></div>
+      <div class="hstat"><b><span data-count="6">0</span></b><span>Age Groups</span></div>
+      <div class="hstat"><b><span data-count="7">0</span></b><span>Programme Pillars</span></div>
+      <div class="hstat"><b><span data-count="8">0</span></b><span>Core Values</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="pitch" id="pitchBoard">
+      <div class="stripes"></div>
+      <div class="goal-t"></div>
+      <div class="goal-b"></div>
+      <svg class="arrow" viewBox="0 0 520 690" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+        <path d="M260 520 C260 440 180 400 180 330 S260 240 260 170"/>
+        <path d="M255 175 l5 -20 l5 20"/>
+      </svg>
+      <div class="player-dot keeper" style="left:50%;top:90%">1</div>
+      <div class="player-dot" style="left:22%;top:72%">2</div>
+      <div class="player-dot" style="left:40%;top:72%">3</div>
+      <div class="player-dot" style="left:60%;top:72%">4</div>
+      <div class="player-dot" style="left:78%;top:72%">5</div>
+      <div class="player-dot" style="left:35%;top:52%">6</div>
+      <div class="player-dot" style="left:65%;top:52%">7</div>
+      <div class="player-dot" style="left:22%;top:35%">8</div>
+      <div class="player-dot" style="left:50%;top:30%">9<span class="p-dot-label">CAPTAIN</span></div>
+      <div class="player-dot" style="left:78%;top:35%">10</div>
+      <div class="player-dot" style="left:50%;top:14%">11</div>
+      <span class="pitch-note">Scan · Decide · Execute</span>
+      <span class="pitch-side">Tactical board · sporting pearls</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- 02 THE ACADEMY: INTERACTIVE ECOSYSTEM GRID -->
+<section class="the-academy" id="academy">
+  <div class="wrap">
+    <div class="eco-head" data-reveal>
+      <span class="sec-eyebrow" style="justify-content:center;display:inline-flex">01 · The Academy Institution</span>
+      <h2 class="wr" data-words>More than <span class="it">a football team.</span></h2>
+      <p class="lead">An institution. An ecosystem. A long-term promise to the youth of Kilifi County.</p>
+    </div>
+
+    <div class="eco-grid">
+      <!-- 01 -->
+      <div class="eco-tile" style="--ac:var(--amber)" data-reveal>
+        <div class="eco-tile-top">
+          <svg class="sk ic"><use href="#i-ball"/></svg>
+          <span class="idx">PILLAR · 01</span>
+        </div>
+        <h3>Football Development</h3>
+        <p>Structured technical, tactical, physical, and psychological growth from Foundation through Senior and Féminin teams.</p>
+        <span class="eco-tag">Pathway & Performance</span>
+      </div>
+
+      <!-- 02 -->
+      <div class="eco-tile" style="--ac:var(--blue)" data-reveal>
+        <div class="eco-tile-top">
+          <svg class="sk ic"><use href="#i-book"/></svg>
+          <span class="idx">PILLAR · 02</span>
+        </div>
+        <h3>Education & Life Skills</h3>
+        <p>Football as a platform — never a replacement — for school discipline, communication, decision-making, and mentorship.</p>
+        <span class="eco-tag">Holistic Growth</span>
+      </div>
+
+      <!-- 03 -->
+      <div class="eco-tile" style="--ac:var(--lagoon)" data-reveal>
+        <div class="eco-tile-top">
+          <svg class="sk ic"><use href="#i-butterfly"/></svg>
+          <span class="idx">PILLAR · 03</span>
+        </div>
+        <h3>Sporting Pearls Féminin</h3>
+        <p>The Butterflies — a dedicated, barrier-breaking pathway for girls' and young women's participation, confidence, and leadership.</p>
+        <span class="eco-tag">Girls & Women in Football</span>
+      </div>
+
+      <!-- 04 -->
+      <div class="eco-tile" style="--ac:var(--amber-2)" data-reveal>
+        <div class="eco-tile-top">
+          <svg class="sk ic"><use href="#i-glove"/></svg>
+          <span class="idx">PILLAR · 04</span>
+        </div>
+        <h3>Specialist Programmes</h3>
+        <p>Dedicated goalkeeper academy, positional mastery, and coach licensing woven into every squad session.</p>
+        <span class="eco-tag">Position Mastery</span>
+      </div>
+
+      <!-- 05 -->
+      <div class="eco-tile" style="--ac:var(--blue-2)" data-reveal>
+        <div class="eco-tile-top">
+          <svg class="sk ic"><use href="#i-shield"/></svg>
+          <span class="idx">PILLAR · 05</span>
+        </div>
+        <h3>Safeguarding & Welfare</h3>
+        <p>Child protection at the heart of every session, trip, and partnership. Safe adults, clear reporting, absolute welfare priority.</p>
+        <span class="eco-tag">Safety First</span>
+      </div>
+
+      <!-- 06 -->
+      <div class="eco-tile" style="--ac:var(--amber)" data-reveal>
+        <div class="eco-tile-top">
+          <svg class="sk ic"><use href="#i-globe"/></svg>
+          <span class="idx">PILLAR · 06</span>
+        </div>
+        <h3>Community Impact</h3>
+        <p>Connecting families, schools, and local leaders — building unity, health, and sustainable opportunities across Mtwapa.</p>
+        <span class="eco-tag">Beyond the Pitch</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 PHILOSOPHY -->
+<section class="philo dark" id="philosophy">
+  <div class="wrap">
+    <div class="philo-head" data-reveal>
+      <span class="sec-eyebrow" style="justify-content:center;display:inline-flex">02 · Our Coaching Philosophy</span>
+      <h2 class="wr" data-words>Developing <span class="it">thinking footballers.</span></h2>
+      <p>We don't coach players to simply play football. We coach them to understand football — to scan, decide, execute and reflect.</p>
+    </div>
+    <div class="philo-blocks">
+      <div class="p-card" data-reveal><span class="p-num">01</span><h3>Brave</h3><p>We encourage players to take responsibility rather than hide from the ball.</p><span class="p-word">Identity</span></div>
+      <div class="p-card" data-reveal><span class="p-num">02</span><h3>Intelligent</h3><p>Players understand space, movement, numbers and timing before acting.</p><span class="p-word">Identity</span></div>
+      <div class="p-card" data-reveal><span class="p-num">03</span><h3>Proactive</h3><p>We influence the game rather than simply react to the opponent.</p><span class="p-word">Identity</span></div>
+      <div class="p-card" data-reveal><span class="p-num">04</span><h3>Connected</h3><p>Players understand relationships, support and collective movement.</p><span class="p-word">Identity</span></div>
+    </div>
+    <div class="mantra" data-reveal>
+      <p class="m-line">See the game.</p>
+      <p class="m-line">Understand the game.</p>
+      <p class="m-line">Play the game.</p>
+      <p class="m-line"><span class="it">Own your development.</span></p>
+      <span class="sign">— Sporting Pearls coaching mantra</span>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PROGRAMMES -->
+<section class="programmes" id="programmes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div data-reveal><span class="sec-eyebrow">03 · Our Programmes</span><h2 class="wr" data-words>Seven pillars. <span class="it">One ecosystem.</span></h2></div>
+      <p data-reveal="right">Each programme has its own pathway — but they share the same philosophy, values and long-term vision.</p>
+    </div>
+    <div class="prg-grid">
+      <a class="prg" style="--ac:var(--amber)" href="boys-programme.html" data-reveal><svg class="sk"><use href="#i-ball"/></svg><span class="n">01</span><h3>Boys' Programme</h3><p>A progressive pathway from Foundation through to Senior football.</p><ul class="prg-list"><li>U9 · Discover</li><li>U11 · Explore</li><li>U13 · Game Intelligence</li><li>U15 · Performance</li><li>U17 · Transition</li></ul><span class="prg-link">Enter the boys' pathway →</span></a>
+      <a class="prg" style="--ac:var(--blue)" href="feminin.html" data-reveal><svg class="sk"><use href="#i-butterfly"/></svg><span class="n">02</span><h3>Sporting Pearls Féminin</h3><p>The Butterflies — a dedicated girls' and women's pathway.</p><ul class="prg-list"><li>Girls' participation</li><li>Confidence building</li><li>Leadership development</li><li>Future coaches pathway</li></ul><span class="prg-link">Meet the Butterflies →</span></a>
+      <a class="prg" style="--ac:var(--amber-2)" href="goalkeeper-development.html" data-reveal><svg class="sk"><use href="#i-glove"/></svg><span class="n">03</span><h3>Goalkeeper Development</h3><p>Modern goalkeepers who can save, think, communicate and lead.</p><ul class="prg-list"><li>Technical · Tactical</li><li>Distribution</li><li>Communication</li><li>Psychological resilience</li></ul><span class="prg-link">Enter the keeper pathway →</span></a>
+      <a class="prg" style="--ac:var(--lagoon)" href="coaching-philosophy.html" data-reveal><svg class="sk"><use href="#i-whistle"/></svg><span class="n">04</span><h3>Coaching Philosophy</h3><p>Player-centred, game-based, age-appropriate.</p><ul class="prg-list"><li>Plan · Create · Observe</li><li>Question · Reinforce</li><li>Development before results</li></ul><span class="prg-link">Read the philosophy →</span></a>
+      <a class="prg" style="--ac:var(--blue-2)" href="education-life-skills.html" data-reveal><svg class="sk"><use href="#i-book"/></svg><span class="n">05</span><h3>Education & Life Skills</h3><p>Football opens doors — education helps players walk through them.</p><ul class="prg-list"><li>Academic commitment</li><li>Leadership & mentorship</li><li>Digital awareness</li><li>Career pathways</li></ul><span class="prg-link">Explore the programme →</span></a>
+      <a class="prg" style="--ac:var(--amber)" href="player-development.html" data-reveal><svg class="sk"><use href="#i-hands"/></svg><span class="n">06</span><h3>Player Development</h3><p>Six dimensions, one player.</p><ul class="prg-list"><li>Six-dimensional model</li><li>Individual feedback</li><li>Long-term pathway</li></ul><span class="prg-link">See the development model →</span></a>
+      <a class="prg" style="--ac:var(--blue)" href="safeguarding.html" data-reveal><svg class="sk"><use href="#i-shield"/></svg><span class="n">07</span><h3>Safeguarding</h3><p>Child protection woven into every decision and partnership.</p><ul class="prg-list"><li>Public commitment</li><li>Clear reporting</li><li>Vetted adults</li></ul><span class="prg-link">Read our policy →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 05 PATHWAY — VERTICAL GROWTH LADDER -->
+<section class="pathway" id="pathway">
+  <div class="wrap">
+    <div class="path-head">
+      <div data-reveal>
+        <span class="sec-eyebrow">04 · The Player Pathway</span>
+        <h2 class="wr" data-words>From U9 <span class="it">to Senior.</span></h2>
+      </div>
+      <p data-reveal="right">Six progressive development stages — climbing from initial ball mastery to full senior tactical maturity.</p>
+    </div>
+
+    <div class="path-ladder">
+
+      <!-- STAGE 01: U9 -->
+      <article class="l-stage" style="--ac:var(--amber)" data-reveal>
+        <div class="l-node">01</div>
+        <div class="l-viz-card">
+          <span class="viz-num">01</span>
+          <span class="viz-caption">Ball familiarity · creativity</span>
+          <svg id="vizU9" viewBox="0 0 300 225" role="img" aria-label="U9 tactical animation: free play and ball familiarity">
+            <rect class="viz-outline" x="10" y="10" width="280" height="205" rx="3"/>
+            <line class="viz-mid" x1="10" y1="112" x2="290" y2="112"/>
+            <circle class="viz-circle" cx="150" cy="112" r="25"/>
+            <g class="v-dot our d1"><circle cx="80" cy="70" r="8"/><text class="v-dot-label" x="80" y="71">1</text></g>
+            <g class="v-dot our d2"><circle cx="200" cy="60" r="8"/><text class="v-dot-label" x="200" y="61">2</text></g>
+            <g class="v-dot our d3"><circle cx="150" cy="140" r="8"/><text class="v-dot-label" x="150" y="141">3</text></g>
+            <g class="v-dot our d4"><circle cx="90" cy="175" r="8"/><text class="v-dot-label" x="90" y="176">4</text></g>
+            <g class="v-dot our d5"><circle cx="230" cy="170" r="8"/><text class="v-dot-label" x="230" y="171">5</text></g>
+            <g class="ball"><circle class="v-ball" cx="140" cy="115" r="4.5"/></g>
+          </svg>
+        </div>
+        <div class="l-body">
+          <span class="l-tag">Foundation Tier</span>
+          <div class="l-age-title">
+            <span class="l-age">U9</span>
+            <h3>Discover · Explore · Enjoy</h3>
+          </div>
+          <p>Young players are introduced to football in a joyful, free-moving environment. We prioritise ball familiarity, physical literacy, and love for the game before introducing rigid tactical systems.</p>
+          <ul class="l-focus">
+            <li>Ball mastery</li>
+            <li>Physical Literacy</li>
+            <li>Creativity & Joy</li>
+            <li>Early Teamwork</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- STAGE 02: U11 -->
+      <article class="l-stage" style="--ac:var(--blue)" data-reveal>
+        <div class="l-node">02</div>
+        <div class="l-viz-card">
+          <span class="viz-num">02</span>
+          <span class="viz-caption">1v1 · first touch · beating</span>
+          <svg id="vizU11" viewBox="0 0 300 225" role="img" aria-label="U11 tactical animation: 1v1 attacking">
+            <rect class="viz-outline" x="10" y="10" width="280" height="205" rx="3"/>
+            <line class="viz-mid" x1="10" y1="112" x2="290" y2="112"/>
+            <circle class="viz-circle" cx="150" cy="112" r="25"/>
+            <g class="v-dot opp def"><circle cx="180" cy="112" r="9"/><text class="v-dot-label" x="180" y="113">D</text></g>
+            <g class="v-dot our att"><circle cx="90" cy="112" r="9"/><text class="v-dot-label" x="90" y="113">A</text></g>
+            <g class="ball-11"><circle class="v-ball" cx="100" cy="115" r="4.5"/></g>
+            <path class="fake-arrow" d="M110 108 Q 140 80 175 95" stroke="var(--amber)" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
+            <path class="v-line" d="M100 112 L 240 95" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <div class="l-body">
+          <span class="l-tag">Exploration Tier</span>
+          <div class="l-age-title">
+            <span class="l-age">U11</span>
+            <h3>Control · Create · Understand</h3>
+          </div>
+          <p>Technically confident players who begin to understand pitch geometry, beat opponents in 1v1 moments, and develop sharp first-touch control under active pressure.</p>
+          <ul class="l-focus">
+            <li>First touch mastery</li>
+            <li>1v1 duel bravery</li>
+            <li>Support angles</li>
+            <li>Spatial awareness</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- STAGE 03: U13 -->
+      <article class="l-stage" style="--ac:var(--lagoon)" data-reveal>
+        <div class="l-node">03</div>
+        <div class="l-viz-card">
+          <span class="viz-num">03</span>
+          <span class="viz-caption">Scan · perceive · decide</span>
+          <svg id="vizU13" viewBox="0 0 300 225" role="img" aria-label="U13 tactical animation: scanning vision cone">
+            <rect class="viz-outline" x="10" y="10" width="280" height="205" rx="3"/>
+            <line class="viz-mid" x1="10" y1="112" x2="290" y2="112"/>
+            <circle class="viz-circle" cx="150" cy="112" r="25"/>
+            <g class="v-cone cone" style="--ox:150px;--oy:130px">
+              <path d="M150 130 L 90 55 A 85 85 0 0 1 210 55 Z" />
+            </g>
+            <g class="v-dot hi"><circle cx="150" cy="130" r="10"/><text class="v-dot-label" x="150" y="131">7</text></g>
+            <circle class="v-pulse" cx="150" cy="130" r="10" style="--d:0s"/>
+            <circle class="v-pulse" cx="150" cy="130" r="10" style="--d:.8s"/>
+            <circle class="scan-dot s1" cx="115" cy="70" r="6"/>
+            <circle class="scan-dot s2" cx="185" cy="65" r="6"/>
+            <circle class="scan-dot s3" cx="150" cy="50" r="6"/>
+            <g class="v-dot our" style="opacity:.65"><circle cx="80" cy="150" r="7"/><text class="v-dot-label" x="80" y="151">4</text></g>
+            <g class="v-dot our" style="opacity:.65"><circle cx="220" cy="150" r="7"/><text class="v-dot-label" x="220" y="151">10</text></g>
+            <g class="v-dot our" style="opacity:.65"><circle cx="150" cy="190" r="7"/><text class="v-dot-label" x="150" y="191">9</text></g>
+          </svg>
+        </div>
+        <div class="l-body">
+          <span class="l-tag">Game Intelligence Tier</span>
+          <div class="l-age-title">
+            <span class="l-age">U13</span>
+            <h3>Scan · Decide · Execute</h3>
+          </div>
+          <p>Players are trained to become independent decision-makers. Developing vision scanning habits, recognising numerical overloads, and executing decisions before the ball arrives.</p>
+          <ul class="l-focus">
+            <li>Pre-orientation scanning</li>
+            <li>Decision speed</li>
+            <li>Positional awareness</li>
+            <li>Passing combinations</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- STAGE 04: U15 -->
+      <article class="l-stage" style="--ac:var(--amber-2)" data-reveal>
+        <div class="l-node">04</div>
+        <div class="l-viz-card">
+          <span class="viz-num">04</span>
+          <span class="viz-caption">Triangles · combinations · support</span>
+          <svg id="vizU15" viewBox="0 0 300 225" role="img" aria-label="U15 tactical animation: passing triangles">
+            <rect class="viz-outline" x="10" y="10" width="280" height="205" rx="3"/>
+            <line class="viz-mid" x1="10" y1="112" x2="290" y2="112"/>
+            <circle class="viz-circle" cx="150" cy="112" r="25"/>
+            <path class="supp" d="M 90 160 L 210 160 L 150 75 Z"/>
+            <g class="v-dot our"><circle cx="90" cy="160" r="9"/><text class="v-dot-label" x="90" y="161">6</text></g>
+            <g class="v-dot our"><circle cx="210" cy="160" r="9"/><text class="v-dot-label" x="210" y="162">8</text></g>
+            <g class="v-dot our"><circle cx="150" cy="75" r="9"/><text class="v-dot-label" x="150" y="76">10</text></g>
+            <g class="v-dot opp"><circle cx="150" cy="130" r="8"/><text class="v-dot-label" x="150" y="131">D</text></g>
+            <g class="ball15"><circle class="v-ball" cx="90" cy="160" r="4.5"/></g>
+            <path class="v-line-dash" d="M 90 160 Q 120 100 150 75"/>
+            <path class="v-line-dash" d="M 150 75 Q 185 110 210 160"/>
+            <path class="v-line-dash" d="M 210 160 Q 150 190 90 160"/>
+          </svg>
+        </div>
+        <div class="l-body">
+          <span class="l-tag">Performance Tier</span>
+          <div class="l-age-title">
+            <span class="l-age">U15</span>
+            <h3>Compete · Adapt · Improve</h3>
+          </div>
+          <p>Progressively demanding environments requiring team cohesion, structured pressing triggers, dynamic passing triangles, and composure under tactical resistance.</p>
+          <ul class="l-focus">
+            <li>Passing triangles</li>
+            <li>Transition speed</li>
+            <li>Pressing triggers</li>
+            <li>Tactical adaptability</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- STAGE 05: U17 -->
+      <article class="l-stage" style="--ac:var(--blue-2)" data-reveal>
+        <div class="l-node">05</div>
+        <div class="l-viz-card">
+          <span class="viz-num">05</span>
+          <span class="viz-caption">Transition · counter · press</span>
+          <svg id="vizU17" viewBox="0 0 300 225" role="img" aria-label="U17 tactical animation: counter attack transition">
+            <rect class="viz-outline" x="10" y="10" width="280" height="205" rx="3"/>
+            <line class="viz-mid" x1="10" y1="112" x2="290" y2="112"/>
+            <circle class="viz-circle" cx="150" cy="112" r="25"/>
+            <rect class="viz-pen" x="110" y="10" width="80" height="22"/>
+            <rect class="viz-pen" x="110" y="193" width="80" height="22"/>
+            <g class="v-dot our u17d f1"><circle cx="150" cy="160" r="8"/><text class="v-dot-label" x="150" y="161">9</text></g>
+            <g class="v-dot our u17d f2"><circle cx="110" cy="170" r="8"/><text class="v-dot-label" x="110" y="171">7</text></g>
+            <g class="v-dot our u17d f3"><circle cx="190" cy="170" r="8"/><text class="v-dot-label" x="190" y="171">11</text></g>
+            <g class="v-dot opp" style="opacity:.7"><circle cx="150" cy="80" r="7"/><text class="v-dot-label" x="150" y="81">D</text></g>
+            <g class="v-dot opp" style="opacity:.7"><circle cx="100" cy="95" r="7"/><text class="v-dot-label" x="100" y="96">D</text></g>
+            <g class="v-dot opp" style="opacity:.7"><circle cx="200" cy="95" r="7"/><text class="v-dot-label" x="200" y="96">D</text></g>
+            <path class="counter-arrow" d="M150 155 L 140 55" stroke="var(--amber)" stroke-width="2" fill="none" stroke-dasharray="100"/>
+            <path class="counter-arrow" d="M110 165 L 95 80" stroke="var(--amber)" stroke-width="2" fill="none" stroke-dasharray="100" style="animation-delay:.15s"/>
+            <path class="counter-arrow" d="M190 165 L 205 80" stroke="var(--amber)" stroke-width="2" fill="none" stroke-dasharray="100" style="animation-delay:.3s"/>
+            <g class="ball17"><circle class="v-ball" cx="150" cy="160" r="4.5"/></g>
+          </svg>
+        </div>
+        <div class="l-body">
+          <span class="l-tag">Transition Tier</span>
+          <div class="l-age-title">
+            <span class="l-age">U17</span>
+            <h3>Perform · Lead · Prepare</h3>
+          </div>
+          <p>Preparing players for senior and professional environments. Focus shifts to game management, explosive transitional play, physical resilience, and leadership maturity.</p>
+          <ul class="l-focus">
+            <li>Game management</li>
+            <li>Counter-press systems</li>
+            <li>On-pitch leadership</li>
+            <li>Professional habits</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- STAGE 06: SENIOR / FÉMININ -->
+      <article class="l-stage" style="--ac:var(--amber)" data-reveal>
+        <div class="l-node">06</div>
+        <div class="l-viz-card">
+          <span class="viz-num">06</span>
+          <span class="viz-caption">Leadership · shape · maturity</span>
+          <svg id="vizSen" viewBox="0 0 300 225" role="img" aria-label="Senior tactical animation: full shape and leadership">
+            <rect class="viz-outline" x="10" y="10" width="280" height="205" rx="3"/>
+            <line class="viz-mid" x1="10" y1="112" x2="290" y2="112"/>
+            <circle class="viz-circle" cx="150" cy="112" r="25"/>
+            <rect class="viz-pen" x="110" y="10" width="80" height="22"/>
+            <rect class="viz-pen" x="110" y="193" width="80" height="22"/>
+            <g class="v-dot keeper"><circle cx="150" cy="200" r="8"/><text class="v-dot-label" x="150" y="201">1</text></g>
+            <g class="v-dot our u-sen compress"><circle cx="60" cy="165" r="7.5"/><text class="v-dot-label" x="60" y="166">2</text></g>
+            <g class="v-dot our u-sen compress"><circle cx="120" cy="165" r="7.5"/><text class="v-dot-label" x="120" y="166">4</text></g>
+            <g class="v-dot our u-sen compress"><circle cx="180" cy="165" r="7.5"/><text class="v-dot-label" x="180" y="166">5</text></g>
+            <g class="v-dot our u-sen compress"><circle cx="240" cy="165" r="7.5"/><text class="v-dot-label" x="240" y="166">3</text></g>
+            <g class="v-dot our u-sen compress"><circle cx="90" cy="115" r="7.5"/><text class="v-dot-label" x="90" y="116">6</text></g>
+            <g class="v-dot our u-sen compress"><circle cx="210" cy="115" r="7.5"/><text class="v-dot-label" x="210" y="116">8</text></g>
+            <g class="v-dot hi">
+              <circle class="captain-ring" cx="150" cy="115" r="10"/>
+              <circle cx="150" cy="115" r="9"/>
+              <text class="v-dot-label" x="150" y="116">C</text>
+            </g>
+            <g class="v-dot our u-sen compress"><circle cx="60" cy="55" r="7.5"/><text class="v-dot-label" x="60" y="56">11</text></g>
+            <g class="v-dot our u-sen compress"><circle cx="150" cy="45" r="7.5"/><text class="v-dot-label" x="150" y="46">9</text></g>
+            <g class="v-dot our u-sen compress"><circle cx="240" cy="55" r="7.5"/><text class="v-dot-label" x="240" y="56">7</text></g>
+            <circle cx="150" cy="115" r="30" fill="none" stroke="var(--amber)" stroke-width="1" stroke-dasharray="3 4" opacity=".5"/>
+          </svg>
+        </div>
+        <div class="l-body">
+          <span class="l-tag">Senior & Féminin Tier</span>
+          <div class="l-age-title">
+            <span class="l-age">18+</span>
+            <h3>Compete · Mentor · Represent</h3>
+          </div>
+          <p>Full tactical mastery in competitive football, developing the next generation of coaches, leaders, and community role models representing Sporting Pearls.</p>
+          <ul class="l-focus">
+            <li>Senior competition</li>
+            <li>Coaching pathway</li>
+            <li>Community mentorship</li>
+            <li>Lifelong leadership</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- 06 DEVELOPMENT CYCLE: ROOMY & NON-OVERLAPPING -->
+<section class="cycle dark" id="cycle">
+  <div class="wrap cycle-grid">
+    <div class="cycle-text" data-reveal="left">
+      <span class="sec-eyebrow">05 · The Development Cycle</span>
+      <h2 class="wr" data-words>Every session. <span class="it">Every action.</span></h2>
+      <p class="lead">A five-stage cyclical framework powering every training session, match, and reflection moment.</p>
+      <p>The player — not the coach — sits at the centre of the cycle. We develop independent thinkers who can read the game rather than simply follow instructions.</p>
+      <p>A coach might not say <i>"Pass it there!"</i> — but instead ask <i>"Where is the space?"</i> or <i>"What options do you have?"</i></p>
+      <p class="cycle-note">Performance is important. Development comes first.</p>
+    </div>
+    
+    <div class="ring-wrap" data-reveal="zoom">
+      <svg class="ring-svg" id="ringSvg" viewBox="0 0 560 560">
+        <!-- Expanded ring track -->
+        <circle class="ring-bg" cx="280" cy="280" r="230"/>
+        <circle class="ring-prog" cx="280" cy="280" r="230" transform="rotate(-90 280 280)"/>
+        
+        <!-- Step 01: Top (0°) -->
+        <g class="ring-step" style="--d:0s">
+          <circle class="node" cx="280" cy="50" r="32"/>
+          <text class="step-n" x="280" y="47">01</text>
+          <text class="step-l" x="280" y="66">Scan</text>
+        </g>
+        
+        <!-- Step 02: Top-Right (72°) -->
+        <g class="ring-step" style="--d:.3s">
+          <circle class="node" cx="498" cy="208" r="32"/>
+          <text class="step-n" x="498" y="205">02</text>
+          <text class="step-l" x="498" y="224">Perceive</text>
+        </g>
+        
+        <!-- Step 03: Bottom-Right (144°) -->
+        <g class="ring-step" style="--d:.6s">
+          <circle class="node" cx="415" cy="466" r="32"/>
+          <text class="step-n" x="415" y="463">03</text>
+          <text class="step-l" x="415" y="482">Decide</text>
+        </g>
+        
+        <!-- Step 04: Bottom-Left (216°) -->
+        <g class="ring-step" style="--d:.9s">
+          <circle class="node" cx="145" cy="466" r="32"/>
+          <text class="step-n" x="145" y="463">04</text>
+          <text class="step-l" x="145" y="482">Execute</text>
+        </g>
+        
+        <!-- Step 05: Top-Left (288°) -->
+        <g class="ring-step" style="--d:1.2s">
+          <circle class="node" cx="62" cy="208" r="32"/>
+          <text class="step-n" x="62" y="205">05</text>
+          <text class="step-l" x="62" y="224">Reflect</text>
+        </g>
+      </svg>
+      
+      <div class="ring-center">
+        <b>Player at the centre</b>
+        <span>Independent Thinkers</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 SUCCESS -->
+<section class="success" id="success">
+  <div class="wrap succ-grid">
+    <div class="succ-text" data-reveal="left">
+      <span class="sec-eyebrow">06 · What Success Looks Like</span>
+      <h2 class="wr" data-words>Not just <span class="it">the trophies.</span></h2>
+      <p class="lead">Competitive results matter. But they never replace development.</p>
+      <p>We measure the academy across more dimensions than a scoreboard — because sustainable success is built in players, in character, and in the community.</p>
+      <ul class="succ-list" data-stagger>
+        <li style="--d:.05s">Are players improving technically, tactically and personally?</li>
+        <li style="--d:.12s">Are they making better decisions on and off the pitch?</li>
+        <li style="--d:.19s">Are they developing discipline, respect and responsibility?</li>
+        <li style="--d:.26s">Are they progressing academically alongside football?</li>
+        <li style="--d:.33s">Are girls accessing meaningful opportunities through Féminin?</li>
+        <li style="--d:.40s">Are coaches continuing to learn and improve?</li>
+        <li style="--d:.47s">Are talented players receiving appropriate opportunities?</li>
+        <li style="--d:.54s">Are former players giving back to the next generation?</li>
+      </ul>
+    </div>
+    <div class="succ-visual" data-reveal="right">
+      <img src="https://images.unsplash.com/photo-1529208214156-1ae276b868a6?auto=format&fit=crop&w=1200&q=85" alt="Young player celebrating with teammates">
+      <span class="succ-frame" aria-hidden="true"></span>
+      <b>"A trophy is a moment. <i>Development is a legacy.</i>"</b>
+    </div>
+  </div>
+</section>
+
+<!-- 08 VALUES -->
+<section class="values" id="values">
+  <div class="wrap">
+    <div class="sec-head" style="justify-content:center;text-align:center">
+      <div data-reveal style="max-width:720px;margin-inline:auto">
+        <span class="sec-eyebrow" style="justify-content:center;display:inline-flex">07 · Our Core Values</span>
+        <h2 class="wr" data-words>Eight commitments. <span class="it">One culture.</span></h2>
+      </div>
+    </div>
+    <div class="val-grid">
+      <div class="v-card" data-reveal><span class="v-num">01</span><span class="v-emo">⚽</span><h3>Excellence</h3><p>Continuously seeking higher standards in football, learning, leadership and service.</p></div>
+      <div class="v-card" data-reveal><span class="v-num">02</span><span class="v-emo">🤝</span><h3>Integrity</h3><p>Acting honestly, responsibly and transparently in every decision we make.</p></div>
+      <div class="v-card" data-reveal><span class="v-num">03</span><span class="v-emo">♥</span><h3>Respect</h3><p>Treating every player, parent, coach, volunteer and partner with dignity.</p></div>
+      <div class="v-card" data-reveal><span class="v-num">04</span><span class="v-emo">🌱</span><h3>Development</h3><p>Prioritising patient, consistent and long-term growth over short-term results.</p></div>
+      <div class="v-card" data-reveal><span class="v-num">05</span><span class="v-emo">🛡</span><h3>Safeguarding</h3><p>Placing child welfare, safety and protection first in every programme and decision.</p></div>
+      <div class="v-card" data-reveal><span class="v-num">06</span><span class="v-emo">🧠</span><h3>Learning</h3><p>Fostering continuous learning for players, coaches, staff and the wider community.</p></div>
+      <div class="v-card" data-reveal><span class="v-num">07</span><span class="v-emo">🌍</span><h3>Community</h3><p>Serving and contributing positively to the local community at every level.</p></div>
+      <div class="v-card" data-reveal><span class="v-num">08</span><span class="v-emo">🦋</span><h3>Inclusion</h3><p>Creating meaningful opportunities for girls and boys to participate and develop.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 BIG CTA -->
+<section class="big-cta" id="cta">
+  <div class="wrap big-cta-in" data-reveal>
+    <span class="sec-eyebrow" style="justify-content:center;display:inline-flex;color:var(--navy-2)">08 · Join the Academy</span>
+    <h2 class="wr" data-words>Your journey <span class="it">starts here.</span></h2>
+    <p class="lead">Whether you're a young player ready to develop, a parent exploring the academy, or an organisation that wants to build with us — there's a place for you in the Sporting Pearls family.</p>
+    <div class="big-cta-actions">
+      <a href="form-01-player-registration.html" class="btn btn-navy">Register a Player <span class="ar">→</span></a>
+      <a href="form-02-trial-application.html" class="btn btn-outline">Apply for a Trial</a>
+      <a href="partners.html" class="btn btn-outline">Partner With Us</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <svg class="crest"><use href="#crest" /></svg>
+        <div>
+          <b>Sporting Pearls<br>Football Academy</b>
+          <p>Developing talent. Building character. Transforming lives.</p>
+          <div class="foot-loc">Kilifi County / Kenya</div>
+        </div>
+      </div>
+      <div class="foot-links">
+        <a href="about-us.html">About</a>
+        <a href="academy.html">Academy</a>
+        <a href="the-squad.html">Teams</a>
+        <a href="join-us.html">Join Us</a>
+        <a href="index.html#news">News</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="socials">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 3h-2a4 4 0 0 0-4 4v3H5v3h2v8h3v-8h2.5l.5-3H10V7a1 1 0 0 1 1-1h2z" /></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3.4-.4-5a2.8 2.8 0 0 0-2-2C18 4.6 12 4.6 12 4.6s-6 0-7.6.4a2.8 2.8 0 0 0-2 2C2 8.6 2 12 2 12s0 3.4.4 5a2.8 2.8 0 0 0 2 2c1.6.4 7.6.4 7.6.4s6 0 7.6-.4a2.8 2.8 0 0 0 2-2c.4-1.6.4-5 .4-5z" /><path d="M10 9.2l5 2.8-5 2.8z" fill="#102141" /></svg></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Sporting Pearls Football Academy. All Rights Reserved.</span>
+      <span>Designed with purpose. Built on values.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Scroll progress bar */
+var prog = document.getElementById('progress');
+var ticking = false;
+window.addEventListener('scroll', function () {
+  if (!ticking) {
+    window.requestAnimationFrame(function () {
+      var h = document.documentElement;
+      prog.style.width = (window.scrollY / (h.scrollHeight - window.innerHeight) * 100) + '%';
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
+/* word-mask split */
+document.querySelectorAll('[data-words]').forEach(function(el){
+  var nodes=Array.prototype.slice.call(el.childNodes);el.innerHTML='';var i=0;
+  function mkWord(content,isEl){
+    var w=document.createElement('span');w.className='w';
+    var inner=document.createElement('span');inner.style.transitionDelay=(i++*70)+'ms';
+    if(isEl){inner.appendChild(content);}else{inner.textContent=content;}
+    w.appendChild(inner);el.appendChild(w);el.appendChild(document.createTextNode(' '));
+  }
+  nodes.forEach(function(n){
+    if(n.nodeType===3){n.textContent.split(/\s+/).filter(Boolean).forEach(function(w){mkWord(w,false);});}
+    else{mkWord(n,true);}
+  });
+});
+
+/* reveal observer */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('[data-reveal],.wr,.pitch,.ring-svg,.succ-list,.l-stage').forEach(function(el){io.observe(el);});
+
+/* count-up */
+var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;cio.unobserve(e.target);var el=e.target,end=parseInt(el.getAttribute('data-count'),10),t0=performance.now();(function step(n){var k=Math.min((n-t0)/1400,1);el.textContent=Math.round(end*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step);})(performance.now());});},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(function(el){cio.observe(el);});
+
+/* ═══════ NAVBAR PRO LOGIC ═══════ */
+(() => {
+  const nav = document.getElementById("spNavPro");
+  if (!nav) return;
+
+  const $ = (s, c = nav) => c.querySelector(s);
+  const $$ = (s, c = nav) => [...c.querySelectorAll(s)];
+  const fallbackImg = "Pearls/radoms/IMG_7080.jpg";
+  const isFinePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const desktopQuery = matchMedia("(min-width: 1100px)");
+  
+  const triggers = $$(".sp-nav-trigger");
+  const dropdowns = $$(".sp-nav-dropdown");
+  const burger = $("#spNavBurger");
+  const mobile = $("#spNavMobile");
+  const mobileBody = $("#spNavMobileBody");
+
+  let closeTimer;
+
+  const closeDropdowns = () => {
+    triggers.forEach(t => { t.classList.remove("active"); t.setAttribute("aria-expanded", "false"); });
+    dropdowns.forEach(d => { d.classList.remove("active"); d.setAttribute("aria-hidden", "true"); });
+  };
+
+  const setPreview = (dropdown, item, instant) => {
+    const media = $(".sp-nav-preview-img", dropdown);
+    const caption = $(".sp-nav-preview-caption", dropdown);
+    if (!media || !caption || !item) return;
+
+    const { img: src = fallbackImg, title = "", copy = "", kicker = "Preview" } = item.dataset;
+    if (media.dataset.current === src && caption.dataset.current === title) return;
+
+    const applyCaption = () => {
+      $(".sp-nav-preview-kicker", caption).textContent = kicker;
+      $(".sp-nav-preview-title", caption).textContent = title;
+      $(".sp-nav-preview-copy", caption).textContent = copy;
+      caption.dataset.current = title;
+    };
+
+    let resolved = false;
+    const swap = (finalSrc) => {
+      if (resolved) return; resolved = true;
+      media.src = finalSrc; media.dataset.current = finalSrc; applyCaption();
+      requestAnimationFrame(() => { media.classList.remove("is-switching"); caption.classList.remove("is-switching"); });
+    };
+
+    if (instant) return swap(src);
+    media.classList.add("is-switching"); caption.classList.add("is-switching");
+    const loader = new Image();
+    loader.onload = () => swap(loader.src);
+    loader.onerror = () => swap(fallbackImg);
+    loader.src = src;
+    setTimeout(() => swap(src), 1200);
+  };
+
+  const openDropdown = (id) => {
+    clearTimeout(closeTimer); closeDropdowns();
+    const trigger = $(`.sp-nav-trigger[data-menu="${id}"]`);
+    const dropdown = $(`.sp-nav-dropdown[data-menu="${id}"]`);
+    if (!trigger || !dropdown) return;
+
+    trigger.classList.add("active"); trigger.setAttribute("aria-expanded", "true");
+    dropdown.classList.add("active"); dropdown.setAttribute("aria-hidden", "false");
+    setPreview(dropdown, $(".sp-nav-item.is-active", dropdown) || $(".sp-nav-item", dropdown), true);
+  };
+
+  triggers.forEach(trigger => {
+    const id = trigger.dataset.menu;
+    const open = () => openDropdown(id);
+    const scheduleClose = () => { closeTimer = setTimeout(closeDropdowns, 140); };
+
+    if (isFinePointer) {
+      trigger.addEventListener("mouseenter", open);
+      trigger.addEventListener("mouseleave", scheduleClose);
+    }
+    trigger.addEventListener("click", e => {
+      if (!isFinePointer) { e.preventDefault(); trigger.classList.contains("active") ? closeDropdowns() : open(); }
+    });
+    trigger.addEventListener("focus", open);
+  });
+
+  dropdowns.forEach(dropdown => {
+    dropdown.addEventListener("mouseenter", () => clearTimeout(closeTimer));
+    dropdown.addEventListener("mouseleave", () => { closeTimer = setTimeout(closeDropdowns, 140); });
+
+    const activateItem = (e) => {
+      const item = e.target.closest(".sp-nav-item");
+      if (!item) return;
+      $$(".sp-nav-item", dropdown).forEach(l => l.classList.toggle("is-active", l === item));
+      setPreview(dropdown, item);
+    };
+    dropdown.addEventListener("mouseover", activateItem);
+    dropdown.addEventListener("focusin", activateItem);
+  });
+
+  if (mobileBody) {
+    const directLinks = $$(".sp-nav-desktop > .sp-nav-link");
+    let html = "";
+    if (directLinks.length) {
+      html += `<div class="sp-nav-mobile-direct">${
+        directLinks.map(link => `<a class="sp-nav-mobile-direct-link" href="${link.href}">
+          <span>${link.dataset.label || link.textContent.trim()}</span>
+          <span class="sp-nav-mobile-arrow"><svg><use href="#icon-arrow"/></svg></span>
+        </a>`).join('')
+      }</div>`;
+    }
+
+    dropdowns.forEach(dropdown => {
+      const trigger = $(`.sp-nav-trigger[data-menu="${dropdown.dataset.menu}"]`);
+      const title = trigger?.dataset.label || dropdown.dataset.menu;
+      html += `
+        <div class="sp-nav-mobile-group">
+          <button type="button" class="sp-nav-mobile-trigger" aria-expanded="false">
+            <span>${title}</span><span><svg><use href="#icon-chevron"/></svg></span>
+          </button>
+          <div class="sp-nav-mobile-panel">
+            ${$$(".sp-nav-item", dropdown).map(item => `
+              <a class="sp-nav-mobile-link" href="${item.getAttribute('href') || '#'}">
+                <img class="sp-nav-mobile-thumb" alt="" loading="lazy" src="${item.dataset.img || fallbackImg}" onerror="this.src='${fallbackImg}'">
+                <span class="sp-nav-mobile-text">
+                  <strong>${item.dataset.title || ""}</strong>
+                  <small>${$("small", item)?.textContent.trim() || ""}</small>
+                </span>
+                <span class="sp-nav-mobile-arrow"><svg><use href="#icon-arrow"/></svg></span>
+              </a>`).join('')}
+          </div>
+        </div>`;
+    });
+    mobileBody.innerHTML = html;
+  }
+
+  const setMobile = (open) => {
+    nav.classList.toggle("sp-nav-open", open);
+    document.body.classList.toggle("sp-nav-lock", open);
+    burger?.classList.toggle("active", open);
+    burger?.setAttribute("aria-expanded", String(open));
+    mobile?.setAttribute("aria-hidden", String(!open));
+    if (open) closeDropdowns();
+  };
+
+  burger?.addEventListener("click", () => setMobile(!nav.classList.contains("sp-nav-open")));
+
+  nav.addEventListener("click", e => {
+    const groupTrigger = e.target.closest(".sp-nav-mobile-trigger");
+    if (groupTrigger) {
+      const group = groupTrigger.closest(".sp-nav-mobile-group");
+      if (group) {
+        const open = group.classList.toggle("open");
+        groupTrigger.setAttribute("aria-expanded", String(open));
+      }
+      return;
+    }
+    if (e.target.closest(".sp-nav-mobile a")) setMobile(false);
+  });
+
+  document.addEventListener("click", e => { if (!nav.contains(e.target)) closeDropdowns(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") { closeDropdowns(); setMobile(false); } });
+
+  const onScroll = () => {
+    nav.classList.toggle("is-scrolled", window.scrollY > 20);
+    if (window.scrollY > 80) closeDropdowns();
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  const onBreakpointChange = () => { if (desktopQuery.matches) { setMobile(false); closeDropdowns(); } };
+  desktopQuery.addEventListener?.("change", onBreakpointChange) || desktopQuery.addListener?.(onBreakpointChange);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form 08: General Contact | Sporting Pearls Football Academy</title>
+<meta name="description" content="Form 08: Official General Contact Form for Sporting Pearls Football Academy. Player registration, trials, partnerships, coaching, volunteering, media and general enquiries. Motto: Grit & Believe. Mtwapa, Kilifi County.">
+<style>
+:root{
+  --navy:#14284b;--navy-2:#0c1a33;--navy-3:#102141;
+  --sand:#f3efe7;--pearl:#fbfaf7;
+  --amber:#f59d1e;--amber-2:#d97f06;
+  --blue:#2e6f9e;--blue-2:#1f567e;--lagoon:#2f8f83;
+  --ink:#14284b;--body:#4a5568;
+  --muted:#6b7280;--muted-d:rgba(251,250,247,.66);
+  --hair:rgba(20,40,75,.14);--hair-d:rgba(251,250,247,.16);
+  --fd:'Fraunces',Georgia,serif;--fb:'Work Sans',system-ui,sans-serif;
+  --fm:'Space Mono',ui-monospace,monospace;--fh:'Caveat',cursive;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(1.25rem,5vw,3.75rem);--sp:clamp(3.5rem,7vw,5.5rem);--barh:40px;
+  --danger:#c53030;--danger-bg:rgba(197,48,48,.06);--success:#2f855a;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--sand);color:var(--body);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font-family:inherit;color:inherit;font-size:inherit}
+button{cursor:pointer;background:none;border:none}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+::selection{background:var(--amber);color:var(--navy)}
+
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:var(--pad);position:relative;z-index:3}
+
+/* Chrome */
+.contact-bar{background:var(--navy);color:var(--pearl);padding:0 var(--pad);height:var(--barh);line-height:1;font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;display:flex;justify-content:space-between;align-items:center;gap:1rem;position:fixed;top:0;left:0;right:0;z-index:1001}
+.contact-left{display:flex;gap:1.5rem;align-items:center}
+.contact-left a:hover{color:var(--amber)}
+.motto-badge{background:var(--amber);color:var(--navy-2);font-weight:700;padding:.2rem .5rem;border-radius:2px;letter-spacing:.15em}
+
+.nav{position:fixed;top:var(--barh);left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem var(--pad);background:rgba(12,26,51,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair-d)}
+.brand{display:flex;align-items:center;gap:.7rem;color:var(--pearl)}
+.brand .crest{width:38px;height:38px}
+.brand-txt b{display:block;font-family:var(--fd);font-size:.95rem;line-height:1.1}
+.brand-txt span{display:block;font-family:var(--fm);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+.nav-back{font-family:var(--fm);font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pearl);display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .9rem;border:1px solid rgba(251,250,247,.25);border-radius:4px;transition:.3s}
+.nav-back:hover{border-color:var(--amber);color:var(--amber)}
+
+/* Header */
+.form-header{padding:calc(var(--barh) + 5rem) 0 2.5rem;background:var(--navy-2);color:var(--pearl);position:relative;overflow:hidden;border-bottom:3px solid var(--amber)}
+.form-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 30%,rgba(245,157,30,.15),transparent 60%);pointer-events:none}
+.form-kicker{font-family:var(--fm);font-size:.62rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem}
+.form-kicker::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--amber)}
+.form-header h1{font-family:var(--fd);font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:700;line-height:1.08;color:var(--pearl)}
+.form-header p{max-width:68ch;color:var(--muted-d);margin-top:.8rem;font-size:.95rem}
+
+/* Progress Tracker */
+.tracker-wrap{background:var(--pearl);border-bottom:1px solid var(--hair);position:sticky;top:calc(var(--barh) + 56px);z-index:900;box-shadow:0 4px 18px rgba(12,26,51,.04)}
+.tracker{display:flex;justify-content:space-between;overflow-x:auto;scrollbar-width:none;padding:.8rem 0}
+.tracker::-webkit-scrollbar{display:none}
+.t-step{display:flex;align-items:center;gap:.6rem;padding:.4rem .8rem;border-radius:4px;cursor:pointer;opacity:.55;transition:.3s;white-space:nowrap}
+.t-step.active{opacity:1;background:rgba(245,157,30,.12)}
+.t-step.completed{opacity:1;color:var(--blue-2)}
+.t-num{width:24px;height:24px;border-radius:50%;background:var(--sand);border:1.5px solid var(--hair);display:grid;place-items:center;font-family:var(--fm);font-size:.65rem;font-weight:700;color:var(--ink)}
+.t-step.active .t-num{background:var(--amber);border-color:var(--amber);color:var(--navy-2)}
+.t-step.completed .t-num{background:var(--lagoon);border-color:var(--lagoon);color:var(--pearl)}
+.t-text{font-family:var(--fm);font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+
+/* Form Container */
+.form-container{padding:var(--sp) 0 6rem}
+.form-card{background:var(--pearl);border:1px solid var(--hair);border-radius:12px;box-shadow:0 18px 45px rgba(20,40,75,.08);overflow:hidden}
+
+.form-section{display:none;padding:clamp(1.8rem,4vw,3.2rem)}
+.form-section.active{display:block;animation:fadeIn .4s var(--ease)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.sec-title{border-bottom:1px dashed var(--hair);padding-bottom:1.2rem;margin-bottom:2rem}
+.sec-badge{font-family:var(--fm);font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-2);display:inline-block;margin-bottom:.4rem}
+.sec-title h2{font-family:var(--fd);font-size:1.8rem;color:var(--ink);line-height:1.1}
+.sec-title p{font-size:.9rem;color:var(--body);margin-top:.4rem}
+
+/* Form Controls */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr;gap:1rem}}
+
+.field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.2rem}
+.field label{font-family:var(--fm);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.field label .req{color:var(--danger);margin-left:.2rem}
+.field input[type="text"],.field input[type="email"],.field input[type="tel"],.field input[type="date"],.field select,.field textarea{background:var(--sand);border:1.5px solid var(--hair);border-radius:6px;padding:.8rem 1rem;color:var(--ink);transition:.3s;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--amber);background:var(--pearl);box-shadow:0 0 0 4px rgba(245,157,30,.15)}
+.field .hint{font-size:.75rem;color:var(--muted)}
+
+/* Checkbox Cards */
+.radio-group,.check-group{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.8rem;margin-top:.3rem}
+.choice-card{background:var(--sand);border:1.5px solid var(--hair);border-radius:6px;padding:.8rem 1rem;display:flex;align-items:center;gap:.7rem;cursor:pointer;transition:.25s}
+.choice-card:hover{border-color:var(--amber)}
+.choice-card input{accent-color:var(--amber);width:16px;height:16px}
+.choice-card span{font-family:var(--fm);font-size:.72rem;font-weight:700;color:var(--ink)}
+
+/* Consent Box */
+.consent-box{background:var(--sand);border-left:4px solid var(--amber);border-radius:0 8px 8px 0;padding:1.4rem;margin-bottom:1.4rem}
+.consent-box h4{font-family:var(--fd);font-size:1.1rem;color:var(--ink);margin-bottom:.4rem}
+.consent-box p{font-size:.85rem;color:var(--body);margin-bottom:.8rem;line-height:1.55}
+
+/* Notice Boxes */
+.info-note{background:rgba(47,143,131,.08);border:1.5px solid rgba(47,143,131,.3);border-left:5px solid var(--lagoon);border-radius:8px;padding:1.3rem;margin-bottom:1.6rem}
+.info-note h4{font-family:var(--fd);font-size:1.05rem;color:var(--lagoon);margin-bottom:.3rem;display:flex;align-items:center;gap:.5rem}
+.info-note p{font-size:.85rem;color:var(--ink);line-height:1.55}
+
+/* Form Actions */
+.form-actions{background:var(--sand);border-top:1px solid var(--hair);padding:1.4rem clamp(1.8rem,4vw,3.2rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--fm);font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.6rem;border-radius:4px;transition:.3s;cursor:pointer}
+.btn-prev{border:1.5px solid var(--hair);color:var(--ink);background:var(--pearl)}
+.btn-prev:hover{background:var(--sand);border-color:var(--ink)}
+.btn-next{background:var(--amber);color:var(--navy-2);box-shadow:0 8px 18px rgba(245,157,30,.25)}
+.btn-next:hover{background:var(--amber-2);color:var(--pearl);transform:translateY(-2px)}
+.btn-submit{background:var(--navy-2);color:var(--amber);border:2px solid var(--amber);box-shadow:0 8px 22px rgba(12,26,51,.3)}
+.btn-submit:hover{background:var(--amber);color:var(--navy-2)}
+
+/* Summary Review Box */
+.review-panel{background:var(--sand);border:1px solid var(--hair);border-radius:8px;padding:1.4rem;margin-bottom:1.5rem}
+.review-item{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px dashed var(--hair);font-size:.85rem}
+.review-item:last-child{border:none}
+.review-label{font-family:var(--fm);color:var(--muted);font-size:.72rem;text-transform:uppercase}
+.review-val{font-weight:600;color:var(--ink);text-align:right}
+
+/* Success Overlay */
+.success-modal{display:none;padding:4rem 2rem;text-align:center}
+.success-modal.active{display:block;animation:fadeIn .5s var(--ease)}
+.succ-icon{width:70px;height:70px;border-radius:50%;background:var(--lagoon);color:var(--pearl);display:grid;place-items:center;font-size:2rem;margin:0 auto 1.4rem;box-shadow:0 0 0 10px rgba(47,143,131,.2)}
+.success-modal h2{font-family:var(--fd);font-size:2.4rem;color:var(--ink);margin-bottom:.6rem}
+.success-modal p{max-width:52ch;margin:0 auto 2rem;color:var(--body)}
+
+/* ═══════════════════════════════════════════
+   ACADEMY FORMS HUB — CROSS-LINKS
+═══════════════════════════════════════════ */
+.forms-back{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.3rem;font-family:var(--fm);font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pearl);padding:.6rem 1rem;border:1px solid rgba(251,250,247,.3);border-radius:4px;transition:.3s}
+.forms-back:hover{border-color:var(--amber);color:var(--amber);transform:translateX(-3px)}
+.forms-hub{background:var(--pearl);border-top:1px solid var(--hair);padding:clamp(2.5rem,6vw,4rem) 0 clamp(3rem,7vw,5rem)}
+.forms-hub-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.2rem;margin-bottom:1.8rem}
+.forms-hub-kicker{font-family:var(--fm);font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber-2);display:inline-flex;align-items:center;gap:.5rem}
+.forms-hub-kicker::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--amber)}
+.forms-hub-head h2{font-family:var(--fd);font-size:clamp(1.7rem,3.5vw,2.3rem);color:var(--ink);line-height:1.05;margin-top:.6rem;font-weight:700}
+.forms-hub-back{font-family:var(--fm);font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-2);display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;border:1.5px solid var(--hair);border-radius:4px;transition:.3s;background:var(--pearl)}
+.forms-hub-back:hover{border-color:var(--amber);color:var(--amber-2);transform:translateX(-3px)}
+.forms-hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem}
+.fh-card{display:flex;gap:.85rem;align-items:flex-start;background:var(--sand);border:1.5px solid var(--hair);border-radius:8px;padding:1.1rem 1.2rem;transition:.25s}
+a.fh-card{cursor:pointer}
+a.fh-card:hover{border-color:var(--amber);background:var(--pearl);transform:translateY(-3px);box-shadow:0 12px 26px rgba(20,40,75,.1)}
+.fh-num{flex:none;width:34px;height:34px;border-radius:50%;background:var(--navy-2);color:var(--amber);display:grid;place-items:center;font-family:var(--fm);font-size:.6rem;font-weight:700}
+.fh-body{display:block;min-width:0}
+.fh-body strong{display:block;font-family:var(--fd);font-size:.98rem;color:var(--ink);line-height:1.15;font-weight:600}
+.fh-body small{display:block;font-size:.78rem;color:var(--muted);margin-top:.3rem;line-height:1.45}
+.fh-tag{display:inline-flex;margin-top:.55rem;font-family:var(--fm);font-size:.52rem;font-style:normal;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .55rem;border-radius:3px}
+.fh-open{color:var(--blue-2);border:1px solid var(--hair);transition:.25s}
+a.fh-card:hover .fh-open{border-color:var(--amber);color:var(--amber-2)}
+.fh-current{color:var(--amber-2);background:rgba(245,157,30,.16)}
+.fh-card.is-current{border-color:var(--amber);background:rgba(245,157,30,.06);cursor:default}
+.fh-card.is-current .fh-num{background:var(--amber);color:var(--navy-2)}
+@media(max-width:600px){.forms-hub-head{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<!-- Crest Symbol -->
+<svg style="display:none" aria-hidden="true">
+<symbol id="crest" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="97" fill="#f59d1e" stroke="#14284b" stroke-width="3"/>
+  <circle cx="100" cy="100" r="67" fill="#fbfaf7" stroke="#14284b" stroke-width="2"/>
+  <defs><path id="tp" d="M20 100 A80 80 0 0 1 180 100"/><path id="bp" d="M12 100 A88 88 0 0 0 188 100"/></defs>
+  <text fill="#14284b" font-family="Fraunces, Georgia, serif" font-size="19" font-weight="700" letter-spacing="3"><textPath href="#tp" startOffset="50%" text-anchor="middle">SPORTING PEARLS</textPath></text>
+  <text fill="#14284b" font-family="Fraunces, Georgia, serif" font-size="16.5" font-weight="700" letter-spacing="1.5"><textPath href="#bp" startOffset="50%" text-anchor="middle">Football Academy</textPath></text>
+  <path d="M100 40 L136 50 L150 70 V106 C150 134 129 154 100 166 C71 154 50 134 50 106 V70 L64 50 Z" fill="#f59d1e" stroke="#14284b" stroke-width="5"/>
+  <circle cx="100" cy="80" r="22" fill="#fbfaf7" stroke="#14284b" stroke-width="3"/>
+  <path d="M100 73 l7.5 5.5 -2.8 8.8 h-9.4 l-2.8 -8.8 z" fill="#14284b"/>
+</symbol>
+</svg>
+
+
+<!-- Crest Symbol -->
+
+<div class="contact-bar">
+  <div class="contact-left">
+    <span>📞 <a href="tel:+254700123456">+254 700 123 456</a></span>
+    <span>✉ <a href="mailto:info@sportingpearlsacademy.org">info@sportingpearlsacademy.org</a></span>
+    <span>✉ <a href="mailto:pearlssporting@gmail.com">pearlssporting@gmail.com</a></span>
+  </div>
+  <div style="display:flex;align-items:center;gap:.6rem">
+    <span class="motto-badge">GRIT & BELIEVE</span>
+    <span>FORM 08 · GENERAL CONTACT</span>
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="index.html" class="brand">
+    <svg class="crest"><use href="#crest"/></svg>
+    <span class="brand-txt"><b>Sporting Pearls</b><span>Football Academy</span></span>
+  </a>
+  <div style="display:flex;gap:.6rem">
+    <a href="forms.html" class="nav-back">All Forms</a>
+    <a href="index.html" class="nav-back">← Back to Home</a>
+  </div>
+</nav>
+
+<header class="form-header">
+  <div class="wrap">
+    <span class="form-kicker">We Would Love To Hear From You</span>
+    <h1>Form 08: General Contact</h1>
+    <p>Questions about registrations, trials, partnerships, coaching, volunteering or media? Send us a message and the right department will pick it up. We keep this simple — one short form, straight to the people who can help.</p>
+  </div>
+</header>
+
+<main class="form-container">
+  <div class="wrap">
+    <div class="form-card">
+      <form id="contactForm" novalidate>
+
+        <!-- SINGLE PANEL -->
+        <section class="form-section active" data-sec="1">
+          <div class="sec-title">
+            <span class="sec-badge">Form 08 · Single Step</span>
+            <h2>Send Us a Message</h2>
+            <p>Complete the details below. Fields marked with a red asterisk are required.</p>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label>Full Name <span class="req">*</span></label>
+              <input type="text" id="ct_name" required placeholder="e.g. Grace Neema">
+            </div>
+            <div class="field">
+              <label>Email Address <span class="req">*</span></label>
+              <input type="email" id="ct_email" required placeholder="you@example.com">
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label>Phone Number</label>
+              <input type="tel" id="ct_phone" placeholder="e.g. +254 7XX XXX XXX">
+            </div>
+            <div class="field">
+              <label>I am contacting you about <span class="req">*</span></label>
+              <select id="ct_topic" required>
+                <option value="">Select a Topic</option>
+                <option value="Player Registration">Player Registration</option>
+                <option value="Trial">Trial</option>
+                <option value="Partnership">Partnership</option>
+                <option value="Sponsorship">Sponsorship</option>
+                <option value="Coaching">Coaching</option>
+                <option value="Volunteering">Volunteering</option>
+                <option value="Media">Media</option>
+                <option value="General Enquiry">General Enquiry</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Subject <span class="req">*</span></label>
+            <input type="text" id="ct_subject" required placeholder="Summarise your enquiry in one line">
+          </div>
+
+          <div class="field">
+            <label>Message <span class="req">*</span></label>
+            <textarea id="ct_message" rows="6" required placeholder="Tell us more. If your enquiry is about a specific player, include the player's full name and squad group."></textarea>
+          </div>
+
+          <div class="info-note" style="margin-top:1.6rem">
+            <h4>ℹ Faster Routes for Common Requests</h4>
+            <p>To reach the right team more directly: <b>Player Registration</b> uses <a href="form-01-player-registration.html" style="color:var(--blue-2);text-decoration:underline">Form 01</a> · <b>Trials</b> use <a href="form-02-trial-application.html" style="color:var(--blue-2);text-decoration:underline">Form 02</a> · <b>Partnerships &amp; Sponsorship</b> use <a href="form-06-sponsorship-partnership.html" style="color:var(--blue-2);text-decoration:underline">Form 06</a> · <b>Donations</b> use <a href="form-07-donation-support.html" style="color:var(--blue-2);text-decoration:underline">Form 07</a> · <b>Child welfare concerns</b> should always go through the confidential <a href="form-10-safeguarding-report.html" style="color:var(--blue-2);text-decoration:underline">Form 10</a>.</p>
+          </div>
+        </section>
+
+        <!-- Actions -->
+        <div class="form-actions" style="justify-content:flex-end">
+          <button type="submit" class="btn btn-submit" id="submitBtn">Send Message ✓</button>
+        </div>
+
+      </form>
+
+      <!-- Submission Success Modal -->
+      <div class="success-modal" id="successModal">
+        <div class="succ-icon">✓</div>
+        <h2>Message Sent!</h2>
+        <p>Thank you, <b id="succ_ct_name">friend of the academy</b>. Your message has been received and routed to the department handling <b id="succ_ct_topic">your enquiry</b>. We reply to every message — you will hear from us soon.</p>
+        <div style="background:var(--sand);padding:1.2rem;border-radius:8px;max-width:400px;margin:0 auto 2rem;font-family:var(--fm);font-size:.78rem">
+          <div>Message Tracking Ref: <b id="succ_ctref">MSG-2026-XXXX</b></div>
+          <div>Motto: <b>Grit & Believe</b></div>
+          <div>Location: Mtwapa, Kilifi County</div>
+        </div>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+          <a href="forms.html" class="btn btn-next">All Official Forms</a>
+          <a href="index.html" class="btn btn-prev">Home</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════════════════════════════════
+     ACADEMY FORMS HUB — CROSS-LINKS TO ALL FORMS
+═══════════════════════════════════════════ -->
+<section class="forms-hub" aria-label="More academy forms">
+  <div class="wrap">
+    <div class="forms-hub-head">
+      <div>
+        <span class="forms-hub-kicker">Academy Forms</span>
+        <h2>More Official Forms</h2>
+      </div>
+      <a href="join-us.html" class="forms-hub-back">← Back to all forms</a>
+    </div>
+    <div class="forms-hub-grid">
+      <a class="fh-card" href="form-01-player-registration.html">
+        <span class="fh-num">01</span>
+        <span class="fh-body">
+          <strong>Form 01: Player Registration</strong>
+          <small>Official enrolment for new players — six sections, guardian & medical details.</small>
+          <em class="fh-open">Open form →</em>
+        </span>
+      </a>
+      <a class="fh-card" href="form-02-trial-application.html">
+        <span class="fh-num">02</span>
+        <span class="fh-body">
+          <strong>Form 02: Trial Application</strong>
+          <small>Book an official technical assessment session with our coaching staff.</small>
+          <em class="fh-open">Open form →</em>
+        </span>
+      </a>
+      <a class="fh-card" href="form-03-parent-association.html">
+        <span class="fh-num">03</span>
+        <span class="fh-body">
+          <strong>Form 03: Parents' Association</strong>
+          <small>Join the SPPGA — player welfare, academic monitoring & matchday liaison.</small>
+          <em class="fh-open">Open form →</em>
+        </span>
+      </a>
+      <a class="fh-card" href="form-04-volunteer-application.html">
+        <span class="fh-num">04</span>
+        <span class="fh-body">
+          <strong>Form 04: Volunteer Application</strong>
+          <small>Support matchday operations, tutoring, photography & community outreach.</small>
+          <em class="fh-open">Open form →</em>
+        </span>
+      </a>
+      <a class="fh-card" href="form-05-coach-technical-staff.html">
+        <span class="fh-num">05</span>
+        <span class="fh-body">
+          <strong>Form 05: Coach & Technical Staff</strong>
+          <small>Apply for coaching, technical or medical staff roles at the academy.</small>
+          <em class="fh-open">Open form →</em>
+        </span>
+      </a>
+      <a class="fh-card" href="form-06-sponsorship-partnership.html">
+        <span class="fh-num">06</span>
+        <span class="fh-body">
+          <strong>Form 06: Sponsorship & Partnership</strong>
+          <small>Sponsor a squad or programme — or become a corporate partner.</small>
+          <em class="fh-open">Open form →</em>
+        </span>
+      </a>
+      <a class="fh-card" href="form-07-donation-support.html">
+        <span class="fh-num">07</span>
+        <span class="fh-body">
+          <strong>Form 07: Donation & Support</strong>
+          <small>Pledge donations for scholarships, kits, equipment and community programmes.</small>
+          <em class="fh-open">Open form →</em>
+        </span>
+      </a>
+      <div class="fh-card is-current" aria-current="page">
+        <span class="fh-num">08</span>
+        <span class="fh-body">
+          <strong>Form 08: General Contact</strong>
+          <small>Send a general enquiry straight to the right academy department.</small>
+          <em class="fh-current">You are here</em>
+        </span>
+      </div>
+      <a class="fh-card" href="form-09-media-photo-consent.html">
+        <span class="fh-num">09</span>
+        <span class="fh-body">
+          <strong>Form 09: Media, Photo & Video Consent</strong>
+          <small>Allow or refuse media, photography and video use for your child.</small>
+          <em class="fh-open">Open form →</em>
+        </span>
+      </a>
+      <a class="fh-card" href="form-10-safeguarding-report.html">
+        <span class="fh-num">10</span>
+        <span class="fh-body">
+          <strong>Form 10: Safeguarding Report</strong>
+          <small>Confidentially report a welfare concern, incident or safety issue.</small>
+          <em class="fh-open">Open form →</em>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+// Pre-validate & submit (single-panel form — no step tracker needed)
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  var inputs = this.querySelectorAll('input[required], select[required], textarea[required]');
+  var valid = true;
+  inputs.forEach(function(input) {
+    if (!input.value.trim()) {
+      valid = false;
+      input.style.borderColor = 'var(--danger)';
+    } else {
+      input.style.borderColor = 'var(--hair)';
+    }
+  });
+
+  if (!valid) {
+    alert('Please fill in all mandatory fields (marked with a red asterisk) before sending.');
+    return;
+  }
+
+  var name = document.getElementById('ct_name').value.trim();
+  var topic = document.getElementById('ct_topic').value;
+  document.getElementById('succ_ct_name').textContent = name || 'friend of the academy';
+  document.getElementById('succ_ct_topic').textContent = topic || 'your enquiry';
+  document.getElementById('succ_ctref').textContent = 'MSG-2026-' + Math.floor(1000 + Math.random() * 9000);
+
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('successModal').classList.add('active');
+});
+</script>
+</body>
+</html>

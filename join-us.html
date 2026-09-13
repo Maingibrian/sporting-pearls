@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the Academy | Sporting Pearls Football Academy</title>
+<meta name="description" content="Join Sporting Pearls Football Academy — Official Onboarding Gateway for Players, Trials, Parents, Volunteers, and Coaches. Motto: Grit & Believe. Est. 2020, Mtwapa, Kilifi County.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,600&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14284b;--navy-2:#0c1a33;--navy-3:#102141;
+  --sand:#f3efe7;--pearl:#fbfaf7;
+  --amber:#f59d1e;--amber-2:#d97f06;
+  --blue:#2e6f9e;--blue-2:#1f567e;--lagoon:#2f8f83;
+  --ink:#14284b;--body:#4a5568;
+  --muted:#6b7280;--muted-d:rgba(251,250,247,.66);
+  --hair:rgba(20,40,75,.14);--hair-d:rgba(251,250,247,.16);
+  --fd:'Fraunces',Georgia,serif;--fb:'Work Sans',system-ui,sans-serif;
+  --fm:'Space Mono',ui-monospace,monospace;--fh:'Caveat',cursive;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(1.25rem,5vw,3.75rem);--sp:clamp(4.5rem,9vw,7.5rem);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{font-family:var(--fb);background:var(--sand);color:var(--body);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+body.menu-open, body.sp-nav-lock{overflow:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+::selection{background:var(--amber);color:var(--navy)}
+body::after{content:'';position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--pad);position:relative;z-index:3}
+section{scroll-margin-top:90px;position:relative;overflow:hidden}
+h1,h2,h3,h4{font-family:var(--fd);font-weight:700;color:var(--ink);letter-spacing:-.01em;line-height:1.02}
+.it{font-style:italic;font-weight:600;color:var(--amber)}
+.dark .it{color:var(--amber)}
+.dark{color:var(--pearl)}
+.dark h1,.dark h2,.dark h3,.dark h4{color:var(--pearl)}
+.kicker{font-family:var(--fm);font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.65rem;color:var(--blue-2)}
+.kicker::before{content:'';width:9px;height:9px;border-radius:50%;background:var(--amber);flex-shrink:0;animation:kdot 2s ease-in-out infinite}
+@keyframes kdot{50%{box-shadow:0 0 0 5px rgba(245,157,30,.18)}}
+.dark .kicker{color:var(--amber)}
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--amber);width:0;z-index:1300;transform-origin:left;box-shadow:0 0 12px rgba(245,157,30,.5)}
+
+/* reveal */
+.js [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js [data-reveal="left"]{transform:translateX(-40px)}
+.js [data-reveal="right"]{transform:translateX(40px)}
+.js [data-reveal="zoom"]{transform:scale(.92)}
+[data-reveal].in{opacity:1;transform:none}
+.wr .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.wr .w>span{display:inline-block;transform:translateY(118%);transition:transform .9s var(--ease)}
+.wr.in .w>span{transform:none}
+
+.sk{width:44px;height:44px;overflow:visible}
+.sk *{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.sk .gh{stroke:var(--navy);opacity:.18;transform:translate(1.6px,1.6px)}
+.sk .ln{stroke:var(--amber-2)}
+.dark .sk .gh{stroke:var(--pearl);opacity:.14}
+.dark .sk .ln{stroke:var(--amber)}
+
+.btn{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--fm);font-weight:700;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:1rem 1.7rem;border-radius:3px;border:1px solid transparent;transition:.35s var(--ease);cursor:pointer}
+.btn .ar{transition:transform .35s var(--ease)}
+.btn:hover{transform:translateY(-2px) scale(1.02)}
+.btn:hover .ar{transform:translateX(5px)}
+.btn-amber{background:var(--amber);color:var(--navy);box-shadow:0 12px 26px rgba(245,157,30,.28)}
+.btn-amber:hover{background:var(--amber-2)}
+.btn-ghost{border-color:rgba(251,250,247,.5);color:var(--pearl)}
+.btn-ghost:hover{background:var(--pearl);color:var(--navy)}
+.btn-navy{background:var(--navy-2);color:var(--amber);box-shadow:4px 4px 0 rgba(12,26,51,.35)}
+.btn-navy:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 rgba(12,26,51,.35)}
+.btn-outline{border:2px solid var(--navy-2);color:var(--navy-2)}
+.btn-outline:hover{background:var(--navy-2);color:var(--amber)}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:90svh;color:var(--pearl);display:grid;grid-template-columns:1.15fr .85fr;overflow:hidden;background:var(--navy);padding-top:110px;}
+.hero::before{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 15% 20%,rgba(245,157,30,.15),transparent 50%),radial-gradient(ellipse at 90% 90%,rgba(46,111,158,.22),transparent 55%)}
+.hero-left{position:relative;z-index:3;padding:calc(110px + 3rem) var(--pad) 3rem;display:flex;flex-direction:column;justify-content:center}
+.hero-kick{font-family:var(--fm);font-size:.58rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:.7rem;margin-bottom:1.4rem}
+.hero-kick i{width:8px;height:8px;background:var(--amber);border-radius:50%;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(245,157,30,.6)}50%{box-shadow:0 0 0 9px rgba(245,157,30,0)}}
+.hero h1{color:var(--pearl);font-size:clamp(2.4rem,5.6vw,4.8rem);max-width:15ch;font-weight:600;line-height:1.04;text-shadow:0 4px 18px rgba(0,0,0,.35);margin-bottom:1.4rem}
+.hero h1 .it{font-size:1.02em}
+.hero-sub{max-width:52ch;color:rgba(251,250,247,.9);font-weight:300;font-size:clamp(1rem,1.3vw,1.1rem);margin-bottom:2rem;line-height:1.6}
+.hero-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.hero-meta span{font-family:var(--fm);font-size:.55rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(251,250,247,.72);border:1px dashed rgba(251,250,247,.35);padding:.38rem .65rem;border-radius:3px}
+.hero-meta b{color:var(--amber)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding-top:1.4rem;border-top:1px dashed rgba(251,250,247,.25)}
+.hstat b{font-family:var(--fd);font-weight:700;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1;color:var(--amber);display:block}
+.hstat span{font-family:var(--fm);font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,250,247,.68);margin-top:.3rem;display:block}
+
+.hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:2rem;background:linear-gradient(180deg,#0a5a3e,#083a29)}
+.hero-quote-box{background:rgba(12,26,51,.85);border:1.5px solid var(--hair-d);border-left:5px solid var(--amber);border-radius:10px;padding:2.4rem 2rem;max-width:440px;color:var(--pearl);box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.hero-quote-box h3{font-family:var(--fd);font-size:1.8rem;color:var(--amber);line-height:1.1;margin-bottom:.8rem}
+.hero-quote-box p{font-size:.95rem;color:var(--muted-d);line-height:1.6;margin-bottom:1.4rem}
+.hero-quote-box .author{font-family:var(--fm);font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pearl);display:flex;align-items:center;gap:.6rem}
+.hero-quote-box .author::before{content:'';width:20px;height:1.5px;background:var(--amber)}
+
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-left{padding-top:calc(110px + 2rem)}.hero-right{min-height:360px}}
+@media(max-width:600px){.hero-stats{grid-template-columns:1fr 1fr;gap:.8rem}}
+
+/* section head */
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:3rem}
+.sec-head h2{font-size:clamp(2.2rem,5vw,4rem);margin-top:.9rem;max-width:20ch}
+.sec-head p{max-width:46ch;font-size:.98rem}
+.dark .sec-head p{color:var(--muted-d)}
+.sec-eyebrow{font-family:var(--fm);font-size:.62rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--amber-2);display:flex;align-items:center;gap:.7rem;margin-bottom:.5rem}
+.dark .sec-eyebrow{color:var(--amber)}
+.sec-eyebrow::before{content:'';width:28px;height:1.5px;background:currentColor}
+
+/* ============ 01 GATEWAYS (THE 5 CORE ONBOARDING PATHWAYS) ============ */
+.gateways{padding:var(--sp) 0;background:var(--sand)}
+.gw-grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+@media(min-width:1100px){.gw-grid{grid-template-columns:repeat(3,1fr)}}
+
+.gw-card{background:var(--pearl);border:1px solid var(--hair);border-radius:12px;padding:2.2rem 1.8rem 2rem;position:relative;overflow:hidden;transition:.4s var(--ease);display:flex;flex-direction:column}
+.gw-card:hover{transform:translateY(-8px);border-color:var(--ac,var(--amber));box-shadow:0 28px 54px rgba(20,40,75,.16)}
+.gw-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--ac,var(--amber));transform:scaleY(0);transform-origin:top;transition:transform .5s var(--ease)}
+.gw-card:hover::after{transform:scaleY(1)}
+
+.gw-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.gw-card .n{font-family:var(--fd);font-style:italic;font-weight:900;font-size:1.8rem;line-height:1;color:transparent;-webkit-text-stroke:1.2px var(--ac,var(--amber-2))}
+.gw-card .sk{margin-bottom:0}
+
+.gw-card h3{font-size:1.45rem;margin:.6rem 0 .5rem;color:var(--ink)}
+.gw-card p{font-size:.92rem;flex:1;margin-bottom:1.4rem;line-height:1.55}
+
+.gw-list{list-style:none;display:grid;gap:.4rem;margin-bottom:1.6rem;border-top:1px dashed var(--hair);padding-top:1rem}
+.gw-list li{display:flex;gap:.6rem;font-size:.84rem;color:var(--body)}
+.gw-list li::before{content:'';width:5px;height:5px;background:var(--ac,var(--amber-2));border-radius:50%;margin-top:.6em;flex-shrink:0}
+
+.gw-btn{font-family:var(--fm);font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pearl);background:var(--navy-2);display:inline-flex;align-items:center;justify-content:space-between;padding:.85rem 1.2rem;border-radius:4px;transition:.3s}
+.gw-btn:hover{background:var(--ac,var(--amber));color:var(--navy-2);transform:translateX(3px)}
+.gw-btn .ar{transition:transform .3s}
+.gw-btn:hover .ar{transform:translateX(5px)}
+
+/* ============ 02 SECONDARY SUPPORT PATHWAYS ============ */
+.support-strip{padding:var(--sp) 0;background:var(--pearl);border-top:1px solid var(--hair)}
+.strip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+@media(max-width:860px){.strip-grid{grid-template-columns:1fr}}
+
+.s-card{background:var(--sand);border:1px solid var(--hair);border-radius:10px;padding:2rem 1.6rem;display:flex;flex-direction:column;justify-content:space-between;transition:.35s var(--ease)}
+.s-card:hover{transform:translateY(-4px);border-color:var(--amber);box-shadow:0 18px 36px rgba(20,40,75,.08)}
+.s-card h4{font-size:1.3rem;color:var(--ink);margin-bottom:.4rem}
+.s-card p{font-size:.9rem;color:var(--body);line-height:1.55;margin-bottom:1.4rem}
+.s-link{font-family:var(--fm);font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-2);display:inline-flex;align-items:center;gap:.5rem;transition:.3s}
+.s-link:hover{gap:.8rem;color:var(--navy)}
+
+/* ============ 03 ONBOARDING FAQ & GUIDANCE ============ */
+.faq-sec{padding:var(--sp) 0;background:var(--navy-2);color:var(--pearl)}
+.faq-head{text-align:center;max-width:720px;margin:0 auto 3.5rem}
+.faq-head h2{font-size:clamp(2.4rem,5.4vw,4.4rem)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:768px){.faq-grid{grid-template-columns:1fr}}
+.faq-item{background:rgba(251,250,247,.04);border:1px solid rgba(251,250,247,.12);border-radius:10px;padding:2rem 1.8rem;transition:.35s}
+.faq-item:hover{border-color:var(--amber);background:rgba(251,250,247,.07)}
+.faq-item h4{font-family:var(--fd);font-size:1.25rem;color:var(--amber);margin-bottom:.5rem}
+.faq-item p{font-size:.92rem;color:var(--muted-d);line-height:1.6}
+
+/* ============ 04 BIG CTA ============ */
+.big-cta{padding:var(--sp) 0;background:var(--amber);position:relative;overflow:hidden}
+.big-cta::before{content:'';position:absolute;inset:0;background:repeating-radial-gradient(circle at 70% 30%,transparent 0 70px,rgba(12,26,51,.06) 70px 72px);pointer-events:none}
+.big-cta-in{position:relative;z-index:2;text-align:center;max-width:860px;margin-inline:auto}
+.big-cta h2{font-size:clamp(2.6rem,7vw,5.2rem);line-height:1;color:var(--navy-2);margin:1rem 0 1.4rem}
+.big-cta h2 .it{color:var(--pearl);text-shadow:0 1px 4px rgba(12,26,51,.3)}
+.big-cta .lead{font-size:1.05rem;color:rgba(12,26,51,.85);font-weight:500;margin-bottom:2.5rem;max-width:56ch;margin-inline:auto}
+.big-cta-actions{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center}
+
+/* ═══════════════════════════════════════════
+   6. FOOTER
+═══════════════════════════════════════════ */
+footer { background: var(--navy-3); color: var(--muted-d); padding: 4rem 0 0; position: relative; overflow: hidden; }
+footer::before { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='97' fill='none' stroke='%23fbfaf7' stroke-width='2' opacity='.04'/%3E%3Ccircle cx='100' cy='100' r='67' fill='none' stroke='%23fbfaf7' stroke-width='1.5' opacity='.03'/%3E%3Cpath d='M100 40 L136 50 L150 70 V106 C150 134 129 154 100 166 C71 154 50 134 50 106 V70 L64 50 Z' fill='none' stroke='%23fbfaf7' stroke-width='2' opacity='.03'/%3E%3C/svg%3E") center/contain no-repeat; pointer-events: none; }
+.foot-grid { display: grid; gap: 2.6rem; align-items: center; padding-bottom: 3rem; position: relative; }
+@media(min-width:960px) { .foot-grid { grid-template-columns: 1.2fr 1.5fr auto; gap: 3rem; } }
+.foot-brand { display: flex; gap: 1rem; }
+.foot-brand .crest { width: 56px; flex-shrink: 0; }
+.foot-brand b { font-family: var(--fd); font-weight: 600; font-size: 1.1rem; color: var(--pearl); display: block; line-height: 1.15; }
+.foot-brand p { font-size: .8rem; margin-top: .4rem; font-weight: 300; }
+.foot-loc { font-family: var(--fm); font-size: .58rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--amber); margin-top: .5rem; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 1.7rem; justify-content: center; }
+.foot-links a { font-family: var(--fm); font-size: .64rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(251, 250, 247, .7); transition: .3s; }
+.foot-links a:hover { color: var(--amber); }
+.socials { display: flex; gap: .7rem; }
+.socials a { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(251, 250, 247, .28); display: grid; place-items: center; color: var(--pearl); transition: .3s; }
+.socials a:hover { background: var(--amber); border-color: var(--amber); color: var(--navy); transform: translateY(-3px); }
+.socials svg { width: 15px; height: 15px; }
+.foot-bottom { border-top: 1px solid var(--hair-d); padding: 1.4rem 0; display: flex; flex-wrap: wrap; gap: .6rem; justify-content: space-between; font-family: var(--fm); font-size: .66rem; letter-spacing: .02em; position: relative; }
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-behavior:auto}.wr .w>span{transform:none}}
+
+/* ═══════════════════════════════════════════
+   5. NAVIGATION (SPORTING PEARLS PRO)
+═══════════════════════════════════════════ */
+:root {
+  --sp-ink: #0c1a33; --sp-ink-2: #102141; --sp-pearl: #fbfaf7; --sp-amber: #f59d1e;
+  --sp-amber-2: #d97f06; --sp-line: rgba(251,250,247,.12); --sp-muted: rgba(251,250,247,.66);
+  --sp-serif: var(--fd, "Fraunces", Georgia, serif); --sp-mono: var(--fm, "Space Mono", ui-monospace, monospace);
+  --sp-sans: var(--fb, "Work Sans", system-ui, sans-serif); --sp-ease: cubic-bezier(.16, 1, .3, 1);
+}
+.sp-nav-pro { position: fixed; inset: 0 0 auto; z-index: 3000; pointer-events: none; font-family: var(--sp-sans); }
+.sp-nav-pro :is(a, button) { text-decoration: none; color: inherit; }
+.sp-nav-pro :focus-visible { outline: 2px solid var(--sp-amber); outline-offset: 3px; }
+
+.sp-nav-bar {
+  position: relative; z-index: 2600; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.05rem clamp(1.1rem, 4vw, 3rem); color: var(--sp-pearl); border-bottom: 1px solid transparent;
+  transition: .35s var(--sp-ease); transition-property: padding, background, border-color, backdrop-filter; pointer-events: auto;
+}
+.sp-nav-pro.is-scrolled .sp-nav-bar { padding-block: .72rem; background: rgba(12,26,51,.78); backdrop-filter: blur(18px); border-bottom-color: rgba(251,250,247,.08); }
+
+.sp-nav-brand { display: flex; align-items: center; gap: .8rem; min-width: 0; color: var(--sp-pearl); }
+.sp-nav-brand-mark {
+  width: 42px; height: 42px; flex: none; object-fit: contain; object-position: center;
+}
+.sp-nav-brand-text strong { display: block; font-family: var(--sp-serif); font-size: 1rem; font-weight: 600; line-height: 1.05; letter-spacing: .01em; }
+.sp-nav-brand-text small { display: block; margin-top: .18rem; font-family: var(--sp-mono); font-size: .54rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(251,250,247,.64); }
+
+.sp-nav-desktop { display: none; align-items: center; gap: .3rem; margin-inline: auto; }
+.sp-nav-trigger, .sp-nav-link, .sp-nav-mobile-direct-link, .sp-nav-mobile-trigger {
+  font-family: var(--sp-mono); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sp-pearl);
+}
+.sp-nav-trigger, .sp-nav-link {
+  position: relative; display: inline-flex; align-items: center; gap: .45rem; padding: .68rem .95rem;
+  border: 1px solid transparent; border-radius: 999px; font-size: .64rem; color: rgba(251,250,247,.84);
+  transition: .25s ease; transition-property: color, background, border-color, transform;
+}
+.sp-nav-trigger:hover, .sp-nav-link:hover { color: var(--sp-pearl); background: rgba(251,250,247,.07); }
+.sp-nav-trigger.active { color: var(--sp-amber); background: rgba(245,157,30,.09); border-color: rgba(245,157,30,.18); }
+.sp-nav-chevron { width: 12px; height: 12px; transition: transform .3s var(--sp-ease); }
+.sp-nav-trigger.active .sp-nav-chevron { transform: rotate(180deg); }
+
+.sp-nav-actions { display: flex; align-items: center; gap: .8rem; pointer-events: auto; }
+.sp-nav-cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: .55rem; padding: .75rem 1.05rem; border-radius: 999px;
+  background: linear-gradient(180deg, #ffb648, var(--sp-amber)); color: var(--sp-ink); font-size: .6rem;
+  box-shadow: 0 10px 24px rgba(245,157,30,.22); transition: .3s var(--sp-ease); transition-property: transform, box-shadow, background, color, border-color;
+}
+.sp-nav-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(245,157,30,.28); }
+.sp-nav-cta.ghost { background: transparent; color: var(--sp-pearl); border: 1px solid rgba(251,250,247,.28); box-shadow: none; }
+.sp-nav-cta.ghost:hover { background: var(--sp-pearl); color: var(--sp-ink); }
+
+.sp-nav-burger {
+  display: none; position: relative; width: 44px; height: 44px; flex: none; border: 1px solid rgba(251,250,247,.2);
+  border-radius: 50%; color: var(--sp-pearl); background: rgba(251,250,247,.04); transition: .3s ease; transition-property: border-color, background;
+}
+.sp-nav-burger:hover { border-color: rgba(245,157,30,.5); }
+.sp-nav-burger span { position: absolute; left: 13px; right: 13px; height: 1.75px; border-radius: 999px; background: currentColor; transition: transform .4s var(--sp-ease), opacity .25s ease; }
+.sp-nav-burger span:first-child { top: 18px; }
+.sp-nav-burger span:last-child { bottom: 18px; }
+.sp-nav-burger.active span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.sp-nav-burger.active span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+.sp-nav-dropdowns { position: absolute; top: 100%; left: 0; width: 100%; z-index: 2550; display: none; padding-top: .65rem; pointer-events: none; }
+.sp-nav-dropdown {
+  position: absolute; top: .65rem; left: 50%; width: min(1120px, calc(100vw - 2rem)); opacity: 0; visibility: hidden;
+  transform: translateX(-50%) translateY(18px); transition: opacity .3s ease, transform .35s var(--sp-ease), visibility .3s; pointer-events: none;
+}
+.sp-nav-dropdown.active { opacity: 1; visibility: visible; transform: translateX(-50%); pointer-events: auto; }
+.sp-nav-dropdown-shell {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); gap: 1.5rem; padding: 1.6rem;
+  border: 1px solid var(--sp-line); border-radius: 24px; background: radial-gradient(circle at top right, rgba(245,157,30,.1), transparent 28%), rgba(10,21,41,.88);
+  backdrop-filter: blur(24px) saturate(150%); box-shadow: 0 24px 64px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.03);
+}
+.sp-nav-dropdown-main { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; min-width: 0; }
+.sp-nav-col-label { margin: 0 0 .75rem; padding-bottom: .65rem; border-bottom: 1px solid rgba(251,250,247,.09); font-family: var(--sp-mono); font-size: .58rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--sp-amber); }
+.sp-nav-items { display: grid; gap: .45rem; }
+
+.sp-nav-item {
+  display: flex; align-items: center; justify-content: space-between; gap: .9rem; padding: .82rem .8rem;
+  border: 1px solid transparent; border-radius: 16px; color: rgba(251,250,247,.82); transition: .25s ease; transition-property: background, border-color, transform, box-shadow;
+}
+.sp-nav-item:hover, .sp-nav-item.is-active { background: rgba(245,157,30,.09); border-color: rgba(245,157,30,.2); }
+.sp-nav-item.is-active { transform: translateX(3px); box-shadow: 0 8px 20px rgba(0,0,0,.12); }
+.sp-nav-item-text { display: grid; min-width: 0; }
+.sp-nav-item-text strong, .sp-nav-mobile-text strong { display: block; font-family: var(--sp-serif); font-weight: 600; line-height: 1.1; color: var(--sp-pearl); }
+.sp-nav-item-text strong { font-size: .98rem; }
+.sp-nav-item-text small, .sp-nav-mobile-text small { display: block; margin-top: .22rem; font-size: .8rem; line-height: 1.35; color: rgba(251,250,247,.58); }
+.sp-nav-item-go, .sp-nav-mobile-arrow {
+  flex: none; display: grid; place-items: center; border: 1px solid rgba(251,250,247,.18); border-radius: 50%; transition: .25s ease; transition-property: background, border-color, color, transform;
+}
+.sp-nav-item-go { width: 28px; height: 28px; color: rgba(251,250,247,.7); }
+.sp-nav-mobile-arrow { width: 26px; height: 26px; color: var(--sp-amber); }
+.sp-nav-item-go svg, .sp-nav-mobile-arrow svg { width: 12px; height: 12px; transition: transform .25s var(--sp-ease); }
+.sp-nav-item.is-active .sp-nav-item-go { background: var(--sp-amber); border-color: var(--sp-amber); color: var(--sp-ink); }
+.sp-nav-item.is-active .sp-nav-item-go svg { transform: translateX(1px); }
+
+.sp-nav-preview { position: relative; margin: 0; min-height: 420px; overflow: hidden; border: 1px solid var(--sp-line); border-radius: 20px; background: #08101f; }
+.sp-nav-preview-pill {
+  position: absolute; top: 1rem; right: 1rem; z-index: 3; padding: .38rem .6rem; border: 1px solid rgba(251,250,247,.18);
+  border-radius: 999px; background: rgba(12,26,51,.55); backdrop-filter: blur(12px); font-family: var(--sp-mono); font-size: .54rem;
+  font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(251,250,247,.88);
+}
+.sp-nav-preview-media { position: absolute; inset: 0; }
+.sp-nav-preview-img { width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scale(1.04); transition: opacity .26s ease, transform .8s var(--sp-ease); }
+.sp-nav-preview-img.is-switching { opacity: 0; transform: scale(1.09); }
+.sp-nav-preview::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,16,31,.08) 0%, rgba(8,16,31,.02) 35%, rgba(8,16,31,.86) 100%); pointer-events: none; }
+.sp-nav-preview-caption { position: absolute; inset: auto 0 0 0; z-index: 2; display: grid; gap: .35rem; padding: 1.3rem; transition: opacity .3s ease, transform .3s var(--sp-ease); }
+.sp-nav-preview-caption.is-switching { opacity: 0; transform: translateY(10px); }
+.sp-nav-preview-kicker { margin: 0; font-family: var(--sp-mono); font-size: .58rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--sp-amber); }
+.sp-nav-preview-title { margin: 0; font-family: var(--sp-serif); font-size: 1.35rem; font-weight: 700; line-height: 1.1; color: var(--sp-pearl); }
+.sp-nav-preview-copy { margin: 0; max-width: 34ch; font-size: .85rem; line-height: 1.45; color: rgba(251,250,247,.74); }
+
+.sp-nav-mobile { position: fixed; inset: 0; z-index: 2500; opacity: 0; visibility: hidden; pointer-events: none; transition: .35s ease; transition-property: opacity, visibility; }
+.sp-nav-open .sp-nav-mobile { opacity: 1; visibility: visible; pointer-events: auto; }
+.sp-nav-mobile-backdrop {
+  position: absolute; inset: 0; background: radial-gradient(circle at 88% 8%, rgba(245,157,30,.17), transparent 22%),
+  radial-gradient(circle at 8% 88%, rgba(46,111,158,.14), transparent 28%), linear-gradient(180deg, rgba(12,26,51,.99), var(--sp-ink));
+}
+.sp-nav-mobile-scroll { position: relative; z-index: 2; height: 100%; overflow: auto; overscroll-behavior: contain; padding: 100px clamp(1rem, 4vw, 2rem) 2rem; }
+.sp-nav-mobile-body { display: grid; gap: 1rem; max-width: 720px; margin: 0 auto; }
+.sp-nav-mobile-direct { display: grid; gap: .65rem; }
+.sp-nav-mobile-direct-link {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.1rem; border: 1px solid var(--sp-line);
+  border-radius: 16px; background: rgba(251,250,247,.04); font-size: .66rem;
+}
+.sp-nav-mobile-group { overflow: hidden; border: 1px solid var(--sp-line); border-radius: 18px; background: rgba(251,250,247,.03); }
+.sp-nav-mobile-trigger {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.1rem; font-size: .66rem;
+}
+.sp-nav-mobile-trigger svg { width: 13px; height: 13px; transition: transform .3s var(--sp-ease); }
+.sp-nav-mobile-group.open .sp-nav-mobile-trigger svg { transform: rotate(180deg); color: var(--sp-amber); }
+.sp-nav-mobile-panel { display: grid; gap: .65rem; max-height: 0; overflow: hidden; transition: max-height .45s ease, padding .45s ease; }
+.sp-nav-mobile-group.open .sp-nav-mobile-panel { max-height: 1000px; padding: 0 1rem 1rem; }
+.sp-nav-mobile-link {
+  display: flex; align-items: center; gap: .9rem; padding: .75rem; border: 1px solid rgba(251,250,247,.09);
+  border-radius: 14px; background: rgba(251,250,247,.03); transition: .25s ease; transition-property: border-color, background, transform;
+}
+.sp-nav-mobile-link:hover { border-color: rgba(245,157,30,.4); background: rgba(245,157,30,.08); transform: translateY(-1px); }
+.sp-nav-mobile-thumb { width: 58px; height: 58px; flex: none; object-fit: cover; border-radius: 12px; border: 1px solid rgba(251,250,247,.12); background: #08101f; }
+.sp-nav-mobile-text { min-width: 0; }
+.sp-nav-mobile-text strong { font-size: .95rem; line-height: 1.15; }
+.sp-nav-mobile-text small { color: var(--sp-muted); }
+.sp-nav-mobile-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1rem; }
+.sp-nav-mobile-actions .sp-nav-cta { flex: 1; min-width: 180px; }
+
+@media (min-width: 1100px) { .sp-nav-desktop { display: flex; } .sp-nav-dropdowns { display: block; } .sp-nav-mobile { display: none; } }
+@media (max-width: 1099px) { .sp-nav-burger { display: inline-flex; } .sp-nav-cta.desktop-only { display: none; } }
+@media (max-width: 700px) { .sp-nav-brand-text strong { font-size: .95rem; } .sp-nav-brand-mark { width: 38px; height: 38px; } }
+@media (max-width: 1250px) { .sp-nav-dropdown-shell { grid-template-columns: 1fr; } .sp-nav-preview { min-height: 280px; order: -1; } }
+@media (prefers-reduced-motion: reduce) { .sp-nav-pro *, .sp-nav-pro *::before, .sp-nav-pro *::after { animation: none !important; transition-duration: .01ms !important; } }
+@media print { .sp-nav-pro, .sp-nav-mobile, #progress { display: none !important; } }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- hand-sketched icon set -->
+<svg style="display:none" aria-hidden="true">
+<symbol id="i-ball" viewBox="0 0 48 48"><g class="gh"><path d="M24 8c9-.5 16.5 7 16 16-.5 9-7 16.5-16 16S7.5 33 8 24 15 8.5 24 8z"/></g><g class="ln"><path d="M24 8c9-.5 16.5 7 16 16-.5 9-7 16.5-16 16S7.5 33 8 24 15 8.5 24 8z"/><path d="M24 18l6.2 4.3-2.2 7.2h-8l-2.2-7.2z"/><path d="M24 8.5v9.5M10 18.5l7.8 3.8M38 18.5l-7.8 3.8M14.5 34l3.5-4.5M33.5 34l-3.5-4.5"/></g></symbol>
+<symbol id="i-butterfly" viewBox="0 0 48 48"><g class="gh"><path d="M24 24c-6.5-8.5-16.5-8-15.5.5 1 6.5 9.5 7 15.5 2.5z"/></g><g class="ln"><path d="M24 24c-6.5-8.5-16.5-8-15.5.5 1 6.5 9.5 7 15.5 2.5z"/><path d="M24 24c6.5-8.5 16.5-8 15.5.5-1 6.5-9.5 7-15.5 2.5z"/><path d="M24 27c-4.5 3-8.5 7.5-5.5 10 2.5 2 5.5-3 5.5-6z"/><path d="M24 27c4.5 3 8.5 7.5 5.5 10-2.5 2-5.5-3-5.5-6z"/><path d="M24 20v17M22 18l-4.5-6M26 18l4.5-6"/></g></symbol>
+<symbol id="i-book" viewBox="0 0 48 48"><g class="gh"><path d="M8 12c6-3.5 10.5-3.5 16 0v24c-5.5-3.5-10-3.5-16 0z"/></g><g class="ln"><path d="M8 12c6-3.5 10.5-3.5 16 0v24c-5.5-3.5-10-3.5-16 0z"/><path d="M40 12c-6-3.5-10.5-3.5-16 0v24c5.5-3.5 10-3.5 16 0z"/><path d="M12 18c3-1 6-1 8 0M12 24c3-1 6-1 8 0M28 18c3-1 6-1 8 0"/><path d="M31 33l7.5-7.5 3 3L34 36z"/></g></symbol>
+<symbol id="i-whistle" viewBox="0 0 48 48"><g class="gh"><path d="M20 22h20v6H28"/></g><g class="ln"><circle cx="19" cy="30" r="8.5"/><path d="M20 22h20v6H28"/><path d="M27 22v-4M33 22v-4"/><circle cx="19" cy="30" r="2"/></g></symbol>
+<symbol id="i-glove" viewBox="0 0 48 48"><g class="gh"><path d="M15 34V14a4 4 0 0 1 8 0v9"/></g><g class="ln"><path d="M15 34V14a4 4 0 0 1 8 0v9a4 4 0 0 1 8 0v11z"/><path d="M13 34h20v5H13z"/><path d="M19 20v5M27 25v4"/></g></symbol>
+<symbol id="i-shield" viewBox="0 0 48 48"><g class="gh"><path d="M24 6l14.5 5v10.5c0 10-6.5 16.5-14.5 21-8-4.5-14.5-11-14.5-21V11z"/></g><g class="ln"><path d="M24 6l14.5 5v10.5c0 10-6.5 16.5-14.5 21-8-4.5-14.5-11-14.5-21V11z"/><path d="M17 24l5 5 9.5-10.5"/></g></symbol>
+<symbol id="i-hands" viewBox="0 0 48 48"><g class="gh"><path d="M7 27c4.5-6.5 11-8.5 17-6l8.5 3.5c3 1.5 3 5.5-.5 6.5l-10.5 3c-6.5 2-12.5-1.5-14.5-7z"/></g><g class="ln"><path d="M7 27c4.5-6.5 11-8.5 17-6l8.5 3.5c3 1.5 3 5.5-.5 6.5l-10.5 3c-6.5 2-12.5-1.5-14.5-7z"/><path d="M7 24l-3-3M41 27l3-3M17 22l4-5"/></g></symbol>
+<symbol id="crest" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="97" fill="#f59d1e" stroke="#14284b" stroke-width="3"/>
+  <circle cx="100" cy="100" r="67" fill="#fbfaf7" stroke="#14284b" stroke-width="2"/>
+  <defs><path id="tp" d="M20 100 A80 80 0 0 1 180 100"/><path id="bp" d="M12 100 A88 88 0 0 0 188 100"/></defs>
+  <text fill="#14284b" font-family="Fraunces, Georgia, serif" font-size="19" font-weight="700" letter-spacing="3"><textPath href="#tp" startOffset="50%" text-anchor="middle">SPORTING PEARLS</textPath></text>
+  <text fill="#14284b" font-family="Fraunces, Georgia, serif" font-size="16.5" font-weight="700" letter-spacing="1.5"><textPath href="#bp" startOffset="50%" text-anchor="middle">Football Academy</textPath></text>
+  <path d="M100 40 L136 50 L150 70 V106 C150 134 129 154 100 166 C71 154 50 134 50 106 V70 L64 50 Z" fill="#f59d1e" stroke="#14284b" stroke-width="5"/>
+  <circle cx="100" cy="80" r="22" fill="#fbfaf7" stroke="#14284b" stroke-width="3"/>
+  <path d="M100 73 l7.5 5.5 -2.8 8.8 h-9.4 l-2.8 -8.8 z" fill="#14284b"/>
+</symbol>
+</svg>
+
+<!-- SVG Icon Definitions (Hidden for Navbar) -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="icon-logo" viewBox="0 0 32 32" fill="none" stroke="currentColor">
+    <circle cx="16" cy="16" r="13.5" stroke-width="2"/>
+    <path d="M16 9.2l5.8 4.2-2.2 6.8h-7.2l-2.2-6.8z" fill="currentColor" stroke="none"/>
+    <path d="M16 2.8v6.2M16 20.2v9M4.2 12.2l6 1.8M27.8 12.2l-6 1.8M8.6 25.8l3.8-4.8M23.4 25.8l-3.8-4.8" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<header class="sp-nav-pro" id="spNavPro">
+  <div class="sp-nav-bar" id="spNavBar">
+    <a href="index.html" class="sp-nav-brand" aria-label="Sporting Pearls Football Academy home">
+      <img class="sp-nav-brand-mark" src="logo.png" alt="" width="42" height="42" aria-hidden="true">
+      <span class="sp-nav-brand-text"><strong>Sporting Pearls</strong><small>Football Academy</small></span>
+    </a>
+
+    <nav class="sp-nav-desktop" aria-label="Primary">
+      <a href="about-us.html" class="sp-nav-trigger" data-menu="about" data-label="About" aria-haspopup="true" aria-expanded="false" aria-controls="spNavDropdownAbout">
+        About <svg class="sp-nav-chevron"><use href="#icon-chevron"/></svg>
+      </a>
+      <a href="index.html#programs" class="sp-nav-trigger" data-menu="academy" data-label="Academy" aria-haspopup="true" aria-expanded="false" aria-controls="spNavDropdownAcademy">
+        Academy <svg class="sp-nav-chevron"><use href="#icon-chevron"/></svg>
+      </a>
+      <a href="the-squad.html" class="sp-nav-trigger" data-menu="teams" data-label="Teams" aria-haspopup="true" aria-expanded="false" aria-controls="spNavDropdownTeams">
+        Teams <svg class="sp-nav-chevron"><use href="#icon-chevron"/></svg>
+      </a>
+      <a href="partners.html" class="sp-nav-link">Partners</a>
+      <a href="support-us.html" class="sp-nav-link">Support</a>
+      <a href="contact.html" class="sp-nav-link">Contact</a>
+    </nav>
+
+    <div class="sp-nav-actions">
+      <a href="join-us.html" class="sp-nav-cta desktop-only">Join Us</a>
+      <button class="sp-nav-burger" id="spNavBurger" type="button" aria-expanded="false" aria-controls="spNavMobile">
+        <span></span><span></span>
+        <span class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="sp-nav-dropdowns">
+    <!-- ABOUT -->
+    <section class="sp-nav-dropdown" id="spNavDropdownAbout" data-menu="about" aria-hidden="true">
+      <div class="sp-nav-dropdown-shell">
+        <div class="sp-nav-dropdown-main">
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Who We Are</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item is-active" href="about-us.html" data-img="Pearls/radoms/IMG_7080.jpg" data-kicker="About" data-title="About Us" data-copy="Mission, values and the institution behind Sporting Pearls.">
+                <span class="sp-nav-item-text"><strong>About Us</strong><small>Mission, values and the institution behind Sporting Pearls.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="our-story.html" data-img="Pearls/kids/IMG_6780.jpg" data-kicker="History" data-title="Our Story" data-copy="From first training sessions in Mtwapa to a structured academy.">
+                <span class="sp-nav-item-text"><strong>Our Story</strong><small>From first training sessions in Mtwapa to a structured academy.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="vision-mission.html" data-img="Pearls/radoms/IMG_7075.jpg" data-kicker="Direction" data-title="Vision & Mission" data-copy="A clear long-term purpose for young players on and off the pitch.">
+                <span class="sp-nav-item-text"><strong>Vision & Mission</strong><small>A clear long-term purpose for young players on and off the pitch.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="core-values.html" data-img="Pearls/kids/IMG_6772.jpg" data-kicker="Culture" data-title="Core Values" data-copy="Discipline, respect, education and opportunity in everything we do.">
+                <span class="sp-nav-item-text"><strong>Core Values</strong><small>Discipline, respect, education and opportunity in everything we do.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Governance</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item" href="leadership-governance.html" data-img="Pearls/radoms/IMG_7088.jpg" data-kicker="Leadership" data-title="Leadership & Governance" data-copy="The people, structure and oversight guiding the academy.">
+                <span class="sp-nav-item-text"><strong>Leadership & Governance</strong><small>The people, structure and oversight guiding the academy.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="safeguarding.html" data-img="Pearls/kids/IMG_6760.jpg" data-kicker="Welfare" data-title="Safeguarding" data-copy="Safe, inclusive and child-centred football environments.">
+                <span class="sp-nav-item-text"><strong>Safeguarding</strong><small>Safe, inclusive and child-centred football environments.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="chairman-message.html" data-img="Pearls/radoms/IMG_7078.jpg" data-kicker="Message" data-title="Chairman's Message" data-copy="Why Sporting Pearls is being built to serve generations.">
+                <span class="sp-nav-item-text"><strong>Chairman's Message</strong><small>Why Sporting Pearls is being built to serve generations.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="partner-with-us.html" data-img="Pearls/kids/IMG_6858.jpg" data-kicker="Collaboration" data-title="Partner With Us" data-copy="Build the future of youth football with our institution.">
+                <span class="sp-nav-item-text"><strong>Partner With Us</strong><small>Build the future of youth football with our institution.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <figure class="sp-nav-preview">
+          <span class="sp-nav-preview-pill">Preview</span>
+          <div class="sp-nav-preview-media"><img class="sp-nav-preview-img" src="Pearls/radoms/IMG_7080.jpg" alt="Sporting Pearls preview"></div>
+          <figcaption class="sp-nav-preview-caption"><p class="sp-nav-preview-kicker">About</p><h4 class="sp-nav-preview-title">About Us</h4><p class="sp-nav-preview-copy">Mission, values and the institution behind Sporting Pearls.</p></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ACADEMY -->
+    <section class="sp-nav-dropdown" id="spNavDropdownAcademy" data-menu="academy" aria-hidden="true">
+      <div class="sp-nav-dropdown-shell">
+        <div class="sp-nav-dropdown-main">
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Development</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item is-active" href="player-development.html" data-img="Pearls/radoms/IMG_7075.jpg" data-kicker="Pathway" data-title="Player Development" data-copy="Technical, tactical, physical and personal development pathways.">
+                <span class="sp-nav-item-text"><strong>Player Development</strong><small>Technical, tactical, physical and personal development pathways.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="boys-programme.html" data-img="Pearls/kid%2013/IMG_6886.jpg" data-kicker="Boys" data-title="Boys' Programme" data-copy="Structured age-group development from grassroots to senior level.">
+                <span class="sp-nav-item-text"><strong>Boys' Programme</strong><small>Structured age-group development from grassroots to senior level.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="feminin.html" data-img="Pearls/FEMALE/IMG_6700.jpg" data-kicker="Girls" data-title="Sporting Pearls Féminin" data-copy="A dedicated pathway for girls and women in football.">
+                <span class="sp-nav-item-text"><strong>Sporting Pearls Féminin</strong><small>A dedicated pathway for girls and women in football.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="goalkeeper-development.html" data-img="Pearls/u-19/IMG_7014.jpg" data-kicker="Specialist" data-title="Goalkeeper Development" data-copy="Specialist coaching for shot-stoppers and defensive leaders.">
+                <span class="sp-nav-item-text"><strong>Goalkeeper Development</strong><small>Specialist coaching for shot-stoppers and defensive leaders.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Beyond The Pitch</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item" href="coaching-philosophy.html" data-img="Pearls/radoms/IMG_7088.jpg" data-kicker="Method" data-title="Coaching Philosophy" data-copy="How we train, mentor and measure player progress.">
+                <span class="sp-nav-item-text"><strong>Coaching Philosophy</strong><small>How we train, mentor and measure player progress.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="education-life-skills.html" data-img="Pearls/radoms/IMG_7078.jpg" data-kicker="Education" data-title="Education & Life Skills" data-copy="Character, leadership and life-skills development.">
+                <span class="sp-nav-item-text"><strong>Education & Life Skills</strong><small>Character, leadership and life-skills development.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="join-us.html" data-img="Pearls/kids/IMG_6780.jpg" data-kicker="Entry" data-title="Trials & Registration" data-copy="Clear entry points into Sporting Pearls squads and programmes.">
+                <span class="sp-nav-item-text"><strong>Trials & Registration</strong><small>Clear entry points into Sporting Pearls squads and programmes.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="contact.html" data-img="Pearls/radoms/IMG_7080.jpg" data-kicker="Contact" data-title="Academy Enquiries" data-copy="Speak with our team about programmes, trials and pathways.">
+                <span class="sp-nav-item-text"><strong>Academy Enquiries</strong><small>Speak with our team about programmes, trials and pathways.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <figure class="sp-nav-preview">
+          <span class="sp-nav-preview-pill">Preview</span>
+          <div class="sp-nav-preview-media"><img class="sp-nav-preview-img" src="Pearls/radoms/IMG_7075.jpg" alt="Academy preview"></div>
+          <figcaption class="sp-nav-preview-caption"><p class="sp-nav-preview-kicker">Pathway</p><h4 class="sp-nav-preview-title">Player Development</h4><p class="sp-nav-preview-copy">Technical, tactical, physical and personal development pathways.</p></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- TEAMS -->
+    <section class="sp-nav-dropdown" id="spNavDropdownTeams" data-menu="teams" aria-hidden="true">
+      <div class="sp-nav-dropdown-shell">
+        <div class="sp-nav-dropdown-main">
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Squads</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item is-active" href="the-squad.html#roster" data-img="Pearls/kids/IMG_6780.jpg" data-kicker="Youth" data-title="U9 & U13" data-copy="Foundations, coordination and the joy of football.">
+                <span class="sp-nav-item-text"><strong>U9 & U13</strong><small>Foundations, coordination and the joy of football.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="the-squad.html#roster" data-img="Pearls/u-19/18.jpg" data-kicker="Development" data-title="U15 & U17" data-copy="Competitive development, structure and tactical discipline.">
+                <span class="sp-nav-item-text"><strong>U15 & U17</strong><small>Competitive development, structure and tactical discipline.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="the-squad.html#roster" data-img="Pearls/u-19/1.jpg" data-kicker="Senior" data-title="U19 Senior" data-copy="High-performance pathway, exposure and leadership.">
+                <span class="sp-nav-item-text"><strong>U19 Senior</strong><small>High-performance pathway, exposure and leadership.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="the-squad.html#roster" data-img="Pearls/FEMALE/IMG_6704.jpg" data-kicker="Girls" data-title="Féminin Squads" data-copy="Girls' teams across development and competitive levels.">
+                <span class="sp-nav-item-text"><strong>Féminin Squads</strong><small>Girls' teams across development and competitive levels.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+          <div class="sp-nav-col">
+            <p class="sp-nav-col-label">Matchday</p>
+            <div class="sp-nav-items">
+              <a class="sp-nav-item" href="index.html#fixtures" data-img="Pearls/kid%2013/IMG_6891.jpg" data-kicker="Schedule" data-title="Fixtures" data-copy="Upcoming matches, tournaments and kick-off details.">
+                <span class="sp-nav-item-text"><strong>Fixtures</strong><small>Upcoming matches, tournaments and kick-off details.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="index.html#fixtures" data-img="Pearls/u-19/IMG_7014.jpg" data-kicker="Performance" data-title="Results" data-copy="Recent performance across Sporting Pearls squads.">
+                <span class="sp-nav-item-text"><strong>Results</strong><small>Recent performance across Sporting Pearls squads.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="player-development.html" data-img="Pearls/radoms/IMG_7075.jpg" data-kicker="Progression" data-title="Player Pathway" data-copy="How players progress through the Sporting Pearls system.">
+                <span class="sp-nav-item-text"><strong>Player Pathway</strong><small>How players progress through the Sporting Pearls system.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+              <a class="sp-nav-item" href="contact.html" data-img="Pearls/radoms/IMG_7080.jpg" data-kicker="Visit" data-title="Training Centre" data-copy="Our home base and session environment in Kilifi County.">
+                <span class="sp-nav-item-text"><strong>Training Centre</strong><small>Our home base and session environment in Kilifi County.</small></span>
+                <span class="sp-nav-item-go"><svg><use href="#icon-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <figure class="sp-nav-preview">
+          <span class="sp-nav-preview-pill">Preview</span>
+          <div class="sp-nav-preview-media"><img class="sp-nav-preview-img" src="Pearls/kids/IMG_6780.jpg" alt="Teams preview"></div>
+          <figcaption class="sp-nav-preview-caption"><p class="sp-nav-preview-kicker">Youth</p><h4 class="sp-nav-preview-title">U9 & U13</h4><p class="sp-nav-preview-copy">Foundations, coordination and the joy of football.</p></figcaption>
+        </figure>
+      </div>
+    </section>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="sp-nav-mobile" id="spNavMobile" aria-hidden="true">
+    <div class="sp-nav-mobile-backdrop"></div>
+    <div class="sp-nav-mobile-scroll">
+      <div class="sp-nav-mobile-body" id="spNavMobileBody"></div>
+      <div class="sp-nav-mobile-actions">
+        <a href="join-us.html" class="sp-nav-cta">Join Us</a>
+        <a href="partners.html" class="sp-nav-cta ghost">Become a Partner</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 01 HERO -->
+<header class="hero">
+  <div class="hero-left">
+    <span class="hero-kick"><i></i>Official Motto: Grit & Believe · Est. 2020</span>
+    <h1 class="wr" data-words>Your journey <span class="it">starts here.</span></h1>
+    <p class="hero-sub" data-reveal>Welcome to the official onboarding gateway of Sporting Pearls Football Academy. Select your designated pathway below to access the structured enrolment forms (Forms 01–05).</p>
+    <div class="hero-meta" data-reveal>
+      <span>Motto · <b>Grit & Believe</b></span>
+      <span>Mtwapa · <b>Kilifi</b></span>
+      <span>U9 → <b>U19 Senior</b></span>
+      <span>🦋 <b>The Butterflies</b></span>
+    </div>
+    <div class="hero-stats" data-reveal>
+      <div class="hstat"><b><span data-count="44">0</span>+</b><span>Registered Players</span></div>
+      <div class="hstat"><b><span data-count="6">0</span></b><span>Squad Tiers</span></div>
+      <div class="hstat"><b><span data-count="5">0</span></b><span>Onboarding Pathways</span></div>
+      <div class="hstat"><b><span data-count="10">0</span></b><span>Core Forms</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-quote-box" data-reveal="zoom">
+      <h3>"Grit & Believe"</h3>
+      <p>Whether you are a young player striving to develop, a parent seeking a supportive environment, or a volunteer building the community — you belong to the Sporting Pearls family.</p>
+      <div class="author">Sporting Pearls Football Academy · Mtwapa</div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- 02 THE 5 CORE ONBOARDING PATHWAYS -->
+<section class="gateways" id="pathways">
+  <div class="wrap">
+    <div class="sec-head">
+      <div data-reveal>
+        <span class="sec-eyebrow">01 · Onboarding Gateways</span>
+        <h2 class="wr" data-words>Five gateways. <span class="it">One family.</span></h2>
+      </div>
+      <p data-reveal="right">Select your dedicated application form below. All registrations are processed directly by our Technical Director and Safeguarding Lead.</p>
+    </div>
+
+    <div class="gw-grid">
+
+      <!-- GATEWAY 01: PLAYER REGISTRATION -->
+      <article class="gw-card" style="--ac:var(--amber)" data-reveal>
+        <div class="gw-top">
+          <svg class="sk"><use href="#i-ball"/></svg>
+          <span class="n">01</span>
+        </div>
+        <h3>Player Registration</h3>
+        <p>Full 6-Section official enrolment for boys and girls across all academy squad tiers (U9, U13, U15, U17, U19, and Féminin).</p>
+        <ul class="gw-list">
+          <li>Complete player biographical profile</li>
+          <li>Primary guardian legal details</li>
+          <li>Medical disclosure & emergency consent</li>
+          <li>Academy code of conduct pledge</li>
+        </ul>
+        <a href="form-01-player-registration.html" class="gw-btn">Player Registration (Form 01) <span class="ar">→</span></a>
+      </article>
+
+      <!-- GATEWAY 02: TRIAL APPLICATION -->
+      <article class="gw-card" style="--ac:var(--blue)" data-reveal>
+        <div class="gw-top">
+          <svg class="sk"><use href="#i-whistle"/></svg>
+          <span class="n">02</span>
+        </div>
+        <h3>Trial & Assessment</h3>
+        <p>Book an official technical assessment session with our licensed coaching staff to evaluate technical skill, spatial vision, and game intelligence.</p>
+        <ul class="gw-list">
+          <li>Outfield and Goalkeeper trial slots</li>
+          <li>Saturday & Sunday training windows</li>
+          <li>Feedback report from coaching staff</li>
+          <li>Squad placement recommendations</li>
+        </ul>
+        <a href="form-02-trial-application.html" class="gw-btn">Book Trial Assessment (Form 02) <span class="ar">→</span></a>
+      </article>
+
+      <!-- GATEWAY 03: PARENT REGISTRATION -->
+      <article class="gw-card" style="--ac:var(--lagoon)" data-reveal>
+        <div class="gw-top">
+          <svg class="sk"><use href="#i-hands"/></svg>
+          <span class="n">03</span>
+        </div>
+        <h3>Parent / Guardian Association</h3>
+        <p>Register as an active member of the Sporting Pearls Parents & Guardians Association (SPPGA) for matchday support and academic oversight.</p>
+        <ul class="gw-list">
+          <li>Link multiple enrolled siblings</li>
+          <li>Join Academic & Welfare committees</li>
+          <li>Matchday carpooling and transport</li>
+          <li>Official Parents Broadcast access</li>
+        </ul>
+        <a href="form-03-parent-association.html" class="gw-btn">Parent Registration (Form 03) <span class="ar">→</span></a>
+      </article>
+
+      <!-- GATEWAY 04: VOLUNTEER APPLICATION -->
+      <article class="gw-card" style="--ac:var(--amber-2)" data-reveal>
+        <div class="gw-top">
+          <svg class="sk"><use href="#i-butterfly"/></svg>
+          <span class="n">04</span>
+        </div>
+        <h3>Volunteer Application</h3>
+        <p>Join our community support team to assist with matchday logistics, academic study halls, media photography, first aid, or kit coordination in Mtwapa.</p>
+        <ul class="gw-list">
+          <li>Weekend and tournament roles</li>
+          <li>Safeguarding background verification</li>
+          <li>Skill sharing and leadership experience</li>
+          <li>Community mentorship certification</li>
+        </ul>
+        <a href="form-04-volunteer-application.html" class="gw-btn">Volunteer Application (Form 04) <span class="ar">→</span></a>
+      </article>
+
+      <!-- GATEWAY 05: COACHING APPLICATION -->
+      <article class="gw-card" style="--ac:var(--blue-2)" data-reveal>
+        <div class="gw-top">
+          <svg class="sk"><use href="#i-glove"/></svg>
+          <span class="n">05</span>
+        </div>
+        <h3>Coach & Technical Staff</h3>
+        <p>For certified, player-centred coaches holding FKF, CAF, or equivalent licenses looking to join our developmental coaching staff.</p>
+        <ul class="gw-list">
+          <li>Head Coach and Assistant positions</li>
+          <li>Goalkeeper specialist coaching</li>
+          <li>License and CV credential upload</li>
+          <li>Philosophy and safeguarding orientation</li>
+        </ul>
+        <a href="form-05-coach-technical-staff.html" class="gw-btn">Coach Application (Form 05) <span class="ar">→</span></a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- 03 SECONDARY SUPPORT PATHWAYS -->
+<section class="support-strip">
+  <div class="wrap">
+    <div class="strip-grid">
+      <div class="s-card" data-reveal="left">
+        <div>
+          <h4>Sponsor / Partner with Us</h4>
+          <p>Explore corporate sponsorship, team kit branding, and long-term community development investments.</p>
+        </div>
+        <a href="partners.html" class="s-link">Form 06: Partnership Enquiry →</a>
+      </div>
+
+      <div class="s-card" data-reveal="zoom">
+        <div>
+          <h4>Donate Kits or Scholarships</h4>
+          <p>Support young players with boots, match balls, training equipment, or academic school fees.</p>
+        </div>
+        <a href="support-us.html" class="s-link">Form 07: Donation & Support →</a>
+      </div>
+
+      <div class="s-card" style="border-left:4px solid var(--amber)" data-reveal="right">
+        <div>
+          <h4>Report a Safeguarding Concern</h4>
+          <p>Confidential direct reporting channel to our Academy Child Protection and Welfare Officer.</p>
+        </div>
+        <a href="safeguarding.html#report" class="s-link" style="color:var(--amber-2)">Form 10: Welfare Report →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 ONBOARDING GUIDANCE FAQ -->
+<section class="faq-sec">
+  <div class="wrap">
+    <div class="faq-head" data-reveal>
+      <span class="sec-eyebrow" style="justify-content:center;display:inline-flex">02 · Onboarding Guidance</span>
+      <h2 class="wr" data-words>Frequently Asked <span class="it">Questions.</span></h2>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item" data-reveal="left">
+        <h4>What age groups are accepted into the academy?</h4>
+        <p>We enroll players aged 7 to 19+ across six structured squads: U9 Discovery, U13 Intelligence, U15 Performance, U17 Transition, U19/Senior, and Sporting Pearls Féminin (The Butterflies).</p>
+      </div>
+
+      <div class="faq-item" data-reveal="right">
+        <h4>What should players bring to their trial session?</h4>
+        <p>Trialists must bring standard football boots (moulded studs or turf trainers), shin guards, black shorts/socks, a water bottle, and a copy of their birth certificate or school ID card.</p>
+      </div>
+
+      <div class="faq-item" data-reveal="left">
+        <h4>How are academic commitments monitored?</h4>
+        <p>Football is a platform for life. We review school report cards every term and provide study hall support to ensure sports participation never compromises academic performance.</p>
+      </div>
+
+      <div class="faq-item" data-reveal="right">
+        <h4>Where do training sessions take place?</h4>
+        <p>Academy sessions take place at Mtwapa Central Academy Grounds and Mtwapa Primary School Field in Kilifi County. Detailed session schedules are shared upon registration confirmation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 BIG CTA -->
+<section class="big-cta" id="cta">
+  <div class="wrap big-cta-in" data-reveal>
+    <span class="sec-eyebrow" style="justify-content:center;display:inline-flex;color:var(--navy-2)">03 · Join the Academy</span>
+    <h2 class="wr" data-words>Grit & Believe. <span class="it">Your journey starts here.</span></h2>
+    <p class="lead">Whether you're a player ready to develop, a parent seeking a supportive environment, or an organisation that wants to transform lives through football — welcome to the family.</p>
+    <div class="big-cta-actions">
+      <a href="form-01-player-registration.html" class="btn btn-navy">Register a Player (Form 01) <span class="ar">→</span></a>
+      <a href="form-02-trial-application.html" class="btn btn-outline">Apply for a Trial (Form 02)</a>
+      <a href="partners.html" class="btn btn-outline">Partner With Us</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <svg class="crest"><use href="#crest" /></svg>
+        <div>
+          <b>Sporting Pearls<br>Football Academy</b>
+          <p>Developing talent. Building character. Transforming lives.</p>
+          <div class="foot-loc">Kilifi County / Kenya</div>
+        </div>
+      </div>
+      <div class="foot-links">
+        <a href="about-us.html">About</a>
+        <a href="academy.html">Academy</a>
+        <a href="the-squad.html">Teams</a>
+        <a href="join-us.html">Join Us</a>
+        <a href="index.html#news">News</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="socials">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 3h-2a4 4 0 0 0-4 4v3H5v3h2v8h3v-8h2.5l.5-3H10V7a1 1 0 0 1 1-1h2z" /></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3.4-.4-5a2.8 2.8 0 0 0-2-2C18 4.6 12 4.6 12 4.6s-6 0-7.6.4a2.8 2.8 0 0 0-2 2C2 8.6 2 12 2 12s0 3.4.4 5a2.8 2.8 0 0 0 2 2c1.6.4 7.6.4 7.6.4s6 0 7.6-.4a2.8 2.8 0 0 0 2-2c.4-1.6.4-5 .4-5z" /><path d="M10 9.2l5 2.8-5 2.8z" fill="#102141" /></svg></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Sporting Pearls Football Academy. All Rights Reserved.</span>
+      <span>Designed with purpose. Built on values.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+var prog=document.getElementById('progress');
+var ticking=false;
+window.addEventListener('scroll',function(){
+  if(!ticking){requestAnimationFrame(function(){
+    var h=document.documentElement;
+    prog.style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+'%';
+    ticking=false;
+  });ticking=true;}
+},{passive:true});
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('menu-open'))document.body.classList.remove('menu-open');});
+
+/* word-mask split */
+document.querySelectorAll('[data-words]').forEach(function(el){
+  var nodes=Array.prototype.slice.call(el.childNodes);el.innerHTML='';var i=0;
+  function mkWord(content,isEl){
+    var w=document.createElement('span');w.className='w';
+    var inner=document.createElement('span');inner.style.transitionDelay=(i++*70)+'ms';
+    if(isEl){inner.appendChild(content);}else{inner.textContent=content;}
+    w.appendChild(inner);el.appendChild(w);el.appendChild(document.createTextNode(' '));
+  }
+  nodes.forEach(function(n){
+    if(n.nodeType===3){n.textContent.split(/\s+/).filter(Boolean).forEach(function(w){mkWord(w,false);});}
+    else{mkWord(n,true);}
+  });
+});
+
+/* reveal observer */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('[data-reveal],.wr,.s-card,.faq-item,.gw-card').forEach(function(el){io.observe(el);});
+
+/* count-up */
+var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;cio.unobserve(e.target);var el=e.target,end=parseInt(el.getAttribute('data-count'),10),t0=performance.now();(function step(n){var k=Math.min((n-t0)/1400,1);el.textContent=Math.round(end*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step);})(performance.now());});},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(function(el){cio.observe(el);});
+
+/* ═══════ NAVBAR PRO LOGIC ═══════ */
+(() => {
+  const nav = document.getElementById("spNavPro");
+  if (!nav) return;
+
+  const $ = (s, c = nav) => c.querySelector(s);
+  const $$ = (s, c = nav) => [...c.querySelectorAll(s)];
+  const fallbackImg = "Pearls/radoms/IMG_7080.jpg";
+  const isFinePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const desktopQuery = matchMedia("(min-width: 1100px)");
+  
+  const triggers = $$(".sp-nav-trigger");
+  const dropdowns = $$(".sp-nav-dropdown");
+  const burger = $("#spNavBurger");
+  const mobile = $("#spNavMobile");
+  const mobileBody = $("#spNavMobileBody");
+
+  let closeTimer;
+
+  const closeDropdowns = () => {
+    triggers.forEach(t => { t.classList.remove("active"); t.setAttribute("aria-expanded", "false"); });
+    dropdowns.forEach(d => { d.classList.remove("active"); d.setAttribute("aria-hidden", "true"); });
+  };
+
+  const setPreview = (dropdown, item, instant) => {
+    const media = $(".sp-nav-preview-img", dropdown);
+    const caption = $(".sp-nav-preview-caption", dropdown);
+    if (!media || !caption || !item) return;
+
+    const { img: src = fallbackImg, title = "", copy = "", kicker = "Preview" } = item.dataset;
+    if (media.dataset.current === src && caption.dataset.current === title) return;
+
+    const applyCaption = () => {
+      $(".sp-nav-preview-kicker", caption).textContent = kicker;
+      $(".sp-nav-preview-title", caption).textContent = title;
+      $(".sp-nav-preview-copy", caption).textContent = copy;
+      caption.dataset.current = title;
+    };
+
+    let resolved = false;
+    const swap = (finalSrc) => {
+      if (resolved) return; resolved = true;
+      media.src = finalSrc; media.dataset.current = finalSrc; applyCaption();
+      requestAnimationFrame(() => { media.classList.remove("is-switching"); caption.classList.remove("is-switching"); });
+    };
+
+    if (instant) return swap(src);
+    media.classList.add("is-switching"); caption.classList.add("is-switching");
+    const loader = new Image();
+    loader.onload = () => swap(loader.src);
+    loader.onerror = () => swap(fallbackImg);
+    loader.src = src;
+    setTimeout(() => swap(src), 1200);
+  };
+
+  const openDropdown = (id) => {
+    clearTimeout(closeTimer); closeDropdowns();
+    const trigger = $(`.sp-nav-trigger[data-menu="${id}"]`);
+    const dropdown = $(`.sp-nav-dropdown[data-menu="${id}"]`);
+    if (!trigger || !dropdown) return;
+
+    trigger.classList.add("active"); trigger.setAttribute("aria-expanded", "true");
+    dropdown.classList.add("active"); dropdown.setAttribute("aria-hidden", "false");
+    setPreview(dropdown, $(".sp-nav-item.is-active", dropdown) || $(".sp-nav-item", dropdown), true);
+  };
+
+  triggers.forEach(trigger => {
+    const id = trigger.dataset.menu;
+    const open = () => openDropdown(id);
+    const scheduleClose = () => { closeTimer = setTimeout(closeDropdowns, 140); };
+
+    if (isFinePointer) {
+      trigger.addEventListener("mouseenter", open);
+      trigger.addEventListener("mouseleave", scheduleClose);
+    }
+    trigger.addEventListener("click", e => {
+      if (!isFinePointer) { e.preventDefault(); trigger.classList.contains("active") ? closeDropdowns() : open(); }
+    });
+    trigger.addEventListener("focus", open);
+  });
+
+  dropdowns.forEach(dropdown => {
+    dropdown.addEventListener("mouseenter", () => clearTimeout(closeTimer));
+    dropdown.addEventListener("mouseleave", () => { closeTimer = setTimeout(closeDropdowns, 140); });
+
+    const activateItem = (e) => {
+      const item = e.target.closest(".sp-nav-item");
+      if (!item) return;
+      $$(".sp-nav-item", dropdown).forEach(l => l.classList.toggle("is-active", l === item));
+      setPreview(dropdown, item);
+    };
+    dropdown.addEventListener("mouseover", activateItem);
+    dropdown.addEventListener("focusin", activateItem);
+  });
+
+  if (mobileBody) {
+    const directLinks = $$(".sp-nav-desktop > .sp-nav-link");
+    let html = "";
+    if (directLinks.length) {
+      html += `<div class="sp-nav-mobile-direct">${
+        directLinks.map(link => `<a class="sp-nav-mobile-direct-link" href="${link.href}">
+          <span>${link.dataset.label || link.textContent.trim()}</span>
+          <span class="sp-nav-mobile-arrow"><svg><use href="#icon-arrow"/></svg></span>
+        </a>`).join('')
+      }</div>`;
+    }
+
+    dropdowns.forEach(dropdown => {
+      const trigger = $(`.sp-nav-trigger[data-menu="${dropdown.dataset.menu}"]`);
+      const title = trigger?.dataset.label || dropdown.dataset.menu;
+      html += `
+        <div class="sp-nav-mobile-group">
+          <button type="button" class="sp-nav-mobile-trigger" aria-expanded="false">
+            <span>${title}</span><span><svg><use href="#icon-chevron"/></svg></span>
+          </button>
+          <div class="sp-nav-mobile-panel">
+            ${$$(".sp-nav-item", dropdown).map(item => `
+              <a class="sp-nav-mobile-link" href="${item.getAttribute('href') || '#'}">
+                <img class="sp-nav-mobile-thumb" alt="" loading="lazy" src="${item.dataset.img || fallbackImg}" onerror="this.src='${fallbackImg}'">
+                <span class="sp-nav-mobile-text">
+                  <strong>${item.dataset.title || ""}</strong>
+                  <small>${$("small", item)?.textContent.trim() || ""}</small>
+                </span>
+                <span class="sp-nav-mobile-arrow"><svg><use href="#icon-arrow"/></svg></span>
+              </a>`).join('')}
+          </div>
+        </div>`;
+    });
+    mobileBody.innerHTML = html;
+  }
+
+  const setMobile = (open) => {
+    nav.classList.toggle("sp-nav-open", open);
+    document.body.classList.toggle("sp-nav-lock", open);
+    burger?.classList.toggle("active", open);
+    burger?.setAttribute("aria-expanded", String(open));
+    mobile?.setAttribute("aria-hidden", String(!open));
+    if (open) closeDropdowns();
+  };
+
+  burger?.addEventListener("click", () => setMobile(!nav.classList.contains("sp-nav-open")));
+
+  nav.addEventListener("click", e => {
+    const groupTrigger = e.target.closest(".sp-nav-mobile-trigger");
+    if (groupTrigger) {
+      const group = groupTrigger.closest(".sp-nav-mobile-group");
+      if (group) {
+        const open = group.classList.toggle("open");
+        groupTrigger.setAttribute("aria-expanded", String(open));
+      }
+      return;
+    }
+    if (e.target.closest(".sp-nav-mobile a")) setMobile(false);
+  });
+
+  document.addEventListener("click", e => { if (!nav.contains(e.target)) closeDropdowns(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") { closeDropdowns(); setMobile(false); } });
+
+  const onScroll = () => {
+    nav.classList.toggle("is-scrolled", window.scrollY > 20);
+    if (window.scrollY > 80) closeDropdowns();
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  const onBreakpointChange = () => { if (desktopQuery.matches) { setMobile(false); closeDropdowns(); } };
+  desktopQuery.addEventListener?.("change", onBreakpointChange) || desktopQuery.addListener?.(onBreakpointChange);
+})();
+</script>
+</body>
+</html>

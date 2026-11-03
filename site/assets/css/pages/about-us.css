@@ -593,3 +593,7 @@ main .deck-note p { max-width: none; }
   .life-grid{grid-auto-rows:150px;}
   .life-tile figcaption{font-size:.76rem;padding:1.8rem .8rem .75rem;}
 }
+
+/* rev 24 — collage lightbox */
+.life-grid[data-lightbox] .life-tile{cursor:zoom-in;}
+.life-grid[data-lightbox] .life-tile:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}

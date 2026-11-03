@@ -685,7 +685,8 @@ transform: scale(1.09)
 position: absolute;
 inset: 0;
 z-index: 1;
-background: linear-gradient(180deg, rgba(12, 26, 51, 0.75) 0%, rgba(12, 26, 51, 0.4) 50%, rgba(12, 26, 51, 0.8) 100%)
+background: linear-gradient(90deg, rgba(12,26,51,.84) 0%, rgba(12,26,51,.5) 44%, rgba(12,26,51,.12) 76%, rgba(12,26,51,.12) 100%),
+linear-gradient(180deg, rgba(12, 26, 51, 0.75) 0%, rgba(12, 26, 51, 0.4) 50%, rgba(12, 26, 51, 0.8) 100%)
 }
 .hero-grain {
 position: absolute;
@@ -2527,4 +2528,12 @@ min-height: 332px
 .pw-tier:nth-child(4) {
 min-height: 372px
 }
+}
+
+/* rev 24 — moment wall lightbox */
+.moment-wall[data-lightbox] .mw-tile{cursor:zoom-in;}
+
+/* rev 24 — mobile hero scrim for real-photo heroes */
+@media (max-width:760px){
+.hero-scrim{background:linear-gradient(180deg,rgba(12,26,51,.52) 0%,rgba(12,26,51,.74) 46%,rgba(12,26,51,.9) 100%);}
 }

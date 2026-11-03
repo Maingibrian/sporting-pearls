@@ -11,6 +11,7 @@ website's squad pages.
 ```
 POST /api/forms/<form-slug>/   ← the 10 site forms (JSON)
 GET  /api/fixtures/            ← homepage fixtures panel
+GET  /api/gallery/feminin/     ← published real photos for the Féminin page
 GET  /api/players/             ← published rosters for the six squad pages
 GET  /api/health/              ← uptime probe
 GET  /admin/                   ← review dashboard (password protected)

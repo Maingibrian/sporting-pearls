@@ -16,8 +16,9 @@ from django import forms
 from django.http import HttpResponse
 from django.utils.html import format_html
 
-from .models import (Coach, Fixture, FormSubmission, Player, Result,
-                     SafeguardingAuditEntry, SafeguardingReport, Squad)
+from .models import (Coach, FemininGalleryPhoto, Fixture, FormSubmission,
+                     Player, Result, SafeguardingAuditEntry,
+                     SafeguardingReport, Squad)
 from .safeguarding import is_dso
 
 
@@ -231,6 +232,94 @@ class CoachAdmin(admin.ModelAdmin):
 
     @admin.action(description='Unpublish selected (hide from website)')
     def unpublish_coaches(self, request, queryset):
+        queryset.update(is_published=False)
+
+
+# ── Féminin gallery (rev 25: real photos, uploaded from the backend) ────
+
+class FemininGalleryAdminForm(forms.ModelForm):
+    """Friendly validation for gallery photo uploads.
+
+    The actual re-encode (EXIF/GPS strip, extension fix, bomb cap) is
+    enforced by FemininGalleryStorage on every save path; this form adds
+    the admin-facing error messages so the office gets a plain-language
+    rejection instead of a traceback.
+    """
+
+    class Meta:
+        model = FemininGalleryPhoto
+        fields = '__all__'
+
+    def clean_photo(self):
+        f = self.cleaned_data.get('photo')
+        if not f or isinstance(f, str):
+            # no new upload (kept existing value / cleared)
+            return f
+        if f.size > 8 * 1024 * 1024:
+            raise forms.ValidationError('Photo is larger than 8 MB — please resize it first.')
+        import io
+        from pathlib import Path as _Path
+        from PIL import Image
+        ext = _Path(f.name).suffix.lower()
+        if ext not in ('.jpg', '.jpeg', '.png', '.webp'):
+            raise forms.ValidationError('Photos must be JPG, PNG or WebP.')
+        raw = f.read()
+        try:
+            img = Image.open(io.BytesIO(raw))
+            img.verify()
+            img = Image.open(io.BytesIO(raw))
+            if (img.width or 0) * (img.height or 0) > 40_000_000:
+                raise forms.ValidationError('That image is too large to process — please resize it first.')
+            img.load()
+        except forms.ValidationError:
+            raise
+        except Exception:
+            raise forms.ValidationError('That file is not a readable image — it may be damaged or not really a photo.')
+        fmt = (img.format or '').upper()
+        if fmt not in ('JPEG', 'PNG', 'WEBP'):
+            raise forms.ValidationError('Photos must be JPG, PNG or WebP.')
+        return f
+
+
+@admin.register(FemininGalleryPhoto)
+class FemininGalleryPhotoAdmin(admin.ModelAdmin):
+    """Real photos for the Féminin page's 'On the Pitch' gallery.
+
+    The section ships HIDDEN on the website — it appears the moment at
+    least one photo here is published. Until then the Féminin page shows
+    no gallery at all (no stock stand-ins for the girls' team)."""
+    form = FemininGalleryAdminForm
+    list_display = ('thumb', 'caption', 'is_published', 'sort', 'updated_at')
+    list_filter = ('is_published',)
+    search_fields = ('caption', 'alt')
+    list_editable = ('is_published', 'sort')
+    list_per_page = 50
+    actions = ('publish_photos', 'unpublish_photos')
+    fieldsets = (
+        ('Photo', {'fields': ('photo', 'caption', 'alt')}),
+        ('Publishing', {'fields': ('is_published', 'sort')}),
+    )
+
+    @admin.display(description='photo')
+    def thumb(self, obj):
+        if obj.photo:
+            try:
+                return format_html(
+                    '<img src="{}" style="width:42px;height:42px;border-radius:9px;'
+                    'object-fit:cover" alt=""/>', obj.photo.url)
+            except ValueError:
+                pass
+        return format_html(
+            '<span style="display:inline-grid;place-items:center;width:42px;height:42px;'
+            'border-radius:9px;background:#eef0f3;color:#5c6a7e;font-weight:700;'
+            'font-size:11px">FG</span>')
+
+    @admin.action(description='Publish selected (gallery appears on website)')
+    def publish_photos(self, request, queryset):
+        queryset.update(is_published=True)
+
+    @admin.action(description='Unpublish selected (gallery hides again)')
+    def unpublish_photos(self, request, queryset):
         queryset.update(is_published=False)
 
 

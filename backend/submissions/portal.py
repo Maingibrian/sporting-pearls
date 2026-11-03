@@ -22,7 +22,8 @@ from django.utils.text import get_valid_filename
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_POST
 
-from .models import Coach, Fixture, FormSubmission, Player, Squad, POSITIONS
+from .models import (Coach, FemininGalleryPhoto, Fixture, FormSubmission,
+                     Player, Squad, POSITIONS)
 from .safeguarding import is_dso, PORTAL_ADMIN_GROUP
 
 # Phase 7 — the QR glyph used on player cards (kept next to the other
@@ -890,6 +891,8 @@ def media_serve(request, path):
         embed them by design (media-consented, is_published=True);
       * photos of PUBLISHED coaches stay public — the technical-team
         section embeds them by design (adult staff, is_published=True);
+      * PUBLISHED Féminin gallery photos stay public — the 'On the
+        Pitch' section renders them by design (rev 25, is_published=True);
       * every other file requires a signed-in user: staff manage all
         players; guardians may fetch only their own children's files;
       * missing, forbidden and traversal paths all return the same plain
@@ -918,6 +921,12 @@ def media_serve(request, path):
             photo=clean, is_published=True).exists()
     elif clean.startswith('coaches/'):
         published = Coach.objects.filter(
+            photo=clean, is_published=True).exists()
+    elif clean.startswith('gallery/feminin/'):
+        # Féminin 'On the Pitch' photos (rev 25): public only while the
+        # photo row is published — the section appears on the site solely
+        # through real, admin-uploaded images.
+        published = FemininGalleryPhoto.objects.filter(
             photo=clean, is_published=True).exists()
 
     if not published:

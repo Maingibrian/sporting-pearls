@@ -3,6 +3,7 @@
 POST /api/forms/<slug>/   — store a submission, email the academy (Resend),
                             send a branded auto-reply, return {ok, ref}.
 GET  /api/fixtures/       — published fixtures for the homepage panel.
+GET  /api/gallery/feminin/ — published real photos for the Féminin page.
 GET  /api/players/        — published rosters for the six squad pages.
 GET  /api/health/         — uptime probe.
 
@@ -26,8 +27,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 
-from .models import Coach, Fixture, FormSubmission, Player, Result, Squad, \
-    SafeguardingAuditEntry, SafeguardingReport
+from .models import Coach, FemininGalleryPhoto, Fixture, FormSubmission, \
+    Player, Result, Squad, SafeguardingAuditEntry, SafeguardingReport
 from .safeguarding import LEGACY_SAFEGUARDING_SLUG, report_fields_for_create
 
 FORMS = {
@@ -426,6 +427,36 @@ def results_list(request):
         'report': r.report,
     } for r in results]
     return JsonResponse({'ok': True, 'count': len(data), 'results': data})
+
+
+@require_GET
+def feminin_gallery(request):
+    """Published real photos for the Féminin 'On the Pitch' gallery (rev 25).
+
+    The gallery section ships HIDDEN on the static site — the Féminin
+    page keeps it off until this endpoint answers with at least one
+    published photo, i.e. until the academy has uploaded real images
+    of the girls' programme from the backend. No stock stand-ins, ever:
+    an empty list (nothing uploaded, or all drafts) means the section
+    simply stays hidden. Unpublished rows never leave the building."""
+    photos = (FemininGalleryPhoto.objects.filter(is_published=True)
+              .order_by('sort', 'id'))
+    data = []
+    for p in photos:
+        url = ''
+        if p.photo:
+            try:
+                url = request.build_absolute_uri(p.photo.url)
+            except ValueError:
+                url = ''
+        if not url:
+            continue
+        data.append({
+            'image': url,
+            'alt': p.alt or p.caption or 'Féminin training',
+            'caption': p.caption,
+        })
+    return JsonResponse({'ok': True, 'count': len(data), 'photos': data})
 
 
 @require_GET

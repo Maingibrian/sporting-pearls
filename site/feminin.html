@@ -488,8 +488,11 @@
 </figure>
 
 
-<!-- ON THE PITCH — REAL TRAINING GALLERY (rev 24) -->
-<section class="fg-sec" id="on-the-pitch">
+<!-- ON THE PITCH — hidden until real photos arrive from the backend (rev 25).
+     Ships with the section off: no stock stand-ins for the girls' team.
+     sp-feminin-gallery.js reveals and fills it only when the Django
+     backend answers /api/gallery/feminin/ with published real photos. -->
+<section class="fg-sec" id="on-the-pitch" hidden>
 <div class="wrap">
 <div class="shead-c">
 <p class="sec-eyebrow" data-reveal>On the Pitch</p>
@@ -497,26 +500,7 @@
 <p class="fg-lead" data-reveal>Training mornings on the coast — pass and move, listen, laugh, grow. This is what the pathway looks like when girls get their share of the game.</p>
 </div>
 <div class="fg-grid" data-lightbox>
-<figure class="fg-tile t-hero" data-reveal>
-<img src="assets/img/feminin/feminin-01.jpg" alt="A girl in a navy jersey dribbling the ball at full stretch during training" loading="lazy" data-fb-hide="parent">
-<figcaption><span>On the ball</span>Composure on the ball, courage in the game.</figcaption>
-</figure>
-<figure class="fg-tile t-up" data-reveal>
-<img src="assets/img/feminin/feminin-04.jpg" alt="Girls playing football on a coastal pitch at sunset" loading="lazy" data-fb-hide="parent">
-<figcaption><span>Pass &amp; move</span>The Butterflies way — cones down, ball moving.</figcaption>
-</figure>
-<figure class="fg-tile t-down" data-reveal>
-<img src="assets/img/feminin/feminin-05.jpg" alt="Players in a team huddle with the sun flaring behind them" loading="lazy" data-fb-hide="parent">
-<figcaption><span>The briefing</span>Every session starts with the why.</figcaption>
-</figure>
-<figure class="fg-tile t-wide2" data-reveal>
-<img src="assets/img/feminin/feminin-02.jpg" alt="A young girl practising her soccer skills on the training ground" loading="lazy" data-fb-hide="parent">
-<figcaption><span>Practice days</span>Repetition is the shortcut.</figcaption>
-</figure>
-<figure class="fg-tile t-portrait" data-reveal>
-<img src="assets/img/feminin/feminin-03.jpg" alt="A girl playing football with focus during a training session" loading="lazy" data-fb-hide="parent">
-<figcaption><span>The pathway</span>From first touch to first team.</figcaption>
-</figure>
+<!-- tiles are built from the backend's published photos by sp-feminin-gallery.js -->
 </div>
 <p class="life-note" data-reveal>Photography from the girls&rsquo; and women&rsquo;s game — the coast, Kenya.</p>
 </div>
@@ -563,8 +547,10 @@
   </div>
 </footer>
 
+<script src="assets/js/shared/site-config.js?v20"></script>
 <script src="assets/js/shared/site-core.js?v22"></script>
 <script src="assets/js/shared/sp-lightbox.js?v1"></script>
+<script src="assets/js/shared/sp-feminin-gallery.js?v1"></script>
 <script src="assets/js/shared/hero-parallax.js?v1"></script>
 </body>
 </html>

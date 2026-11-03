@@ -280,6 +280,87 @@ class Coach(models.Model):
         return f'{self.name} · {self.role}'
 
 
+class FemininGalleryStorage(FileSystemStorage):
+    """Storage that re-encodes Féminin gallery photos on EVERY save path.
+
+    The 'On the Pitch' gallery on the Féminin page ships hidden and only
+    appears once the academy publishes REAL photos of the girls' programme
+    from the Django admin (rev 25). Whatever writes the file — admin form,
+    shell, future views — only a clean Pillow re-encode is ever stored:
+    EXIF/GPS/ICC metadata never lands in /media/, the stored extension
+    always matches the real image format, and the pixel-count cap rejects
+    decompression bombs before the full decode. Invalid inputs raise
+    ValueError — the write fails closed."""
+
+    def _save(self, name, content):
+        import io
+        from django.core.files.base import ContentFile
+        from django.utils.text import get_valid_filename
+        from PIL import Image
+
+        raw = content.read()
+        try:
+            img = Image.open(io.BytesIO(raw))
+            img.verify()
+            img = Image.open(io.BytesIO(raw))
+            if (img.width or 0) * (img.height or 0) > 40_000_000:
+                raise ValueError('image exceeds the 40-megapixel cap')
+            img.load()
+        except Exception:
+            raise ValueError('gallery photo is not a readable image')
+        fmt = (img.format or '').upper()
+        if fmt not in ('JPEG', 'PNG', 'WEBP'):
+            raise ValueError('gallery photo must be JPG, PNG or WebP')
+        buf = io.BytesIO()
+        if fmt == 'JPEG':
+            img.convert('RGB').save(buf, 'JPEG', quality=85)
+            ext = '.jpg'
+        elif fmt == 'PNG':
+            img.save(buf, 'PNG')
+            ext = '.png'
+        else:
+            img.save(buf, 'WEBP', quality=85)
+            ext = '.webp'
+        stem = name.rsplit('/', 1)[-1].rsplit('.', 1)[0] or 'photo'
+        name = 'gallery/feminin/fg-' + get_valid_filename(stem) + ext
+        return super()._save(name, ContentFile(buf.getvalue()))
+
+
+class FemininGalleryPhoto(models.Model):
+    """A real photograph of the girls' programme for the Féminin page.
+
+    The 'On the Pitch' gallery section ships HIDDEN on the static site —
+    it renders only when this model has published rows, i.e. when the
+    academy has uploaded real photos from the backend (rev 25). Until
+    then the section stays off the page entirely: no stock stand-ins for
+    the girls' team. Photos follow the player/coach photo rules —
+    Pillow-verified, re-encoded with EXIF/GPS stripped, pixel-capped and
+    served through the authenticated media gate (public only while the
+    photo is published)."""
+
+    caption = models.CharField(max_length=120, blank=True,
+                               help_text='Short label shown on the tile, e.g. "Pass & move".')
+    alt = models.CharField('alt text', max_length=250, blank=True,
+                           help_text='Describe the photo for screen readers — who, what, where.')
+    photo = models.ImageField(upload_to='gallery/feminin/',
+                              storage=FemininGalleryStorage(),
+                              help_text='JPG, PNG or WebP. Re-encoded on save — hidden metadata is stripped.')
+    is_published = models.BooleanField('published on website', default=False,
+                                       help_text='The gallery section appears on the Féminin page only when at least one photo is published.')
+    sort = models.PositiveSmallIntegerField('display order', default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['sort', 'id']
+        verbose_name = 'Féminin gallery photo'
+
+    def __str__(self):
+        label = self.caption or 'Untitled photo'
+        state = 'live' if self.is_published else 'draft'
+        return f'{label} ({state})'
+
+
 class SafeguardingReport(models.Model):
     """A child-welfare / safeguarding concern raised through form 10.
 

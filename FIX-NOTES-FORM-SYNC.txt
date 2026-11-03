@@ -1,0 +1,1627 @@
+════════════════════════════════════════════════════════════════════
+  FORM SYNC FIX — WHAT CHANGED (kit revision 2)
+════════════════════════════════════════════════════════════════════
+
+PROBLEM
+  1) Forms 07 (donation), 08 (contact) and 09 (media consent) were
+     never migrated to the Django sync layer: their pages still loaded
+     the old Netlify hook (form-submit.js), which posts to
+     /.netlify/functions/submit — an endpoint that does not exist in
+     this kit. Their submissions were never stored or emailed.
+  2) The Django sync layer (sp-forms.js) collected answers with
+     FormData, which requires name= attributes — the site's inputs
+     only carry ids. The 10 "wired" forms were therefore posting
+     essentially empty payloads ({_hp: ""}).
+  3) The honeypot value was renamed to "_hp" before sending, so the
+     backend's "company" check never saw it.
+
+FIX (files touched)
+  site/assets/js/shared/sp-forms.js      — rewritten (v2):
+      * SLUGS map now covers all 13 forms (donationForm, contactForm
+        and consentForm added)
+      * serialization is label-based (ported from the proven
+        form-submit.js serializer): answers are keyed by each field's
+        visible label, with placeholder/id fallbacks — works with the
+        id-only inputs used across the site
+      * success-triggered: a form syncs only when the page's own
+        success UI appears (modal .active / #enquirySuccess unhidden /
+        #formSuccess .on), i.e. after page validation passed
+      * honeypot now travels under the "company" key the backend
+        actually checks; bot hits are silently dropped server-side
+      * offline queue + retry, demo mode (empty API_BASE) and the
+        visitor-facing sync note are unchanged
+  form-07-donation-support.html          — loads site-config.js +
+  form-08-contact-form.html                sp-forms.js (v22) instead of
+  form-09-media-photo-consent.html         form-submit.js; cache
+                                           versions normalised
+  (10 other form pages)                   — sp-forms.js cache version
+                                           bumped v19 → v22
+  site/assets/js/shared/form-submit.js    — REMOVED (dead Netlify
+                                           layer, zero references left)
+  site/README-form-backend.md             — rewritten for the Django
+                                           wiring; documents all 13
+                                           forms
+  backend/submissions/views.py            — FORMS registry: the three
+        missing slugs added (form-07-donation-support → SUP,
+        form-08-contact-form → ENQ, form-09-media-photo-consent → MC);
+        name/email extraction is now case-insensitive and
+        label-aware ("Full Name", "Your Email Address", …) with a
+        contains-"name" fallback, and the email fallback scans field
+        VALUES only (never keys — a placeholder like
+        "you@example.com" can legitimately appear as a field key).
+
+  site/assets/js/pages/form-07-donation-support.js
+        — the KES preset chips kept the chosen amount only in a JS
+          closure variable, so it never reached any form field and
+          the sync payload showed "(empty)". Chip clicks now also
+          write the amount into #d_amount (the page's own review/
+          success code already prefers that field, so nothing else
+          changes).
+
+  Found & fixed during end-to-end browser testing:
+  * sp-forms.js fieldLabel() now also honours <label for="id">
+    sibling associations (contact.html pattern) — previously the
+    placeholder text leaked in as the field key.
+  * The serializer now also picks up fields that carry only a
+    placeholder (the homepage newsletter email input).
+
+  All verified in a real headless browser against a live install:
+  forms 07, 08, 09, the contact page, the newsletter, the honeypot
+  drop, and validation-gated syncing (invalid attempts never fire).
+
+NO BEHAVIOUR CHANGES
+  install.sh, ports, portals, database schema, seeds and service
+  templates are untouched. Re-running install.sh over an existing
+  install is upgrade-safe as before (it keeps .env, db.sqlite3 and
+  media, and only replaces the site + backend code).
+════════════════════════════════════════════════════════════════════
+
+
+════════════════════════════════════════════════════════════════════
+  KIT REVISION 3 — SAFEGUARDING PAGE COPY REFRESH
+════════════════════════════════════════════════════════════════════
+
+PROBLEM
+  safeguarding.html still described the confidential online
+  reporting form as "Coming soon" in the Key Public Policies list —
+  even though Form 10 (form-10-safeguarding-report.html) is live,
+  wired into the Django sync layer and working end-to-end. Worse,
+  the safeguarding page itself — the one page whose whole job is
+  "How to Raise a Concern" — never linked to the form at all:
+  its hero, contact section and policy list all routed people to
+  email or the general contact page instead.
+
+FIX (file touched: site/safeguarding.html only)
+  * Hero — primary amber CTA is now "Report a Concern —
+    Confidential Form" linking straight to Form 10; the previous
+    anchors ("How to Raise a Concern", "Safeguarding Contact")
+    remain as ghost buttons. The hero card ("Report. Don't wait
+    for proof.") gained a direct "Open the confidential form" link.
+  * Section 04 (How to Raise a Concern) — added a lead paragraph
+    spelling out the three reporting channels (online form,
+    Safeguarding Lead email, any staff member) and the two
+    reassurances people actually need: no proof required,
+    anonymous reporting available. The "Report the concern.
+    Don't wait for proof." band now carries an amber
+    "Open the Confidential Report Form" button.
+  * Section 07 (Safeguarding Contact) — the side card was
+    rewritten from a placeholder notice ("direct line published
+    once confirmed") into the online-reporting panel: explains the
+    form's confidential vs anonymous choice and reference number,
+    keeps the verified-details policy note and the emergency
+    guidance, and leads with the Form 10 button (general
+    contact.html demoted to a text link).
+  * Section 08 (Key Public Policies) — the stale list item is now
+    a live link: "Raising a Concern — Online Form · Open Form 10
+    (Confidential) →" with shield icon (the three unreleased PDF
+    rows correctly remain "on release" — those documents genuinely
+    don't exist yet).
+
+  All five new touchpoints use the page's existing design-system
+  classes (.btn-amber / .btn-navy / .report-band / .contact-side /
+  .dl-list) — no CSS changes, no JS changes, no new assets.
+
+VERIFIED
+  Rendered in a real headless browser: tag balance clean, zero
+  console errors, all five Form 10 links present and visible,
+  hero CTA click-through navigates to Form 10, VLM visual review
+  of hero / concern / contact / policies sections found no
+  overlap, overflow or contrast issues. The two other "coming
+  soon" strings on the site (form-07 online payments, index
+  fixtures) are genuine future features and were left alone.
+
+
+════════════════════════════════════════════════════════════════════
+  KIT REVISION 4 — POLICY DOCUMENTS AS HTML PAGES
+════════════════════════════════════════════════════════════════════
+
+PROBLEM
+  The safeguarding page's "Key Public Policies" section listed three
+  documents as "published here on release" / "on release" — they did
+  not exist. Site visitors (and any safeguarding review) saw an
+  academy that advertises a Safeguarding & Child Protection Policy
+  but publishes none of it.
+
+WHAT WAS BUILT
+  Three complete policy documents, published as accessible web
+  pages (not PDFs) and fully integrated into the site:
+
+  site/policy-safeguarding-child-protection.html
+      Full policy, 16 sections: policy statement, scope, legal
+      framework (Constitution of Kenya Art. 53, Children Act 2022,
+      Data Protection Act 2019, UNCRC, International Safeguards
+      for Children in Sport, FKF requirements), definitions, the 8
+      guiding principles, roles & responsibilities, safe
+      recruitment, safe environments & activities (supervision,
+      facilities, travel, health), communication & digital safety,
+      photography/media/consent, recognising & responding to
+      concerns (incl. Form 10 channels, emergency order), allega-
+      tions against adults, confidentiality & records, whistleblow-
+      ing & non-retaliation, training & review, document control
+      with version history tables.
+
+  site/policy-coach-volunteer-code.html
+      Coach & Volunteer Code of Conduct, 9 sections: purpose,
+      professional conduct, coaching practice & safety, boundaries
+      & relationships (incl. grooming-pattern callout), communi-
+      cation & digital contact, photography & media, the duty to
+      report (recognise/respond/record/report), breaches & sanc-
+      tions, acknowledgement.
+
+  site/policy-player-parent-code.html
+      Player Code of Conduct & Parent Expectations, 8 sections:
+      purpose, player code, parent & guardian expectations, spec-
+      tator behaviour, raising concerns, when standards slip, what
+      families can expect from us, acknowledgement.
+
+  site/assets/css/pages/policy.css  (new)
+      Document layout on top of the existing design system: compact
+      navy pol-hero band, doc-meta strip, sticky table of contents,
+      numbered policy sections, definition rows, callouts (policy /
+      alert / navy), document-control tables, related-document
+      cards, responsive breakpoints, and a print stylesheet.
+
+  site/safeguarding.html  (section 08 updated)
+      The three "on release" rows are now live "Read the full
+      policy / Read the code →" links; the policy note now states
+      that documents are published as web pages that print cleanly.
+
+HOW THEY WERE BUILT
+  Generated by a builder script (scripts/policy_pages/build.py in
+  the analysis workspace, not shipped) that splices the policy
+  content onto the exact head/nav/footer skeleton of safeguarding.
+  html — so navigation, mega-menu, mobile menu, footer, reveal
+  animations and the SVG sprite system are pixel-identical to the
+  rest of the site. Pages load safeguarding.css (design system)
+  + policy.css (document layout). The Safeguarding nav item is
+  marked active. install.sh needs no changes — new files live in
+  site/ and ship automatically.
+
+CONSISTENCY
+  All content is anchored to what the site already publishes: the
+  8 principles, the Listen/Reassure/Record/Report/Escalate steps,
+  safe-recruitment checkpoints, media-consent rules, Form 10
+  flow and reference numbers, and the Welfare & Safeguarding Lead
+  / Governing Body roles. Cross-links: each policy links to the
+  other two, Form 10, Form 09 (media consent), Form 01 / Form 04,
+  the safeguarding hub and the contact page.
+
+VERIFIED
+  Structural: tag balance, zero broken internal refs, every TOC
+  anchor resolves. Browser: all three pages render with zero
+  console errors at 1440x900 and 390x844, TOC sticky on desktop /
+  static on mobile, no horizontal overflow, meta chips not
+  clipped, nav active state correct, TOC anchor scrolling works,
+  click-through from the safeguarding policies list verified.
+  VLM visual review: professional navy/amber aesthetic consistent
+  with the site; no defects (one initial mobile flag re-investi-
+  gated and shown to be screenshot fold, not clipping).
+
+
+════════════════════════════════════════════════════════════════════
+  KIT REVISION 5 — LEADERSHIP BIOS & COMMITMENT (cycle 2)
+════════════════════════════════════════════════════════════════════
+
+PROBLEM
+  leadership-governance.html still showed two "coming soon"
+  placeholders: a dashed "Full profile coming soon" note in the
+  Chairman section, and a whole section promising "Leadership
+  bios & committee structures coming soon." The page advertised
+  leadership it did not show — the last substantive content gap
+  on the site.
+
+WHAT CHANGED (files touched)
+  site/leadership-governance.html
+      * Section 03 retitled "Leadership & Executive Management"
+        with a lead paragraph introducing the leadership team.
+      * Chairman bio completed: Dr. Stephen M. Abuor — Founder &
+        President, Sporting Pearls SP Ltd & SP PEARLS Group;
+        MBChB (Medicine & Surgery) + Data Analytics; founding
+        partner/owner of WESÇEROS INFRATECH LTD; playing and
+        grassroots background; whole-person philosophy; the
+        philosophy quote "With the correct team culture, we want
+        to educate more than just one generation." in a navy
+        quote callout; Coastal Region ecosystem, "Our Pride. Our
+        Identity. Our Story." vision, long-term institutional
+        vision; 7 Leadership Focus chips; signature block and
+        Chairman's Message CTA retained.
+      * New Executive Director block: Mrs. Joyleen Mbwika —
+        Executive Director — Finance, Sporting Pearls Group;
+        10+ years finance & accounting in the private sector;
+        institutional foundation, accountability and sustainable
+        growth; youth-development commitment; 7 Executive Focus
+        chips; mirrored layout (JM monogram card on the right).
+      * The "coming soon" section is replaced by "05 · Our
+        Leadership Commitment": stewardship-and-service lead,
+        five principle cards (Integrity, Accountability,
+        Safeguarding, Development, Sustainability) and a navy
+        purpose band — "Developing Talent. Building Character.
+        Transforming Lives Through Football."
+      * Final CTA renumbered to 06; meta description updated;
+        the pending-note/soon-strip CSS is now unused but left
+        in place (harmless, kept for reference).
+
+  site/assets/css/pages/leadership-governance.css
+      * Appended: .chair-grid.rev (mirrored bio layout),
+        .bio-quote (philosophy callout), .bio-focus (focus
+        chips), .commit-grid / .commit-card (five principles),
+        .purpose-band, plus responsive breakpoints. Cache
+        version bumped v19 -> v23 on the page link.
+
+  Content supplied by the academy (Dr. Abuor and Mrs. Mbwika
+  profiles, commitment principles) — lightly edited for flow
+  and web presentation, facts unchanged.
+
+VERIFIED
+  Tag balance OK; zero "coming soon" left; zero broken refs.
+  Browser at 1440x900 and 390x844: zero console errors, both
+  monogram cards render (SA / JM), reversed grid order correct
+  on desktop, 14 focus chips wrap cleanly, 5 commitment cards
+  visible, no horizontal overflow on mobile. Split-text
+  headings settle fully after scroll reveal (initial VLM flags
+  were mid-animation captures; re-checked settled frames —
+  clean; the scrollHeight "clipped" flag on .w spans is the
+  site's pre-existing word-wrap pattern, confirmed identical
+  on untouched headings). No other page references the old
+  "bios coming soon" promise.
+
+
+════════════════════════════════════════════════════════════════════
+  KIT REVISION 6 — DEPLOYMENT HARDENING (cycle 3)
+════════════════════════════════════════════════════════════════════
+
+PROBLEM
+  The kit deployed fine on a LAN, but going live on a real
+  domain left five operational gaps:
+  1) .env shipped with ALLOWED_HOSTS=* and CORS_ALLOW_ALL=1
+     (any host header accepted, any origin could read API
+     responses) and no guided way to tighten them.
+  2) No HTTPS path: the nginx template was HTTP-only.
+  3) Backups were a one-line tip ("copy those two folders")
+     — no command, no schedule, no rotation.
+  4) Email setup was two sentences; Resend needs DNS records
+     and the right .env keys or nothing sends.
+  5) sp.sh restart was broken when invoked as documented
+     ("bash sp.sh restart"): it re-called itself via $0, which
+     is not on PATH — a latent bug since the first release.
+
+WHAT CHANGED (files touched)
+  install.sh
+      * New options: --domain=NAME (locks ALLOWED_HOSTS +
+        CORS + CSRF origins to the domain incl. www., with
+        localhost/127.0.0.1 kept for health checks and local
+        admin access), --with-tls (Let's Encrypt via certbot
+        webroot; installs the TLS nginx front, flips secure
+        cookies + SECURE_SSL_REDIRECT on after certs actually
+        issue, rewrites the site's API_BASE to https), and
+        --tls-email for the certificate registration.
+      * Domain hardening applies to FRESH installs (dedicated
+        .env branch) AND to re-runs on existing installs
+        (upsert helper rewrites/appends keys; upgrade-safe).
+      * TLS flow: HTTP nginx front first (also the ACME
+        fallback), certbot certonly (apex+www, retries
+        apex-only), then nginx-tls.conf; on any failure it
+        reverts to the HTTP front and prints fix-forward
+        steps instead of leaving a broken server.
+      * systemd installs now also install sp-backup.service +
+        sp-backup.timer (daily 02:30, Persistent=true).
+      * Banner: public-URL line reflecting TLS state, backup
+        line, and a hardening hint on wildcard installs.
+  templates/sp.sh
+      * New "backup" command: online-safe sqlite snapshot
+        (sqlite3 backup API — safe while gunicorn runs),
+        bundled with media/ + .env into
+        backups/sp-backup-<ts>.tar.gz (archive paths relative
+        to backend/ so restore = one tar -x), keeps newest 14.
+      * Fixed restart bug ($0 -> $APP/sp.sh absolute path).
+  templates/nginx-tls.conf (new)
+      * :80 ACME + 301-to-HTTPS; :443 with Let's Encrypt cert
+        paths, Mozilla intermediate TLS profile, HSTS (set at
+        nginx so it covers the static site too), 12m upload
+        limit, same proxy map as the HTTP front.
+  templates/sp-backup.service + sp-backup.timer (new)
+      * oneshot unit + daily timer for automated backups.
+  backend/sporting_pearls_backend/settings.py
+      * SECURE_SSL_REDIRECT (env-driven, default 0 — existing
+        plain-HTTP installs unaffected).
+  EMAIL-SETUP-GUIDE.txt (new, also copied into the app dir)
+      * Resend step-by-step: account, domain verification,
+        DNS records, API key, .env keys, QC redirect mode,
+        troubleshooting table.
+  templates/POST-INSTALL-README.txt, README-START-HERE.txt
+      * "Going live" hardening section, backup/restore
+        commands, new installer options, email guide pointer.
+
+VERIFIED (real install runs, not dry parses)
+  Fresh --domain install: .env locked (ALLOWED_HOSTS=
+  domain,www,localhost,127.0.0.1; CORS_ALLOW_ALL=0 with
+  scheme-covering origins), demo data seeded, admin created.
+  Upgrade re-run with --domain: .env kept then upserted;
+  superuser untouched ("already exists — skipping"), so a
+  changed admin password is never reset by upgrades.
+  Services: start/stop/restart/health all pass under the
+  hardened env; site serves; Host: domain and loopback hosts
+  both 200. Form POST end-to-end under lockdown: ref
+  SP-ENQ-20261022-C5AB stored; Access-Control-Allow-Origin
+  returned for the site's origin, absent for a foreign
+  origin. Backup: bundle contains db.sqlite3 + .env + media;
+  14-bundle rotation confirmed; restore round-trip validated
+  (integrity ok, 13 submissions, 66 players, 1 guardian,
+  hardened .env and photo present after extract). TLS paths:
+  --with-tls without --domain errors cleanly; non-root runs
+  skip nginx/TLS with a message and still finish. Templates
+  render with zero leftover __PLACEHOLDERS__. Settings flip
+  test: SECURE_SSL_REDIRECT reads 0/1 from env as designed.
+  Default (no --domain) install unchanged: wildcard .env,
+  LAN API_BASE wiring, new hardening hint in the banner.
+
+
+════════════════════════════════════════════════════════════════════
+  KIT REVISION 7 — REAL ACADEMY PHOTOGRAPHY + PORTAL USER GUIDE
+════════════════════════════════════════════════════════════════════
+
+PROBLEM
+  1) The website ran on 9 generic stock photographs (empty
+     pitches, boots, whiteboards — no people), while the
+     academy supplied 19 real training highlights (Canon
+     EOS 4000D, Lightroom-edited: coaching briefings, team
+     huddles, the training ground).
+  2) The staff and parent portals had no user documentation
+     at all — new staff and invited parents had to work out
+     the flow by trial and error.
+
+WHAT CHANGED — website photography
+  16 optimized images added to the site root (7 full-size
+  figures ~1024w q80, 2 hero images gently upscaled to
+  1536w, plus 10 gallery thumbs 720w; total ~1.9 MB):
+      index.html        "Team huddle" video card and the
+                        Boys Programme card now use real
+                        academy photos (was: generic stock).
+      about-us.html     Hero, parallax figure and a NEW
+                        "10 · Life at the Academy" section —
+                        a 3x4 photo grid (one wide feature,
+                        one tall tile) with captions; CTA
+                        renumbered to 11; about-us.css
+                        extended + cache bumped v19 -> v23.
+      coaching-         "Philosophy in practice" figure now
+      philosophy.html   a real tactical briefing (was: a
+                        stock whiteboard photo).
+      join-us.html      "Ready to start" figure now a real
+                        pre-drill huddle.
+      chairman-         Hero now the coach addressing the
+      message.html      academy (leadership visual).
+  The empty-coast-pitch hero stays as the global brand
+  look; the Féminin and squad-captain stock slots stay
+  (no girls' photos in this batch; captain cards carry
+  fictional names, so real boys' faces must not be
+  attached). Nav dropdown thumbnails unchanged.
+
+WHAT CHANGED — portal user guide
+  site/portal-guide.html (new, 54 KB): a 10-section
+  walkthrough of both portals with 17 annotated
+  screenshots in browser-chrome frames — staff (sign-in,
+  desk, submissions + detail, players, fixtures,
+  announcements, welfare desk, access & security) and
+  parents (invitation/activation, sign-in, overview,
+  announcements, welfare desk + case thread, child page,
+  account), plus a quick-answers table and safeguarding
+  cross-links. Built by scripts/portal_guide/build.py on
+  the site skeleton (same splice method as the policy
+  pages) with assets/css/pages/portal-guide.css (policy
+  doc system + .shot figures; sticky TOC desktop, static
+  mobile, print styles).
+  assets/img/guide/*.jpg — 17 screenshots captured from a
+  real demo-data deployment (1280w q82, ~1.3 MB total).
+
+  Sign-in pages now link the guide:
+      backend settings: SITE_URL (env-driven, empty hides
+      the links); install.sh writes it in all .env
+      branches, upserts on --domain re-runs, appends on
+      legacy upgrades (never overwrites a custom value),
+      flips to https after TLS issues. Both login pages
+      (staff + parent) render "New here? Read the user
+      guide →" pointing at SITE_URL/portal-guide.html.
+  README-START-HERE + POST-INSTALL-README list the guide.
+
+VERIFIED
+  VLM-catalogued all 19 uploads + 9 existing images to
+  plan placement. Tag balance OK on all 5 edited pages.
+  Desktop 1440x900: hero/plx/gallery all load, 10/10
+  tiles, grid math exact (wide = 2 cols, tall = 2 rows),
+  no overflow, VLM PASS on gallery + guide. Mobile
+  390x844: 2-col grid, 10/10 loaded, no overflow. The
+  only "broken" images found were pre-existing hidden
+  mobile-nav previews that never load on desktop
+  (untouched files, unchanged behaviour).
+  Guide page: 17/17 screenshots load (after scroll), TOC
+  sticky desktop / static mobile, all 21 anchors resolve,
+  zero console errors, no URL-bar clipping on mobile,
+  VLM PASS at three scroll depths. Login links verified
+  live on a demo deployment for BOTH portals (found +
+  fixed a missing `settings` import in portal.py that
+  500'd the staff login). Parent _render token check
+  extended safely (__GUIDE__ injected centrally).
+
+════════════════════════════════════════════════════════════════════
+  KIT REVISION 8 — REMOTE ACCESS: LAN/INTERNET SHARING FIXES + GUIDE
+════════════════════════════════════════════════════════════════════
+
+PROBLEM
+  Running the kit on a workstation (e.g. Linux Mint) and
+  sharing the live site with another machine did not work:
+  the website port (http.server) binds 0.0.0.0, but
+  gunicorn was hard-coded to 127.0.0.1 in BOTH sp.sh and
+  the systemd template — so a remote visitor could open
+  the site, yet every form POST and both portals were
+  unreachable ("connection refused"), contradicting the
+  .env (SP_BIND=0.0.0.0, CSRF_TRUSTED_ORIGINS carrying
+  the LAN IP) and the installer banner advertising LAN
+  URLs. Also: --with-nginx without --domain wired
+  API_BASE to http://LAN_IP:8020 (a loopback-only port)
+  instead of the nginx :80 same-origin front, and
+  --public-url could never re-point an already-wired
+  install (the sed only fires on the empty value).
+
+WHAT CHANGED
+  sp.sh:              gunicorn now binds "$BIND" from
+                      SP_BIND (.env, default 0.0.0.0);
+                      SP_BIND=127.0.0.1 restores the old
+                      loopback-only behaviour.
+  sp-backend.service: --bind 127.0.0.1 → __BIND__
+                      (install.sh already substitutes
+                      0.0.0.0); comment added on
+                      firewalled hardened servers.
+  install.sh:         PUB logic — with --with-nginx and
+                      no --domain, API_BASE is written as
+                      http://LAN_IP (nginx :80 front,
+                      site + /api/ same origin) instead
+                      of the unreachable :8020. New
+                      --public-url force re-point:
+                      always rewrites API_BASE on
+                      upgrade re-runs (documented as THE
+                      way to re-point a running install
+                      at a new origin). Copies
+                      REMOTE-ACCESS-GUIDE.txt into the
+                      app; banner now points at it.
+  REMOTE-ACCESS-     new kit doc: running on Mint/Ubuntu
+  GUIDE.txt (new)    (quick trial / systemd / VPS), LAN
+                      sharing (IP, ufw, portal URLs),
+                      internet sharing (Tailscale,
+                      Cloudflare quick tunnel, ngrok),
+                      go-live-on-VPS path, and a
+                      symptom→fix troubleshooting table.
+
+VERIFIED
+  Fresh user-mode install (ports 8120/8190, --demo-data):
+  banner + API_BASE wired to http://<lan-ip>:8120; ss
+  shows BOTH services on 0.0.0.0. Remote-machine view
+  simulated via the non-loopback IP: /api/health/ ok,
+  site HTTP 200, staff portal login HTTP 200. Cross-origin
+  form POST with Origin=<site origin>: HTTP 200,
+  access-control-allow-origin: *, stored (ref
+  SP-GENQ-20261022-3A12). Tunnel simulation (Host:
+  demo-words.trycloudflare.com, Origin: https://…,
+  X-Forwarded-Proto: https): form POST stored (ref
+  SP-GENQ-20261022-00A6) + portal login 200 — proves the
+  public-hostname recipes. Upgrade re-run with
+  --public-url: .env kept, API_BASE force re-pointed,
+  services healthy. QA instance then removed.
+
+════════════════════════════════════════════════════════════════════
+  KIT REVISION 9 — INDEX ABOUT SECTION: VIDEO CARD -> PHOTO GALLERY
+════════════════════════════════════════════════════════════════════
+
+PROBLEM
+  The homepage About section ("About Sporting Pearls")
+  showed a fake video card — a dimmed team-huddle photo
+  with a decorative play button that played nothing.
+  The user asked for a gallery of candid academy moments
+  with comments, plus a button that links to the About
+  page.
+
+WHAT CHANGED
+  index.html        the .video-placeholder (play-btn +
+                    sp-team-huddle.jpg) is replaced by a
+                    .moment-wall: a 2x2 mosaic of four
+                    real academy photos (sp-hl-02/01/03/
+                    07, the 720w training-highlight thumbs)
+                    each with a caption bar — small
+                    uppercase Space Mono label ("One
+                    family", "School of the game", "One
+                    squad, one message", "The debrief")
+                    plus a one-line comment — over a navy
+                    gradient, matching the About page's
+                    "Life at the Academy" gallery recipe.
+                    Images lazy-load and self-hide on
+                    error. The CTA is re-labelled
+                    "More About Us" and now links to
+                    about-us.html (was "Watch Our Story" ->
+                    #our-story anchor); id watchStory ->
+                    aboutCta (no JS referenced either id —
+                    verified, the play button was pure
+                    CSS decoration).
+  index.css         .video-placeholder/.play-btn/
+                    playPulse styles replaced by
+                    .moment-wall/.mw-tile styles (4/3
+                    tiles, rounded, hover zoom 1.06,
+                    figcaption gradient rgba(8,17,34,.9),
+                    amber-2 label, mobile tune-up under
+                    520px). Cache bumped v19 -> v20.
+
+VERIFIED
+  Static serve + headless browser: DOM shows 4 tiles,
+  4/4 gallery images loaded, button reads "More About
+  Us" with href=about-us.html, .video-placeholder gone,
+  zero console errors, no leftover video-placeholder/
+  play-btn/watchStory/aboutVideo references anywhere
+  in the site. VLM review desktop 1440x900: PASS on
+  all four points (mosaic loaded, captions readable,
+  no overflow, editorial style consistent). Mobile
+  390x844: PASS on all four points once scrolled into
+  view (gallery sits below the text column in the
+  single-column mobile layout, as expected).
+
+════════════════════════════════════════════════════════════════════
+  KIT REVISION 10 — LEADERSHIP & GOVERNANCE: PARALLAX CARD SYSTEM
+════════════════════════════════════════════════════════════════════
+
+PROBLEM
+  The leadership-governance page read as flat and
+  unfinished: the governance ladder was a plain
+  full-width stack, the two bios were long text walls
+  beside stark monogram placeholders ("OFFICIAL
+  PORTRAIT TO FOLLOW") with nothing else in the
+  column, and none of the card sections moved on
+  scroll. User: page "looks bad… should have parallax
+  with the cards".
+
+WHAT CHANGED
+  Governance      the 7-card vertical ladder becomes a
+  deck (02):      staggered two-column deck — cards
+                  02/04/06 offset down, an amber spine
+                  runs between columns, and every card
+                  floats on scroll via per-card parallax
+                  wrappers (alternating +.02/-.02 speeds
+                  so the columns shear opposingly).
+  Bios (03):      each monogram portrait is now a
+                  layered parallax stack — the portrait
+                  drifts at .03 while a new white
+                  polaroid photo card (real academy
+                  photo, rotated 2.75°, mono tag +
+                  caption) drifts the opposite way at
+                  -.05, overlapping the portrait's side
+                  above the name plate. Chairman gets
+                  sp-coach-address.jpg ("At the ground");
+                  ED gets the previously-unused
+                  sp-classroom.jpg ("Stewardship"),
+                  mirrored to the left side.
+  Commitment      the 5 principle cards ride a parallax
+  wave (05):      wave (speeds -.032 → .032 across the
+                  row) so the deck ripples as you scroll.
+  Full-bleed      both sp-fig photos (tactics board,
+  figures:        whistle) now parallax INSIDE their
+                  frames (img oversized to 118%, offset
+                  -9%, data-plx .055/.07).
+  Engineering     parallax hooks live on dedicated
+  notes:          wrappers (.gov-cell/.commit-cell/
+                  .plx-w/.plx-w2) because [data-reveal].in
+                  resets transform:none and site-core
+                  writes inline translate3d — same
+                  element would break both. Hover
+                  lifts/shifts on the cards themselves are
+                  therefore preserved. Reduced-motion
+                  users get static fallbacks; mobile
+                  collapses to single-column natural
+                  order (01-07) with the polaroid stacked
+                  below the portrait. CSS cache v23->v24.
+
+VERIFIED
+  Live DOM: all parallax wrappers receive opposing
+  inline transforms (gov ±13px, commit wave ±8px, bio
+  stacks ±30px, fig img 49px inside its headroom);
+  7/7 reveals fire; 33 images, 0 broken; zero console
+  errors after full-length scroll. VLM review: gov
+  deck desktop PASS (stagger, badges, spine, polish;
+  3 cards below fold = viewport framing only), both
+  bio stacks PASS 4/4 after one fix round (first
+  pass caught the polaroid covering the name plate —
+  repositioned from bottom-corner to above the plate
+  zone, bottom:6rem/width:52%), commitment wave PASS
+  (cards, icons, stagger; purpose band below fold).
+  Mobile 390x844: card order 01-07 natural, no
+  horizontal overflow, polaroid layered below portrait,
+  VLM PASS 8/8 across both sections.
+
+=====================================================================
+KIT REVISION 11 — SITE-WIDE WAVE UNIFICATION + LEADERSHIP LEADER CARDS
+=====================================================================
+DATE:        23 Oct 2026
+NOTE:        Supersedes the v10 kit. Builds on Revision 10's
+             parallax system; the Revision 10 bio-stacks
+             (monogram + polaroid) are replaced by two large
+             photo-based leader cards with condensed bios, and the
+             hero divider on every affected page is unified to the
+             boys-programme tide style.
+
+PROBLEM
+  1) Two different wavy hero-bottom dividers existed across the
+     site. Education & Life Skills and the Boys' Programme use the
+     organic layered "tide" divider (asymmetric S-curves, soft blue
+     shadow layer, gentle drift); twelve other pages (Contact,
+     Partners, About Us, Chairman's Message, Feminin, Our Story,
+     Vision & Mission, Partner With Us, Safeguarding, Core Values,
+     Support Us, Leadership & Governance) still carried the older
+     uniform sine-wave divider (evenly spaced identical humps,
+     amber tint, continuous slide) — visually inconsistent.
+  2) The Leadership & Governance page read as a text wall: two
+     8-10 paragraph bios, monogram "portrait to follow" placeholders
+     and weak parallax; client asked for "parallax with the cards".
+
+WHAT CHANGED
+  A) Wave unification (12 pages converted to the tide divider):
+     - HTML: the two-svg .hero-wave block replaced with the single-
+       svg .tide block used by boys-programme (organic S-curve
+       paths, w2 shadow + w1 fill).
+     - CSS: page .hero-wave rules (incl. inline <style> variants in
+       our-story / vision-mission / core-values) replaced with the
+       tide rules — absolute bottom:0, height clamp(60px,8vh,90px),
+       width calc(100% + 200px) with -100px bleed, wdrift/wdrift2
+       ease-in-out alternate animations, w1 fill var(--sand) (w1
+       fill var(--navy-2) on leadership where the navy marquee
+       follows), w2 fill rgba(46,111,158,.35), reduced-motion guard.
+       Orphaned @keyframes wslide removed everywhere.
+     - Page CSS cache versions bumped (?v19->v20, about-us
+       v23->v24). Converted pages: contact, partners, about-us,
+     chairman-message, feminin, partner-with-us, safeguarding,
+     support-us (css-file variant) + our-story, vision-mission,
+     core-values (inline-style variant).
+     - Audit trail: all 22 candidate pages screenshotted at their
+       hero bottom edge and VLM-classified (contact-sheet grouping)
+       before the change; converted result re-verified after.
+  B) Leadership & Governance redesign (v24->v25):
+     - Hero: background swapped feminin-hero.jpg ->
+       sp-team-huddle.jpg (was unused anywhere), id="heroBg" hook +
+       new assets/js/pages/leadership-governance.js adds hero
+       background scroll parallax (translateY = scrollY * 0.25,
+       rAF-throttled, reduced-motion safe). Tide divider installed
+       (navy fill, blends into the institutional navy marquee).
+     - 03 Leadership: the two long text-wall bios replaced with two
+       large parallax leader cards (.leader-grid 2-col, second card
+       offset +4.5rem; wrappers data-plx .028 / -.036 for visible
+       differential depth). Cards carry photo media (sp-coach-
+       address.jpg / sp-classroom.jpg) with navy duotone gradient,
+       dashed monogram seal (SA/JM), name plate, condensed 3-
+       paragraph bios, focus chips, signature and (Stephen) a
+       Chairman's Message CTA. Placeholder monogram portraits and
+       tilted polaroid side-cards removed.
+     - Governance deck parallax deepened (±.02 -> ±.05), commitment
+       deck now a true parallax wave (-.05/-.025/0/.025/.05) with
+       alternating desktop stagger offsets. Dead CSS removed (old
+       monogram portrait block, chair-stack responsive rules).
+
+VERIFIED
+  Code sweep: 0 references to hero-wave/wslide remain in any
+  converted page (HTML or CSS); tide block + wdrift keyframes
+  present in all 12. VLM contact-sheet verification: all converted
+  pages (incl. both CSS variants + inline-style variants + mobile
+  390px) render the organic layered tide wave — "ALL MATCH
+  REFERENCE: YES". Leadership page: desktop hero/governance/cards/
+  commitment/CTA + mobile hero/cards all PASS (one false alarm —
+  "redaction bars" on the Joyleen quote was the word-reveal
+  animation caught mid-flight; settled re-shot PASS with quotes
+  fully readable). Functional parallax: heroBg translateY(400px)@
+  scroll 1600 (0.25x exact), leader card translate3d active, no
+  console errors, no horizontal overflow at 390px on contact /
+  our-story / leadership-governance.
+
+
+════════════════════════════════════════════════════════════════════
+  KIT REVISION 12 — PHASE 0: SAFE BASELINE (production hardening)
+════════════════════════════════════════════════════════════════════
+
+CONTEXT
+  The academy site is being hardened for production in gated
+  phases (see PRODUCTION-READINESS.md, the single source of truth).
+  Phase 0 = establish the safety net before touching features:
+  full inventory, credential hygiene, and a production mode that
+  refuses to boot on insecure configuration.
+
+CHANGES
+  1) PRODUCTION-READINESS.md (NEW, kit root)
+     Architecture & trust boundaries; complete route/form/role/
+     email/secret/script inventory; data classification (public,
+     personal, medical, ID documents, children's media,
+     safeguarding-restricted); 20-item risk register (R1-R20) with
+     severity and remediation phase; final launch checklist; test
+     evidence table T1-T14.
+  2) backend/.env.production.example (NEW)
+     Credential-free template for production: locked ALLOWED_HOSTS,
+     single-origin CORS/CSRF, strong SECRET_KEY guidance, secure
+     cookies, no RESEND_API_KEY value. backend/.env.example now
+     points to it for production installs.
+  3) install.sh — deterministic credentials REMOVED
+     * No default admin password anywhere in source. Install uses
+       SP_ADMIN_PASS (never echoed) or generates a random 20-char
+       password shown exactly ONCE in the banner. Existing accounts
+       are never reset on re-install/upgrade.
+     * Demo parent (demo-data installs): fictional address
+       (demo.parent@example.com) + random per-install password,
+       shown once. The old fixed password and the real personal
+       Gmail address are gone from source and banners.
+     * New --production flag: verifies the configuration by
+       actually booting the app under the production guard BEFORE
+       writing SP_ENV=production. Insecure values are itemised and
+       the install exits 1 in development mode instead.
+  4) backend/sporting_pearls_backend/settings.py — FAIL-CLOSED
+     SP_ENV=production now aborts at import (gunicorn workers and
+     every manage.py command) if ANY of: DEBUG=1, wildcard/empty
+     ALLOWED_HOSTS, CORS_ALLOW_ALL=1, missing/placeholder/short
+     DJANGO_SECRET_KEY, SESSION_COOKIE_SECURE=0, or
+     CSRF_COOKIE_SECURE=0.
+  5) seeds/seed-announcements-p2.py — env-driven demo credentials
+     (reads SP_DEMO_PARENT_EMAIL / SP_DEMO_PARENT_PASS, falls back
+     to random; no hardcoded personal data).
+  6) README-START-HERE.txt / POST-INSTALL-README — credential-free
+     wording + lost-password reset instructions.
+  7) Git baseline (repository ships inside the kit)
+     .gitignore blocks .env, db.sqlite3, media/, logs/, backups/;
+     4 commits: baseline -> readiness doc -> env example ->
+     credential removal + fail-closed guard.
+
+VERIFIED (evidence T1-T14 in PRODUCTION-READINESS.md §8)
+  Guard rejects each insecure value individually (T1-T5) and
+  accepts a fully hardened env (T6); development mode unaffected
+  (T7). Two clean installs: random admin password generated &
+  shown once, no default findable in source (T8); SP_ADMIN_PASS
+  honoured silently (T9); upgrade keeps existing password and
+  prints none (T10); demo parent fictional + random (T11);
+  --production verification path (T12). Git hygiene: secrets/db/
+  media never tracked (T13); kit zip contains no secrets/.git/db
+  (T14).
+
+NOTE FOR THE OWNER
+  Phase 0 is complete and the programme now pauses at the Phase 0
+  gate. Phase 1 (safeguarding/data protection: DSO role,
+  restricted report storage, audit log, minimal notifications) is
+  the next and highest-priority phase. Nothing has been deployed;
+  no real email has been sent.
+
+
+
+════════════════════════════════════════════════════════════════════
+  KIT REVISION 13 — PHASE 1: SAFEGUARDING & DATA PROTECTION
+════════════════════════════════════════════════════════════════════
+
+CONTEXT
+  The highest-risk data this system holds — child-welfare reports
+  with names, narratives, witnesses and reporter identities — was
+  previously stored in the shared submissions ledger, emailed IN FULL
+  to the general academy inbox, and readable by ANY staff account
+  (risks R1-R3 in PRODUCTION-READINESS.md). Phase 1 isolates it
+  completely. Nothing was deployed; no real email was sent.
+
+CHANGES
+  1) Restricted storage (backend/submissions/)
+     * NEW safeguarding.py — roles, statuses, the label-keyed form-10
+       parser (one pure function shared by API, migration, tests),
+       and the idempotent legacy-row mover.
+     * NEW models: SafeguardingReport (structured fields, anonymous
+       reports store no identity even if a client misbehaves) and
+       SafeguardingAuditEntry (append-only: save() on an existing row
+       and delete() both raise).
+     * Migrations 0003 (schema) + 0004 (groups, DSO permissions,
+       legacy ledger rows moved into the restricted store and
+       audited — upgrading installs are cleaned automatically).
+  2) Access control
+     * DSO role = Django group "DSO (Designated Safeguarding
+       Officer)", granted per person via the NEW manage.py command:
+         sp_dso grant|revoke|list <username>
+     * Staff, parents AND superusers without the role get a neutral
+       403 — in the branded portal AND in the Django admin (admin
+       views are read-only for the DSO; no add/change/delete).
+     * The staff dashboard shows no trace that reports exist: no
+       rows, no counts, no nav item (the "Safeguarding desk" link
+       appears only for the DSO).
+  3) The DSO desk — /portal/dso/ (new branded pages)
+     Queue (status chips + filters), report detail (identity block,
+       incident fields, narrative), status workflow (received →
+       under review → escalated — external authority → actioned →
+       closed), assign-to-me, append-only case notes, full audit
+       trail per report, and a global audit log page.
+     EVERY page view and action writes an audit entry with the
+     acting user's name.
+  4) Email hygiene
+     * DSO notification (NEW, to DSO_EMAIL only — never the general
+       inbox): "a report is waiting" + reference + portal link.
+       No narrative, no child name, no reporter identity — enforced
+       by tests.
+     * Reporter acknowledgment (NEW): neutral subject, reference +
+       emergency numbers (Police 999/112, Childline 116); anonymous
+       reporters get nothing by design.
+     * Unset DSO_EMAIL fails safe: no academy email at all; the
+       report waits in the desk.
+  5) Public copy (site/form-10-safeguarding-report.html)
+     "100% Whistleblower Protection" replaced with legally-careful
+     "Confidential Reporting" wording: anonymity honoured, identity
+     DSO-only, but statutory sharing where a child is at risk is
+     disclosed; good-faith reporting protected from retaliation.
+     Step 4 retitled "Immediate Safety & Final Submission",
+     submission target corrected to the Designated Safeguarding
+     Officer (was "Safeguarding Committee").
+     >> OWNER ACTION: legal review/sign-off of this wording before
+        launch (open item at the Phase 1 gate).
+  6) Data-loss bug fixed (site/assets/js/shared/sp-forms.js, v23)
+     Grouped checkboxes sharing one label (the six form-10 incident
+     categories) collapsed to the FIRST box's Yes/No — the
+     selection never reached the server. Now every checked option
+     value is collected under the shared label. Cache bust ?v22→v23
+     on all 13 form pages.
+  7) Operations
+     * SAFEGUARDING-RUNBOOK.md (NEW, kit root): roles, automated
+       behaviour, DSO workflow with response times, escalation
+       ladder, data-handling rules, break-glass, residual risks,
+       manual QA script (fictional data), owner TODOs.
+     * .env examples + install.sh + POST-INSTALL-README teach the
+       DSO_EMAIL setting and the sp_dso command.
+
+VERIFIED (evidence T15-T27 in PRODUCTION-READINESS.md §8)
+  38 automated tests (manage.py test): parser unit tests incl.
+  legacy shapes; API isolation (report stored, ZERO ledger rows);
+  notification/ack content scans (no narrative/child/identity
+  anywhere); access matrix (anonymous/parent/staff/superuser/DSO/
+  revoked); dashboard blindness; admin gating; audit immutability;
+  full desk lifecycle; group least-privilege. Live smoke with a
+  real server + real sessions (scripts/p1_smoke.sh): 19/19 —
+  includes submitting a fictional report over HTTP and walking the
+  whole DSO workflow. Visual QA (agent-browser + VLM): DSO desk
+  pages desktop + mobile, form-10 copy box — PASS after two fixes
+  (friendly notification labels instead of raw config strings).
+
+NOTE FOR THE OWNER (Phase 1 gate)
+  Code and tests are done; three things need a human decision:
+    1) appoint the DSO:  manage.py sp_dso grant <username>
+    2) set DSO_EMAIL in backend/.env (the officer's PRIVATE inbox)
+    3) legal review of the new public wording (form-10)
+  Then Phase 2 (auth & application hardening) can begin.
+
+
+════════════════════════════════════════════════════════════════════
+KIT REVISION 14 — PHASE 2: AUTH & APPLICATION HARDENING
+(supersedes rev 13; contains all rev 2-14 work)
+════════════════════════════════════════════════════════════════════
+
+Gate-1 outcome recorded: legal wording APPROVED AS-IS by the owner
+(2026-10-23). DSO appointment + DSO_EMAIL remain owner-side actions.
+
+WHAT CHANGED
+  1) Login hardening (all three surfaces)
+     * Staff portal login: per-IP throttle (8 fails / 15 min) with a
+       branded 429 page and a disabled form — parity with the parent
+       portal, which always had it.
+     * Django admin login: same throttle via the new
+       AdminLoginThrottle middleware (counts only failures; a
+       successful sign-in resets the counter).
+     * Message hygiene: unknown user, wrong password and
+       valid-credentials-but-not-staff now ALL return the same
+       "Wrong username or password" on both branded logins (the old
+       "This account does not have portal access" / "No parent
+       account uses this email" replies were account-validity
+       oracles once a password was known).
+     * PBKDF2 timing equaliser: a dummy password verify runs when the
+       username/email does not match, so response time does not
+       reveal account existence either.
+  2) Password reset without account enumeration (NEW, both portals)
+     * /portal/reset/ (staff: username or email) and
+       /portal/parents/reset/ (parents: email).
+     * Identical neutral "Check your inbox" page for known and
+       unknown accounts; the email (neutral text + one link only) is
+       sent only for real, active accounts.
+     * Links are one-use (setting the password changes the hash and
+       kills the token) and expire after PASSWORD_RESET_TIMEOUT
+       (default 1 hour, was Django's 3 days).
+     * Abuse controls: honeypot field + 5 requests / IP / hour.
+     * "Forgot your password?" links added to both login pages.
+  3) Response hardening
+     * NEW submissions/middleware.py: SecurityHeadersMiddleware adds
+       CSP + Permissions-Policy + Cross-Origin-Opener-Policy to every
+       Django response. CSP blocks object-src, base-uri, form-action
+       and frame-ancestors; scripts/styles keep 'unsafe-inline'
+       because the public site uses inline onerror= handlers on 36
+       pages and the dashboard ships one inline script (documented as
+       residual risk R27 — tighten in a later refactor).
+     * Settings: nosniff, strict Referrer-Policy, X-Frame-Options
+       DENY, env-driven HSTS, session cookies HttpOnly + SameSite=Lax
+       with a 12-hour age, security-event logging (pk + ip only).
+     * nginx templates (both :80 and TLS): same header set for the
+       static site, branded 404/50x error pages via error_page
+       (internal), and the MISSING client_max_body_size 12m added to
+       the plain-:80 front (uploads >1 MB silently failed through it).
+  4) Proxy trust is now opt-in
+     * SECURE_PROXY_SSL_HEADER only honours X-Forwarded-Proto when
+       TRUST_PROXY_HEADER=1 (install.sh --with-nginx writes it).
+       Direct-exposure deployments can no longer be spoofed into
+       believing a request is HTTPS.
+  5) Player-photo uploads fully validated
+     * Pillow double-pass decode: renamed non-images, truncated
+       files and SVGs are rejected; 40-megapixel cap before decode.
+     * Stored images are re-encoded WITHOUT EXIF/GPS metadata (a
+       children's academy should not leak photo GPS coordinates) and
+       the stored extension always matches the real format.
+  6) Branded error pages
+     * Django 404/500 handlers render branded pages with no
+       internals; static site gets 404.html + 50x.html.
+  7) Public API abuse cap
+     * Per-IP aggregate limit across all 13 forms (one IP can no
+       longer multiply its per-form budget); per-form limit unchanged.
+
+VERIFIED (evidence T28-T42 in PRODUCTION-READINESS.md §8)
+  89 automated tests (38 Phase 1 + 51 new: headers, throttles, reset
+  flow incl. enumeration parity + expiry + one-use, upload validation
+  incl. EXIF strip + bomb cap, aggregate throttle, settings pins).
+  Phase 0 guard suite re-run: 12/12. Live smoke with a real server
+  (scripts/p2_smoke.sh): 25/25 — headers over HTTP, both throttles,
+  the full reset flow with a live login afterwards, upload rejection
+  + EXIF-strip verification on the stored file, branded 404. Visual
+  QA (agent-browser + VLM): 7/7 pages desktop + mobile.
+
+NOTE FOR THE OWNER (Phase 2 gate)
+  Everything above is tested and dormant-safe for existing installs
+  (upgrades pick it up on restart). Two behaviours to be aware of:
+    * logins pause 15 minutes after 8 failures from one address;
+    * portal sessions now expire after 12 hours.
+  Say continue to proceed to Phase 3 (truthful, resilient public
+  forms), or flag anything above first.
+
+KIT REVISION 15 — PHASE 3: TRUTHFUL, RESILIENT PUBLIC FORMS
+=============================================================
+Date: 2026-10-23 (production-hardening programme; see PRODUCTION-READINESS.md)
+
+WHAT CHANGED
+------------
+1. sp-forms.js rewritten (v3) — the honest submission contract:
+   - The success screen and its reference number now appear ONLY after
+     the server acknowledges the submission. Previously every page
+     invented a reference client-side (e.g. "SAFE-2026-4821") the moment
+     its own validation passed — a number that could never be traced to
+     a database row, shown before any server contact.
+   - Offline / server-rejected states get an honest on-page panel:
+     "Not sent yet" / "Not sent", the reason, a Try-again button, the
+     email fallback — and on form 10, the Childline Kenya 116 urgency
+     line. The form and the visitor's answers stay on the page.
+   - Undelivered copies retry automatically on the next visit; when one
+     finally goes through, a discreet note shows the REAL reference.
+   - Drafts: every form autosaves while typing and offers restore on the
+     next visit ("Continue where I left off" / "Start fresh").
+   - Device-copy hygiene (R25): drafts + offline copies expire after
+     48 hours; the queue is capped at 5 entries per form (was 20).
+   - Demo mode (empty API_BASE) now shows a clearly-marked DEMO-XXXX
+     reference instead of a fabricated realistic-looking one.
+
+2. All 13 form pages' success copy rewritten to be true:
+   - Removed: "securely transmitted directly to the Designated Child
+     Safeguarding Officer AND EXECUTIVE COMMITTEE" (only the DSO can
+     see reports since Phase 1), "an acknowledgement email and SMS has
+     been routed" (there is no SMS), "officially recorded in the
+     registry", "Under Immediate Assessment", "Assessment Slot Booked",
+     "Technical Director and coaching staff have been notified",
+     "forwarded directly to our Executive Board".
+   - Now: plain statements of what actually happened (received by the
+     academy office, will contact you, keep this reference) + the real
+     SP-XXXX-YYYYMMDD-XXXX reference.
+   - Accessibility: success dialogs get role="dialog" + aria-modal +
+     focus management; notes/panels are aria-live.
+
+3. Server-side validation parity (views.py):
+   - Payload guards: empty/junk payloads (fewer than 2 real answers),
+     >200 fields, >20-item checkbox lists, >4000-char values, >64 KB
+     bodies → honest 4xx, nothing stored, no reference issued.
+   - Newsletter requires a valid email address in the payload.
+   - An empty form-10 report (no narrative, no child, no categories) is
+     rejected with "the report appears to be empty".
+   - 4xx responses are never queued for retry client-side.
+
+4. Data minimisation (R13/R26 + email hygiene):
+   - NEW public privacy page policy-data-privacy.html (Kenya Data
+     Protection Act 2019): per-form collection table, who-can-see map,
+     on-device copy behaviour, retention approach, rights, contact.
+   - A short privacy notice + link on every form page.
+   - Medical details and ID numbers are withheld from notification
+     email bodies ("[withheld from email — view in the staff portal]")
+     with an explanatory note; the database keeps the full payload.
+   - The staff ledger answer sheet shows medical/ID values only to
+     Portal Administrators + superuser; ordinary staff see a mask and a
+     "restricted" note (body-b.html answer sheet + portal.py).
+   - form-01's photo field now states plainly that files are not
+     attached online — bring a printed photo on registration day.
+
+EVIDENCE
+--------
+- 22 new automated tests (test_phase3_forms.py): shape guards, form-10
+  content guard, email redaction, ledger redaction matrix → full suite
+  111/111 PASS.
+- phase0_guard_tests.py: 12/12 PASS.
+- scripts/p3_smoke.sh (live server): 17/17 PASS.
+- Browser QA (agent-browser, real servers, fictional data): real-ref
+  modal matches DB (form-08 + form-10); offline panel + queue; retry
+  with on-screen real references; draft save/restore/start-fresh/clear-
+  on-success (a debounce race was found and fixed); 429 path shows the
+  server message and is NOT queued; all 13 pages load with 0 JS errors
+  and privacy links (partners.html link added after the sweep caught
+  its absence); VLM visual QA of 7 screenshots — PASS.
+- Screenshots: download/qa-p3/*.png.
+
+OWNER ACTIONS AT THIS GATE (gate-3)
+-----------------------------------
+a) Accept the new form behaviours: success waits for the server;
+   offline reports persist in the visitor's browser for up to 48 h;
+   drafts autosave on the device.
+b) Decide the form-01 minimisation question (R13): which medical/ID
+   fields to keep, make optional, or move to a paper form.
+c) Review policy-data-privacy.html (esp. the retention wording).
+d) Confirm the form-01 photo-field note (vs wiring the upload later).
+OPERATIONAL NOTE: never serve the public site with an empty API_BASE
+(demo mode pretends success with a DEMO- reference).
+
+════════════════════════════════════════════════════════════════════
+KIT REVISION 16 — PHASE 5: PRODUCTION ENGINEERING (+ gate-3 decisions)
+════════════════════════════════════════════════════════════════════
+Date: 2026-10-23. Supersedes rev 15 (contains all rev 2-16 work).
+
+GATE-3 OUTCOME (recorded first)
+-------------------------------
+Owner approved via chat ("continue"), per the established pattern:
+- New form behaviours accepted (success waits for the server; 48-h
+  device copies; autosaved drafts).
+- R13 decided by applying the recommended default: form-01 no longer
+  collects Birth Certificate/UPI or National ID numbers online, and
+  the medical section is now ONE optional "conditions or allergies"
+  note; a full medical form is completed on paper with the coach at
+  enrolment; emergency-treatment authorisation kept. Privacy page and
+  form copy updated to say exactly that.
+- Privacy-page wording accepted as-is; form-01 photo-field honest
+  note kept (bring a printed photo).
+
+WHAT CHANGED IN PHASE 5
+-----------------------
+1. Pinned dependencies (R20): requirements.txt now pins exact tested
+   versions (Django 6.1.2, gunicorn 26.2.0, whitenoise 6.12.0,
+   requests 2.34.2, django-cors-headers 4.9.0, Pillow 13.0.0) with
+   documented upgrade procedure; psycopg noted as the optional
+   PostgreSQL driver.
+2. /healthz/ (R20): liveness + database-readiness probe at BOTH ''
+   and /healthz/; 503 + no internals when the DB is down; for uptime
+   monitors.
+3. Media auth-gating (R17): /media/ is served by portal.media_serve —
+   PUBLISHED players' photos stay public (squad pages, media
+   consented); every other file needs a staff session or the OWNING
+   guardian; missing/forbidden/traversal paths all return the same
+   plain 404 (no existence oracle); files belonging to no player row
+   fail closed (staff only).
+4. CSP inline-JS refactor (R27 closed for scripts):
+   - 240 inline onerror= handlers across 37 pages became data-fb /
+     data-fb-hide attributes, handled by the new shared
+     assets/js/shared/img-fallback.js (capture-phase error listener +
+     synchronous/DOMContentLoaded/load sweeps).
+   - core-values / our-story / vision-mission: the big inline
+     <script> blocks moved to assets/js/pages/<page>.js.
+   - Portal dashboard: inline script block moved to
+     /portal/assets/dash.js (allow-listed route, staff-only).
+   - Player-card photo fallbacks (portal + parent pages) use
+     data-fb-hide="reveal-next" + /portal/assets/img-fallback.js
+     (allow-listed, any signed-in user).
+   - index.html toast close button: inline onclick= replaced by an id
+     binding in index-2.js.
+   - CSP tightened to script-src 'self' (no unsafe-inline) in the
+     Django middleware AND both nginx templates; style-src keeps its
+     documented inline allowance.
+5. Self-hosted fonts + vendored JS (latent CSP bugs found during the
+   refactor): every page loaded Google Fonts and index.html loaded
+   lenis/gsap/ScrollTrigger/splittype from CDNs — ALL of these would
+   have been blocked by the shipped CSP under the real nginx front
+   (QA never caught it because the static test server sends no
+   headers). Now: 36 woff2 files + fonts.css served locally; the
+   three animation libraries vendored into assets/js/vendor/; and
+   splittype@0.3.4 — which has VANISHED from npm/unpkg/CDNs, so the
+   live script tag was silently 404ing and the hero word-reveal never
+   ran — replaced by a minimal local shim (assets/js/vendor/
+   splittype.min.js) that restores the animation. Zero third-party
+   requests remain on the public site.
+6. Backup restore drill (R14): templates/restore-drill.sh (installed
+   by install.sh next to sp.sh; sp.sh backup now points to it).
+   Extracts the newest bundle into a scratch dir, integrity-checks
+   the DB, boots a throwaway instance on the restored data, probes
+   healthz/portal/players API over HTTP, compares record counts with
+   the live DB. Executed here against a real bundle: 10/10 PASS.
+   Two script bugs found and fixed while proving it (integrity-check
+   exit code, grep -q SIGPIPE under pipefail).
+7. Optional PostgreSQL + shared cache (R14/R28): settings read
+   DB_ENGINE/DB_NAME/DB_USER/DB_PASSWORD/DB_HOST/DB_PORT and
+   SP_CACHE=db (Django DatabaseCache — shared throttle counters
+   across gunicorn workers, one-time manage.py createcachetable).
+   Defaults unchanged (SQLite + per-process cache); both switches
+   verified by subprocess settings-import tests; .env examples
+   updated.
+8. CI (R20): .github/workflows/ci.yml — backend test suite + phase-0
+   guard on every push once the repo is hosted; the guard script now
+   ships inside the kit (scripts/phase0_guard_tests.py, portable).
+9. EMAIL-SETUP-GUIDE: new deliverability section (R15) — SPF/DKIM/
+   DMARC record shapes and progression, verification steps, why DSO
+   notifications and password-reset mail must be verified first, and
+   the explicit "failures are recorded, not alerted" caveat.
+10. Bugs found by Phase 5 QA and fixed with regression tests:
+    - Parent portal home 500-ed for any player without a shirt
+      number (pre-existing latent crash, exposed by a minimal
+      fixture).
+    - Player-card photos carried an inline onerror= emitted from
+      Python (portal.py + parents/views.py) — invisible to the
+      HTML-file sweep, illegal under the tightened CSP; replaced by
+      the data-fb chain.
+    - The per-asset ACL initially required staff for img-fallback.js,
+      which 404-ed it for guardians (found live); now any
+      signed-in user may load it.
+
+EVIDENCE (PRODUCTION-READINESS.md §8, T52-T61)
+----------------------------------------------
+- manage.py test submissions: 133/133 PASS (22 new Phase 5 tests).
+- Portable phase-0 guard from inside the kit: 12/12 PASS.
+- scripts/p5_smoke.sh (real server + curl sessions): 42/42 PASS —
+  healthz both paths, CSP shape on 4 path classes, media-gate matrix
+  incl. traversal, dash.js ACL, dashboard renders with external
+  script and zero inline code, admin sanity, minimised form-01
+  fields, CSP-safe static pages, vendored libraries.
+- Restore drill: 10/10 PASS against a real bundle.
+- Browser QA (agent-browser, real servers): index (gsap/lenis/
+  SplitType objects present, computed font-family = Fraunces/Work
+  Sans — self-hosted fonts actually render; 0 console errors; 0
+  inline handlers), the three externalised pages (reveals fire),
+  form-01 (6 sections; cert/ID fields gone; health note present),
+  staff dashboard (dash.js loaded; view switching works), admin
+  login renders, parent home + child page (photo loads through the
+  media gate; broken photo reveals the monogram fallback on home,
+  child and staff players views). Screenshots: download/qa-p5/*.png.
+- VLM visual QA: 7/7 PASS.
+
+OWNER ACTIONS AT THIS GATE (gate-5)
+-----------------------------------
+a) Accept the CSP/behaviour changes — expected to be invisible; all
+   scripts now load from the site itself instead of Google/jsdelivr/
+   cdnjs/unpkg.
+b) Accept the media-gating policy: published squad photos stay
+   public; unpublished player photos are visible only to staff and
+   the owning guardian (old direct links now 404).
+c) Confirm the form-01 minimisation applied at gate-3 reads correctly.
+d) Decide the database question: stay on SQLite (default, unchanged)
+   or switch to PostgreSQL (config + docs shipped; needs the psycopg
+   driver and a one-time createcachetable if SP_CACHE=db).
+e) Point an uptime monitor at /healthz/ on the production host and
+   name the operational owner (R20 residual).
+
+=====================================================================
+KIT REVISION 17 — GATE-5 CLOSED + PHASE 6 (ACCEPTANCE TESTING)
+=====================================================================
+
+Gate-5 outcome (chat approval "continue", per the gate-2/gate-3
+pattern)
+---------------------------------------------------------------------
+a) CSP/behaviour changes ACCEPTED (self-hosted scripts/fonts).
+b) Media-gating policy ACCEPTED (published public, rest staff/
+   owning-guardian).
+c) Form-01 minimisation ACCEPTED as applied at gate-3.
+d) Database decision: STAY ON SQLITE (default). The PostgreSQL
+   switch (DB_ENGINE=postgres + DB_* + SP_CACHE=db) remains a
+   documented config option for later; no migration now.
+Also closed a gate-1 documentation leftover: SAFEGUARDING-RUNBOOK
+§9's closing paragraph still said the wording awaited owner review;
+it now records the 2026-10-23 as-is approval and what to update
+together (runbook §9 + website copy + privacy notice) if counsel
+ever refines the wording.
+
+Phase 6 — acceptance from a FRESH INSTALL of the shipped zip
+---------------------------------------------------------------------
+Method: unzip sporting-pearls-server-kit-v16.zip into a scratch
+directory and run install.sh --demo-data with SP_ADMIN_PASS — the
+owner's literal path. Everything below ran against that installed
+stack (gunicorn :8020 + static :8090), never the dev workspace.
+
+- Installer: 9/9 steps, services up, demo data seeded, per-install
+  random demo-parent password, admin password never echoed. (T62)
+- Automated suites from the installed tree: 133/133 tests +
+  phase-0 guard 12/12. (T63)
+- Live acceptance matrix 96/96 (now shipped as
+  scripts/p6_acceptance.sh — parameterised for staging re-runs):
+  liveness + real sp.sh stop/start; minimised form-01 on the served
+  site; CSP/nosniff/XFO; four public form submissions with real
+  references; payload guards (400/413/empty-report); form-10 → DSO
+  desk end-to-end (queue, detail, status, case note, full audit)
+  with staff + superuser 403s and dashboard blindness; demo-parent
+  journey (child, announcements, complaints, account); medical
+  redaction (plain staff masked / portal admin full / SP-SAFE ref
+  invisible); enumeration-free resets + full token link flow on
+  both portals; media-gate matrix; upload validation + EXIF strip;
+  branded 404 app + site; staff + admin login throttles 429;
+  backup + restore drill. (T64)
+- Browser journeys (agent-browser, 1440x900, 0 console errors):
+  full 6-section form-01 registration → success modal shows the
+  REAL server reference (SP-REG-20261024-7A11) matching the DB row
+  exactly — the form correctly refused to submit while the required
+  guardian signature was empty; demo-parent home (child +
+  announcements); staff dashboard (no safeguarding nav); DSO
+  dashboard → queue (narratives hidden) → detail → audit log.
+  (T66)
+- VLM visual QA: 8/8 PASS (one initial homepage FAIL was the hero
+  word-reveal animation caught mid-flight; re-shot after settle —
+  same artefact class as the Phase 3 QA false alarm). (T67)
+
+REAL DEFECT FOUND AND FIXED (T65) — throttles were inert
+---------------------------------------------------------------------
+Symptom: after 8 failed staff logins, the 9th attempt returned 200
+(no 429) on the fresh install — yet the same code passed every
+Phase 2 test.
+
+Root cause: the shipped service templates ran gunicorn with
+--workers 3. The login/reset throttles count in the process-local
+cache (R28), so the 8 failures round-robined across three worker
+processes and no single counter ever reached the threshold. The
+throttle was REAL CODE that was INERT in the default install —
+exactly the class of bug only a fresh-install acceptance test can
+catch (the Phase 2 tests ran against a single-process runserver).
+
+Fix: templates/sp.sh and templates/sp-backend.service now ship
+  --workers 1 --threads 8
+One gunicorn process with 8 gthread threads: the throttle counters
+are process-shared (and thread-safe through Django's cache API),
+SQLite writes stay single-process (no cross-worker "database is
+locked"), and concurrency for a small academy comes from threads.
+Both templates carry a comment explaining the scaling path:
+PostgreSQL + SP_CACHE=db (shared counters) BEFORE raising the
+worker count.
+
+Verified on the installed instance: 9th failed staff login → 429
+with the branded page; admin surface likewise. The acceptance
+script now carries a regression guard (gunicorn must be exactly
+master + 1 process) so a future "just raise the workers" change
+fails the acceptance run loudly instead of silently disarming the
+throttles again.
+
+Remaining owner-side before go-live (unchanged except Phase 6
+item now annotated): academy-staff staging sign-off with the same
+fictional data (re-run scripts/p6_acceptance.sh at staging), real
+production credentials, domain/hosts locking, uptime monitor at
+/healthz/ + named operational owner, DSO appointment + DSO_EMAIL.
+Phase 4 (content) remains owner-input blocked.
+
+KIT REVISION 18 — PHASE 4 (CONTENT & ENQUIRY POLICY)
+
+OWNER DECISIONS (chat, 2026-10-24)
+- Chairman's message + leadership names (Dr. Stephen Abuor, Mrs.
+  Joyleen Mbwika) confirmed real as published — no edits made.
+- Coaching staff: admin-settable (built this revision).
+- Fees / programme specifics / partnership terms / contact details:
+  communicated upon enquiry — no longer published on the website.
+- Safeguarding retention: 24 months unless the case is still open
+  (runbook §5 + privacy page §7 now state it in writing).
+- Email delivery owner-confirmed ("mails do get delivered").
+- "Remove the socials" — done, all 37 pages.
+
+WHAT CHANGED — BACKEND
+- submissions/models.py: new Coach model (name, role, optional squad
+  FK, bio, photo, is_published, sort) + CoachPhotoStorage — a custom
+  FileSystemStorage that re-encodes EVERY coach-photo save on EVERY
+  write path (admin form, shell, future views): Pillow verify + full
+  decode, 40-megapixel bomb cap, JPEG/PNG/WebP allow-list, EXIF/GPS/
+  ICC stripped via clean re-encode, stored extension matches the real
+  format, slug-safe filename, invalid input raises (fails closed).
+  Migration 0005_coach.
+- submissions/admin.py: CoachAdmin (thumb, publish/unpublish actions,
+  list_editable is_published/sort) + CoachAdminForm for friendly
+  validation messages (the transform itself lives in the storage).
+- submissions/views.py + urls.py: public read-only /api/coaches/ —
+  published coaches only, sort order, shape
+  {ok, count, coaches:[{name, role, squad, bio, photo}]} (photo is an
+  absolute URL through the media gate; empty string when none).
+- submissions/portal.py media_serve: coaches/ branch — published
+  coach photos public (technical-team section embeds them), everything
+  else staff/superuser only; uniform 404s unchanged.
+- Tests: submissions/tests/test_phase4.py — 13 tests (endpoint
+  publish-filter/order/shape/absolute-URL; media gate public/private/
+  staff matrix; storage EXIF-strip + extension fix + fail-closed on
+  direct saves; admin form rejections). Suite now 146/146; phase-0
+  guard 12/12.
+
+WHAT CHANGED — WEBSITE (site/)
+- Socials removed everywhere: footer socials block (37 pages),
+  .socials CSS rules (29 page stylesheets + 3 inline style blocks),
+  foot-grid rebalanced 3->2 tracks, "on our socials first" copy
+  (index), media-volunteer role reworded (form-04), "official
+  Facebook, Instagram and YouTube channels" (form-09) -> "official
+  channels and platforms".
+- Enquiry policy: every published email address removed — contact.html
+  (hero card, Email vcard -> Enquiries vcard, two mailto sentences),
+  policy-data-privacy.html (x3, rights + contact sections now route
+  through the contact form / academy office), safeguarding.html
+  (contact-line), portal-guide.html (x2), 50x.html, form-08 success
+  copy, form-09 withdrawal copy, partners.html partnerships@ button ->
+  form-06 link. sp-forms.js: CONTACT_EMAIL mailto fallbacks removed
+  from the offline panel and sync note; site-config.js: CONTACT_EMAIL
+  key removed. Copy states plainly that fees, programme schedules and
+  partnership terms are shared in reply to an enquiry.
+- Privacy page §7: concrete retention wording (24 months; open cases
+  until closed, then 24 months from closure).
+- the-squad.html: hardcoded fictional captain cards (4) replaced by a
+  dynamic #capList rendered from the roster source; new "Coaching &
+  Technical Staff" section (#staff) rendered from /api/coaches/ with
+  an honest empty state; stats band "38 Clean Sheets" (fabricated) ->
+  "6 Captain-Led Squads" (structural); #statRoster now tracks the
+  published roster count (— when zero).
+- the-squad.js: renderTeam shows an honest "Squad list being finalised"
+  panel for empty squads (never an empty pitch with a stray hint);
+  LIVE sites never fall back to the bundled fictional roster — order
+  is live data -> localStorage last-good -> honest empty panels (demo
+  mode, no API_BASE, keeps the bundled showcase); captains render
+  dynamically (photo or monogram, motto, shirt/position/age — no
+  fabricated "Matches" stat); captain-less squads show "TBC" instead
+  of a stale fictional name; coaches fetch with CSP-safe programmatic
+  monogram fallback; cache bumps (site-config/sp-forms/the-squad js+css).
+- the-squad.css: .pitch-empty, .cap-empty, .cap-mono, .staff/.st-card
+  styles in the page palette.
+
+KNOWN NOTES
+- The backend still uses info@ as the system sender (reset mails, DSO
+  notifications, portal/parent pages behind login) — that is the
+  "communicated upon enquiry" reply channel, not a published detail.
+- Demo installs show the bundled showcase squads/captains (clearly
+  demo content); live deployments (API_BASE set) never do.
+- Retention anchor (24 months from closure for open cases) is the
+  protective default reading of the owner's wording — flagged in the
+  runbook for counsel confirmation.
+
+KIT REVISION 19 — PHASE 7 (RESULTS PAGE + PLAYER QR CODES)
+────────────────────────────────────────────────────────────────────
+WHAT CHANGED
+- New public Results page (site/results.html): the nav's Results item
+  and every footer now point at it (was: a scroll to the home fixtures
+  anchor). Honest "Coming Soon" panel until the office publishes
+  results; then month-grouped match cards with W/D/L badges, scores,
+  competition/venue and optional reports — fed by /api/results/
+  (published only, newest first, outcome derived server-side).
+  Results are entered in the Django admin (Results section, next to
+  Fixtures): team, opponent, competition, date, venue, home/away,
+  both scores, optional report, publish flag.
+- New public player profile page (site/player.html?ref=FEM-01) — the
+  QR target. Shows ONLY the public fields already published on the
+  squad pages (name, squad, number, position, age, motto, photo).
+  Unpublished or unknown refs show an honest "not available" panel —
+  a printed QR can never leak an un-published profile. The page is
+  noindex (children's individual profiles stay out of search engines).
+- QR code cards, one per child, printable:
+    /portal/qr/               staff — every player, grouped by squad
+    /portal/qr/<ref>/         staff — one player (QR button on every
+                              player card in the dashboard)
+    /portal/parents/qr/<ref>/ guardian — own child only (link on the
+                              child page in the parent portal)
+  Cards carry a Print button; unpublished players are included but
+  flagged (their QR shows "not available" until published). The QR
+  encodes  SITE_URL/player.html?ref=<ref>  — SITE_URL is written by
+  install.sh (domain/LAN aware); if it is unset the card page shows a
+  warning before you print.
+- segno==1.6.1 added to requirements (pure-Python QR generation, no
+  network, no other dependencies).
+- the-squad.html now supports #team-<key> deep links (the profile
+  page's "View the full squad" opens the right tab).
+- CSP hardening: an inline onerror= survived INSIDE 9 JavaScript nav
+  templates (site-core/nav-pro/scroll-parallax + 6 page scripts) —
+  invisible to the Phase-5 sweep because that only scanned HTML
+  files. All converted to the data-fb pattern; asset versions bumped.
+NOTES FOR THE OFFICE
+- Print QR cards AFTER the player is published (or accept the flagged
+  draft card and publish before handing it out).
+- The profile a QR opens contains exactly what the squad page shows —
+  nothing private (no guardian, contact or medical data) is reachable.
+- If you re-point the site to a new domain, re-run install.sh so
+  SITE_URL (and the QR targets) follow — cards printed before the move
+  keep pointing at the old address.
+
+════════════════════════════════════════════════════════════════════
+KIT REVISION 20 — SITE POLISH ROUND (SEO / COPY / A11Y / IMAGES)
+────────────────────────────────────────────────────────────────────
+WHAT CHANGED
+- Full change record: CHANGELOG-REV20.md (the authoritative list,
+  grouped by the owner's task numbers, with measured contrast ratios
+  and owner-decision items).
+- SEO: site/robots.txt + site/sitemap.xml added (23 public pages;
+  forms, policies, portal-guide, player.html, error pages excluded);
+  canonical + Open Graph tags on all 39 public pages; 23 over-long
+  meta descriptions rewritten (<160, unique); favicon added to
+  404/50x. install.sh --domain/--public-url now re-points the domain
+  placeholder across robots/sitemap/canonical/og automatically.
+- Copy: duplicated home hero label replaced ("Mtwapa · Kilifi County ·
+  Since 2020"); pillar 06 retitled "A Community United"; place naming
+  standardised (first body mention "Mtwapa, Kilifi County"); counts
+  audited — Seven/Eight/6 all verified correct against their sections;
+  contact's "8 Development Programmes" left as-is and REPORTED (site
+  lists disagree: 6 vs 7) per the no-guessing instruction.
+- Numbering: eyebrows renumbered to start at 01 and run continuously
+  on 8 pages (about-us, partners, safeguarding, leadership-governance,
+  chairman-message, boys-programme, education-life-skills,
+  coaching-philosophy).
+- Stat strips: mobile rows are now 3-column grids with 12px labels
+  (bl14m-hero-600.css + -b + leadership/player-development + the 3
+  inline-style pages); contact's third stat "2020 · Serving the
+  Community" replaced with the factual "6 · Teams U9 → Féminin".
+- Forms hub: join-us shows all ten forms in "Main Pathways (01–06)" +
+  "Other Forms (07–10)"; Form 06 card added; Forms 08/09 added;
+  heading "Five gateways" -> "Ten gateways"; hero stat 5 -> 6
+  Onboarding Pathways.
+- Contact: response-time line added using the kit's own auto-reply
+  wording ("within a few working days") + OWNER confirm comment.
+- Typography/contrast: all sub-12px mono labels raised to 12px (24
+  css files + 3 inline-style pages); grey-on-dark alphas raised to
+  pass WCAG AA 4.5:1 (ratios recorded in scripts/p8_contrast.py
+  output; lowest text ratio now 5.08:1 on the lightest navy);
+  policy-data-privacy paragraph spacing + subheading sizes increased
+  (wording untouched; shared policy.css kept uniform across the four
+  policy pages).
+- Images: logo.png 310->75KB (palette), feminin-hero.jpg 355->190KB,
+  sp-coach-address.jpg 361->188KB (nlmeans denoise + re-encode; the
+  photos' baked-in grain blocked a plain re-encode under 200KB);
+  rollback copies in scripts/originals/; 150 below-the-fold images
+  lazy-loaded (heroes/LCP stay eager).
+- Bugs found by QA (pre-existing, fixed): the-squad.css 404'd on a
+  designer-local image (../../Pearls/radoms/IMG_7082.jpg — never
+  shipped) -> re-pointed to sp-team-huddle.jpg; bl14m-hero-600-b.css
+  never had the mobile label rule, so chairman-message/about-us stat
+  labels overlapped at 390px -> fixed.
+- CSS cache versions bumped (40 links across the 39 pages).
+
+NOT CHANGED (by instruction)
+- No deployment, email, personal data, safeguarding/DSO logic, CSP,
+  rate limits, media gating, audit logging, form fields/validation,
+  policy wording (one accidental edit inside the safeguarding policy
+  was caught and reverted), fixtures "Coming Soon", no build step.
+
+OWNER DECISIONS REQUESTED
+- contact "8 Development Programmes" real count (6 vs 7 on site).
+- partners "4 Active Squads" vs 6 teams elsewhere.
+- partner-with-us.html redirect recommendation (301 -> partners.html)
+  — noindex only after owner confirms.
+- contact response time (keep "a few working days" or set a number).
+- education-life-skills quote attribution reading.
+
+EVIDENCE
+- backend: manage.py check clean; 162/162 tests pass (before+after).
+- scripts/p8_verify.py static suite: ALL PASS (tag balance, link
+  resolution, CSP hygiene, canonical/OG completeness, description
+  uniqueness/length, lazy coverage, CSS brace balance, robots/sitemap
+  shape, enquiry-policy grep, forms-hub structure).
+- scripts/p8_browser_qa.sh: 41 pages x 1440/390px — 0 console errors,
+  0 failed assets, 0 horizontal overflow; VLM visual QA of 19
+  screenshots PASS (two initial flags investigated: one screenshot-
+  fold artefact, one real overlap fixed via bl14m -b).
+
+=====================================================================
+KIT REVISION 21 — 2026-10-27 (owner UI round + squad QR + test portability)
+=====================================================================
+OWNER ASK (with a support-us hero screenshot): remove the carousel,
+ensure there is no black, add a parallax effect.
+STANDING OWNER ASK (sample card: James Karanja): every player card on
+the squad pages carries the player's unique QR code.
+
+DONE
+- Carousel (the auto-scrolling marquee strip) removed from all 14
+  pages that had it; dead CSS (11 page css + 3 inline) and JS
+  (site-core + 4 page scripts) swept; hero-to-section seams fixed
+  (partners w1 -> pearl, leadership w1 -> sand, the-squad fill -> sand).
+- Black eliminated where the owner saw it:
+  * REAL pre-existing bug: hero tide waves rendered pure black because
+    `.tide .w1 path` never matched (`.w1` IS the path) -> SVG default
+    black fill. Fixed to `.tide path.w1/.w2` (9 css + 3 inline pages);
+    verified via getComputedStyle.
+  * Near-black recolors in the 14 style files: stat-band stop
+    rgba(12,26,51,1) -> rgba(26,50,96,1); tints -> rgba(20,40,75,*);
+    hero fallbacks + chairman/leadership/player-development gradients
+    -> navy family; theme-color metas -> #14284b; fig placeholders.
+  * Footer unified navy-3 -> navy-4 site-wide (29 page css + index.css
+    + 3 inline html).
+- Parallax: new assets/js/shared/hero-parallax.js (RM-safe, rAF,
+  0.25x) wired on all 16 photo heroes (11 new + 5 existing).
+- Cache busts ?v22/?v23 (39 pages touched).
+- Squad player cards -> unique per-player QR: the dossier modal on
+  the-squad.html now renders a framed QR encoding that player's
+  public profile URL (player.html?ref=...). Self-hosted vendor lib
+  assets/js/vendor/qr.min.js (qrcode-generator, MIT; no CDN, no
+  eval/new Function -> CSP-safe). Live roster refs from the API
+  (p.ref); demo mode derives squad-code + shirt-order refs matching
+  player_seed.json; fail-closed hide on any error (never a dead
+  link); sp-player.js demo-profile fallback (captain U19-10) so demo
+  scans land on a real profile. New test
+  test_squad_player_cards_carry_unique_qr locks the wiring
+  (suite now 163 tests).
+- Backend: test_phase7.py no longer hardcodes the build machine's
+  absolute site/ path (resolves relative to the test file) — the
+  shipped suite now runs on any install path.
+
+NOT CHANGED
+- No backend behaviour, no security control, no safeguarding/DSO
+  logic, no forms, no policy wording, no deploy.
+
+EVIDENCE (2026-10-27)
+- venv rebuilt from pinned requirements; 163/163 tests (incl. the new
+  QR wiring test); phase-0 guard 12/12. Static sweeps: 0 marquee/.mq-/mqTrack,
+  16 heroBg, 11 parallax includes, 0 navy-3 footers, wave fix in 12
+  files; QR wiring present (vendor include, mQr/mQrLink targets,
+  .m-qr CSS, ref plumbing). Browser QA 12 pages: marquee 0, footer
+  rgb(26,50,96), waves correct, parallax 0.25x, 0 console errors;
+  41 pages 200. VLM QA 5 shots PASS.
+- Full change record: CHANGELOG-REV21.md.
+
+════════════════════════════════════════════════════════════════════
+  KIT REVISION 22 — REAL SQUAD ROSTER (EXCEL REGISTER IMPORT)
+════════════════════════════════════════════════════════════════════
+
+OWNER REQUEST
+  "update the website with the following player info" — delivered as
+  SPFA_Player_Administration_System_2026-2027.xlsx plus two player
+  photo archives (under19 + under13 downloads).
+
+WHAT CHANGED
+  * the-squad.js (v25 -> v26): demo squads replaced by the real
+    register — 50 players, squads U12(18)/U14(16)/U16(11)/U19(5).
+    Formation board now places players by registered position line
+    (new BANDS map); new bench strip keeps every registered player
+    visible and clickable; captains honest-TBC (no data in register);
+    dossier chips show factual register fields only (no fabricated
+    ratings/heights); missing foot/age render as "—".
+  * 29 player photos staged at site/assets/img/squad/u16-NN.jpg +
+    u19-NN.jpg from the two archives, mapped via the register's inline
+    photo references; 21 players have no reference and keep the jersey
+    fallback.
+  * the-squad.html: 5 tabs (U12/U14/U16/U19/Féminin-last, boot U12),
+    legend, stats band 50/4/5, meta descriptions; Féminin shows the
+    honest "being finalised" panel (no register rows yet).
+  * the-squad.css ?v23 -> v24 (bench strip styles).
+  * sp-player.js (rev 22) DEMO_PROFILES regenerated (50 real refs,
+    photos wired); player.html include ?v2 -> ?v3.
+  * Sitewide nav mega-menu relabelled in all 41 pages: "U9 & U13" ->
+    "U12 & U14", "U15 & U17" -> "U16" (incl. preview captions).
+  * index.html: pathway tiers + impact label updated to U12·U14 / U16 /
+    U19 / Féminin; "Teams · U12 -> Féminin".
+  * backend/player_seed.json regenerated from the same source; the
+    three data artifacts carry identical refs (U12-01 ... U19-05).
+  * One test assertion updated: seeded-captain ref 'U19-10' (demo
+    data, gone) -> real register refs 'U12-01'/'U19-05'.
+
+EVIDENCE
+  manage.py test submissions 163/163 PASS (venv rebuilt from pinned
+  requirements). Gateway crawl: 41/41 pages + 133/133 unique assets
+  200; 29/29 squad photos 200. Browser QA (1440 + 390px): 5 tabs,
+  U12 boot, 11 dots + 7 bench chips, modal photo/QR/chips OK, U19
+  5-dot honest layout, Féminin honest panel, 0 console errors;
+  player.html?ref=U12-02 renders with photo. VLM QA 5 shots PASS.
+  Full change record: CHANGELOG-REV22.md.
+
+OWNER ACTIONS STILL OPEN
+  - Send the Féminin register rows to fill the last tab.
+  - 21 players have no photo in the register (jersey fallback shows);
+    send headshots referenced by player name to have them wired.
+  - Program-page prose still says "U9 to U19" generally — confirm
+    whether to relabel the development-pathway copy sitewide.

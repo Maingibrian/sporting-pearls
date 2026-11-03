@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f59d1e'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%230c1a33' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%230c1a33'/%3E%3C/svg%3E">
+<title>Announcements desk · Sporting Pearls Management Portal</title>
+<style>__STAFF_CSS__
+  .an-row{display:flex;align-items:flex-start;gap:12px;padding:15px 18px}
+  .an-row + .an-row{margin-top:12px}
+  .an-main{min-width:0;flex:1}
+  .an-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
+  .an-date{margin-left:auto;font-size:12.5px;color:var(--muted)}
+  .an-row h3{font-family:Georgia,serif;font-size:16px;color:var(--navy);font-weight:600}
+  .an-row p{font-size:14px;color:#5c6a7e;line-height:1.55;margin-top:4px}
+  .an-for{display:inline-block;margin-top:9px;font-size:12.5px;font-weight:600;letter-spacing:.6px;
+    text-transform:uppercase;color:#a05a04;background:rgba(245,157,30,.09);
+    border:1px solid rgba(245,157,30,.22);border-radius:999px;padding:3px 10px}
+  .an-acts{flex:none}
+  .inlineform{display:inline;margin:0}
+  .sq-check{display:flex;align-items:center;gap:8px;font-size:14.5px;color:#1a2436;
+    font-weight:500;text-transform:none;letter-spacing:0;padding:6px 0;margin:0}
+  .sq-check input{width:auto;accent-color:#a05a04}
+  .sqdot{width:9px;height:9px;border-radius:50%;flex:none}
+  .pane{padding:20px 22px}
+  .pane h3{font-family:Georgia,serif;font-size:17.5px;color:var(--navy);font-weight:600;margin-bottom:4px}
+  .pane .sub{font-size:14px;color:#5c6a7e;margin-bottom:6px}
+  .cnt{display:flex;gap:10px;margin-bottom:16px}
+  .cnt .c{flex:1;background:#fff;border:1px solid #e7ebf2;border-radius:14px;padding:11px 14px;box-shadow:0 1px 2px rgba(12,26,51,.05),0 12px 30px -12px rgba(12,26,51,.14)}
+  .cnt .c span{font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#7c88a1}
+  .cnt .c b{display:block;font-family:Georgia,serif;font-size:21px;color:var(--navy);margin-top:2px}
+  .hint{border:1px dashed #d9dfe9;border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.6;color:#5c6a7e;margin-top:14px}
+  .hint b{color:var(--navy)}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="bar">
+      <div class="mark">SP</div>
+      <h1>Sporting Pearls Academy<small>Management Portal</small></h1>
+      <div class="who">
+        <span>__USER__</span>
+        <form method="post" action="/portal/logout/" class="signout">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <button type="submit">Sign out</button>
+        </form>
+      </div>
+    </div>
+    <div class="hero">
+      <h2>Announcements desk</h2>
+      <p>Compose notices, target them to squads, and publish straight to every parent&#8217;s board</p>
+    </div>
+    <nav class="pnav">
+      <a __NAV_DASH__ href="/portal/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Dashboard</a>
+      <a __NAV_ANN__ href="/portal/desk/announcements/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg> Announcements</a>
+      <a __NAV_COMP__ href="/portal/desk/complaints/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 11.5l2 2 4-4"/></svg> Welfare desk</a>
+    </nav>
+  </header>
+  <main>
+__NOTE__
+    <div class="cnt">
+      <div class="c"><span>Published</span><b>__N_PUB__</b></div>
+      <div class="c"><span>Drafts</span><b>__N_DRAFT__</b></div>
+    </div>
+    <div class="grid2">
+      <div class="pane card">
+        <h3>Compose a notice</h3>
+        <p class="sub">Empty squad selection reaches <b>every</b> parent.</p>
+        <form method="post" action="/portal/desk/announcements/">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <label for="a-title">Title</label>
+          <input type="text" id="a-title" name="title" maxlength="150" required
+                 placeholder="e.g. U15 conditioning block starts Monday">
+          <label for="a-body">Message</label>
+          <textarea id="a-body" name="body" required
+                    placeholder="Write the notice as it should reach parents — warm, clear, specific. Blank lines start a new paragraph."></textarea>
+          <label>Squads (none ticked = all squads)</label>
+__SQUAD_BOXES__
+          <label class="row-check"><input type="checkbox" name="pinned" value="1">
+            Pin to the top of the board</label>
+          <label class="row-check"><input type="checkbox" name="email_now" value="1" checked>
+            Also email this notice to the parents it is visible to</label>
+          <button class="act" type="submit" name="action" value="publish">Publish now</button>
+          <button class="act" type="submit" name="action" value="draft"
+                  style="background:transparent;border:1.5px solid #d9dfe9;color:#1a2436;margin-left:8px">
+            Save as draft</button>
+        </form>
+        <div class="hint"><b>How email works here:</b> on publish with the email box ticked, every
+          active parent whose children play in the selected squads receives the branded notice
+          in their inbox. Publishing without the box simply places it on the board.</div>
+      </div>
+      <div>
+        <div class="sec-h" style="margin-top:0"><h3>Announcement ledger</h3></div>
+__ANN_ROWS__
+      </div>
+    </div>
+  </main>
+  <div class="foot">
+    <span>Sporting Pearls Football Academy · Mtwapa, Kilifi County</span>
+    <span class="fbrand">Sporting Pearls Academy · Management Portal</span>
+  </div>
+</body>
+</html>

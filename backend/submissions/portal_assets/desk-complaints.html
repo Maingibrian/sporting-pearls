@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f59d1e'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%230c1a33' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%230c1a33'/%3E%3C/svg%3E">
+<title>Welfare desk · Sporting Pearls Management Portal</title>
+<style>__STAFF_CSS__
+  .fchips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .fchip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.5px solid #d9dfe9;
+    color:#1a2436;font-size:13.5px;font-weight:600;padding:7px 14px;border-radius:999px;
+    text-decoration:none;transition:.15s}
+  .fchip:hover{border-color:var(--amber)}
+  .fchip.on{background:var(--amber);border-color:var(--amber);color:#3d2800}
+  .fchip .cn{background:rgba(12,26,51,.08);border-radius:999px;padding:1px 8px;font-size:12.5px}
+  .fchip.on .cn{background:rgba(12,26,51,.12)}
+  .case{display:flex;align-items:flex-start;gap:12px;padding:15px 18px;text-decoration:none;
+    color:inherit;transition:.15s;margin-bottom:12px}
+  .case:hover{border-color:rgba(245,157,30,.6);transform:translateY(-1px)}
+  .case-main{min-width:0;flex:1}
+  .case-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .case-top h3{font-family:Georgia,serif;font-size:15.5px;color:var(--navy);font-weight:600}
+  .case-ref{font-family:'Sarasa Mono SC',monospace;font-size:12.5px;color:#7c88a1;background:#f3f5f9;border-radius:6px;padding:1.5px 7px}
+  .case-meta{font-size:13.5px;color:#5c6a7e;margin-top:4px}
+  .case-side{flex:none;text-align:right}
+  .case-date{font-size:12.5px;color:var(--muted)}
+  .alert{display:flex;gap:12px;align-items:flex-start;border:1.5px dashed rgba(245,157,30,.55);
+    background:rgba(245,157,30,.06);border-radius:14px;padding:14px 17px;margin-bottom:18px}
+  .alert b{color:var(--navy)}
+  .alert p{font-size:14.5px;color:#5c6a7e;line-height:1.55}
+  .alert .n{font-family:Georgia,serif;font-size:24px;color:#a05a04;font-weight:700}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="bar">
+      <div class="mark">SP</div>
+      <h1>Sporting Pearls Academy<small>Management Portal</small></h1>
+      <div class="who">
+        <span>__USER__</span>
+        <form method="post" action="/portal/logout/" class="signout">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <button type="submit">Sign out</button>
+        </form>
+      </div>
+    </div>
+    <div class="hero">
+      <h2>Welfare desk</h2>
+      <p>Every parent concern, in one auditable place — reply, take notes, move cases to done</p>
+    </div>
+    <nav class="pnav">
+      <a __NAV_DASH__ href="/portal/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Dashboard</a>
+      <a __NAV_ANN__ href="/portal/desk/announcements/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg> Announcements</a>
+      <a __NAV_COMP__ href="/portal/desk/complaints/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 11.5l2 2 4-4"/></svg> Welfare desk</a>
+    </nav>
+  </header>
+  <main>
+    <div class="alert">
+      <span class="n">__OPEN_N__</span>
+      <p><b>cases are open or in review.</b> A public reply emails the parent instantly;
+      internal notes stay staff-only. Move a case to <b>Resolved</b> or <b>Closed</b> when
+      the family is satisfied — parents can always reopen by writing again.</p>
+    </div>
+    <div class="fchips">
+__CHIPS__
+    </div>
+__CASE_ROWS__
+  </main>
+  <div class="foot">
+    <span>Sporting Pearls Football Academy · Mtwapa, Kilifi County</span>
+    <span class="fbrand">Sporting Pearls Academy · Management Portal</span>
+  </div>
+</body>
+</html>

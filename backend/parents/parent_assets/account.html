@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f59d1e'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%230c1a33' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%230c1a33'/%3E%3C/svg%3E">
+<title>Account · Sporting Pearls Parent Portal</title>
+<style>__CHROME_CSS__
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;max-width:980px;margin:0 auto}
+  .pane{padding:22px 24px}
+  .pane h3{font-family:Georgia,serif;font-size:18px;color:var(--navy);font-weight:600;margin-bottom:5px;position:relative;padding-left:14px}
+  .pane h3::before{content:'';position:absolute;left:0;top:2px;bottom:2px;width:4.5px;border-radius:4px;background:var(--gold)}
+  .pane .sub{font-size:14px;color:#5c6a7e;margin-bottom:14px;line-height:1.55}
+  label{display:block;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#7c88a1;margin:13px 0 6px}
+  input,select{width:100%;border:1.5px solid #d9dfe9;border-radius:11px;padding:10.5px 13px;font:inherit;font-size:15px;
+    color:var(--ink);background:#fff;transition:border .15s,box-shadow .15s}
+  input:focus,select:focus{outline:none;border-color:var(--lagoon);box-shadow:0 0 0 3.5px rgba(31,122,111,.16)}
+  button{margin-top:16px;background:var(--teal);color:#fff;border:0;border-radius:11px;padding:12px 20px;
+    font:inherit;font-size:14.5px;font-weight:700;cursor:pointer;transition:.16s;box-shadow:0 6px 16px rgba(31,122,111,.32)}
+  button:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(31,122,111,.4)}
+  .note-err{background:#fdecea;border:1px solid #f3c2bb;color:#c0392b;border-radius:12px;padding:11px 15px;font-size:14.5px;
+    margin-bottom:14px;box-shadow:inset 3px 0 0 #d9534f}
+  .meta{border-top:1px dashed var(--hair);margin-top:18px;padding-top:15px}
+  .meta .row{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:6px 0}
+  .meta .row span{color:#5c6a7e}
+  .meta .row b{color:var(--navy);font-weight:600;text-align:right;overflow-wrap:anywhere}
+  .acct-kid{display:flex;align-items:center;gap:9px;font-size:14.5px;color:var(--navy);font-weight:600;padding:8px 0;
+    border-bottom:1px dashed var(--hair)}
+  .acct-kid:last-child{border-bottom:0}
+  .acct-kid .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);flex:none;box-shadow:0 0 0 3px rgba(245,157,30,.16)}
+  .acct-kid em{margin-left:auto;font-style:normal;font-size:13px;color:#7c88a1;text-align:right}
+  .wide{margin-top:18px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="bar">
+      <div class="mark">SP</div>
+      <h1>Sporting Pearls Academy<small>Parent Portal</small></h1>
+      <div class="who">
+        <span>__GUARDIAN__ · __RELATION__</span>
+        <form method="post" action="/portal/parents/logout/" class="signout">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <button type="submit">Sign out</button>
+        </form>
+      </div>
+    </div>
+    <div class="hero">
+      <h2>Account settings</h2>
+      <p>Keep your contact details current — the academy uses them for squad communication</p>
+    </div>
+    <nav class="pnav">
+      <a __NAV_OVERVIEW__ href="/portal/parents/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg> Overview</a>
+      <a __NAV_BOARD__ href="/portal/parents/announcements/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> Announcements __UNREAD_BADGE__</a>
+      <a __NAV_WELFARE__ href="/portal/parents/complaints/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 11.5l2 2 4-4"/></svg> Welfare desk</a>
+      <a __NAV_ACCOUNT__ href="/portal/parents/account/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Account</a>
+    </nav>
+  </header>
+  <main>
+__NOTE__
+    <div class="grid">
+      <div class="pane card">
+        <h3>Contact details</h3>
+        <p class="sub">Your relationship to the child and the best phone number for the office.</p>
+        <form method="post" action="/portal/parents/account/">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <input type="hidden" name="which" value="profile">
+          <label for="id-rel">I am the child&#8217;s</label>
+          <select id="id-rel" name="relation">__REL_OPTS__</select>
+          <label for="id-phone">Phone</label>
+          <input id="id-phone" name="phone" value="__PHONE__" placeholder="+254 …">
+          <button type="submit">Save contact details</button>
+        </form>
+      </div>
+      <div class="pane card">
+        <h3>Password</h3>
+        <p class="sub">Choose a password you do not use anywhere else.</p>
+        <form method="post" action="/portal/parents/account/">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <input type="hidden" name="which" value="password">
+          <label for="id-cur">Current password</label>
+          <input id="id-cur" type="password" name="current" autocomplete="current-password" required>
+          <label for="id-p1">New password</label>
+          <input id="id-p1" type="password" name="password" autocomplete="new-password" required minlength="8">
+          <label for="id-p2">Repeat the new password</label>
+          <input id="id-p2" type="password" name="password2" autocomplete="new-password" required>
+          <button type="submit">Change password</button>
+        </form>
+      </div>
+      <div class="pane card wide">
+        <h3>Account</h3>
+        <p class="sub">Read-only details held by the academy office.</p>
+        <div class="meta">
+          <div class="row"><span>Sign-in email</span><b>__EMAIL__</b></div>
+          <div class="row"><span>Parent since</span><b>__SINCE__</b></div>
+          <div class="row" style="display:block"><span style="display:block;margin-bottom:4px">Children linked</span>__KIDS__</div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div class="foot">
+    <span>Questions? <b>info@sportingpearlsacademy.org</b> · Mtwapa, Kilifi County</span>
+    <span class="fbrand">Sporting Pearls Academy · Parent Portal</span>
+  </div>
+</body>
+</html>

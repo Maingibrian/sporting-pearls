@@ -1,0 +1,9 @@
+/* ─── v16: shared hero wave divider (pages whose hero had no wave) ─── */
+.hero-wave{position:relative;z-index:5;height:clamp(44px,4.6vw,60px);margin-top:calc(-1*clamp(44px,4.6vw,60px));overflow:hidden;pointer-events:none;line-height:0;}
+.hero-wave svg{position:absolute;bottom:0;left:0;width:200%;height:100%;}
+.hero-wave .w1{animation:wslide 17s linear infinite;}
+.hero-wave .w2{animation:wslide 29s linear infinite reverse;opacity:.6;}
+.hero-wave .w1 path{fill:var(--sand);}
+.hero-wave .w2 path{fill:rgba(245,157,30,.16);}
+@keyframes wslide{to{transform:translateX(-50%);}}
+@media(prefers-reduced-motion:reduce){.hero-wave .w1,.hero-wave .w2{animation:none;}}

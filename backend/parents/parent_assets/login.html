@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f59d1e'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%230c1a33' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%230c1a33'/%3E%3C/svg%3E">
+<title>Parent sign in · Sporting Pearls Academy</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--navy:#0c1a33;--navy2:#14284b;--amber:#f59d1e;--lagoon:#1f7a6f;--pearl:#fbfaf7;--muted:#8a94a6;--fail:#c0392b;
+    --gold:linear-gradient(135deg,#ffb748,#f59d1e 58%,#ec8d08);
+    --teal:linear-gradient(135deg,#28998c,#1f7a6f 62%,#186458);
+    --pitch:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='260' viewBox='0 0 520 260'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.07' stroke-width='1.4'%3E%3Ccircle cx='260' cy='130' r='62'/%3E%3Ccircle cx='260' cy='130' r='4'/%3E%3Cpath d='M260 0v260M0 40h92v180H0M520 40h-92v180h92'/%3E%3C/g%3E%3C/svg%3E")}
+  html,body{min-height:100%;overflow-x:hidden}
+  @supports(overflow:clip){html,body{overflow-x:clip}}
+  body{font-family:'Work Sans','Segoe UI',system-ui,-apple-system,Arial,sans-serif;
+    background:radial-gradient(1100px 620px at 12% -12%,#15594f 0%,#124e46 20%,var(--navy2) 58%,var(--navy) 100%);
+    min-height:100vh;display:grid;place-items:center;padding:28px 22px;color:var(--pearl);position:relative;overflow-x:hidden}
+  body::before{content:'';position:absolute;width:340px;height:340px;border-radius:50%;border:1.5px solid rgba(245,157,30,.28);
+    right:-70px;top:-110px;pointer-events:none}
+  body::after{content:'';position:absolute;inset:0;background:var(--pitch) left -80px bottom -40px no-repeat;
+    background-size:470px 235px;opacity:.9;pointer-events:none;
+    -webkit-mask-image:linear-gradient(75deg,#000 30%,transparent 70%);mask-image:linear-gradient(75deg,#000 30%,transparent 70%)}
+  .lg-wrap{width:100%;max-width:940px;position:relative;z-index:1}
+  .lg-grid{display:grid;grid-template-columns:1.05fr 1fr;border-radius:24px;overflow:hidden;
+    box-shadow:0 40px 90px rgba(2,8,20,.55),0 0 0 1px rgba(255,255,255,.06)}
+  .lg-side{position:relative;overflow:hidden;padding:42px 40px 36px;color:#dbe3f0;
+    background:radial-gradient(560px 260px at 88% -60px,rgba(31,122,111,.5),transparent 62%),
+      radial-gradient(420px 240px at -40px 115%,rgba(245,157,30,.16),transparent 58%),
+      linear-gradient(126deg,#0c1a33 0%,#13294e 48%,#0c1a33 100%);
+    display:flex;flex-direction:column}
+  .lg-side::after{content:'';position:absolute;inset:0;background:var(--pitch) right -60px bottom -50px no-repeat;
+    background-size:430px 215px;opacity:.9;pointer-events:none;
+    -webkit-mask-image:linear-gradient(80deg,transparent 40%,#000 85%);mask-image:linear-gradient(80deg,transparent 40%,#000 85%)}
+  .lg-side>*{position:relative;z-index:1}
+  .lg-brand{display:flex;align-items:center;gap:13px}
+  .lg-mark{width:46px;height:46px;border-radius:13px;background:var(--gold);color:#122a52;flex:none;
+    display:grid;place-items:center;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:20px;
+    box-shadow:0 8px 22px rgba(245,157,30,.4),inset 0 0 0 1.5px rgba(255,255,255,.3)}
+  .lg-brand h1{font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:600;letter-spacing:.2px;color:#fff}
+  .lg-brand small{display:block;font-size:11.5px;letter-spacing:2.6px;text-transform:uppercase;color:#7fd0c5;
+    font-family:'Work Sans',sans-serif;font-weight:600;margin-top:3px}
+  .lg-pitch{margin-top:44px}
+  .lg-pitch h2{font-family:Georgia,serif;font-size:clamp(24px,2.6vw,30px);color:#fff;font-weight:600;line-height:1.25;position:relative;padding-bottom:14px}
+  .lg-pitch h2::after{content:'';position:absolute;left:1px;bottom:0;width:48px;height:3.5px;border-radius:3px;
+    background:linear-gradient(90deg,#ffb748,#f59d1e)}
+  .lg-pitch p{margin-top:14px;font-size:15px;line-height:1.65;color:#a9b6ce;max-width:40ch}
+  .lg-perks{margin-top:30px;display:flex;flex-direction:column;gap:14px}
+  .lg-perk{display:flex;align-items:flex-start;gap:12px}
+  .lg-perk .ic{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center;
+    background:rgba(251,250,247,.08);border:1px solid rgba(251,250,247,.16);color:#7fd0c5}
+  .lg-perk .ic svg{width:18px;height:18px}
+  .lg-perk b{display:block;font-size:14.5px;color:#fff;font-weight:600;letter-spacing:.2px}
+  .lg-perk span{display:block;font-size:13.5px;color:#a9b6ce;margin-top:2px;line-height:1.5}
+  .lg-sidefoot{margin-top:auto;padding-top:30px;font-size:12.5px;color:#8a97b1;letter-spacing:.3px}
+  .lg-form{background:var(--pearl);color:#1a2436;padding:42px 40px 36px;display:flex;flex-direction:column;justify-content:center}
+  .lg-form h2{font-family:Georgia,serif;font-size:22px;color:var(--navy);margin-bottom:5px}
+  .lg-form p.lg-sub{font-size:14px;color:#5c6a7e;margin-bottom:22px;line-height:1.6}
+  label{display:block;font-size:12px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;
+    color:#5c6a7e;margin:15px 0 6px}
+  input[type=email],input[type=text],input[type=password]{width:100%;padding:11.5px 14px;border:1.5px solid #d9dfe9;border-radius:11px;
+    font:inherit;font-size:15px;background:#fff;color:#1a2436;outline:none;transition:border .15s,box-shadow .15s}
+  input:focus{border-color:var(--lagoon);box-shadow:0 0 0 3.5px rgba(31,122,111,.16)}
+  .lg-err{background:#fdeeec;color:var(--fail);border:1px solid #f2c4bd;border-radius:12px;
+    padding:10px 14px;font-size:14.5px;margin:16px 0 0;box-shadow:inset 3px 0 0 #d9534f}
+  button{width:100%;margin-top:24px;padding:13px;border:none;border-radius:12px;background:var(--teal);
+    color:#fff;font:inherit;font-weight:700;font-size:15px;cursor:pointer;letter-spacing:.3px;
+    transition:transform .14s,box-shadow .14s;box-shadow:0 8px 20px rgba(31,122,111,.35)}
+  button:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(31,122,111,.45)}
+  button:active{transform:none}
+  button[disabled]{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+  .lg-foot{margin-top:20px;text-align:center;font-size:13px;color:var(--muted);line-height:1.6}
+  .lg-foot b{color:#5c6a7e}
+  @media(max-width:840px){.lg-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+    .lg-side{padding:30px 30px 26px}.lg-pitch{margin-top:22px}.lg-perks,.lg-sidefoot{display:none}
+    .lg-form{padding:30px 30px 28px}}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+  <div class="lg-wrap">
+    <div class="lg-grid">
+      <div class="lg-side">
+        <div class="lg-brand">
+          <div class="lg-mark">SP</div>
+          <h1>Sporting Pearls Academy<small>Parent Portal</small></h1>
+        </div>
+        <div class="lg-pitch">
+          <h2>Your child&rsquo;s journey, one sign-in away</h2>
+          <p>The private families&rsquo; side of the academy — squad news, fixtures and a direct line to the office, in one place.</p>
+        </div>
+        <div class="lg-perks">
+          <div class="lg-perk">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
+            <div><b>Squad announcements</b><span>Notices filtered to your children&rsquo;s squads, flagged when new.</span></div>
+          </div>
+          <div class="lg-perk">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 11.5l2 2 4-4"/></svg></span>
+            <div><b>Welfare desk</b><span>Private cases answered by staff, in writing, start to finish.</span></div>
+          </div>
+          <div class="lg-perk">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span>
+            <div><b>Player profiles</b><span>Squad, shirt number, fixtures — the academy&rsquo;s record for your child.</span></div>
+          </div>
+        </div>
+        <div class="lg-sidefoot">Mtwapa, Kilifi County · info@sportingpearlsacademy.org</div>
+      </div>
+      <div class="lg-form">
+        <h2>Karibu, parents</h2>
+        <p class="lg-sub">Sign in with the email your account was invited with.</p>
+        <form method="post" action="/portal/parents/login/">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <label for="id-username">Your email</label>
+          <input type="email" id="id-username" name="username" value="__EMAIL__" autocomplete="email" required autofocus __DISABLED__>
+          <label for="id-password">Password</label>
+          <input type="password" id="id-password" name="password" autocomplete="current-password" required __DISABLED__>
+          __ERROR__
+          <button type="submit" __DISABLED__>Sign in</button>
+        </form>
+        <div class="lg-foot">__GUIDE__Forgot your password? <a href="/portal/parents/reset/" style="color:#5c6a7e;font-weight:700">Reset it by email</a> · No account yet? Accounts open by invitation once your child's application is approved · <b>info@sportingpearlsacademy.org</b></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,396 @@
+
+      <!-- ══════════════ VIEW: FIXTURES ══════════════ -->
+      <section class="view" id="view-fixtures">
+        <div class="toolbar">
+          <p style="font-size:15px;color:var(--muted);max-width:62ch;margin-right:auto">
+            Fixtures you publish here <b style="color:var(--ink)">replace the "Coming Soon" panel on the homepage instantly</b> — no developer, no redeploy. Drafts stay private until you flip the switch.
+          </p>
+          <button class="btn btn-amber" data-toast="Preview — in the live portal this opens a short form: team, opponent, date, kick-off, venue, publish.">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Add fixture
+          </button>
+        </div>
+
+        <div class="fx-grid">
+__FX_CARDS__
+        </div>
+
+        <div class="card">
+          <div class="card-h"><h2>What supporters see on the homepage</h2><span class="hint">live preview</span></div>
+          <div class="card-b">
+            <div class="mini-browser">
+              <div class="mb-bar">
+                <i style="background:#f0868a"></i><i style="background:#f5ce7e"></i><i style="background:#9fd6a9"></i>
+                <span class="mb-url">sportingpearlsacademy.org — Next Fixtures</span>
+              </div>
+              <div class="mb-body">
+                <h4>Next Fixtures</h4>
+                <div class="mb-sub">Come and cheer the Pearls — updates appear here the moment you publish.</div>
+__FX_MINI__
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════ VIEW: ACCESS & SECURITY ══════════════ -->
+      <section class="view" id="view-access">
+        <div class="access-grid">
+          <div class="card">
+            <div class="card-h"><h2>Your account</h2></div>
+            <div class="card-b">
+              <div class="acct">
+                <div class="ava">AA</div>
+                <div>
+                  <h3>Academy Admin</h3>
+                  <span class="role">Full control</span>
+                </div>
+              </div>
+              <div style="margin-top:14px">
+                <div class="kv"><span>Sign-in name</span><b>admin</b></div>
+                <div class="kv"><span>Notified at</span><b>info@sportingpearlsacademy.org</b></div>
+                <div class="kv"><span>Can manage</span><b>Ledger · Fixtures · Accounts</b></div>
+                <div class="kv"><span>Two-factor ready</span><b style="color:var(--success)">Yes</b></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-h"><h2>Password &amp; sign-in</h2></div>
+            <div class="card-b">
+              <ol class="steps">
+                <li>Open the live portal address and sign in once with the credentials you were given.</li>
+                <li>Click your name (top-right corner), then <b>Change password</b>.</li>
+                <li>Save a strong private password — the starter one is temporary and should not stay.</li>
+                <li>Ask me for extra staff accounts whenever you need them — each gets their own sign-in.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-h"><h2>Notifications</h2></div>
+            <div class="card-b">
+              <div class="kv"><span>New entry</span><b>Email alert → info@</b></div>
+              <div class="kv"><span>Auto-reply to sender</span><b style="color:var(--success)">Branded, instant</b></div>
+              <div class="kv"><span>Safeguarding reports</span><b style="color:var(--amber-ink)">Flagged urgent</b></div>
+              <div class="kv"><span>Weekly summary</span><b>Roadmap — see Grow</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-h"><h2>Already guarding the door</h2><span class="hint">running now, zero setup</span></div>
+          <div class="card-b">
+            <div class="shield-grid">
+              <div class="shield">
+                <div class="s-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10z"/><path d="M9 11.5l2 2 4-4.5"/></svg></div>
+                <h3>Spam trap (honeypot)</h3>
+                <p>Bots fill a hidden field they can't see — silently discarded, never reaches your ledger or inbox.</p>
+              </div>
+              <div class="shield">
+                <div class="s-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+                <h3>Rate limiting</h3>
+                <p>Any one form accepts at most 8 entries per minute from the same visitor — flood attempts bounce.</p>
+              </div>
+              <div class="shield">
+                <div class="s-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+                <h3>Sealed forms (CSRF)</h3>
+                <p>Every submission is token-verified; only pages on your own site can post to the portal.</p>
+              </div>
+              <div class="shield">
+                <div class="s-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5V12c0 1.7 3.6 3 8 3s8-1.3 8-3V5.5"/><path d="M4 12v6.5c0 1.7 3.6 3 8 3s8-1.3 8-3V12"/></svg></div>
+                <h3>Permanent ledger</h3>
+                <p>Entries are append-only and fully backed up with the database — nothing is silently lost or edited.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════ VIEW: ROADMAP ══════════════ -->
+      <section class="view" id="view-roadmap">
+        <div class="card rm-hero" style="margin-bottom:18px">
+          <h2>The branded portal — live</h2>
+          <p>This page is now the real thing: it is served straight from the academy's backend, behind one private sign-in. What you do here — reviewing entries, publishing fixtures, hiding, editing, adding or deleting players — applies to the database and the website the moment you press the button. The roadmap below is what the portal can grow into next, one step at a time, each without disturbing the site.</p>
+        </div>
+
+        <div class="rm-group">
+          <div class="rm-head"><h2>Quick wins</h2><span class="rm-n">Days</span><span class="rm-line"></span></div>
+          <div class="rm-grid">
+            <div class="card rm-card">
+              <div class="rm-tags"><span class="tag tag-eff">Effort · Low</span><span class="tag tag-hi">Impact · High</span></div>
+              <h3>Staff notes on entries</h3>
+              <p>Attach private notes to any submission — "called back, trial set for Saturday" — so the whole team sees the history.</p>
+            </div>
+            <div class="card rm-card">
+              <div class="rm-tags"><span class="tag tag-eff">Effort · Low</span><span class="tag tag-hi">Impact · High</span></div>
+              <h3>One-click resend</h3>
+              <p>If an auto-reply ever fails, re-send it from the ledger itself — no support ticket, no code.</p>
+            </div>
+            <div class="card rm-card">
+              <div class="rm-tags"><span class="tag tag-eff">Effort · Low</span><span class="tag tag-md">Impact · Med</span></div>
+              <h3>Ageing highlights</h3>
+              <p>Entries left unreviewed for 3+ days glow amber in the ledger, so nothing slips through the cracks.</p>
+            </div>
+            <div class="card rm-card">
+              <div class="rm-tags"><span class="tag tag-eff">Effort · Low</span><span class="tag tag-md">Impact · Med</span></div>
+              <h3>Monday 7am digest</h3>
+              <p>A weekly email to info@: new entries, pending replies, week's fixtures — the academy week before coffee.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rm-group">
+          <div class="rm-head"><h2>Next tier</h2><span class="rm-n">1–2 weeks</span><span class="rm-line"></span></div>
+          <div class="rm-grid">
+            <div class="card rm-card">
+              <div class="rm-tags"><span class="tag tag-md">Effort · Med</span><span class="tag tag-hi">Impact · High</span></div>
+              <h3>News &amp; announcements</h3>
+              <p>Post match reports and academy news to the homepage from the portal — with photos, in the site's own style.</p>
+            </div>
+            <div class="card rm-card">
+              <div class="rm-tags"><span class="tag tag-md">Effort · Med</span><span class="tag tag-hi">Impact · High</span></div>
+              <h3>Photo uploads</h3>
+              <p>Registration and trial forms accept a passport photo, stored with the entry — no more paper photos to match.</p>
+            </div>
+            <div class="card rm-card">
+              <div class="rm-tags"><span class="tag tag-md">Effort · Med</span><span class="tag tag-hi">Impact · High</span></div>
+              <h3>WhatsApp alerts</h3>
+              <p>Urgent forms — especially safeguarding reports — ping a staff WhatsApp group the second they arrive.</p>
+            </div>
+            <div class="card rm-card">
+              <div class="rm-tags"><span class="tag tag-md">Effort · Med</span><span class="tag tag-md">Impact · Med</span></div>
+              <h3>Saved reply templates</h3>
+              <p>One-click personalised responses straight from an entry ("Asante for your trial application…").</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rm-group">
+          <div class="rm-head"><h2>Bigger builds</h2><span class="rm-n">2–4 weeks</span><span class="rm-line"></span></div>
+          <div class="rm-grid">
+            <div class="card rm-card" style="background:linear-gradient(120deg,#fff 55%,#e6f4ea)">
+              <div class="rm-tags"><span class="tag tag-hi">Shipped · this cycle</span></div>
+              <h3>Player profile manager</h3>
+              <p>Done — the six squads' rosters now live in the dashboard. Add players, upload photos, set captains and formations; the website squad pages update automatically.</p>
+            </div>
+            <div class="card rm-card">
+              <div class="rm-tags"><span class="tag tag-eff">Effort · High</span><span class="tag tag-hi">Impact · High</span></div>
+              <h3>Paystack / M-PESA giving</h3>
+              <p>Donations and fee payments on the Support page, every transaction logged neatly in the ledger.</p>
+            </div>
+            <div class="card rm-card">
+              <div class="rm-tags"><span class="tag tag-md">Effort · Med</span><span class="tag tag-md">Impact · Med</span></div>
+              <h3>Google Sheets mirror</h3>
+              <p>The ledger synced live to a spreadsheet for the office — sort, pivot and print with familiar tools.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════ FOOTER ══════════════ -->
+      <footer class="foot">
+        <div class="foot-title">To take the whole academy live</div>
+        <div class="next-steps">
+          <div class="ns"><span class="ns-n">1</span><div><b>Deploy the engine</b><small>Push the backend folder to Railway — the README walks it step by step (~20 minutes). This portal and the forms API move together.</small></div></div>
+          <div class="ns"><span class="ns-n">2</span><div><b>Switch the site over</b><small>Send me the live URL — I wire it into the site's config and cut package v20. Forms go fully live.</small></div></div>
+          <div class="ns"><span class="ns-n">3</span><div><b>Share the portal</b><small>Bookmark this portal address for your staff — sign-in happens here, never on any technical screen.</small></div></div>
+          <div class="ns"><span class="ns-n">4</span><div><b>Clear the samples</b><small>Delete the __TOTAL__ rehearsal entries in one pass — or ask me to wipe them before handover.</small></div></div>
+        </div>
+        <div class="colophon">
+          <span>Sporting Pearls Academy · Management Portal v2 — live</span>
+          <span>Signed in as __USER_NAME__ · rendered __GEN_DATE__ from the academy's own database</span>
+          <span class="sep"></span>
+          <span>One login, real actions — the website updates the moment you press a button.</span>
+        </div>
+      </footer>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<!-- ══════════════ MODAL ══════════════ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Entry details">
+  <div class="modal-bg" id="modal-bg"></div>
+  <div class="modal-card">
+    <div class="m-head">
+      <div>
+        <h3 id="m-name">—</h3>
+        <span class="m-ref" id="m-ref">—</span>
+      </div>
+      <button class="m-x" id="m-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="m-body">
+      <div class="m-meta" id="m-meta"></div>
+      <div class="m-sec">Their answers</div>
+      <div class="ans" id="m-ans"></div>
+      <div class="m-sec" id="inv-sec">Guardian invitation — Parent Portal access</div>
+      <div class="ans" id="inv-box">
+        <div class="pf-grid">
+          <div class="pf-field"><label>Guardian name</label><input id="inv-name" maxlength="120"></div>
+          <div class="pf-field"><label>Guardian email</label><input id="inv-email" type="email" maxlength="254"></div>
+          <div class="pf-field"><label>Phone (optional)</label><input id="inv-phone" maxlength="40"></div>
+          <div class="pf-field"><label>Relationship</label><select id="inv-rel"></select></div>
+          <div class="pf-field pf-wide"><label>Child on the portal</label><select id="inv-child"></select></div>
+          <div class="pf-field" id="inv-new-squad-w" style="display:none"><label>New profile — squad</label><select id="inv-new-squad"></select></div>
+          <div class="pf-field" id="inv-new-age-w" style="display:none"><label>New profile — age</label><input id="inv-new-age" type="number" min="4" max="60"></div>
+        </div>
+        <p class="pf-note" id="inv-note">Approving sends the guardian an activation email (valid 72 hours). They set their own password and see only their child's card. Inactive profiles stay draft until a coach publishes them.</p>
+        <div id="inv-result"></div>
+      </div>
+    </div>
+    <div class="m-foot">
+      <button class="btn btn-primary" id="m-invite">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        Approve &amp; invite guardian
+      </button>
+      <a class="btn btn-ghost" id="m-reply" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        Reply by email
+      </a>
+      <button class="btn btn-ghost" id="m-review">Mark reviewed</button>
+      <button class="btn btn-ghost" id="m-archive">Archive</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PLAYER EDIT MODAL ══════════════ -->
+<div class="modal" id="edit-modal" role="dialog" aria-modal="true" aria-label="Edit player">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-card wide">
+    <div class="m-head">
+      <div>
+        <h3 id="e-title">Edit player</h3>
+        <span class="m-ref" id="e-sub">—</span>
+      </div>
+      <button class="m-x" data-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="m-body">
+      <div class="pf-grid">
+        <div class="pf-field"><label>First name</label><input id="e-first" maxlength="60"></div>
+        <div class="pf-field"><label>Last name</label><input id="e-last" maxlength="60"></div>
+        <div class="pf-field"><label>Shirt number</label><input id="e-number" type="number" min="0" max="99" inputmode="numeric"></div>
+        <div class="pf-field"><label>Position</label><select id="e-pos"></select></div>
+        <div class="pf-field"><label>Age</label><input id="e-age" type="number" min="4" max="60"></div>
+        <div class="pf-field"><label>Height (m)</label><input id="e-ht" placeholder="1.68" maxlength="6"></div>
+        <div class="pf-field"><label>Stronger foot</label><select id="e-foot"><option value="">—</option><option value="R">Right</option><option value="L">Left</option></select></div>
+        <div class="pf-field"><label>Pitch slot 1–11 (0 = spare)</label><input id="e-order" type="number" min="0" max="20"></div>
+        <div class="pf-field pf-wide"><label>Motto (shown on the player card)</label><textarea id="e-motto" rows="2" maxlength="300"></textarea></div>
+        <div class="pf-field pf-checks pf-wide">
+          <label class="pf-check"><input type="checkbox" id="e-cap"> Captain — the star moves to this player</label>
+          <label class="pf-check"><input type="checkbox" id="e-pub"> Published — visible on the website squad page</label>
+        </div>
+      </div>
+      <p class="pf-note">Saving applies to the website immediately — the squad page updates the next time it loads.</p>
+    </div>
+    <div class="m-foot">
+      <button class="btn btn-primary" id="e-save">Save changes</button>
+      <button class="btn btn-ghost" data-close>Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PHOTO UPLOAD MODAL ══════════════ -->
+<div class="modal" id="photo-modal" role="dialog" aria-modal="true" aria-label="Upload photo">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-card">
+    <div class="m-head">
+      <div>
+        <h3>Upload photo</h3>
+        <span class="m-ref" id="p-sub">—</span>
+      </div>
+      <button class="m-x" data-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="m-body">
+      <div class="p-drop" id="p-drop" tabindex="0">
+        <input type="file" id="p-file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" hidden>
+        <div class="p-drop-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <b id="p-name">Choose a photo</b>
+        <span>JPG, PNG or WebP · up to 8 MB · a clear headshot works best</span>
+      </div>
+      <p class="pf-note">The photo replaces the academy monogram on the website card as soon as it uploads.</p>
+    </div>
+    <div class="m-foot">
+      <button class="btn btn-primary" id="p-save" disabled>Upload photo</button>
+      <button class="btn btn-ghost" data-close>Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ DELETE CONFIRM MODAL ══════════════ -->
+<div class="modal" id="del-modal" role="dialog" aria-modal="true" aria-label="Delete player">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-card">
+    <div class="m-head">
+      <div>
+        <h3>Delete this player?</h3>
+        <span class="m-ref" id="d-sub">—</span>
+      </div>
+      <button class="m-x" data-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="m-body">
+      <p class="pf-note" style="margin-top:0">This permanently removes the player's profile — their card disappears from the website too. If you only want them off the website for now (injury, transfer, left the academy), use the <b>eye button</b> instead — hiding is reversible.</p>
+    </div>
+    <div class="m-foot">
+      <button class="btn btn-danger" id="d-confirm">Yes, delete permanently</button>
+      <button class="btn btn-ghost" data-close>Keep the player</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ ADD PLAYER MODAL ══════════════ -->
+<div class="modal" id="add-modal" role="dialog" aria-modal="true" aria-label="Add player">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-card wide">
+    <div class="m-head">
+      <div>
+        <h3>Add a new player</h3>
+        <span class="m-ref">The next free REF code is assigned automatically</span>
+      </div>
+      <button class="m-x" data-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="m-body">
+      <div class="pf-grid">
+        <div class="pf-field"><label>Squad</label><select id="a-squad"></select></div>
+        <div class="pf-field"><label>Shirt number</label><input id="a-number" type="number" min="0" max="99" inputmode="numeric"></div>
+        <div class="pf-field"><label>First name</label><input id="a-first" maxlength="60"></div>
+        <div class="pf-field"><label>Last name</label><input id="a-last" maxlength="60"></div>
+        <div class="pf-field"><label>Position</label><select id="a-pos"></select></div>
+        <div class="pf-field"><label>Age</label><input id="a-age" type="number" min="4" max="60"></div>
+        <div class="pf-field"><label>Height (m)</label><input id="a-ht" placeholder="1.68" maxlength="6"></div>
+        <div class="pf-field"><label>Stronger foot</label><select id="a-foot"><option value="">—</option><option value="R">Right</option><option value="L">Left</option></select></div>
+        <div class="pf-field pf-wide"><label>Motto</label><textarea id="a-motto" rows="2" maxlength="300"></textarea></div>
+        <div class="pf-field pf-checks pf-wide">
+          <label class="pf-check"><input type="checkbox" id="a-pub"> Publish immediately — show on the website squad page</label>
+        </div>
+      </div>
+      <p class="pf-note">New players join as spares (pitch slot 12) — edit their slot later to place them in the starting shape. Photos can be added right after with the camera button.</p>
+    </div>
+    <div class="m-foot">
+      <button class="btn btn-primary" id="a-save">Add player</button>
+      <button class="btn btn-ghost" data-close>Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+  <span id="toast-msg"></span>
+</div>
+
+<script type="application/json" id="subs-json">__SUBS_JSON__</script>
+<script type="application/json" id="players-json">__PLAYERS_JSON__</script>
+<script src="/portal/assets/dash.js?v16"></script>
+<script src="/portal/assets/img-fallback.js?v4"></script>
+</body>
+</html>

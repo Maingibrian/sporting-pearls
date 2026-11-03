@@ -1,0 +1,147 @@
+════════════════════════════════════════════════════════════════════
+  SPORTING PEARLS — OUTGOING EMAIL SETUP (Resend)
+════════════════════════════════════════════════════════════════════
+
+WHAT EMAIL DOES HERE
+  Once enabled, the system sends:
+
+  1. Form notifications    every website form (registration, trials,
+                           sponsorship, safeguarding reports, contact …)
+                           is emailed to your inbox with the full answers.
+  2. Branded auto-replies  the person who submitted gets a confirmation
+                           in Sporting Pearls branding (can be switched
+                           off with AUTO_REPLY=0).
+  3. Parent-portal invites when staff register a guardian from a
+                           submission, the parent receives an activation
+                           link by email.
+  4. Portal mail           password resets / account notices for parents.
+
+  WITHOUT a key nothing breaks: every submission is still stored in the
+  database and visible in the staff portal — email is simply skipped.
+  (This is the kit's default state: mail OFF.)
+
+──────────────────────────────────────────────────────────────────────
+ENABLE IT — 6 STEPS (about 15 minutes, needs DNS access)
+──────────────────────────────────────────────────────────────────────
+
+  1  Create the account
+     Go to https://resend.com and sign up (free tier: 100 emails/day,
+     3,000/month — plenty for the academy).
+
+  2  Add your domain
+     Dashboard → Domains → Add Domain → enter
+     sportingpearlsacademy.org (or whichever domain the site runs on).
+
+  3  Add the DNS records Resend shows you
+     They give 2–3 records (a DKIM TXT record, an SPF TXT record, and
+     optionally a DMARC policy). Add them in the DNS panel of whoever
+     manages your domain (your registrar, or Cloudflare if you use it).
+     Wait for Resend's "Verified" tick — usually 5–30 minutes.
+
+  4  Create an API key
+     Dashboard → API Keys → Create API Key → "Full access".
+     Copy the key (starts with re_ ...) — it is shown only once.
+
+  5  Put the key in the kit's config
+     Edit  backend/.env  in your app folder (sp-app/backend/.env)
+     and make sure these lines exist:
+
+       RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxx
+       EMAIL_TO=info@sportingpearlsacademy.org
+       EMAIL_FROM=info@sportingpearlsacademy.org
+
+     EMAIL_TO    = the inbox that receives form notifications
+     EMAIL_FROM  = the address parents see as sender — MUST be on the
+                   domain you verified in step 2
+
+  6  Restart and test
+       cd sp-app && bash sp.sh restart
+     Then submit any form on the website (e.g. the contact form) and
+     check both inboxes: yours (notification) and the sender's
+     (auto-reply).
+
+  Optional switches (same file):
+
+    AUTO_REPLY=1                  0 disables visitor confirmations
+    SP_MAIL_REDIRECT=you@…        QC MODE — see below
+
+──────────────────────────────────────────────────────────────────────
+QC MODE (test without spamming real parents)
+──────────────────────────────────────────────────────────────────────
+  While testing the parent portal, set
+
+    SP_MAIL_REDIRECT=your-own-address@example.com
+
+  Every outbound email is then delivered to that one address instead
+  of its real recipient, with the subject prefixed  [QC→original]  so
+  you can see where it would have gone. Remove the line (and restart)
+  when going live.
+
+──────────────────────────────────────────────────────────────────────
+DELIVERABILITY — MAKING SURE MAIL ACTUALLY ARRIVES (Phase 5)
+──────────────────────────────────────────────────────────────────────
+  DNS authentication is what keeps academy mail out of spam folders.
+  After step 3 above, your DNS panel should hold records shaped like
+  these (exact values come from Resend's dashboard — never invent them):
+
+    SPF (TXT on the bare domain)
+      v=spf1 include:_resend.sportingpearlsacademy.org ~all
+      → only Resend may send as your domain; anything else is suspect.
+
+    DKIM (TXT, a long key Resend shows you, e.g. resend._domainkey)
+      Proves the message was not altered in transit and that it really
+      came from your setup.
+
+    DMARC (TXT on _dmarc.your-domain)
+      Start observing:   v=DMARC1; p=none; rua=mailto:dmarc@your-domain
+      After 2–4 clean weeks, tighten to p=quarantine, later p=reject.
+      The rua= address receives weekly reports — glance at them: they
+      list anything spoofing your domain.
+
+  Verify it worked (15 minutes, once per domain):
+    1. Send yourself a test: submit the website contact form.
+    2. Check the received message in Gmail/Outlook: it should show
+       "mail from sportingpearlsacademy.org via resend" or just your
+       domain — and NOT a red "unauthenticated" warning.
+    3. Free deep check: send one mail to an address on mail-tester.com
+       and aim for a score of 9–10/10.
+    4. Resend → Dashboard → Emails shows every send, with the exact
+       rejection reason when a mailbox provider refuses.
+
+  Why this matters most for safeguarding mail: DSO notifications
+  (DSO_EMAIL) and parent password-reset links are the two messages
+  that MUST arrive. Verify delivery for both after setup — a missed
+  marketing email is an annoyance; a missed welfare notification or a
+  parent locked out of the portal is a real problem.
+
+  Delivery failures are recorded, not alerted: each submission row and
+  parent invite stores its email_status / email_error where staff can
+  see it (staff portal; Resend dashboard). There is no automatic
+  "mailer down" alarm in this kit — the health probe (curl
+  http://your-server/healthz/) covers the backend, not mailbox
+  deliverability. Check the Resend dashboard if mail seems quiet.
+
+──────────────────────────────────────────────────────────────────────
+TROUBLESHOOTING
+──────────────────────────────────────────────────────────────────────
+  Symptom                        Likely cause / fix
+  ─────────────────────────────  ────────────────────────────────────
+  "skipped (no RESEND_API_KEY)"  Key missing in backend/.env, or the
+  in logs                          file has spaces around "=". Restart
+                                   after editing.
+  HTTP 403 from Resend           EMAIL_FROM is not on a verified
+                                   domain — use the domain from step 2.
+  HTTP 401                       Wrong/expired API key.
+  Mail lands in spam             DKIM/SPF not fully verified yet —
+                                   re-check step 3; consider adding
+                                   DMARC (p=quarantine).
+  Parent invite "email_error"    Visible per-invite in the staff
+                                   portal's guardian-invite list; the
+                                   exact Resend error is stored there.
+  Nothing after restart          bash sp.sh logs  — backend.log shows
+                                   each send result (sent / skipped /
+                                   HTTP error).
+
+  Still stuck? Resend's own logs (Dashboard → Emails) show every
+  request that reached them, including rejections with reasons.
+════════════════════════════════════════════════════════════════════

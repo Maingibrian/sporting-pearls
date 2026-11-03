@@ -1,17 +1,33 @@
-# --- Python ---
+# --- secrets & env ---
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# --- python / django ---
+.venv/
+venv/
 __pycache__/
 *.pyc
 *.pyo
+db.sqlite3
+db.sqlite3.*
+staticfiles/
+backend/media/
+media/
 
-# --- OS junk ---
-Thumbs.db
+# --- node ---
+node_modules/
+.next/
+npm-debug.log*
+
+# --- os / editor junk ---
 .DS_Store
-desktop.ini
-
-# --- Editors / IDEs ---
-.vscode/
-.idea/
+Thumbs.db
 *.swp
+*~
+.idea/
+.vscode/
 
-# --- Backup archives (kept locally, not committed) ---
-construct.zip
+# --- installer working dirs ---
+sp-app/

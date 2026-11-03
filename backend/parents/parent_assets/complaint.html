@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f59d1e'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%230c1a33' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%230c1a33'/%3E%3C/svg%3E">
+<title>Case __CASE_REF__ · Sporting Pearls Parent Portal</title>
+<style>__CHROME_CSS____DESK_CSS__
+  .casehead{padding:20px 24px;display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+  .casehead h3{font-family:Georgia,serif;font-size:20px;color:var(--navy);font-weight:600;margin-right:auto;line-height:1.3}
+  .casehead .ref{font-size:12.5px;color:#7c88a1;background:#f3f5f9;border-radius:7px;padding:3px 10px;
+    font-family:'Sarasa Mono SC',monospace;border:1px solid var(--hair)}
+  .factline{display:flex;gap:10px 22px;flex-wrap:wrap;border-top:1px dashed var(--hair);margin-top:14px;padding-top:14px;width:100%}
+  .factline span{font-size:13.5px;color:#5c6a7e}
+  .factline b{color:var(--navy);font-weight:600}
+  .thread{display:flex;flex-direction:column;gap:13px;margin:20px 0;max-width:860px}
+  .msg{border:1px solid var(--hair);border-radius:16px;overflow:hidden;background:#fff;box-shadow:var(--shadow-1)}
+  .msg-h{display:flex;align-items:center;gap:10px;padding:11px 17px;background:#f6f8fb;border-bottom:1px solid var(--hair)}
+  .msg-h::before{content:'';width:9px;height:9px;border-radius:50%;background:#cfd6e0;flex:none;box-shadow:0 0 0 3px rgba(207,214,224,.2)}
+  .msg-h b{font-size:14px;color:var(--navy)}
+  .msg-h span{margin-left:auto;font-size:12.5px;color:var(--muted)}
+  .msg.guardian .msg-h{background:rgba(31,122,111,.08)}
+  .msg.guardian .msg-h::before{background:var(--lagoon);box-shadow:0 0 0 3px rgba(31,122,111,.16)}
+  .msg.staff{border-color:rgba(245,157,30,.4)}
+  .msg.staff .msg-h{background:rgba(245,157,30,.13)}
+  .msg.staff .msg-h::before{background:var(--amber);box-shadow:0 0 0 3px rgba(245,157,30,.2)}
+  .msg-b{padding:15px 18px}
+  .msg-b p{font-size:15px;line-height:1.7;color:#1a2436}
+  .msg-b p + p{margin-top:10px}
+  .reply{padding:20px 24px;max-width:860px}
+  .reply h3{font-family:Georgia,serif;font-size:17.5px;color:var(--navy);font-weight:600;margin-bottom:3px}
+  .reply .sub{font-size:14px;color:#5c6a7e;margin-bottom:4px}
+  .closed{border:1px dashed #cfd6e0;background:#f7f8fb;color:#5c6a7e;border-radius:12px;
+    padding:10px 14px;font-size:14px;margin-bottom:12px}
+  .back{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:700;color:var(--lagoon);
+    text-decoration:none;margin-bottom:14px;letter-spacing:.3px}
+  .back:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="bar">
+      <div class="mark">SP</div>
+      <h1>Sporting Pearls Academy<small>Parent Portal</small></h1>
+      <div class="who">
+        <span>__GUARDIAN__ · __RELATION__</span>
+        <form method="post" action="/portal/parents/logout/" class="signout">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <button type="submit">Sign out</button>
+        </form>
+      </div>
+    </div>
+    <div class="hero">
+      <h2>Case __CASE_REF__</h2>
+      <p>Only you and authorised academy staff can read this conversation</p>
+    </div>
+    <nav class="pnav">
+      <a __NAV_OVERVIEW__ href="/portal/parents/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg> Overview</a>
+      <a __NAV_BOARD__ href="/portal/parents/announcements/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> Announcements __UNREAD_BADGE__</a>
+      <a __NAV_WELFARE__ href="/portal/parents/complaints/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 11.5l2 2 4-4"/></svg> Welfare desk</a>
+      <a __NAV_ACCOUNT__ href="/portal/parents/account/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Account</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back" href="/portal/parents/complaints/">&larr; All your cases</a>
+__NOTE__
+    <div class="casehead card">
+      <h3>__CASE_SUBJECT__</h3>
+      <span class="stc-space"></span>
+      __CASE_STATUS__
+      <code class="ref">__CASE_REF__</code>
+      <div class="factline">
+        <span>Category <b>__CASE_CAT__</b></span>
+        <span>About <b>__CASE_CHILD__</b></span>
+        <span>Opened <b>__CASE_OPENED__</b></span>
+        <span>Last activity <b>__CASE_UPDATED__</b></span>
+      </div>
+    </div>
+
+    <div class="sec-h"><h3>Conversation</h3></div>
+    <div class="thread">
+__THREAD__
+    </div>
+
+    <div class="reply card">
+      <h3>Add a message</h3>
+      <p class="sub">Anything you write here goes straight to the academy office.</p>
+__CLOSED_NOTE__
+      <form method="post" action="/portal/parents/complaints/__CASE_ID__/">
+        <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+        <textarea name="message" required placeholder="Write your message…"></textarea>
+        <button type="submit">Send to the academy office</button>
+      </form>
+    </div>
+  </main>
+  <div class="foot">
+    <span>Questions? <b>info@sportingpearlsacademy.org</b> · Mtwapa, Kilifi County</span>
+    <span class="fbrand">Sporting Pearls Academy · Parent Portal</span>
+  </div>
+</body>
+</html>

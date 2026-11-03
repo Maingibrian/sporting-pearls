@@ -1,0 +1,165 @@
+════════════════════════════════════════════════════════════════════
+ SPORTING PEARLS — REMOTE ACCESS & SHARING GUIDE
+ How to run the kit (e.g. on Linux Mint) and share the running site
+ with another machine — on your LAN or over the internet.
+════════════════════════════════════════════════════════════════════
+
+Ports used below (defaults, check backend/.env SP_PORT_* to change):
+  8090  the website (static pages)
+  8020  the backend: forms API, staff portal, parent portal, /admin/
+
+────────────────────────────────────────────────────────────────────
+ 1. RUNNING THE KIT ON LINUX MINT
+────────────────────────────────────────────────────────────────────
+Linux Mint is Ubuntu-based, so the installer works as-is. One-time
+prerequisites (Mint does not ship python venv support by default):
+
+    sudo apt update && sudo apt install -y python3-venv curl
+
+A) QUICK TRIAL — your home folder, no root needed:
+    unzip sporting-pearls-server-kit-v7.zip -d sporting-pearls
+    cd sporting-pearls
+    bash install.sh --demo-data
+  → website  http://localhost:8090
+  → portals  http://localhost:8020/portal/login/            (staff)
+             http://localhost:8020/portal/parents/login/    (parent)
+  Control it with:  bash sp.sh {status|start|stop|restart|logs|health|backup}
+  Services survive logout (not reboot — re-run "bash sp.sh start" after
+  a reboot, or use option B).
+
+B) PROPER LOCAL INSTALL — root, systemd (auto-start on boot,
+   daily backup at 02:30):
+    sudo bash install.sh --demo-data
+  → installs to /opt/sporting-pearls/sp-app
+
+C) FULL SERVER INSTALL (VPS with a domain) — nginx front + HTTPS:
+    sudo bash install.sh --with-nginx --domain=your.domain \
+        --with-tls --tls-email=you@example.com
+  See POST-INSTALL-README.txt for the whole hardening story.
+
+Notes:
+  * --demo-data is for trials/demo only. For the real site install
+    WITHOUT it (fresh empty database).
+  * Default admin login is on the installer's end banner — change it
+    after first login at http://localhost:8020/admin/
+
+────────────────────────────────────────────────────────────────────
+ 2. SHARING ON YOUR LAN (same Wi-Fi / office network)
+────────────────────────────────────────────────────────────────────
+Since kit v7 the backend binds 0.0.0.0 like the website, so other
+machines on the same network work out of the box.
+
+  a) Find this machine's IP:
+        ip -4 addr show        (e.g. 192.168.1.50)
+
+  b) Open the firewall if you use one (Mint ships ufw DISABLED by
+     default — if you never turned it on, skip this):
+        sudo ufw allow 8090/tcp     # website
+        sudo ufw allow 8020/tcp     # backend + portals
+     If you installed with --with-nginx, it is just:
+        sudo ufw allow 80/tcp
+
+  c) On the OTHER machine, open:
+        http://192.168.1.50:8090                      website
+        http://192.168.1.50:8020/portal/login/        staff portal
+        http://192.168.1.50:8020/portal/parents/login/ parent portal
+     (with --with-nginx everything is on http://192.168.1.50 — one URL)
+
+Tips:
+  * Reserve this machine's IP in your router (DHCP reservation).
+    If the IP ever changes, re-run the installer — it re-wires the
+    site to the current IP (or edit
+    site/assets/js/shared/site-config.js → API_BASE by hand).
+  * The installer prints the LAN URLs on its end banner.
+
+────────────────────────────────────────────────────────────────────
+ 3. SHARING OVER THE INTERNET (development / demos)
+────────────────────────────────────────────────────────────────────
+Do NOT open ports on your home router to share a dev box. Pick one:
+
+A) TAILSCALE — recommended: private, free, stable addresses.
+   Both machines (the Mint box and the remote one):
+        curl -fsSL https://tailscale.com/install.sh | sh
+        sudo tailscale up          (sign in with the same account)
+   On the Mint box get its tailnet IP:
+        tailscale ip -4            (e.g. 100.101.102.103)
+   Point the site at it and restart:
+        bash install.sh --public-url=http://100.101.102.103:8020
+        bash sp.sh restart
+   The remote machine then opens:
+        http://100.101.102.103:8090                    website
+        http://100.101.102.103:8020/portal/login/      portals
+   Only machines on your tailnet can reach it — nothing is public.
+
+B) CLOUDFLARE QUICK TUNNEL — public link, no account needed:
+        # one-time install of cloudflared:
+        curl -L --output cloudflared.deb \
+          https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+        sudo dpkg -i cloudflared.deb
+        # run a tunnel for the website:
+        cloudflared tunnel --url http://localhost:8090
+   It prints a public URL like https://random-words.trycloudflare.com.
+   Forms also need the BACKEND reachable, so run a second tunnel:
+        cloudflared tunnel --url http://localhost:8020
+   Then re-point the site to the backend's tunnel URL and restart:
+        bash install.sh --public-url=https://<backend-tunnel-url>
+        bash sp.sh restart
+   The links are PUBLIC (anyone who has them can view) and they change
+   every time you restart the tunnel — fine for quick demos only.
+
+C) NGROK — needs a free account, gives a stable static domain:
+        ngrok config add-authtoken <your-token>
+        ngrok http 8090        (and: ngrok http 8020)
+   Then re-point exactly like in B.
+
+If a portal login shows a 403 page through an https tunnel, append the
+https URL to CSRF_TRUSTED_ORIGINS in backend/.env and restart.
+
+────────────────────────────────────────────────────────────────────
+ 4. THE PROPER WAY — GO LIVE ON A SMALL VPS
+────────────────────────────────────────────────────────────────────
+When the academy site goes public, don't expose your dev machine.
+Rent a small VPS, point the domain's DNS A record at it, upload the
+zip and run:
+
+    sudo bash install.sh --with-nginx --domain=your.domain \
+        --with-tls --tls-email=you@example.com
+
+That gives: one HTTPS origin for site + forms + portals, locked
+ALLOWED_HOSTS/CORS, auto-renewing certificates, systemd services and
+daily 02:30 backups. On such a server, firewall the backend port
+("ufw deny 8020/tcp") and let nginx :80/:443 be the only front door.
+
+────────────────────────────────────────────────────────────────────
+ 5. TROUBLESHOOTING
+────────────────────────────────────────────────────────────────────
+ symptom                                  | fix
+ -----------------------------------------+--------------------------
+ site opens on the other machine, but    | the API origin in
+ forms say "offline copy kept"            | site/assets/js/shared/
+                                          | site-config.js is not
+                                          | reachable from there →
+                                          | re-run: bash install.sh
+                                          |   --public-url=<origin
+                                          |   the visitor can reach>
+ -----------------------------------------+--------------------------
+ "Invalid HTTP_HOST / DisallowedHost"     | add the hostname to
+ in backend/logs                          | ALLOWED_HOSTS in
+                                          | backend/.env, restart
+ -----------------------------------------+--------------------------
+ 403 on portal login via tunnel/https     | append https://<host> to
+                                          | CSRF_TRUSTED_ORIGINS in
+                                          | backend/.env, restart
+ -----------------------------------------+--------------------------
+ connection refused from other machine    | firewall: ufw allow
+                                          | <port>/tcp — or services
+                                          | down: bash sp.sh status
+ -----------------------------------------+--------------------------
+ worked yesterday, dead today             | DHCP changed the IP →
+                                          | reserve it in the router
+                                          | and re-run the installer
+ -----------------------------------------+--------------------------
+ changed .env, no effect                  | settings are read at
+                                          | start: bash sp.sh restart
+                                          | (systemd: sudo systemctl
+                                          | restart sp-backend)

@@ -1,0 +1,28 @@
+# Sporting Pearls — Django backend (gunicorn)
+[Unit]
+Description=Sporting Pearls — Django API + portals (gunicorn)
+After=network.target
+
+[Service]
+Type=simple
+User=__RUNUSER__
+WorkingDirectory=__APP__/backend
+Environment=DJANGO_SETTINGS_MODULE=sporting_pearls_backend.settings
+Environment=PYTHONUNBUFFERED=1
+ExecStartPre=__APP__/backend/.venv/bin/python manage.py migrate --noinput
+# __BIND__ is substituted by install.sh (0.0.0.0 → API + portals reachable on
+# the LAN). On a hardened public server, firewall this port (ufw deny <port>)
+# and let nginx :80/:443 be the only front door.
+# ONE process + threads (not --workers 3): the login/reset throttles count
+# in the process-local cache, and SQLite writes best from a single process.
+# Concurrency comes from gthread (--threads 8). To scale out later: move to
+# PostgreSQL + SP_CACHE=db (shared counters), then raise the worker count.
+ExecStart=__APP__/backend/.venv/bin/gunicorn sporting_pearls_backend.wsgi:application \
+  --bind __BIND__:__PORT_API__ --workers 1 --threads 8 --timeout 60
+Restart=on-failure
+RestartSec=3
+StandardOutput=append:__APP__/logs/backend.log
+StandardError=append:__APP__/logs/backend.log
+
+[Install]
+WantedBy=multi-user.target

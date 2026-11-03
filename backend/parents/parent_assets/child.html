@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f59d1e'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%230c1a33' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%230c1a33'/%3E%3C/svg%3E">
+<title>__CHILD_NAME__ · Sporting Pearls Parent Portal</title>
+<style>__CHROME_CSS__
+  .prof{display:grid;grid-template-columns:230px 1fr;gap:0;overflow:hidden;max-width:900px;margin:0 auto}
+  .prof-photo{position:relative;background:linear-gradient(155deg,#1d3f77,#0f2246 60%,#0c1a33);min-height:250px}
+  .prof-photo::after{content:'';position:absolute;inset:0;background:var(--pitch);background-size:260px 130px;opacity:.85;
+    -webkit-mask-image:linear-gradient(160deg,#000 30%,transparent 85%);mask-image:linear-gradient(160deg,#000 30%,transparent 85%)}
+  .prof-photo::before{content:'';position:absolute;left:0;right:0;bottom:0;height:4px;z-index:2;
+    background:linear-gradient(90deg,#ffb748,#f59d1e,#28998c)}
+  .prof-photo img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:1}
+  .prof-photo .ava{position:absolute;inset:0;display:grid;place-items:center;color:var(--pearl);z-index:1;
+    font-family:Georgia,serif;font-size:54px;font-weight:700;opacity:.92}
+  .prof-photo .kd-num{position:absolute;left:14px;bottom:16px;background:rgba(12,26,51,.85);color:var(--pearl);z-index:2;
+    border:1px solid rgba(245,157,30,.55);border-radius:9px;padding:3.5px 11px;font-size:14px;letter-spacing:1px}
+  .prof-body{padding:24px 26px 22px;min-width:0}
+  .prof-body h2{font-family:Georgia,serif;font-size:clamp(21px,3vw,26px);color:var(--navy);font-weight:600;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .cap{background:var(--gold);color:#122a52;font-size:12px;font-weight:800;letter-spacing:1.1px;
+    text-transform:uppercase;border-radius:999px;padding:3.5px 10px;font-family:'Work Sans',sans-serif;
+    box-shadow:0 3px 10px rgba(245,157,30,.35)}
+  .prof-squad{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#5c6a7e;margin:8px 0 3px;
+    text-transform:uppercase;letter-spacing:.9px}
+  .prof-squad .dot{width:9px;height:9px;border-radius:50%;flex:none;box-shadow:0 0 0 3px rgba(245,157,30,.16)}
+  .prof-ref{font-size:13px;color:var(--muted);letter-spacing:.6px}
+  .facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:10px;margin-top:18px}
+  .cf{background:#f7f9fc;border:1px solid var(--hair);border-radius:12px;padding:11px 13px;transition:.15s}
+  .cf:hover{border-color:rgba(31,122,111,.35);background:#f4f8f7}
+  .cf span{display:block;font-size:12px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#7c88a1}
+  .cf b{display:block;font-size:14.5px;color:var(--navy);margin-top:4px;font-weight:600}
+  .motto{margin-top:18px;background:radial-gradient(420px 160px at 92% -40px,rgba(31,122,111,.45),transparent 60%),
+    linear-gradient(120deg,#14284b,#0c1a33);color:#e8edf6;border-radius:14px;
+    padding:18px 22px 18px 48px;font-family:Georgia,serif;font-size:15.5px;font-style:italic;line-height:1.65;position:relative;overflow:hidden}
+  .motto .mq{position:absolute;left:15px;top:8px;font-size:36px;color:var(--amber);font-style:normal}
+  .fx{margin-top:18px;border-top:1px dashed var(--hair);padding-top:14px;font-size:15px}
+  .fx b{display:block;font-weight:600;color:var(--navy)}
+  .fx span{color:#5c6a7e;font-size:14px}
+  .fx-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--lagoon);margin-bottom:6px}
+  .fx-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber)}
+  .back{display:inline-flex;align-items:center;gap:7px;margin:0 auto 14px;font-size:14px;font-weight:700;
+    color:var(--lagoon);text-decoration:none;letter-spacing:.3px}
+  .back:hover{text-decoration:underline}
+  @media(max-width:680px){.prof{grid-template-columns:1fr}.prof-photo{min-height:200px}}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="bar">
+      <div class="mark">SP</div>
+      <h1>Sporting Pearls Academy<small>Parent Portal</small></h1>
+      <div class="who">
+        <span>__GUARDIAN__ · __RELATION__</span>
+        <form method="post" action="/portal/parents/logout/" class="signout">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <button type="submit">Sign out</button>
+        </form>
+      </div>
+    </div>
+    <div class="hero">
+      <h2>My child</h2>
+      <p>The profile the academy holds for your child</p>
+    </div>
+    <nav class="pnav">
+      <a __NAV_OVERVIEW__ href="/portal/parents/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg> Overview</a>
+      <a __NAV_BOARD__ href="/portal/parents/announcements/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> Announcements __UNREAD_BADGE__</a>
+      <a __NAV_WELFARE__ href="/portal/parents/complaints/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 11.5l2 2 4-4"/></svg> Welfare desk</a>
+      <a __NAV_ACCOUNT__ href="/portal/parents/account/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Account</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back" href="/portal/parents/">← Back to overview</a>
+    <div class="prof card">
+      <div class="prof-photo">__CHILD_PHOTO__<span class="kd-num">__CHILD_REF__</span></div>
+      <div class="prof-body">
+        <h2>__CHILD_NAME____CAPTAIN__</h2>
+        <div class="prof-squad"><span class="dot" style="background:__SQUAD_DOT__"></span>__SQUAD_TEXT__</div>
+        <div class="facts">
+__FACTS__
+        </div>
+__MOTTO__
+        <div class="fx"><span class="fx-tag">Next fixture</span>__NEXT_FX__</div>
+        <a class="qr-link" href="/portal/parents/qr/__CHILD_REF__/" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:10px 16px;border:1.5px solid #d8dde6;border-radius:9px;text-decoration:none;color:#16233a;font-weight:600;font-size:14px">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20v.01M17.5 17.5h3M20 17v3"/></svg>
+          Print QR profile card
+        </a>
+      </div>
+    </div>
+  </main>
+  <div class="foot">
+    <span>Questions? <b>info@sportingpearlsacademy.org</b> · Mtwapa, Kilifi County</span>
+    <span class="fbrand">Sporting Pearls Academy · Parent Portal</span>
+  </div>
+<script src="/portal/assets/img-fallback.js?v4"></script>
+</body>
+</html>

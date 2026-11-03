@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sporting Pearls Football Academy — sitemap.xml (public content pages only)
+
+  Excluded by design: the 10 form pages (transactional), the 4 policy
+  documents (reference, not landing pages), portal-guide.html (internal
+  user guide, not part of public navigation), player.html (per-player QR
+  profile, noindex), 404.html and 50x.html (error documents).
+
+  OWNER: the domain placeholder below is centralised — replace
+  https://www.sportingpearlsacademy.org with the real origin in ONE pass
+  (find and replace across this file; running the installer with the
+  domain flag does it automatically, together with robots.txt and every
+  canonical / og:url tag in the HTML).
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.sportingpearlsacademy.org/</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/about-us.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/our-story.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/vision-mission.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/core-values.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/chairman-message.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/leadership-governance.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/institutional-blueprint.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/safeguarding.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/academy.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/boys-programme.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/feminin.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/goalkeeper-development.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/player-development.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/education-life-skills.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/coaching-philosophy.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/the-squad.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/results.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/partners.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/partner-with-us.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/support-us.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/join-us.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://www.sportingpearlsacademy.org/contact.html</loc><lastmod>2026-10-26</lastmod></url>
+</urlset>

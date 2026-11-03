@@ -1,0 +1,13 @@
+/* Sporting Pearls - shared bl14m-hero-600-b.css (verbatim v15, 2 pages) */
+@media(max-width:600px){
+.hero{padding-top:92px}
+.hero-inner{padding:1.75rem var(--pad) clamp(4.5rem,10vh,7rem)}
+.hero h1{font-size:clamp(1.85rem,8.6vw,2.4rem);margin-bottom:1rem}
+.hero-sub{margin-bottom:1.1rem}
+.hero-actions{margin-bottom:1.2rem}
+.hero-actions .btn{padding:0.72rem 1rem;font-size:0.875rem}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);padding-top:0.8rem;gap:1rem 0.6rem}
+.hero-stat{min-width:0}
+.hero-stat span{font-size:0.75rem;letter-spacing:.06em}
+.hero-stat b{font-size:1.55rem}
+}

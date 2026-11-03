@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f59d1e'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%230c1a33' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%230c1a33'/%3E%3C/svg%3E">
+<title>DSO desk · Sporting Pearls Management Portal</title>
+<style>__DSO_CSS__
+  .fchips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .fchip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.5px solid #d9dfe9;
+    color:#1a2436;font-size:13.5px;font-weight:600;padding:7px 14px;border-radius:999px;
+    text-decoration:none;transition:.15s}
+  .fchip:hover{border-color:var(--amber)}
+  .fchip.on{background:var(--amber);border-color:var(--amber);color:#3d2800}
+  .fchip .cn{background:rgba(12,26,51,.08);border-radius:999px;padding:1px 8px;font-size:12.5px}
+  .fchip.on .cn{background:rgba(12,26,51,.12)}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="bar">
+      <div class="mark">SP</div>
+      <h1>Sporting Pearls Academy<small>Management Portal</small></h1>
+      <div class="who">
+        <span>__USER__</span>
+        <form method="post" action="/portal/logout/" class="signout">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <button type="submit">Sign out</button>
+        </form>
+      </div>
+    </div>
+    <div class="hero">
+      <h2>DSO desk — safeguarding reports</h2>
+      <p>Restricted access · every view and action is recorded in the audit trail</p>
+    </div>
+    <div class="pnav">
+      <a href="/portal/" __NAV_DASH__>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Dashboard</a>
+      <a href="/portal/dso/" __NAV_REPORTS__>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Reports</a>
+      <a href="/portal/dso/audit/" __NAV_AUDIT__>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Audit log</a>
+    </div>
+  </header>
+  <main>
+    <div class="dso-alert">
+      <span class="n" style="font-family:Georgia,serif;font-size:24px;color:#c0392b;font-weight:700">__OPEN_N__</span>
+      <div>
+        <b>waiting reports need review.</b>
+        <p>Emergency first: if a child may be in immediate danger, call the Police (999 / 112) or
+        Childline Kenya (116) <em>before</em> anything else, then record the escalation on the
+        report. Everything you open or change here is written to the audit trail.</p>
+      </div>
+    </div>
+    <div class="fchips">
+__CHIPS__
+    </div>
+__REP_ROWS__
+  </main>
+  <div class="foot">
+    <span><b>__TOTAL_N__</b> report(s) in the restricted store · access limited to the DSO role</span>
+    <span class="fbrand">Sporting Pearls Academy · Management Portal</span>
+  </div>
+</body>
+</html>

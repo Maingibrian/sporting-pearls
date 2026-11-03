@@ -1,0 +1,22 @@
+# Sporting Pearls backend — pinned dependencies (Phase 5, R20).
+#
+# Exact pins: the whole test suite (129 tests), the live smoke checks and
+# the phase-0 fail-closed guard were verified against exactly these
+# versions. Upgrade deliberately: bump, re-run
+#   python manage.py test submissions
+#   python phase0_guard_tests.py   (kit repo scripts/)
+# and update PRODUCTION-READINESS.md §8 with the new evidence row.
+#
+# Optional (NOT installed by default): PostgreSQL support — needed only
+# when backend/.env sets DB_ENGINE=postgres (see settings.py Phase 5
+# block and PRODUCTION-READINESS.md R14/R28):
+#   psycopg[binary]>=3.2
+Django==6.1.2
+gunicorn==26.2.0
+whitenoise==6.12.0
+requests==2.34.2
+django-cors-headers==4.9.0
+Pillow==13.0.0
+# Phase 7 — QR codes for player profile cards (pure Python, no network,
+# no other dependencies; renders SVG server-side).
+segno==1.6.1

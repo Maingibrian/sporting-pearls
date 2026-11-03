@@ -1,0 +1,51 @@
+# Sporting Pearls — continuous integration (Phase 5, R20).
+#
+# Runs on every push / pull request once this repo is hosted on GitHub:
+#   backend-tests : the full Django test suite (129 tests — safeguarding
+#                   isolation, auth hardening, form truthfulness, media
+#                   gating, healthz, settings switches)
+#   phase0-guard  : the 12 fail-closed production-guard cases
+#                   (scripts/phase0_guard_tests.py — portable, no .venv
+#                   assumptions)
+#
+# No secrets, no network calls to third parties, no deployments: CI only
+# proves the kit's own tests pass on a clean machine.
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+      - name: Install pinned dependencies
+        run: pip install -r requirements.txt
+      - name: Django system check
+        run: python manage.py check
+      - name: Test suite (submissions + parents)
+        run: python manage.py test submissions parents -v 1
+
+  phase0-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+      - name: Install pinned dependencies
+        run: pip install -r backend/requirements.txt
+      - name: Fail-closed production guard (12 cases)
+        run: python scripts/phase0_guard_tests.py

@@ -1,0 +1,17 @@
+# Sporting Pearls Football Academy — robots.txt
+# Public content is open; the portals, admin, API and uploaded media are not
+# for crawling. Media URLs are permission-gated server-side as well.
+#
+# OWNER: when the real domain goes live, replace
+#   https://www.sportingpearlsacademy.org
+# with the real origin (running the installer with --domain does this
+# automatically for robots.txt, sitemap.xml and every canonical/og:url tag).
+
+User-agent: *
+Allow: /
+Disallow: /portal/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /media/
+
+Sitemap: https://www.sportingpearlsacademy.org/sitemap.xml

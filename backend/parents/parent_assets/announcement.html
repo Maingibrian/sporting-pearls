@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f59d1e'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%230c1a33' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%230c1a33'/%3E%3C/svg%3E">
+<title>__AN_TITLE__ · Sporting Pearls Parent Portal</title>
+<style>__CHROME_CSS__
+  .art{max-width:780px;margin:0 auto;padding:30px 32px}
+  .art .an-top{display:flex;align-items:center;gap:8px;margin-bottom:13px}
+  .art .an-date{margin-left:auto;font-size:13px;color:var(--muted)}
+  .art h2{font-family:Georgia,serif;font-size:clamp(22px,3vw,27px);color:var(--navy);font-weight:600;line-height:1.28}
+  .art .an-for{display:inline-flex;align-items:center;gap:6px;margin-top:13px;font-size:12px;font-weight:700;letter-spacing:.7px;
+    text-transform:uppercase;color:var(--lagoon);background:rgba(31,122,111,.08);
+    border:1px solid rgba(31,122,111,.2);border-radius:999px;padding:4px 12px}
+  .art .an-for::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber)}
+  .art .body{margin-top:20px;border-top:1px dashed var(--hair);padding-top:20px;font-size:15px;line-height:1.8;color:#2a3550}
+  .art .body p{margin-bottom:15px}
+  .art .body p:last-child{margin-bottom:0}
+  .back{display:inline-flex;align-items:center;gap:7px;margin:0 auto 14px;font-size:14px;font-weight:700;
+    color:var(--lagoon);text-decoration:none;letter-spacing:.3px}
+  .back:hover{text-decoration:underline}
+  .readmark{margin-top:20px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:7px;
+    border-top:1px solid var(--hair);padding-top:14px}
+  .readmark svg{width:15px;height:15px;color:var(--lagoon)}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="bar">
+      <div class="mark">SP</div>
+      <h1>Sporting Pearls Academy<small>Parent Portal</small></h1>
+      <div class="who">
+        <span>__GUARDIAN__ · __RELATION__</span>
+        <form method="post" action="/portal/parents/logout/" class="signout">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <button type="submit">Sign out</button>
+        </form>
+      </div>
+    </div>
+    <div class="hero">
+      <h2>Announcements</h2>
+      <p>Notices from the academy, filtered to your children&#8217;s squads</p>
+    </div>
+    <nav class="pnav">
+      <a __NAV_OVERVIEW__ href="/portal/parents/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg> Overview</a>
+      <a __NAV_BOARD__ href="/portal/parents/announcements/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> Announcements __UNREAD_BADGE__</a>
+      <a __NAV_WELFARE__ href="/portal/parents/complaints/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 11.5l2 2 4-4"/></svg> Welfare desk</a>
+      <a __NAV_ACCOUNT__ href="/portal/parents/account/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Account</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back" href="/portal/parents/announcements/">← Back to the board</a>
+    <article class="art card">
+      <div class="an-top">__AN_PINNED__<span class="an-date">__AN_DATE__</span></div>
+      <h2>__AN_TITLE__</h2>
+      <span class="an-for">For: __AN_AUDIENCE__</span>
+      <div class="body">__AN_BODY__</div>
+      <div class="readmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Marked as read for your account</div>
+    </article>
+  </main>
+  <div class="foot">
+    <span>Questions? <b>info@sportingpearlsacademy.org</b> · Mtwapa, Kilifi County</span>
+    <span class="fbrand">Sporting Pearls Academy · Parent Portal</span>
+  </div>
+</body>
+</html>

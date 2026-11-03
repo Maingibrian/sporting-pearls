@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f59d1e'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%230c1a33' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%230c1a33'/%3E%3C/svg%3E">
+<title>Announcements · Sporting Pearls Parent Portal</title>
+<style>__CHROME_CSS__
+  .an-list{display:flex;flex-direction:column;gap:14px;max-width:820px;margin:0 auto}
+  .an-card{display:block;padding:18px 20px;text-decoration:none;color:inherit;transition:.16s;position:relative;overflow:hidden}
+  .an-card:hover{border-color:rgba(31,122,111,.45);transform:translateY(-2px);box-shadow:var(--shadow-2)}
+  .an-unread{border-left:4px solid #e04f3f}
+  .an-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+  .an-new{background:#fdecea;color:#c0392b;font-size:12.5px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;
+    border-radius:999px;padding:3.5px 10px;box-shadow:0 2px 6px rgba(224,79,63,.22)}
+  .an-date{margin-left:auto;font-size:13px;color:var(--muted)}
+  .an-card h3{font-family:Georgia,serif;font-size:18px;color:var(--navy);font-weight:600;line-height:1.3}
+  .an-card p{font-size:14.5px;color:#5c6a7e;line-height:1.6;margin-top:6px}
+  .an-for{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:700;letter-spacing:.7px;
+    text-transform:uppercase;color:var(--lagoon);background:rgba(31,122,111,.08);
+    border:1px solid rgba(31,122,111,.2);border-radius:999px;padding:3.5px 11px}
+  .an-for::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber)}
+  .an-empty{padding:30px 22px;text-align:center;display:flex;flex-direction:column;gap:6px}
+  .an-empty b{font-family:Georgia,serif;color:var(--navy);font-size:16.5px}
+  .an-empty span{font-size:14.5px;color:#5c6a7e}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="bar">
+      <div class="mark">SP</div>
+      <h1>Sporting Pearls Academy<small>Parent Portal</small></h1>
+      <div class="who">
+        <span>__GUARDIAN__ · __RELATION__</span>
+        <form method="post" action="/portal/parents/logout/" class="signout">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <button type="submit">Sign out</button>
+        </form>
+      </div>
+    </div>
+    <div class="hero">
+      <h2>Announcements</h2>
+      <p>__UNREAD_N__ unread__PLURAL__ for your family · notices are filtered to your children&#8217;s squads</p>
+    </div>
+    <nav class="pnav">
+      <a __NAV_OVERVIEW__ href="/portal/parents/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg> Overview</a>
+      <a __NAV_BOARD__ href="/portal/parents/announcements/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> Announcements __UNREAD_BADGE__</a>
+      <a __NAV_WELFARE__ href="/portal/parents/complaints/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 11.5l2 2 4-4"/></svg> Welfare desk</a>
+      <a __NAV_ACCOUNT__ href="/portal/parents/account/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Account</a>
+    </nav>
+  </header>
+  <main>
+    <div class="an-list">
+__AN_ROWS__
+    </div>
+  </main>
+  <div class="foot">
+    <span>Questions? <b>info@sportingpearlsacademy.org</b> · Mtwapa, Kilifi County</span>
+    <span class="fbrand">Sporting Pearls Academy · Parent Portal</span>
+  </div>
+</body>
+</html>

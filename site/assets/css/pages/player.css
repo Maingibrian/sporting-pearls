@@ -1,0 +1,60 @@
+/* Sporting Pearls — player.css (Phase 7)
+   Public player profile — the QR-code target page. Base design system
+   loads first via safeguarding.css; this sheet adds the profile card:
+   photo or monogram fallback, public facts, motto, squad link, and the
+   honest not-available panel for unknown/unpublished refs. */
+
+/* ============ HERO ============ */
+.plb-hero{position:relative;background:linear-gradient(135deg,var(--navy-2) 0%,var(--navy-4) 55%,var(--navy) 100%);color:var(--pearl);padding:clamp(6.5rem,10vh,8.5rem) 0 clamp(3rem,5vw,4rem);overflow:hidden;}
+.plb-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(52% 68% at 82% 12%,rgba(245,157,30,.14),transparent 62%),radial-gradient(40% 55% at 8% 88%,rgba(46,111,158,.16),transparent 60%);pointer-events:none;}
+.plb-hero .wrap{max-width:1040px;}
+.plb-hero .sec-eyebrow{color:var(--amber);}
+.plb-hero .sec-eyebrow::before{background:var(--amber);}
+.plb-hero h1{font-size:clamp(2.2rem,4.6vw,3.6rem);color:var(--pearl);line-height:1.06;max-width:22ch;margin-top:1rem;}
+.plb-lede{margin-top:1.25rem;max-width:62ch;font-size:clamp(1rem,1.6vw,1.125rem);color:var(--muted-d);line-height:1.75;}
+
+/* ============ PROFILE SECTION ============ */
+.plb-sec{padding-block:clamp(3rem,6vw,4.5rem);}
+.plb-wrap{max-width:900px;}
+.plb-card{display:grid;grid-template-columns:300px minmax(0,1fr);gap:clamp(1.5rem,3.5vw,2.75rem);background:var(--pearl);border:1px solid var(--hair);border-radius:var(--radius);padding:clamp(1.5rem,3.5vw,2.5rem);box-shadow:0 24px 60px rgba(11,26,54,.08);}
+.plb-photo{position:relative;aspect-ratio:4/5;border-radius:calc(var(--radius) - 4px);overflow:hidden;background:var(--sand);border:1px solid var(--hair);}
+.plb-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.plb-mono{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--fd);font-size:4.2rem;font-weight:700;color:var(--navy-4);background:linear-gradient(160deg,var(--sand),#e9e2d4);}
+.plb-num{position:absolute;left:.8rem;bottom:.8rem;font-family:var(--fm);font-weight:700;font-size:.8rem;letter-spacing:.1em;color:var(--pearl);background:var(--navy-2);border-radius:8px;padding:.32rem .7rem;}
+.plb-squad{display:flex;align-items:center;gap:.55rem;font-family:var(--fm);font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber-2);}
+.plb-squad .dot{width:.62rem;height:.62rem;border-radius:50%;display:inline-block;flex:none;}
+.plb-body h2{font-size:clamp(1.8rem,3.4vw,2.5rem);margin-top:.55rem;}
+.plb-facts{margin-top:1.25rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--hair);border-radius:calc(var(--radius) - 6px);overflow:hidden;}
+.plb-facts .pf{padding:.85rem 1.1rem;border-bottom:1px solid var(--hair);background:var(--pearl);}
+.plb-facts .pf:nth-child(odd){border-right:1px solid var(--hair);}
+.plb-facts .pf:nth-last-child(-n+2){border-bottom:0;}
+.plb-facts .pf:nth-last-child(-n+2):nth-child(odd){border-bottom:0;}
+.plb-facts .pf span{display:block;font-family:var(--fm);font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem;}
+.plb-facts .pf b{font-size:1rem;color:var(--ink);font-weight:600;}
+.plb-motto{margin-top:1.35rem;font-family:var(--fd);font-style:italic;font-size:1.18rem;line-height:1.55;color:var(--ink);border-left:3px solid var(--amber);padding:.35rem 0 .35rem 1.15rem;}
+.plb-actions{margin-top:1.6rem;}
+.plb-link{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--fm);font-size:.76rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--navy-2);text-decoration:none;border:1.5px solid var(--hair);border-radius:100px;padding:.85rem 1.5rem;transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease),transform .35s var(--ease);}
+.plb-link:hover{background:var(--navy-2);color:var(--pearl);border-color:var(--navy-2);transform:translateY(-2px);}
+.plb-arrow{width:15px;height:15px;flex:none;}
+
+/* ============ NOT AVAILABLE ============ */
+.plb-missing-card{max-width:680px;margin-inline:auto;background:var(--pearl);border:1.5px dashed rgba(20,40,75,.28);border-radius:var(--radius);padding:clamp(2rem,4.5vw,3rem);text-align:center;}
+.plb-missing-kicker{font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-2);margin-bottom:.8rem;}
+.plb-missing-card h2{font-size:clamp(1.5rem,2.8vw,2rem);margin-bottom:1rem;}
+.plb-missing-card p{color:var(--muted);max-width:52ch;margin:0 auto 1.5rem;line-height:1.75;}
+.plb-missing-card .plb-link{margin-inline:auto;}
+
+/* ============ LOADING ============ */
+.plb-loading{display:grid;justify-items:center;gap:.9rem;padding:3.5rem 0;color:var(--muted);}
+.plb-loading-dot{width:2.6rem;height:2.6rem;border-radius:50%;border:3px solid var(--hair);border-top-color:var(--amber);animation:plb-spin 1s linear infinite;}
+@keyframes plb-spin{to{transform:rotate(360deg);}}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:760px){
+  .plb-card{grid-template-columns:1fr;}
+  .plb-photo{max-width:340px;}
+  .plb-facts{grid-template-columns:1fr;}
+  .plb-facts .pf:nth-child(odd){border-right:0;}
+  .plb-facts .pf{border-bottom:1px solid var(--hair);}
+  .plb-facts .pf:last-child{border-bottom:0;}
+}

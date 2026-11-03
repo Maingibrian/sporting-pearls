@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23f59d1e'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%230c1a33' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%230c1a33'/%3E%3C/svg%3E">
+<title>Case __CASE_REF__ · Sporting Pearls Management Portal</title>
+<style>__STAFF_CSS__
+  .casehead{padding:18px 22px;display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+  .casehead h3{font-family:Georgia,serif;font-size:19px;color:var(--navy);font-weight:600;margin-right:auto}
+  .casehead .ref{font-size:12.5px;color:#7c88a1;background:#f3f5f9;border-radius:7px;padding:3px 9px;font-family:'Sarasa Mono SC',monospace}
+  .factline{display:flex;gap:18px;flex-wrap:wrap;border-top:1px dashed var(--hair);margin-top:12px;padding-top:12px;width:100%}
+  .factline span{font-size:13.5px;color:#5c6a7e}
+  .factline b{color:var(--navy);font-weight:600}
+  .grid2.casegrid{grid-template-columns:1fr 360px;align-items:start}
+  @media(max-width:880px){.grid2.casegrid{grid-template-columns:1fr}}
+  .thread{display:flex;flex-direction:column;gap:12px;margin:4px 0 20px}
+  .msg{border:1px solid var(--hair);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 16px rgba(12,26,51,.05)}
+  .msg-h{display:flex;align-items:baseline;gap:10px;padding:10px 16px;background:#f7f8fb;border-bottom:1px solid var(--hair);flex-wrap:wrap}
+  .msg-h b{font-size:14px;color:var(--navy)}
+  .msg-h span{margin-left:auto;font-size:12.5px;color:var(--muted)}
+  .msg.guardian .msg-h{background:rgba(31,122,111,.07)}
+  .msg.staff .msg-h{background:rgba(245,157,30,.09)}
+  .msg-b{padding:13px 16px}
+  .msg-b p{font-size:15px;line-height:1.65;color:#1a2436}
+  .msg-b p + p{margin-top:9px}
+  .int{background:#3d2800;color:#ffd98a;font-size:12.5px;font-weight:700;letter-spacing:1px;
+    text-transform:uppercase;border-radius:6px;padding:2.5px 8px}
+  .msg.internal{border-style:dashed;border-color:#c9b98a;background:#fffdf6}
+  .pane{padding:20px 22px}
+  .pane h3{font-family:Georgia,serif;font-size:17px;color:var(--navy);font-weight:600;margin-bottom:4px}
+  .pane .sub{font-size:14px;color:#5c6a7e;margin-bottom:6px}
+  .strow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+  .strow .inlineform{display:inline;margin:0}
+  .ghost.curst{border-color:var(--amber);background:rgba(245,157,30,.1);color:#a05a04}
+  .meta .row{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:5px 0;border-bottom:1px dashed var(--hair)}
+  .meta .row:last-child{border-bottom:0}
+  .meta .row span{color:#5c6a7e}
+  .meta .row b{color:var(--navy);font-weight:600;text-align:right;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="bar">
+      <div class="mark">SP</div>
+      <h1>Sporting Pearls Academy<small>Management Portal</small></h1>
+      <div class="who">
+        <span>__USER__</span>
+        <form method="post" action="/portal/logout/" class="signout">
+          <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+          <button type="submit">Sign out</button>
+        </form>
+      </div>
+    </div>
+    <div class="hero">
+      <h2>Case __CASE_REF__</h2>
+      <p>Public replies email the parent instantly · internal notes never leave this room</p>
+    </div>
+    <nav class="pnav">
+      <a __NAV_DASH__ href="/portal/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Dashboard</a>
+      <a __NAV_ANN__ href="/portal/desk/announcements/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg> Announcements</a>
+      <a __NAV_COMP__ href="/portal/desk/complaints/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 11.5l2 2 4-4"/></svg> Welfare desk</a>
+    </nav>
+  </header>
+  <main>
+    <a class="back" href="/portal/desk/complaints/">&larr; Welfare inbox</a>
+__NOTE__
+    <div class="casehead card">
+      <h3>__CASE_SUBJECT__</h3>
+      __CASE_STATUS__
+      <code class="ref">__CASE_REF__</code>
+      <div class="factline">
+        <span>Category <b>__CASE_CAT__</b></span>
+        <span>About <b>__CASE_CHILD__</b></span>
+        <span>Opened <b>__CASE_OPENED__</b></span>
+        <span>Last activity <b>__CASE_UPDATED__</b></span>
+      </div>
+    </div>
+
+    <div class="grid2 casegrid" style="margin-top:18px">
+      <div>
+        <div class="sec-h" style="margin-top:0"><h3>Conversation</h3></div>
+        <div class="thread">
+__THREAD__
+        </div>
+      </div>
+      <div>
+        <div class="pane card">
+          <h3>Reply to the family</h3>
+          <p class="sub">A public reply is emailed to the parent the moment you send it.</p>
+          <form method="post" action="/portal/desk/complaints/__CASE_REF_NUM__/">
+            <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+            <input type="hidden" name="action" value="reply">
+            <textarea name="message" required placeholder="Write the academy's reply — clear, warm, specific…"></textarea>
+            <label class="row-check"><input type="checkbox" name="internal" value="1">
+              Internal note instead (never shown to the parent)</label>
+            <button class="act" type="submit">Send reply</button>
+          </form>
+        </div>
+        <div class="pane card" style="margin-top:16px">
+          <h3>Case status</h3>
+          <p class="sub">The parent sees the status chip in their portal.</p>
+          <div class="strow">
+__STATUS_BTNS__
+          </div>
+        </div>
+        <div class="pane card" style="margin-top:16px">
+          <h3>Who opened this</h3>
+          <div class="meta">
+            <div class="row"><span>Guardian</span><b>__CASE_GUARDIAN__</b></div>
+            <div class="row"><span>Relation</span><b>__CASE_RELATION__</b></div>
+            <div class="row"><span>Phone</span><b>__CASE_PHONE__</b></div>
+            <div class="row"><span>About</span><b>__CASE_CHILD__</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div class="foot">
+    <span>Sporting Pearls Football Academy · Mtwapa, Kilifi County</span>
+    <span class="fbrand">Sporting Pearls Academy · Management Portal</span>
+  </div>
+</body>
+</html>

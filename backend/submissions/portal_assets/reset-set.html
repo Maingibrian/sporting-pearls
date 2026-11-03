@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Choose a new password · Sporting Pearls</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--navy:#0c1a33;--navy2:#14284b;--amber:#f59d1e;--pearl:#fbfaf7;--muted:#8a94a6;--fail:#c0392b}
+  html,body{height:100%}
+  body{font-family:'Work Sans','Segoe UI',system-ui,-apple-system,Arial,sans-serif;
+    background:radial-gradient(1200px 700px at 15% -10%,#1b3a6b 0%,var(--navy2) 42%,var(--navy) 100%);
+    display:grid;place-items:center;padding:24px;color:var(--pearl)}
+  .lg-wrap{width:100%;max-width:410px}
+  .lg-brand{display:flex;align-items:center;gap:12px;margin-bottom:22px;justify-content:center}
+  .lg-mark{width:46px;height:46px;border-radius:13px;background:var(--amber);color:var(--navy);
+    display:grid;place-items:center;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:20px;
+    box-shadow:0 8px 22px rgba(245,157,30,.35)}
+  .lg-brand h1{font-family:Georgia,'Times New Roman',serif;font-size:21px;font-weight:600;letter-spacing:.2px}
+  .lg-brand small{display:block;font-size:13px;letter-spacing:2.2px;text-transform:uppercase;color:var(--muted);font-family:'Work Sans',sans-serif;margin-top:3px}
+  .lg-card{background:var(--pearl);color:#1a2436;border-radius:18px;padding:30px 28px 26px;
+    box-shadow:0 24px 60px rgba(2,8,20,.55)}
+  .lg-card h2{font-family:Georgia,serif;font-size:19px;color:var(--navy);margin-bottom:4px}
+  .lg-card p.lg-sub{font-size:14px;color:#5c6a7e;margin-bottom:8px;line-height:1.55}
+  label{display:block;font-size:12.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+    color:#5c6a7e;margin:14px 0 6px}
+  input[type=password]{width:100%;padding:11px 13px;border:1.5px solid #d8dde6;border-radius:10px;
+    font:inherit;font-size:14.5px;background:#fff;color:#1a2436;outline:none;transition:border .15s}
+  input:focus{border-color:var(--amber)}
+  .lg-err{background:#fdeeec;color:var(--fail);border:1px solid #f2c4bd;border-radius:10px;
+    padding:10px 13px;font-size:14.5px;margin:16px 0 0}
+  button{width:100%;margin-top:22px;padding:12.5px;border:none;border-radius:11px;background:var(--amber);
+    color:#231503;font:inherit;font-weight:700;font-size:14.5px;cursor:pointer;letter-spacing:.3px;
+    transition:transform .12s,box-shadow .12s}
+  button:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(245,157,30,.4)}
+  .lg-foot{margin-top:18px;text-align:center;font-size:13px;color:var(--muted);line-height:1.7}
+  .lg-foot a{color:#5c6a7e;font-weight:700}
+</style>
+</head>
+<body>
+  <div class="lg-wrap">
+    <div class="lg-brand">
+      <div class="lg-mark">SP</div>
+      <h1>Sporting Pearls Academy<small>__AUD__</small></h1>
+    </div>
+    <div class="lg-card">
+      <h2>Choose a new password</h2>
+      <p class="lg-sub">This link works once. Pick something at least 8 characters long that is not a common word — then use it from the next sign-in.</p>
+      <form method="post" action="__ACTION__">
+        <input type="hidden" name="csrfmiddlewaretoken" value="__CSRF__">
+        <label for="id-pw1">New password</label>
+        <input type="password" id="id-pw1" name="password" autocomplete="new-password" required minlength="8" autofocus>
+        <label for="id-pw2">Repeat the new password</label>
+        <input type="password" id="id-pw2" name="password2" autocomplete="new-password" required minlength="8">
+        __ERR__
+        <button type="submit">Save the new password</button>
+      </form>
+      <div class="lg-foot">Link expired? Just <a href="__REQ_URL__">request a fresh one</a>.</div>
+    </div>
+  </div>
+</body>
+</html>

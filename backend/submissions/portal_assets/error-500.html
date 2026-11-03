@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Something went wrong · Sporting Pearls</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--navy:#0c1a33;--navy2:#14284b;--amber:#f59d1e;--pearl:#fbfaf7;--muted:#8a94a6}
+  html,body{height:100%}
+  body{font-family:'Work Sans','Segoe UI',system-ui,-apple-system,Arial,sans-serif;
+    background:radial-gradient(1200px 700px at 15% -10%,#1b3a6b 0%,var(--navy2) 42%,var(--navy) 100%);
+    display:grid;place-items:center;padding:24px;color:var(--pearl)}
+  .lg-wrap{width:100%;max-width:440px;text-align:center}
+  .lg-code{font-family:Georgia,'Times New Roman',serif;font-size:64px;font-weight:700;color:var(--amber);
+    letter-spacing:2px;margin-bottom:6px}
+  .lg-wrap h1{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:600;margin-bottom:10px}
+  .lg-wrap p{font-size:14.5px;color:#b9c2d4;line-height:1.65;max-width:380px;margin:0 auto 24px}
+  .lg-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:12px 22px;border:none;border-radius:11px;background:var(--amber);
+    color:#231503;font:inherit;font-weight:700;font-size:14.5px;cursor:pointer;text-decoration:none}
+  .btn.ghost{background:transparent;color:var(--pearl);border:1.5px solid #33507e}
+  .lg-mark{width:46px;height:46px;border-radius:13px;background:var(--amber);color:var(--navy);
+    display:grid;place-items:center;font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:20px;
+    margin:0 auto 18px;box-shadow:0 8px 22px rgba(245,157,30,.35)}
+</style>
+</head>
+<body>
+  <div class="lg-wrap">
+    <div class="lg-mark">SP</div>
+    <div class="lg-code">500</div>
+    <h1>Something went wrong on our side</h1>
+    <p>The portal hit an unexpected problem. Your data is safe — nothing was half-saved. Please try again in a moment; the academy office can help if it keeps happening.</p>
+    <div class="lg-actions">
+      <a class="btn" href="/portal/login/">Management Portal</a>
+      <a class="btn ghost" href="__SITE_URL__">__SITE_LABEL__</a>
+    </div>
+  </div>
+</body>
+</html>

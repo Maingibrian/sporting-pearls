@@ -1,0 +1,8 @@
+[Unit]
+Description=Sporting Pearls daily backup (db + media + .env)
+
+[Service]
+Type=oneshot
+User=__RUNUSER__
+WorkingDirectory=__APP__
+ExecStart=/bin/bash __APP__/sp.sh backup

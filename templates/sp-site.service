@@ -1,0 +1,16 @@
+[Unit]
+Description=Sporting Pearls — Static site (http.server)
+After=network.target
+
+[Service]
+Type=simple
+User=__RUNUSER__
+WorkingDirectory=__APP__
+ExecStart=__PY__ -m http.server __PORT_SITE__ --bind __BIND__ --directory __APP__/site
+Restart=on-failure
+RestartSec=3
+StandardOutput=append:__APP__/logs/site.log
+StandardError=append:__APP__/logs/site.log
+
+[Install]
+WantedBy=multi-user.target

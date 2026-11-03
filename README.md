@@ -13,7 +13,6 @@ parent portal, admin) with a one-shot Linux installer.
 | `templates/`  | systemd units, nginx configs, backup/restore scripts used by the installer   |
 | `scripts/`    | Build & QA scripts used to produce and verify the kit                        |
 | `install.sh`  | One-shot installer for any Linux box with Python 3.10+ (no root required)    |
-| `.github/`    | CI workflow                                                                  |
 
 ## Quick start (local server)
 
@@ -57,3 +56,10 @@ backend via `site/assets/js/shared/site-config.js`.
 - Never commit real secrets: copy `backend/.env.example` /
   `backend/.env.production.example` to `.env` and fill in values locally.
 - `db.sqlite3`, `media/`, `.venv/` and `.env` are git-ignored.
+
+## CI (optional)
+
+A GitHub Actions workflow is included at `scripts/github-ci.yml`
+(kept out of `.github/workflows/` because the initial push token lacked
+workflow scope). To enable CI, copy it to `.github/workflows/ci.yml`
+via the GitHub web UI, or push it with a token that has workflow scope.

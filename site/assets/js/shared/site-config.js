@@ -7,5 +7,5 @@
    While empty, every form keeps its current on-page behaviour and the
    Fixtures panel keeps showing its "Coming Soon" state.                */
 window.SP_CONFIG = {
-  API_BASE: ""
+  API_BASE: "https://sporting-pearlsorg.onrender.com"
 };

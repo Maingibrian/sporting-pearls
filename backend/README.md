@@ -195,7 +195,7 @@ see a broken page):
    Uploaded files are stored under `MEDIA_ROOT` (point it at the volume
    so they survive deploys).
 4. **Captains & formation:** tick *captain* on one player per squad and
-   set the squad's formation (4-3-3, 4-4-2, 4-2-3-1, 3-5-2) — the site
+   set the squad's formation (4-2-3-1, 4-3-3, 4-4-2, 3-5-2) — the site
    pitch and captain marker update automatically.
 
 ## 9. Security checklist (before going live)

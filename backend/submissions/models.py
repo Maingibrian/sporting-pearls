@@ -194,7 +194,7 @@ class Squad(models.Model):
     code = models.CharField('short code', max_length=4, unique=True,
                             help_text='Printed on the paper data form, e.g. FEM, U09.')
     label = models.CharField(max_length=80, help_text='e.g. Sporting Pearls Féminin, U9 Foundation Squad')
-    formation = models.CharField(max_length=8, choices=FORMATIONS, default='4-3-3')
+    formation = models.CharField(max_length=8, choices=FORMATIONS, default='4-2-3-1')
     accent = models.CharField('accent colour', max_length=9, default='#f59d1e',
                               help_text='Hex colour used on the website squad tab, e.g. #f59d1e')
     sort = models.PositiveSmallIntegerField('display order', default=0)

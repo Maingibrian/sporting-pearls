@@ -38,7 +38,7 @@ class Command(BaseCommand):
                 defaults=dict(
                     code=s['code'],
                     label=s['label'],
-                    formation=s.get('form', '4-3-3'),
+                    formation=s.get('form', '4-2-3-1'),
                     accent=s.get('accent', '#f59d1e'),
                     sort=s.get('sort', 0),
                 ),

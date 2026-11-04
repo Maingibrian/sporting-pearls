@@ -7,7 +7,7 @@
    "key": "feminin",
    "code": "FEM",
    "label": "Sporting Pearls Féminin",
-   "form": "4-3-3",
+   "form": "4-2-3-1",
    "accent": "#f59d1e",
    "sort": 5,
    "players": []
@@ -16,7 +16,7 @@
    "key": "u12",
    "code": "U12",
    "label": "U12 Foundation Squad",
-   "form": "4-4-2",
+   "form": "4-2-3-1",
    "accent": "#2e6f9e",
    "sort": 1,
    "players": [
@@ -278,7 +278,7 @@
    "key": "u14",
    "code": "U14",
    "label": "U14 Development Squad",
-   "form": "4-3-3",
+   "form": "4-2-3-1",
    "accent": "#2f8f83",
    "sort": 2,
    "players": [
@@ -512,7 +512,7 @@
    "key": "u16",
    "code": "U16",
    "label": "U16 Performance Squad",
-   "form": "3-5-2",
+   "form": "4-2-3-1",
    "accent": "#1f567e",
    "sort": 3,
    "players": [
@@ -676,7 +676,7 @@
    "key": "u19",
    "code": "U19",
    "label": "U19 Senior Squad",
-   "form": "3-5-2",
+   "form": "4-2-3-1",
    "accent": "#f59d1e",
    "sort": 4,
    "players": [

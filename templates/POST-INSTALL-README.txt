@@ -357,10 +357,10 @@ WHAT REVISION 21 CHANGED (owner UI round)
 The squad page now shows the REAL academy register (season 2026-27),
 imported from the Player Administration Excel:
 
-  U12 Foundation .... 18 players   (4-4-2)
-  U14 Development ... 16 players   (4-3-3)
-  U16 Performance ... 11 players   (3-5-2)
-  U19 Senior ......... 5 players   (3-5-2)
+  U12 Foundation .... 18 players   (4-2-3-1)
+  U14 Development ... 16 players   (4-2-3-1)
+  U16 Performance ... 11 players   (4-2-3-1)
+  U19 Senior ......... 5 players   (4-2-3-1)
   Féminin ............ roster being finalised (empty by design
                        until the office sends the girls' register)
 

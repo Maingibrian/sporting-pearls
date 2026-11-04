@@ -1,4 +1,4 @@
-/* Sporting Pearls - the-squad.js (v26 — real register import 2026-11-03) */
+/* Sporting Pearls - the-squad.js (v27 — all squads switch to 4-2-3-1, 2026-11-04) */
 document.documentElement.classList.add('js');
 
 /* Tactical Formation Coordinate Presets */
@@ -59,7 +59,7 @@ var CAP_NAMES = {
 var TEAMS = {
   u12: {
     label: 'U12 Foundation Squad',
-    form: '4-4-2',
+    form: '4-2-3-1',
     squad: [
       [12,'Suleimann','Alii','GK','11','','','','','U12-01',[['Position','Goalkeeper'],['Season','2026–27']]],
       [23,'Brian','Karisa Samuel','GK','10','','','','assets/img/squad/u16-09.jpg','U12-02',[['Position','Goalkeeper'],['Season','2026–27']]],
@@ -83,7 +83,7 @@ var TEAMS = {
   },
   u14: {
     label: 'U14 Development Squad',
-    form: '4-3-3',
+    form: '4-2-3-1',
     squad: [
       [1,'Elijah','Mwakwekwe Chai','GK','13','','','','assets/img/squad/u16-16.jpg','U14-01',[['Position','Goalkeeper'],['Season','2026–27']]],
       [3,'Amos','Justus Kuto','FB','15','','','','assets/img/squad/u16-18.jpg','U14-02',[['Position','Full Back'],['Season','2026–27']]],
@@ -105,7 +105,7 @@ var TEAMS = {
   },
   u16: {
     label: 'U16 Performance Squad',
-    form: '3-5-2',
+    form: '4-2-3-1',
     squad: [
       [22,'Mwazuma','Chitibwa Kumbo','GK','16','','','','assets/img/squad/u19-29.jpg','U16-01',[['Position','Goalkeeper'],['Season','2026–27']]],
       [11,'Joel','Gharama','WB','16','','','','','U16-02',[['Position','Wing Back'],['Season','2026–27']]],
@@ -122,7 +122,7 @@ var TEAMS = {
   },
   u19: {
     label: 'U19 Senior Squad',
-    form: '3-5-2',
+    form: '4-2-3-1',
     squad: [
       [2,'Menza','Harrison Charo','FB','19','','','','assets/img/squad/u19-10.jpg','U19-01',[['Position','Full Back'],['Season','2026–27']]],
       [12,'Isaac','Mumo','FB','16','','','','assets/img/squad/u19-28.jpg','U19-02',[['Position','Full Back'],['Season','2026–27']]],
@@ -133,7 +133,7 @@ var TEAMS = {
   },
   feminin: {
     label: 'Sporting Pearls Féminin',
-    form: '4-3-3',
+    form: '4-2-3-1',
     squad: []   /* roster being finalised by the academy office */
   }
 };
@@ -193,9 +193,9 @@ function renderTeam(key){
     return;
   }
 
-  var formKey = FORM[t.form] ? t.form : '4-3-3';   /* dashboard may set any formation */
+  var formKey = FORM[t.form] ? t.form : '4-2-3-1';   /* dashboard may set any formation */
   var slots = FORM[formKey];
-  var bands = BANDS[formKey] || BANDS['4-3-3'];
+  var bands = BANDS[formKey] || BANDS['4-2-3-1'];
 
   /* Group the register by position line, then fill the formation slots:
      keepers in goal, defenders in defence, and so on. Overflowing players
@@ -351,7 +351,7 @@ function openModal(i){
   var t = TEAMS[current];
   var p = t.squad[i];
   var si = slotByPlayer[i];
-  var slots = FORM[FORM[t.form] ? t.form : '4-3-3'];
+  var slots = FORM[FORM[t.form] ? t.form : '4-2-3-1'];
   var xy = (si != null && slots[si]) ? slots[si] : [50,50];
   var hex = ACCENT_HEX[current];
   lastFocus = document.activeElement;
@@ -604,7 +604,7 @@ renderCaptains();   /* captains re-render from live data once published */
     squads.forEach(function(s){
       if(!TEAMS[s.key]) return;                     /* only the site's six tabs */
       seen[s.key] = true;
-      if(!FORM[s.form]) s.form = '4-3-3';
+      if(!FORM[s.form]) s.form = '4-2-3-1';
       TEAMS[s.key] = {
         label: s.label || TEAMS[s.key].label,
         form: s.form,

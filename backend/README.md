@@ -197,6 +197,12 @@ see a broken page):
 4. **Captains & formation:** tick *captain* on one player per squad and
    set the squad's formation (4-2-3-1, 4-3-3, 4-4-2, 3-5-2) — the site
    pitch and captain marker update automatically.
+5. **Technical team (coaches):** manage coaches from the portal's
+   *Technical team* view — add name, role, squad link, short bio and a
+   photo, then flip the eye switch to publish. Published coaches replace
+   the "once confirmed" notice on the website's squad page immediately;
+   drafts stay private. (The Django admin still works too — the portal
+   and admin edit the same records.)
 
 ## 9. Security checklist (before going live)
 

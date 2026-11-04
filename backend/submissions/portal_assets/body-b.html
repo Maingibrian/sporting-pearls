@@ -33,6 +33,45 @@ __FX_MINI__
         </div>
       </section>
 
+      <!-- ══════════════ VIEW: TECHNICAL TEAM ══════════════ -->
+      <section class="view" id="view-coaches">
+        <div class="toolbar">
+          <p style="font-size:15px;color:var(--muted);max-width:62ch;margin-right:auto">
+            The coaching team on the website squad page. Add each coach once their details are confirmed, then flip the eye switch — <b style="color:var(--ink)">published coaches appear on sportingpearlsacademy.org immediately</b>, replacing the "once confirmed" notice.
+          </p>
+          <button class="btn btn-amber" id="btn-add-coach">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Add coach
+          </button>
+        </div>
+
+        <div class="pl-grid" id="co-grid" style="__COACH_GRID_STYLE__">
+__COACH_CARDS__
+        </div>
+
+        <div class="card" id="co-empty" style="margin-top:0;__COACH_EMPTY_STYLE__">
+          <div class="card-b" style="display:flex;gap:13px;align-items:flex-start">
+            <div class="r-ico" style="width:34px;height:34px;border-radius:10px;background:#fff3dd;color:var(--amber-ink);flex:none;display:grid;place-items:center">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M12 3v2M7 6h10l-.7 4.2a4.6 4.6 0 0 1-4.3 3.8 4.6 4.6 0 0 1-4.3-3.8L7 6zM12 14v4M9 21h6M10 18h4"/></svg>
+            </div>
+            <div style="font-size:14.5px;color:var(--muted)">
+              <b style="color:var(--ink)">No coaches published yet.</b> The website shows "Coaching-team profiles are published by the academy office at the start of each season and appear here once confirmed" — the moment you add and publish the first coach, that notice is replaced by the real technical team. Drafts (eye closed) stay private until you're ready.
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <div class="card-b" style="display:flex;gap:13px;align-items:flex-start">
+            <div class="r-ico" style="width:34px;height:34px;border-radius:10px;background:#fff3dd;color:var(--amber-ink);flex:none;display:grid;place-items:center">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </div>
+            <div style="font-size:14.5px;color:var(--muted)">
+              <b style="color:var(--ink)">Photos in one tap, same as players.</b> The camera button uploads a headshot — it is re-encoded with hidden metadata stripped before it is stored. Coaches with the eye closed keep their profile here but vanish from the website until you publish them again.
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ══════════════ VIEW: ACCESS & SECURITY ══════════════ -->
       <section class="view" id="view-access">
         <div class="access-grid">
@@ -383,6 +422,72 @@ __FX_MINI__
   </div>
 </div>
 
+<!-- ══════════════ COACH EDIT MODAL ══════════════ -->
+<div class="modal" id="coach-edit-modal" role="dialog" aria-modal="true" aria-label="Edit coach">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-card">
+    <div class="m-head">
+      <div>
+        <h3 id="ce-title">Edit coach</h3>
+        <span class="m-ref" id="ce-sub">—</span>
+      </div>
+      <button class="m-x" data-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="m-body">
+      <div class="pf-grid">
+        <div class="pf-field"><label>Full name</label><input id="ce-name" maxlength="120"></div>
+        <div class="pf-field"><label>Role</label><input id="ce-role" maxlength="120" placeholder="e.g. Head Coach · U14 Lead · GK Coach"></div>
+        <div class="pf-field"><label>Squad</label><select id="ce-squad">__COACH_SQUAD_OPTS__</select></div>
+        <div class="pf-field"><label>Display order (0–99)</label><input id="ce-sort" type="number" min="0" max="99" inputmode="numeric"></div>
+        <div class="pf-field pf-wide"><label>Short bio (shown on the website card)</label><textarea id="ce-bio" rows="3" maxlength="600"></textarea></div>
+        <div class="pf-field pf-checks pf-wide">
+          <label class="pf-check"><input type="checkbox" id="ce-pub"> Published — visible on the website technical-team section</label>
+        </div>
+      </div>
+      <p class="pf-note">Saving applies to the website immediately — the squad page's technical-team section updates the next time it loads.</p>
+    </div>
+    <div class="m-foot">
+      <button class="btn btn-primary" id="ce-save">Save changes</button>
+      <button class="btn btn-ghost" data-close>Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ ADD COACH MODAL ══════════════ -->
+<div class="modal" id="coach-add-modal" role="dialog" aria-modal="true" aria-label="Add coach">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-card">
+    <div class="m-head">
+      <div>
+        <h3>Add a coach</h3>
+        <span class="m-ref">Coaching-team profiles appear on the website once published</span>
+      </div>
+      <button class="m-x" data-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="m-body">
+      <div class="pf-grid">
+        <div class="pf-field"><label>Full name</label><input id="ca-name" maxlength="120"></div>
+        <div class="pf-field"><label>Role</label><input id="ca-role" maxlength="120" placeholder="e.g. Head Coach · U14 Lead · GK Coach"></div>
+        <div class="pf-field"><label>Squad</label><select id="ca-squad">__COACH_SQUAD_OPTS__</select></div>
+        <div class="pf-field"><label>Display order (0–99)</label><input id="ca-sort" type="number" min="0" max="99" inputmode="numeric"></div>
+        <div class="pf-field pf-wide"><label>Short bio (optional)</label><textarea id="ca-bio" rows="3" maxlength="600"></textarea></div>
+        <div class="pf-field pf-checks pf-wide">
+          <label class="pf-check"><input type="checkbox" id="ca-pub"> Publish immediately — show on the website straight away</label>
+        </div>
+      </div>
+      <p class="pf-note">New coaches can stay as drafts while contracts are confirmed — flip the eye switch when the website may show them.</p>
+    </div>
+    <div class="m-foot">
+      <button class="btn btn-primary" id="ca-save">Add coach</button>
+      <button class="btn btn-ghost" data-close>Cancel</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
   <span id="toast-msg"></span>
@@ -390,7 +495,8 @@ __FX_MINI__
 
 <script type="application/json" id="subs-json">__SUBS_JSON__</script>
 <script type="application/json" id="players-json">__PLAYERS_JSON__</script>
-<script src="/portal/assets/dash.js?v16"></script>
+<script type="application/json" id="coaches-json">__COACHES_JSON__</script>
+<script src="/portal/assets/dash.js?v17"></script>
 <script src="/portal/assets/img-fallback.js?v4"></script>
 </body>
 </html>

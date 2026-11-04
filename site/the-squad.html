@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="assets/css/shared/fonts.css?v1">
   <script src="assets/js/shared/img-fallback.js?v1"></script>
 <script src="assets/js/shared/page-veil.js?v1"></script>
-<link rel="stylesheet" href="assets/css/pages/the-squad.css?v25">
+<link rel="stylesheet" href="assets/css/pages/the-squad.css?v26">
 
 
 
@@ -326,7 +326,11 @@
     </div>
 
     <div class="squad-layout">
-      <div class="tabs" role="tablist" aria-label="Choose a team" data-reveal="left">
+      <div class="tabstrip" data-reveal="left">
+        <button class="tabnav" id="tabPrev" type="button" aria-label="Show previous squad" aria-controls="pitch" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="tabs" role="tablist" aria-label="Choose a team" id="teamTabs">
         <button class="tab active" data-team="u12" style="--tc:var(--blue)" role="tab" aria-selected="true">
           <span class="idx">01</span>
           <span><span class="tname"><i></i>U12 Foundation</span><span class="tmeta">4-2-3-1 · Discover &amp; Enjoy · 18 players</span></span>
@@ -351,6 +355,10 @@
           <span class="idx">05</span>
           <span><span class="tname"><i></i>Féminin (Butterflies)</span><span class="tmeta">4-2-3-1 · Women &amp; Girls · Roster TBC</span></span>
           <span class="arr">→</span>
+        </button>
+        </div>
+        <button class="tabnav" id="tabNext" type="button" aria-label="Show next squad" aria-controls="pitch" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
         </button>
       </div>
 
@@ -529,7 +537,7 @@
 
 <script src="assets/js/shared/site-config.js?v24"></script>
 <script src="assets/js/vendor/qr.min.js?v1"></script>
-<script src="assets/js/pages/the-squad.js?v27"></script>
+<script src="assets/js/pages/the-squad.js?v28"></script>
 <script src="assets/js/shared/nav-pro.js?v23"></script>
 
 <script src="assets/js/shared/mask-reveal.js?v19"></script>

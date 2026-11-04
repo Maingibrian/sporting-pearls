@@ -1,4 +1,4 @@
-/* Sporting Pearls - the-squad.js (v27 — all squads switch to 4-2-3-1, 2026-11-04) */
+/* Sporting Pearls - the-squad.js (v28 — squad strip arrows + coach-friendly roster, 2026-11-05) */
 document.documentElement.classList.add('js');
 
 /* Tactical Formation Coordinate Presets */
@@ -170,6 +170,7 @@ function renderTeam(key){
     var on = tabs[i].getAttribute('data-team') === key;
     tabs[i].classList.toggle('active', on);
     tabs[i].setAttribute('aria-selected', on ? 'true' : 'false');
+    if(on) centerTab(tabs[i]);
   }
 
   pitchEl.style.setProperty('--acc', ACCENT_VAR[key]);
@@ -331,6 +332,59 @@ for(var ti=0; ti<allTabs.length; ti++){
   allTabs[ti].addEventListener('click', function(){
     renderTeam(this.getAttribute('data-team'));
   });
+}
+
+/* ── Squad strip navigation (v28) ─────────────────────────────────────
+ * On narrow screens the five squads overflow the strip. Instead of a
+ * hidden sideways scroll nobody discovers, the strip now shows big
+ * prev/next arrows, edge fades while more squads wait on a side, and
+ * snap-scrolls; the active squad always centres itself. Desktop keeps
+ * the sticky vertical list — the arrows simply never appear there. */
+var stripEl = document.querySelector('.tabstrip');
+var trackEl = document.getElementById('teamTabs');
+var navPrev = document.getElementById('tabPrev');
+var navNext = document.getElementById('tabNext');
+var stripRaf = null;
+
+function stripPaint(){
+  stripRaf = null;
+  if(!stripEl || !trackEl) return;
+  var max = trackEl.scrollWidth - trackEl.clientWidth;
+  var on = max > 8;
+  if(navPrev) navPrev.hidden = !on;
+  if(navNext) navNext.hidden = !on;
+  if(!on){ stripEl.classList.remove('can-left','can-right'); return; }
+  var x = trackEl.scrollLeft;
+  if(navPrev) navPrev.disabled = x <= 4;
+  if(navNext) navNext.disabled = x >= max - 4;
+  stripEl.classList.toggle('can-left', x > 14);
+  stripEl.classList.toggle('can-right', x < max - 14);
+}
+
+function stripQueue(){ if(stripRaf === null) stripRaf = requestAnimationFrame(stripPaint); }
+
+function centerTab(el){
+  if(!trackEl || !el || !trackEl.scrollWidth) return;
+  if(trackEl.clientWidth >= trackEl.scrollWidth) return;   /* nothing to scroll */
+  var r = el.getBoundingClientRect(), t = trackEl.getBoundingClientRect();
+  if(r.left >= t.left && r.right <= t.right) return;       /* already fully visible */
+  el.scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+}
+
+function stripGo(dir){
+  var list = [].slice.call(trackEl.querySelectorAll('.tab'));
+  var i = -1;
+  for(var k=0; k<list.length; k++){ if(list[k].classList.contains('active')){ i = k; break; } }
+  var t = list[Math.max(0, Math.min(list.length - 1, i + dir))];
+  if(t) renderTeam(t.getAttribute('data-team'));
+}
+
+if(stripEl && trackEl && navPrev && navNext){
+  navPrev.addEventListener('click', function(){ stripGo(-1); });
+  navNext.addEventListener('click', function(){ stripGo(1); });
+  trackEl.addEventListener('scroll', stripQueue, {passive:true});
+  window.addEventListener('resize', stripQueue);
+  stripPaint();
 }
 
 playersEl.addEventListener('click', function(e){

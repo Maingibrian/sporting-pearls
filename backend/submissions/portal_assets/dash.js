@@ -17,6 +17,7 @@
     overview:   ['Overview', 'Everything happening across the academy, at a glance'],
     submissions:['Submissions', 'Every form entry, in one permanent ledger'],
     players:    ['Players', 'The six squads, managed from one place'],
+    coaches:    ['Technical team', 'The coaching staff shown on the website'],
     fixtures:   ['Fixtures', 'What appears on the homepage fixture panel'],
     access:     ['Access & Security', 'Who gets in — and what keeps the bad out'],
     roadmap:    ['Roadmap', 'What the portal can grow into next']
@@ -427,14 +428,14 @@
       $('#e-pub').checked = !!p.is_published;
       openM('#edit-modal');
     } else if(act === 'photo'){
-      currentPid = pid;
+      currentPid = pid; photoMode = 'player';
       $('#p-sub').textContent = p.first_name + ' ' + p.last_name + '  ·  ' + p.ref;
       $('#p-file').value = '';
       $('#p-name').textContent = 'Choose a photo';
       $('#p-save').disabled = true;
       openM('#photo-modal');
     } else if(act === 'delete'){
-      currentPid = pid;
+      currentPid = pid; delMode = 'player';
       $('#d-sub').textContent = p.first_name + ' ' + p.last_name + '  ·  ' + p.ref + '  —  this cannot be undone';
       openM('#del-modal');
     }
@@ -478,10 +479,33 @@
     if(!f) return;
     var b = $('#p-save'); b.disabled = true;
     var fd = new FormData(); fd.append('file', f);
-    api('/portal/players/' + currentPid + '/photo/', {method:'POST', body: fd})
+    var url = photoMode === 'coach'
+      ? '/portal/coaches/' + currentCid + '/photo/'
+      : '/portal/players/' + currentPid + '/photo/';
+    api(url, {method:'POST', body: fd})
       .then(function(j){
         b.disabled = false;
         if(!j.ok){ toast(j.error || 'Upload failed'); return; }
+        if(photoMode === 'coach'){
+          COACHES[j.coach.id] = j.coach;
+          var ccard = document.querySelector('.co-card[data-cid="'+j.coach.id+'"]');
+          if(ccard){
+            var ph = ccard.querySelector('.pl-photo');
+            var img = ph.querySelector('img');
+            var ava = ph.querySelector('.ava');
+            if(!img){
+              img = document.createElement('img');
+              img.alt = ''; img.loading = 'lazy';
+              img.addEventListener('error', function(){ img.style.display='none'; if(ava) ava.style.display='grid'; });
+              ph.insertBefore(img, ph.firstChild);
+            }
+            img.src = j.photo; img.style.display = '';
+            if(ava) ava.style.display = 'none';
+          }
+          closeM(document.getElementById('photo-modal'));
+          toast('Photo uploaded — the website card is updated');
+          return;
+        }
         PLAYERS[j.player.id] = j.player;
         var card = document.querySelector('.pl-card[data-pid="'+j.player.id+'"]');
         if(card){
@@ -504,6 +528,18 @@
 
   $('#d-confirm').addEventListener('click', function(){
     var b = $('#d-confirm'); b.disabled = true;
+    if(delMode === 'coach'){
+      api('/portal/coaches/' + currentCid + '/delete/', {method:'POST'}).then(function(j){
+        b.disabled = false;
+        if(!j.ok){ toast(j.error || 'Could not delete'); return; }
+        var card = document.querySelector('.co-card[data-cid="'+currentCid+'"]');
+        if(card){ card.classList.add('removing'); setTimeout(function(){ card.remove(); recountCoaches(); }, 240); }
+        delete COACHES[currentCid];
+        closeM(document.getElementById('del-modal'));
+        toast(j.name + ' removed from the technical team');
+      });
+      return;
+    }
     api('/portal/players/' + currentPid + '/delete/', {method:'POST'}).then(function(j){
       b.disabled = false;
       if(!j.ok){ toast(j.error || 'Could not delete'); return; }
@@ -537,6 +573,135 @@
         if(!j.ok){ toast(j.error || 'Could not add the player'); return; }
         closeM(document.getElementById('add-modal'));
         toast(j.player.ref + ' added — refreshing the squad…');
+        setTimeout(function(){ location.reload(); }, 900);
+      });
+  });
+
+  /* ---------- coaches: technical team management (rev 28) ---------- */
+  var COACHES = {};
+  var currentCid = null;
+  var photoMode = 'player';
+  var delMode = 'player';
+  var coData = document.getElementById('coaches-json');
+  if(coData){
+    JSON.parse(coData.textContent).forEach(function(c){ COACHES[c.id] = c; });
+  }
+
+  function recountCoaches(){
+    var n = Object.keys(COACHES).length;
+    var badge = document.querySelector('.nav-item[data-view="coaches"] .nav-badge');
+    if(badge) badge.textContent = n;
+    var grid = document.getElementById('co-grid');
+    var empty = document.getElementById('co-empty');
+    if(grid) grid.style.display = n ? '' : 'none';
+    if(empty) empty.style.display = n ? 'none' : '';
+  }
+
+  function refreshCoachCard(c){
+    var card = document.querySelector('.co-card[data-cid="'+c.id+'"]');
+    if(!card) return;
+    card.classList.toggle('draft', !c.published);
+    var pill = card.querySelector('.pill');
+    if(pill){
+      pill.className = 'pill ' + (c.published ? 'p-sent' : 'p-arc');
+      pill.textContent = c.published ? 'Live on site' : 'Draft';
+    }
+    var h3 = card.querySelector('h3');
+    if(h3) h3.textContent = c.name;
+    var meta = card.querySelector('.pl-meta');
+    if(meta) meta.textContent = (c.role || '') + ' · ' + (c.squad_label || 'Academy-wide');
+    var motto = card.querySelector('.pl-motto');
+    if(motto) motto.textContent = c.bio || 'Short bio to follow once confirmed.';
+    var code = card.querySelector('.pl-foot code');
+    if(code) code.textContent = '#' + (c.sort < 10 ? '0' : '') + c.sort;
+    var tog = card.querySelector('.co-act[data-act="toggle"]');
+    if(tog) tog.title = c.published ? 'Hide from the website' : 'Show on the website';
+  }
+
+  var coGrid = document.getElementById('co-grid');
+  if(coGrid){
+    recountCoaches();   /* keep badge + empty state in sync from the start */
+    coGrid.addEventListener('click', function(e){
+      var btn = e.target.closest('.co-act');
+      if(!btn) return;
+      var card = btn.closest('.co-card');
+      var cid = parseInt(card.dataset.cid, 10);
+      var c = COACHES[cid];
+      if(!c) return;
+      var act = btn.dataset.act;
+      if(act === 'toggle'){
+        btn.disabled = true;
+        api('/portal/coaches/' + cid + '/toggle/', {method:'POST'}).then(function(j){
+          btn.disabled = false;
+          if(!j.ok){ toast(j.error || 'Could not update the coach'); return; }
+          c.published = j.published;
+          refreshCoachCard(c);
+          toast(j.published ? c.name + ' is live on the website technical team'
+                            : c.name + ' hidden from the website (reversible)');
+        });
+      } else if(act === 'edit'){
+        currentCid = cid;
+        $('#ce-title').textContent = 'Edit ' + c.name;
+        $('#ce-sub').textContent = (c.squad_label || 'Academy-wide') + '  ·  changes go live on save';
+        $('#ce-name').value = c.name;
+        $('#ce-role').value = c.role || '';
+        $('#ce-squad').value = c.squad || '';
+        $('#ce-sort').value = c.sort;
+        $('#ce-bio').value = c.bio || '';
+        $('#ce-pub').checked = !!c.published;
+        openM('#coach-edit-modal');
+      } else if(act === 'photo'){
+        currentCid = cid; photoMode = 'coach';
+        $('#p-sub').textContent = c.name + '  ·  ' + (c.role || 'coach');
+        $('#p-file').value = '';
+        $('#p-name').textContent = 'Choose a photo';
+        $('#p-save').disabled = true;
+        openM('#photo-modal');
+      } else if(act === 'delete'){
+        currentCid = cid; delMode = 'coach';
+        $('#d-sub').textContent = c.name + '  ·  ' + (c.role || 'coach') + '  —  this cannot be undone';
+        openM('#del-modal');
+      }
+    });
+  }
+
+  $('#ce-save').addEventListener('click', function(){
+    var b = $('#ce-save'); b.disabled = true;
+    var body = JSON.stringify({
+      name: $('#ce-name').value, role: $('#ce-role').value,
+      squad: $('#ce-squad').value, sort: $('#ce-sort').value === '' ? 0 : $('#ce-sort').value,
+      bio: $('#ce-bio').value, is_published: $('#ce-pub').checked
+    });
+    api('/portal/coaches/' + currentCid + '/edit/',
+        {method:'POST', headers:{'Content-Type':'application/json'}, body: body})
+      .then(function(j){
+        b.disabled = false;
+        if(!j.ok){ toast(j.error || 'Could not save'); return; }
+        COACHES[j.coach.id] = j.coach;
+        refreshCoachCard(j.coach);
+        closeM(document.getElementById('coach-edit-modal'));
+        toast('Saved — ' + j.coach.name + "'s card is updated on the website");
+      });
+  });
+
+  $('#btn-add-coach').addEventListener('click', function(){
+    ['ca-name','ca-role','ca-bio'].forEach(function(id){ document.getElementById(id).value = ''; });
+    $('#ca-squad').value = ''; $('#ca-sort').value = ''; $('#ca-pub').checked = false;
+    openM('#coach-add-modal');
+  });
+  $('#ca-save').addEventListener('click', function(){
+    var b = $('#ca-save'); b.disabled = true;
+    var body = JSON.stringify({
+      name: $('#ca-name').value, role: $('#ca-role').value,
+      squad: $('#ca-squad').value, sort: $('#ca-sort').value === '' ? 0 : $('#ca-sort').value,
+      bio: $('#ca-bio').value, is_published: $('#ca-pub').checked
+    });
+    api('/portal/coaches/add/', {method:'POST', headers:{'Content-Type':'application/json'}, body: body})
+      .then(function(j){
+        b.disabled = false;
+        if(!j.ok){ toast(j.error || 'Could not add the coach'); return; }
+        closeM(document.getElementById('coach-add-modal'));
+        toast(j.coach.name + ' added — refreshing the technical team…');
         setTimeout(function(){ location.reload(); }, 900);
       });
   });

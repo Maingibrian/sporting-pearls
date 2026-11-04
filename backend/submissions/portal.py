@@ -212,6 +212,47 @@ def player_card(p, squad_code):
         f'</article>')
 
 
+def coach_photo_src(c):
+    if c.photo:
+        return '/media/' + c.photo.name
+    return ''
+
+
+def coach_card(c):
+    """One technical-team card — reuses the player-card scaffolding so
+    the coaches view feels native to the rest of the portal (rev 28)."""
+    mono = initials(c.name)
+    if c.photo:
+        photo_html = (f'<img src="{esc(coach_photo_src(c))}" alt="" loading="lazy" '
+                      f'data-fb-hide="reveal-next">'
+                      f'<div class="ava" style="display:none">{esc(mono)}</div>')
+    else:
+        photo_html = f'<div class="ava">{esc(mono)}</div>'
+    pill = ('<span class="pill p-sent">Live on site</span>' if c.is_published
+            else '<span class="pill p-arc">Draft</span>')
+    meta = ' · '.join(x for x in [c.role,
+                                  c.squad.label if c.squad else 'Academy-wide'] if x)
+    acts = (
+        f'<span class="pl-acts">'
+        f'<button class="iconbtn co-act" data-act="toggle" title="'
+        + ('Hide from the website' if c.is_published else 'Show on the website')
+        + f'" aria-label="Toggle visibility">{EYE_HIDE}{EYE_SHOW}</button>'
+        f'<button class="iconbtn co-act" data-act="edit" title="Edit profile" aria-label="Edit profile">{PENCIL}</button>'
+        f'<button class="iconbtn co-act" data-act="photo" title="Upload photo" aria-label="Upload photo">{CAMERA}</button>'
+        f'<button class="iconbtn co-act danger" data-act="delete" title="Remove coach" aria-label="Remove coach">{TRASH}</button>'
+        f'</span>')
+    draft = ' draft' if not c.is_published else ''
+    return (
+        f'<article class="card pl-card co-card{draft}" data-cid="{c.id}" '
+        f'data-name="{esc(c.name)}">'
+        f'<div class="pl-photo">{photo_html}</div>'
+        f'<div class="pl-body"><h3>{esc(c.name)}</h3>'
+        f'<div class="pl-meta">{esc(meta)}</div>'
+        f'<p class="pl-motto">{esc(c.bio or "Short bio to follow once confirmed.")}</p></div>'
+        f'<div class="pl-foot"><code>#{c.sort:02d}</code>{pill}{acts}</div>'
+        f'</article>')
+
+
 def build_page(request):
     now = timezone.localtime(timezone.now())
     gen_date = now.strftime('%d %b %Y · %H:%M').lstrip('0')
@@ -373,6 +414,15 @@ def build_page(request):
         cards.append(player_card(p, p.squad.code))
     cards_html = '\n'.join(cards)
 
+    # ---- technical team (rev 28: coach management from the portal) ----
+    coaches = list(Coach.objects.select_related('squad').order_by('sort', 'name'))
+    coach_cards_html = '\n'.join(coach_card(c) for c in coaches)
+    coach_grid_style = '' if coaches else 'display:none'
+    coach_empty_style = 'display:none' if coaches else ''
+    squad_opts = ('<option value="">Academy-wide (no squad)</option>'
+                  + ''.join(f'<option value="{esc(s.code)}">{esc(s.label)}</option>'
+                            for s in squads))
+
     # ---- assemble ----
     css = (ASSETS / 'styles.css').read_text(encoding='utf-8')
     body = ((ASSETS / 'body-a.html').read_text(encoding='utf-8')
@@ -419,6 +469,13 @@ def build_page(request):
         '__FX_MINI__': fx_mini_html,
         '__PLAYER_CHIPS__': chips_html,
         '__PLAYER_CARDS__': cards_html,
+        '__CN_COACHES__': str(len(coaches)),
+        '__COACH_CARDS__': coach_cards_html,
+        '__COACH_GRID_STYLE__': coach_grid_style,
+        '__COACH_EMPTY_STYLE__': coach_empty_style,
+        '__COACH_SQUAD_OPTS__': squad_opts,
+        '__COACHES_JSON__': json.dumps(
+            [_coach_payload(c) for c in coaches], ensure_ascii=False).replace('</', '<\\/'),
     }
     for k, v in tokens.items():
         body = body.replace(k, v)
@@ -748,6 +805,142 @@ def player_add(request):
     p.save()
     return JsonResponse({'ok': True, 'player': _player_payload(p),
                          'total': Player.objects.count()})
+
+
+def _coach_payload(c):
+    return {
+        'id': c.id,
+        'name': c.name,
+        'role': c.role,
+        'squad': c.squad.code if c.squad else '',
+        'squad_label': c.squad.label if c.squad else '',
+        'bio': c.bio,
+        'photo': coach_photo_src(c),
+        'published': c.is_published,
+        'sort': c.sort,
+    }
+
+
+def _clean_coach_fields(data):
+    """Validate the coach fields the portal may set (rev 28)."""
+    name = str(data.get('name') or '').strip()
+    role = str(data.get('role') or '').strip()
+    if not (1 <= len(name) <= 120):
+        return None, 'Name is required (max 120 characters).'
+    if not (1 <= len(role) <= 120):
+        return None, 'Role is required (max 120 characters).'
+    bio = str(data.get('bio') or '').strip()
+    if len(bio) > 600:
+        return None, 'Bio is limited to 600 characters.'
+    try:
+        sort = int(data.get('sort') or 0)
+    except (TypeError, ValueError):
+        sort = 0
+    if not (0 <= sort <= 99):
+        return None, 'Display order must be between 0 and 99.'
+    code = str(data.get('squad') or '').strip().upper()
+    squad = Squad.objects.filter(code=code).first() if code else None
+    if code and not squad:
+        return None, 'Unknown squad.'
+    return {'name': name, 'role': role, 'bio': bio, 'sort': sort,
+            'squad': squad}, None
+
+
+@require_POST
+@_staff
+def coach_toggle(request, cid):
+    c = Coach.objects.filter(pk=cid).first()
+    if not c:
+        return _bad('Coach not found.')
+    c.is_published = not c.is_published
+    c.save(update_fields=['is_published', 'updated_at'])
+    return JsonResponse({'ok': True, 'published': c.is_published,
+                         'live': Coach.objects.filter(is_published=True).count()})
+
+
+@require_POST
+@_staff
+def coach_delete(request, cid):
+    c = Coach.objects.filter(pk=cid).first()
+    if not c:
+        return _bad('Coach not found.')
+    name = c.name
+    if c.photo:
+        c.photo.delete(save=False)
+    c.delete()
+    return JsonResponse({'ok': True, 'name': name,
+                         'total': Coach.objects.count()})
+
+
+@require_POST
+@_staff
+def coach_edit(request, cid):
+    c = Coach.objects.filter(pk=cid).first()
+    if not c:
+        return _bad('Coach not found.')
+    try:
+        data = json.loads(request.body or '{}')
+    except ValueError:
+        return _bad('Bad request body.')
+    upd, err = _clean_coach_fields(data)
+    if err:
+        return _bad(err)
+    for k, v in upd.items():
+        setattr(c, k, v)
+    if 'is_published' in data:
+        c.is_published = bool(data.get('is_published'))
+    c.save()
+    return JsonResponse({'ok': True, 'coach': _coach_payload(c)})
+
+
+@require_POST
+@_staff
+def coach_add(request):
+    try:
+        data = json.loads(request.body or '{}')
+    except ValueError:
+        return _bad('Bad request body.')
+    upd, err = _clean_coach_fields(data)
+    if err:
+        return _bad(err)
+    c = Coach(is_published=bool(data.get('is_published')), **upd)
+    c.save()
+    return JsonResponse({'ok': True, 'coach': _coach_payload(c),
+                         'total': Coach.objects.count()})
+
+
+@require_POST
+@_staff
+def coach_photo(request, cid):
+    """Upload a coach photo (rev 28).
+
+    CoachPhotoStorage re-encodes every save path — EXIF/GPS stripped,
+    extension matched to the real format, decompression bombs capped —
+    so this view only pre-checks size/extension and turns storage
+    failures into a friendly toast instead of a 500.
+    """
+    c = Coach.objects.filter(pk=cid).first()
+    if not c:
+        return _bad('Coach not found.')
+    f = request.FILES.get('file')
+    if not f:
+        return _bad('Choose a photo file first.')
+    if f.size > 8 * 1024 * 1024:
+        return _bad('Photo is larger than 8 MB — please resize it first.')
+    if Path(f.name).suffix.lower() not in ('.jpg', '.jpeg', '.png', '.webp'):
+        return _bad('Photos must be JPG, PNG or WebP.')
+    name = f'coach-{get_valid_filename(Path(f.name).stem)}'
+    try:
+        if c.photo:
+            c.photo.delete(save=False)
+        c.photo.save(name, f, save=True)
+    except ValueError:
+        return _bad('That file is not a readable image — it may be damaged '
+                    'or not really a photo.')
+    except Exception:
+        return _bad('That file could not be stored as an image.')
+    return JsonResponse({'ok': True, 'photo': coach_photo_src(c),
+                         'coach': _coach_payload(c)})
 
 
 @require_POST
